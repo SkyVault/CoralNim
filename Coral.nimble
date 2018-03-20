@@ -8,4 +8,4 @@ license       = "MIT"
 # Dependencies
 
 requires "nim >= 0.17.2"
-
+requires "nim-glfw >= 0.2.1"
