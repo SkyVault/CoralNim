@@ -3,6 +3,7 @@ import
     opengl,
     os,
     glfw,
+    renderer,
     glfw/wrapper as glfwx
 
 type
@@ -21,7 +22,9 @@ type
         config: CoralConfig
         running: bool
         targetFPS: int
+        r2d: R2D
         clock: Clock
+        title: string
         load*: proc()
         update*: proc()
         draw*: proc()
@@ -42,6 +45,8 @@ proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): 
      )
 
 proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGame=
+    ## Initializes the game object
+
     result = CoralGame(
         window: nil,
         config: config,
@@ -50,6 +55,8 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         update: proc()=discard,
         draw: proc()=discard,
         destroy: proc()=discard,
+        r2d: nil,
+        title: title,
         clock: Clock(
             fps: 0.0,
             delta: config.fps.float / 1000.0,
@@ -93,9 +100,14 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         GL_DEPTH_BUFFER_BIT
         )
 
+    # initialize the renderer once opengl is initialized
+    result.r2d = newR2D()
+
 proc clock* (game: CoralGame): auto = game.clock
 
 proc run* (game: CoralGame)=
+    ## This method launches the game loop and begins the rendering cycle
+
     game.running = true
 
     game.load()
@@ -133,3 +145,41 @@ proc run* (game: CoralGame)=
         game.clock.timer += game.clock.delta
 
     game.destroy()
+
+# Window functions
+proc windowSize* (self: CoralGame): (int, int)=
+    ## Returns the size in pixels of the GLFW window
+    var width, height: cint
+    getWindowSize(self.window, addr width, addr height)
+    return (width.int, height.int)
+
+proc `windowSize=`*(self: CoralGame, width, height: int)=
+    ## Sets the size of the window
+    setWindowSize(self.window, width.cint, height.cint)
+
+proc windowPosition* (self: CoralGame): (int, int)=
+    ## Returns the windows position on the monitor
+    var width, height: cint
+    getWindowPos(self.window, addr width, addr height)
+    return (width.int, height.int)
+
+proc `windowPosition=`* (self: CoralGame, x, y: int) =
+    setWindowPos(self.window, x.cint, y.cint)
+
+proc windowTitle* (self: CoralGame): string=
+    return self.title 
+
+proc `windowTitle=`* (self: CoralGame, title: string)=
+    self.title = title
+    setWindowTitle(self.window, title.cstring)
+
+proc windowVisible* (self: CoralGame): bool =
+    return
+        if getWindowAttrib(self.window, VISIBLE) == 0:
+            false
+        else:
+            true
+    
+proc `windowVisible=`* (self: CoralGame, visible: bool) =
+    if visible: hideWindow(self.window)
+    else: showWindow(self.window)

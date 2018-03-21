@@ -2,8 +2,8 @@ import
     ../Coral/game,
     ../Coral/graphics,
     ../Coral/renderer,
-    ../Coral/gameMath
-
+    ../Coral/gameMath,
+    math
 
 let theGame = newGame(
     1280, 
@@ -18,6 +18,7 @@ theGame.load = proc()=
 
 theGame.update = proc()= 
     echo theGame.clock.currentFPS.int, " ", theGame.clock.dt
+    theGame.windowTitle = "カウボーイビバップカウボーイビバップ"
 
 theGame.draw = proc()= 
     r2d.setBackgroundColor(DarkGray())
