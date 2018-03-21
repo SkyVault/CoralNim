@@ -7,8 +7,16 @@ let theGame = newGame(
     "Breakout!", 
     config())
 
-theGame.load = proc()= discard
-theGame.update = proc()= discard
-theGame.draw = proc()= discard
+theGame.load = proc()= 
+    discard
+
+theGame.update = proc()= 
+    echo theGame.clock.currentFPS.int, " ", theGame.clock.dt
+
+theGame.draw = proc()= 
+    discard
+
+theGame.destroy = proc()=
+    discard
 
 theGame.run()
