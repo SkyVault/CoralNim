@@ -106,7 +106,7 @@ proc run* (game: CoralGame)=
         let wait_time = 1.0 / game.targetFPS.float
         let now = getTime().float
         let curr_time = (now - game.clock.last)
-        let durr = 1000.0 * (wait_time - curr_time) + 0.5
+        # let durr = 1000.0 * (wait_time - curr_time) + 0.5
 
         game.clock.delta = curr_time
         game.clock.last = now
