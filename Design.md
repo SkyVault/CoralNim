@@ -8,6 +8,12 @@
 2. Scene manager
 3. Window creation and management
 
+#### API
+```nim
+proc createWindow(size: (int, int), title: string, CoralWindowSettings settings = nil)
+```
+
+
 ### GAME MATH MODULE
 
 1. Contains vector maths and matrix maths for games
