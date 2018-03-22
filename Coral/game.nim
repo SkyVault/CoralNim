@@ -134,6 +134,7 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
 ## Public accessor properties
 proc clock* (game: CoralGame): auto = game.clock
 proc input* (game: CoralGame): auto = game.input
+proc r2d* (game: CoralGame):auto = game.r2d
 
 proc newKey(): CoralKey=
     return CoralKey(state: 0, last: 0)
@@ -320,7 +321,6 @@ proc run* (game: CoralGame)=
         # Update and draw the game
         game.update()
 
-        game.r2d.setBackgroundColor(DarkGray())
         game.r2d.clear()
         game.r2d.begin(game.windowSize)
         game.draw()

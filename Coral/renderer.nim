@@ -213,7 +213,12 @@ proc setBackgroundColor*(self: R2D, color: Color)=
 proc getBackgroundColor*(self: R2D): auto= return self.clear_color
 
 proc clear* (self: R2D)=
-    glClearColor(self.clear_color.r, self.clear_color.g, self.clear_color.b, self.clear_color.a)
+    glClearColor(
+        self.clear_color.r, 
+        self.clear_color.g, 
+        self.clear_color.b, 
+        self.clear_color.a
+        )
     glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
 proc begin* (self: R2D, size: (int, int))=

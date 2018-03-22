@@ -101,6 +101,23 @@ proc Gray*                 ():Color=newColor(0.5, 0.5, 0.5)
 proc Transperent*          ():Color=newColor(1, 1, 1, 0)
 proc TransperentBlack*     ():Color=newColor(0, 0, 0, 0)
 
+template P8Black*      ():untyped = newColor(0, 0, 0, 1)
+template P8DarkBlue*   ():untyped = newColor(29.0 / 255.0, 43.0 / 255.0, 83.0 / 255.0)
+template P8DarkPurple* ():untyped = newColor(126.0 / 255.0, 37.0 / 255.0, 83.0 / 255.0)
+template P8DarkGreen*  ():untyped = newColor(0.0, 135.0 / 255.0, 81.0 / 255.0)
+template P8Brown*      ():untyped = newColor(171.0 / 255.0, 82.0 / 255.0, 54.0 / 255.0)
+template P8DarkGray*   ():untyped = newColor(95.0 / 255.0, 87.0 / 255.0, 79.0 / 255.0)
+template P8LightGray*  ():untyped = newColor(194.0 / 255.0, 195.0 / 255.0, 199.0 / 255.0)
+template P8White*      ():untyped = newColor(1.0, 241.0 / 255.0, 232.0 / 255.0)
+template P8Red*        ():untyped = newColor(1.0, 0.0, 77.0 / 255.0)
+template P8Orange*     ():untyped = newColor(1.0, 163.0 / 255.0, 0.0) 
+template P8Yellow*     ():untyped = newColor(1.0, 236.0 / 255.0, 39.0 / 255.0)
+template P8Green*      ():untyped = newColor(0.0, 228.0 / 255.0, 54.0 / 255.0)
+template P8Blue*       ():untyped = newColor(41.0 / 255.0, 173.0 / 255.0, 1.0)
+template P8Indigo*     ():untyped = newColor(131.0 / 255.0, 118.0 / 255.0, 156.0 / 255.0)
+template P8Pink*       ():untyped = newColor(1.0, 119.0 / 255.0, 168.0 / 255.0)
+template P8Peach*      ():untyped = newColor(1.0, 204.0 / 255.0, 170.0 / 255.0)
+
 # TODO: lets make it so that the user can choose to clear the depth buffer or color buffer or depth stencel.
 proc clearScreen* (c: Color)=
     glClearColor(c.r, c.g, c.b, c.a)

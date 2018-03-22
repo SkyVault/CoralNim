@@ -12,10 +12,7 @@ let theGame = newGame(
     "Breakout!", 
     config())
 
-var r2d: R2D
-
-theGame.load = proc()= 
-    r2d = newR2D()
+theGame.load = proc()= discard
 
 theGame.update = proc()= 
     theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.currentFPS
@@ -24,7 +21,8 @@ theGame.update = proc()=
         quit(theGame)
 
 theGame.draw = proc()= 
-    r2d.drawRect(newV2(100, 100), newV2(100, 100), theGame.clock.timer, Red())
+    theGame.r2d.setBackgroundColor(P8Peach)
+    theGame.r2d.drawRect(newV2(100, 100), newV2(100, 100), theGame.clock.timer, Red())
 
 theGame.destroy = proc()=
     discard
