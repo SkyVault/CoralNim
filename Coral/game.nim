@@ -13,6 +13,9 @@ type
         fps, delta, last, timer, last_fps: float
         ticks: int
 
+    CoralAssetManager = ref object
+        
+
     # Input handler
     CoralKey = ref object
         state*, last*: int

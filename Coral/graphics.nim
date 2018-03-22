@@ -101,6 +101,7 @@ template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)
 template Transperent*          ():untyped =newColor(1, 1, 1, 0)
 template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)
 
+## Pico 8 Color palette
 template P8Black*      ():untyped = newColor(0, 0, 0, 1)
 template P8DarkBlue*   ():untyped = newColor(29.0 / 255.0, 43.0 / 255.0, 83.0 / 255.0)
 template P8DarkPurple* ():untyped = newColor(126.0 / 255.0, 37.0 / 255.0, 83.0 / 255.0)

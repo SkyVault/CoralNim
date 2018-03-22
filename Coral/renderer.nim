@@ -258,30 +258,36 @@ proc drawSprite* (self: R2D, image: Image, region: Region, position: V2, size: V
       newDrawable(image, region, position, size, rotation, color, layer)
     )
 
-proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float, color: Color)=
+proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color)=
     drawSprite(self, image, newRegion(0, 0, image.width, image.height), position, size, rotation, color)
 
-proc drawRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
+proc drawRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=
     glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
 
     glUniform1i(self.has_texture_location, 0)
-    glUniform2f(self.position_location, position.x, position.y)
-    glUniform2f(self.size_location, size.x, size.y)
+    glUniform2f(self.position_location, x, y)
+    glUniform2f(self.size_location, width, height)
     glUniform1f(self.rotation_location, rotation)
     glUniform1f(self.depth_location, 0 - layer)
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
 
-proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
+proc drawRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
+    self.drawRect(position.x, position.y, size.x, size.y, rotation, color, layer)
+
+proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=
     glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
 
     glUniform1i(self.has_texture_location, 0)
-    glUniform2f(self.position_location, position.x, position.y)
-    glUniform2f(self.size_location, size.x, size.y)
+    glUniform2f(self.position_location, x, y)
+    glUniform2f(self.size_location, width, height)
     glUniform1f(self.rotation_location, rotation)
     glUniform1f(self.depth_location, 0 - layer)
 
     glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_BYTE, nil)
+
+proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
+    self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
 
 # proc drawTiledMap* (self: R2D, map: TiledMap, scale: float32 = 1.0)=
 #     let image = map.image

@@ -12,6 +12,8 @@ let theGame = newGame(
     "Breakout!", 
     config())
 
+let wat = loadImage "Tests/wat.png"
+
 theGame.load = proc()= discard
 
 theGame.update = proc()= 
@@ -22,9 +24,10 @@ theGame.update = proc()=
 
 theGame.draw = proc()= 
     theGame.r2d.setBackgroundColor(P8Peach)
-    theGame.r2d.drawRect(newV2(100, 100), newV2(100, 100), theGame.clock.timer, Red())
+    theGame.r2d.drawLineRect(1000, 100, 200, 200, theGame.clock.timer, Red())
+    theGame.r2d.drawImage(wat, newV2(0, 0), newV2(500, 500), 0.0, White)
 
-theGame.destroy = proc()=
-    discard
+# theGame.destroy = proc()=
+#     discard
 
 theGame.run()
