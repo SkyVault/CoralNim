@@ -168,7 +168,7 @@ proc newDrawable* (image: Image, region: Region, position: V2, size: V2, rotatio
 
 proc newR2D* ():R2d =
     result = R2D(
-      clear_color: Black(),
+      clear_color: Black,
       drawables: newTable[uint32, seq[Drawable]]()
     )
 

@@ -90,16 +90,16 @@ proc length* (c: Color): float=
     )
 
 ## Defines a custom pallet of colors
-proc Red*                  ():Color=newColor(1, 0, 0)
-proc Green*                ():Color=newColor(0, 1, 0)
-proc Blue*                 ():Color=newColor(0, 0, 1)
-proc White*                ():Color=newColor()
-proc Black*                ():Color=newColor(0, 0, 0)
-proc DarkGray*             ():Color=newColor(0.2, 0.2, 0.2)
-proc LightGray*            ():Color=newColor(0.8, 0.8, 0.8)
-proc Gray*                 ():Color=newColor(0.5, 0.5, 0.5)
-proc Transperent*          ():Color=newColor(1, 1, 1, 0)
-proc TransperentBlack*     ():Color=newColor(0, 0, 0, 0)
+template Red*                  ():untyped =newColor(1, 0, 0)
+template Green*                ():untyped =newColor(0, 1, 0)
+template Blue*                 ():untyped =newColor(0, 0, 1)
+template White*                ():untyped =newColor(1, 1, 1)
+template Black*                ():untyped =newColor(0, 0, 0)
+template DarkGray*             ():untyped =newColor(0.2, 0.2, 0.2)
+template LightGray*            ():untyped =newColor(0.8, 0.8, 0.8)
+template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)
+template Transperent*          ():untyped =newColor(1, 1, 1, 0)
+template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)
 
 template P8Black*      ():untyped = newColor(0, 0, 0, 1)
 template P8DarkBlue*   ():untyped = newColor(29.0 / 255.0, 43.0 / 255.0, 83.0 / 255.0)
@@ -122,7 +122,6 @@ template P8Peach*      ():untyped = newColor(1.0, 204.0 / 255.0, 170.0 / 255.0)
 proc clearScreen* (c: Color)=
     glClearColor(c.r, c.g, c.b, c.a)
     glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
-    
 
 proc toColor* (c: (float32,float32,float32,float32)):Color=
     ## Converts a 4 unit tuple of floats to a Color. 
