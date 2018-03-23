@@ -349,6 +349,10 @@ proc measure* (font: SpriteFont, scale: float, str: string): V2=
     xlen += ((float32)(glyph.region.w) + glyph.xoffset) * scale
   return newV2((float32)xlen, (float32)ylen + yoff)
 
+## Camera 2D
+proc view* (camera: Camera2D): M4=
+    return transform(camera.position, camera.zoom, newV2(camera.zoom, camera.zoom))
+
 # Printing the data types
 proc `$`* (r: Region): string=
     result = "nRegion {\n"

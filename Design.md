@@ -9,10 +9,6 @@
 3. Window creation and management
 
 #### API
-```nim
-proc createWindow(size: (int, int), title: string, CoralWindowSettings settings = nil)
-```
-
 
 ### GAME MATH MODULE
 

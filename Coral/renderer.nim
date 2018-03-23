@@ -204,8 +204,12 @@ proc newR2D* ():R2d =
     result.view_location            = glGetUniformLocation(result.shader_program, "view");
     glUseProgram(0);
 
-proc setView* (self: R2D, view: M4)=
-  self.view_matrix = view
+proc view* (self: R2D): auto= return self.view_matrix
+proc `view=`* (self: R2D, view: M4)=
+    self.view_matrix = view
+
+proc `view=`* (self: R2D, camera: Camera2D)=
+    self.view_matrix = camera.view
 
 proc setBackgroundColor*(self: R2D, color: Color)=
     self.clear_color = color
@@ -234,7 +238,6 @@ proc begin* (self: R2D, size: (int, int))=
     glUniformMatrix4fv(self.ortho_location, 1, GL_TRUE, addr ortho.m[0])
 
     var view = self.view_matrix
-    glUseProgram(self.shader_program)
     glUniformMatrix4fv(self.view_location, 1, GL_TRUE, addr view.m[0])
 
     glBindVertexArray(self.rvao)

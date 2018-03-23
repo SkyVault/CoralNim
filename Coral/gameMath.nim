@@ -22,9 +22,18 @@ type
         m00*, m10*, m20*: float32
         m01*, m11*, m21*: float32
         m02*, m12*, m22*: float32
+
     M3* = object {.union.}
         m* : array[9, float32]
         a* : M3Arr
+
+    M2Arr = object
+        m00*, m10*: float32
+        m01*, m11*: float32
+
+    M2* = object {.union.}
+        m* : array[4, float32]
+        a* : M2Arr
 
 const PI*       = 3.14159265359
 const DEGTORAD* = PI / 180.0
@@ -188,6 +197,9 @@ proc translation* (x: float32, y: float32, z: float32): M4=
 proc translation* (off: V3): M4=
     translation(off.x, off.y, off.z)
 
+proc translation* (off: V2): M4=
+    translation(off.x, off.y, 0.0)
+
 proc scale* (x: float32, y: float32, z: float32): M4=
     newM4(
         x, 0, 0, 0,
@@ -283,6 +295,13 @@ proc transform* (pos: V3, rot: V3, scale: V3): M4=
     result = mul(result, translation(pos * 2))
     result = mul(result, scale(scale))
 
+proc transform* (pos: V2, rot: float, scale: V2): M4=
+    result = identity()
+    result = mul(result, translation(-pos))
+    result = mul(result, rotZ(rot))
+    result = mul(result, translation(pos * 2))
+    result = mul(result, scale(scale.x, scale.y, 0))
+
 # M3 Functions
 proc newM3* (): M3=
     M3(
@@ -361,6 +380,47 @@ proc transposeM3* (m: M3): M3=
         m.a.m00, m.a.m01, m.a.m02,
         m.a.m10, m.a.m11, m.a.m12,
         m.a.m20, m.a.m21, m.a.m22
+    )
+
+proc newM2* (m00, m01, m10, m11: float): M2=
+    M2(
+        a: M2Arr(m00: m00, m01: m01, m10: m10, m11: m11)
+    )
+
+proc translation* (m: M2, x, y: float): M2=
+    newM2(
+        0, x,
+        0, y
+    )
+
+proc scale* (m: M2, x, y: float): M2=
+    newM2(
+        x, 0,
+        0, y
+    )
+
+proc rot* (m: M2, rot: float): M2=
+    let c = cos(rot)
+    let s = sin(rot)
+    newM2(
+        c, -s,
+        s, c
+    )
+
+proc mul* (a: M2, b: M2): M2=
+    let A = a.a.m00
+    let B = a.a.m01
+    let C = a.a.m10
+    let D = a.a.m11
+
+    let E = a.a.m00
+    let F = a.a.m01
+    let G = a.a.m10
+    let H = a.a.m11
+
+    return newM2(
+        A * E + B * G, A * F + B * H,
+        C * E + D * G, C * F + D * H
     )
 
 # USEFUL MATH FUNCTIONS
