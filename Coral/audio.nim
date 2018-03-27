@@ -60,6 +60,16 @@ proc `paused=`* (audio: CoralAudio, val: bool)=
 proc togglePause* (audio: CoralAudio)=
     audio.paused = not audio.paused
 
+proc looping* (audio: CoralAudio): bool=
+    # audio.sound.setLooping
+    return audio.sound.looping
+
+proc `looping=`* (audio: CoralAudio, value: bool)=
+    audio.sound.setLooping value
+
+proc duration* (audio: CoralAudio): float=
+    return audio.sound.duration
+
 proc `playing=`* (audio: CoralAudio, value: bool)=
     case value:
         of true: 

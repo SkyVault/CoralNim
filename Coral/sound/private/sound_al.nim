@@ -62,6 +62,18 @@ proc setLooping*(s: Sound, flag: bool) =
     if s.src != 0:
         alSourcei(s.src, AL_LOOPING, ALint(flag))
 
+proc looping* (s: Sound): bool=
+    if s.src != 0:
+        var value: ALint = 0
+        alGetSourcei(s.src, AL_LOOPING, addr value)
+        return 
+            if value == 0:
+                false
+            else:
+                true
+    else:
+        return false
+
 proc reclaimInactiveSource(): ALuint {.inline.} =
     for i in 0 ..< activeSounds.len:
         let src = activeSounds[i].src
