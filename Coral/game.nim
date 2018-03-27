@@ -3,6 +3,7 @@ import
     opengl,
     os,
     glfw,
+    audio,
     renderer,
     tables,
     graphics,
@@ -46,6 +47,7 @@ type
         r2d: R2D
         clock: CoralClock
         input: CoralInputManager
+        audio: CoralAudioMixer
         title: string
         load*: proc()
         update*: proc()
@@ -95,8 +97,13 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
             last_mouse_left_state: false, curr_mouse_left_state: false,
             last_mouse_right_state: false, curr_mouse_right_state: false,
             keyMap: initTable[cint, CoralKey]()
+        ),
+        audio: CoralAudioMixer(
+
         )
     )
+
+    result.audio.init()
 
     let succ = glfwx.init()
 
@@ -138,6 +145,7 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
 proc clock* (game: CoralGame): auto = game.clock
 proc input* (game: CoralGame): auto = game.input
 proc r2d* (game: CoralGame):auto = game.r2d
+proc audio* (game: CoralGame):auto = game.audio
 
 proc newKey(): CoralKey=
     return CoralKey(state: 0, last: 0)

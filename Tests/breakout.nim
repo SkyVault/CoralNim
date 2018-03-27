@@ -4,6 +4,7 @@ import
     ../Coral/renderer,
     ../Coral/gameMath,
     ../Coral/ecs,
+    ../Coral/audio,
     math,
     glfw
 
@@ -29,7 +30,11 @@ let camera = Camera2D(
     rotation  : 0.0
 )
 
-theGame.load = proc()= discard
+var theAudio: CoralAudio
+
+theGame.load = proc()=
+    theAudio = theGame.audio.loadAudio "Tests/pixel_caves.ogg"
+    theAudio.playing = true
 
 theGame.update = proc()= 
     theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.currentFPS

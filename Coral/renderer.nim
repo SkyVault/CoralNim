@@ -59,7 +59,7 @@ uniform float rotation = 0.0;
 uniform float depth = 0.5;
 
 uniform vec4 quad;
-uniform mat4 view;
+uniform mat2 view;
 uniform mat4 ortho;
 
 void main() {
@@ -73,7 +73,7 @@ void main() {
     float c = cos(rotation);
     mat2 rot = mat2(c, -s, s, c);
     vec2 pos = position + (size * ((rot * Vertex) + 0.5));
-    gl_Position = ortho * view * vec4(pos, 0.0, 1.0) + vec4(0, 0, depth, 0.0);
+    gl_Position = ortho * vec4(pos, 0.0, 1.0) + vec4(0, 0, depth, 0.0);
 }
 """
 
@@ -124,7 +124,7 @@ type
         clear_color: Color
         rvao, rvbo, ribo: GLuint
         ortho_projection: M4
-        view_matrix: M4
+        view_matrix: M2
 
         shader_program: GLuint
 
@@ -190,7 +190,7 @@ proc newR2D* ():R2d =
         loadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
     )
 
-    result.view_matrix = identity()
+    result.view_matrix = newM2(1, 0, 0, 1)
 
     glUseProgram(result.shader_program);
     result.diffuse_location         = glGetUniformLocation(result.shader_program, "diffuse");
@@ -205,7 +205,7 @@ proc newR2D* ():R2d =
     glUseProgram(0);
 
 proc view* (self: R2D): auto= return self.view_matrix
-proc `view=`* (self: R2D, view: M4)=
+proc `view=`* (self: R2D, view: M2)=
     self.view_matrix = view
 
 proc `view=`* (self: R2D, camera: Camera2D)=
@@ -238,7 +238,7 @@ proc begin* (self: R2D, size: (int, int))=
     glUniformMatrix4fv(self.ortho_location, 1, GL_TRUE, addr ortho.m[0])
 
     var view = self.view_matrix
-    glUniformMatrix4fv(self.view_location, 1, GL_TRUE, addr view.m[0])
+    glUniformMatrix2fv(self.view_location, 1, GL_TRUE, addr view.m[0])
 
     glBindVertexArray(self.rvao)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ribo)

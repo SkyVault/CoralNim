@@ -387,19 +387,19 @@ proc newM2* (m00, m01, m10, m11: float): M2=
         a: M2Arr(m00: m00, m01: m01, m10: m10, m11: m11)
     )
 
-proc translation* (m: M2, x, y: float): M2=
+proc translation* (x, y: float): M2=
     newM2(
         0, x,
         0, y
     )
 
-proc scale* (m: M2, x, y: float): M2=
+proc scale* (x, y: float): M2=
     newM2(
         x, 0,
         0, y
     )
 
-proc rot* (m: M2, rot: float): M2=
+proc rot* (rot: float): M2=
     let c = cos(rot)
     let s = sin(rot)
     newM2(
