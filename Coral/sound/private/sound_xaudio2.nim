@@ -35,6 +35,9 @@ proc isPlaying(s: IXAudio2SourceVoice): bool {.inline.} =
 
 proc isPlaying* (sound: Sound): bool {.inline.} =
     let s = sound.sourceVoice
+
+    if s == nil: return false
+
     var state: XAUDIO2_VOICE_STATE
     discard s.GetState(s, state, XAUDIO2_VOICE_NOSAMPLESPLAYED)
     result = state.BuffersQueued != 0

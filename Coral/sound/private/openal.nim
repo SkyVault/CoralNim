@@ -45,18 +45,22 @@ const
     AL_PLAYING* : ALenum =                             0x1012
     AL_PAUSED* : ALenum =                              0x1013
     AL_STOPPED* : ALenum =                             0x1014
+    AL_SEC_OFFSET* : ALenum =                          0x1024
+    AL_SAMPLE_OFFSET* : ALenum =                       0x1025
 
 proc alGenBuffers*(n: ALsizei, buffers: ptr ALuint) {.alimport.}
 proc alGenSources*(n: ALsizei, sources: ptr ALuint) {.alimport.}
 
 proc alSourcei*(sid: ALuint, param: ALenum, value: ALint) {.alimport.}
 proc alSourcef*(sid: ALuint, param: ALenum, value: ALfloat) {.alimport.}
+proc alSourcefv* (sid: ALuint, param: ALenum, value: array[3, ALfloat]) {.alimport.}
 
 proc alGetSourcef*(sid: ALuint, param: ALenum, value: ptr ALfloat) {.alimport.}
 proc alGetSourcei*(sid: ALuint, param: ALenum, value: ptr ALint) {.alimport.}
 
 proc alSourcePlay*(sid: ALuint) {.alimport.}
 proc alSourceStop*(sid: ALuint) {.alimport.}
+proc alSourcePause* (sid: ALuint) {.alimport.}
 
 proc alGetBufferi*(bid: ALuint, param: ALenum, value: ptr ALint) {.alimport.}
 

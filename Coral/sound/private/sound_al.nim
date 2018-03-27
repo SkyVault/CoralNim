@@ -12,6 +12,14 @@ var activeSounds: seq[Sound]
 proc finalizeSound(s: Sound) =
     if s.src != 0: alDeleteSources(1, addr s.src)
 
+proc destroy* (s: Sound)=
+    if s.src != 0:
+        alDeleteSources(1, addr s.src)
+
+proc destroyAllSounds* ()=
+    for sound in activeSounds:
+        sound.destroy()
+
 proc newSound(): Sound =
     result.new(finalizeSound)
     result.mGain = 1
@@ -37,6 +45,12 @@ proc newSoundWithStream*(s: Stream): Sound =
     result.dataSource = newDataSourceWithStream(s)
 
 proc isSourcePlaying(src: ALuint): bool {.inline.} =
+    var state: ALenum
+    alGetSourcei(src, AL_SOURCE_STATE, addr state)
+    result = state == AL_PLAYING
+
+proc isPlaying* (sound: Sound): bool {.inline.} =
+    let src: ALuint = sound.src
     var state: ALenum
     alGetSourcei(src, AL_SOURCE_STATE, addr state)
     result = state == AL_PLAYING
@@ -76,6 +90,54 @@ proc play*(s: Sound) =
         else:
             alSourceStop(s.src)
             alSourcePlay(s.src)
+
+proc position* (s: Sound): float=
+    var val: array[3, ALfloat]
+    if s.src != 0:
+        alSourcefv(s.src, AL_POSITION, val)
+        echo val[0], " ", val[1], " ", val[2]
+        return 0.0
+    else:
+        return 0.0
+
+proc playbackPosition* (s: Sound): float=
+    if s.src != 0:
+        var val: ALfloat = 0.0
+        alGetSourcef(s.src, AL_SEC_OFFSET, addr val)
+        return val.float
+    else:
+        return 0.0
+
+proc `playbackPosition=`* (s: Sound, val: float)=
+    if s.src != 0:
+        alSourcef(s.src, AL_SEC_OFFSET, val.ALfloat)
+
+proc pause* (s: Sound)=
+    if s.src != 0:
+        alSourcePause(s.src)
+
+proc resume* (s: Sound)=
+    if s.src != 0:
+        s.play()
+
+proc paused* (s: Sound): bool=
+    if s.src != 0:
+        var val: ALint = 0
+        alGetSourcei(s.src, AL_SOURCE_STATE, addr val)
+        return
+            if val != AL_PAUSED:
+                false
+            else:
+                true
+    else:
+        return false
+    
+proc `paused=`* (s: Sound, val: bool)=
+    if s.src != 0:
+        if val:
+            s.pause()
+        else:
+            s.resume()
 
 proc `gain=`*(s: Sound, v: float) =
     s.mGain = v

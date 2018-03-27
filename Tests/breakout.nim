@@ -34,13 +34,17 @@ var theAudio: CoralAudio
 
 theGame.load = proc()=
     theAudio = theGame.audio.loadAudio "Tests/pixel_caves.ogg"
-    theAudio.playing = true
+    # theAudio.volume = 0
+    theAudio.play()
 
 theGame.update = proc()= 
     theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.currentFPS
 
     if theGame.isKeyReleased keyEscape:
         quit(theGame)
+
+    if theGame.isKeyPressed keyP:
+        theAudio.togglePause()
 
 theGame.draw = proc()= 
     theGame.r2d.setBackgroundColor(P8Peach)

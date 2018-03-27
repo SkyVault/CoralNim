@@ -340,7 +340,8 @@ proc run* (game: CoralGame)=
         # incrament the timers
         game.clock.ticks += 1
         game.clock.timer += game.clock.delta
-
+    
+    game.audio.destroy()
     game.destroy()
 
 # Game related functions
