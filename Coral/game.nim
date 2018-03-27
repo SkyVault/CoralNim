@@ -3,12 +3,15 @@ import
     opengl,
     os,
     glfw,
-    audio,
-    renderer,
     tables,
-    graphics,
-    glfw/wrapper as glfwx
+    glfw/wrapper as glfwx,
 
+    audio,
+    graphics,
+    renderer,
+    ecs,
+    gameMath
+    
 type
     CoralClock = ref object
         fps, delta, last, timer, last_fps: float

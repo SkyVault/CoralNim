@@ -3,9 +3,11 @@ import
 
 type
     V3* = ref object
+        ## 3 unit vector type
         x* , y* , z* : float32
 
     V2* = ref object
+        ## 2 unit vector type
         x*, y*: float32
 
     M4Arr = object
@@ -42,10 +44,18 @@ const RADTODEG* = 180.0 / PI
 proc newV3* (x: float = 0, y: float = 0, z: float = 0): V3=
     V3(x: x, y: y, z: z)
 
-proc V3Up*     (): V3 = newV3(0, 1, 0)
-proc V3Right*  (): V3 = newV3(1, 0, 0)
-proc V3Left*   (): V3 = newV3(-1, 0, 0)
-proc V3One*    (): V3 = newV3(1, 1, 1)
+proc V3Up*     (): V3 = 
+    ## Returns a zeroed vector with the y coordinate set to one
+    newV3(0, 1, 0)
+
+proc V3Right*  (): V3 =     
+    newV3(1, 0, 0)
+
+proc V3Left*   (): V3 = 
+    newV3(-1, 0, 0)
+
+proc V3One*    (): V3 = 
+    newV3(1, 1, 1)
 
 proc `+`* (a: V3, b: V3): V3= newV3(a.x + b.x, a.y + b.y, a.z + b.z)
 proc `-`* (a: V3, b: V3): V3= newV3(a.x - b.x, a.y - b.y, a.z - b.z)
