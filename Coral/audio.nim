@@ -18,7 +18,7 @@ proc `playbackPosition=`* (audio: CoralAudio, val: float)
 proc init* (audio: CoralAudioMixer)=
     audio_initialized = true
 
-proc destroy* (audio: CoralAudioMixer)=
+proc destroy* (mixer: CoralAudioMixer)=
     destroyAllSounds()
 
 proc loadAudio* (mixer: CoralAudioMixer, path: string) : CoralAudio=
@@ -32,6 +32,9 @@ proc play* (audio: CoralAudio)=
 proc stop* (audio: CoralAudio)=
     audio.sound.stop()
     audio.playbackPosForPause = 0.0
+
+proc destroy* (audio: CoralAudio)=
+    audio.sound.destroy()
 
 proc playing* (audio: CoralAudio): bool=
     # This isnt multiplatform :/
