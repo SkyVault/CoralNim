@@ -5,8 +5,7 @@ import
     ../Coral/gameMath,
     ../Coral/ecs,
     ../Coral/audio,
-    math,
-    glfw
+    math
 
 let theGame = newGame(
     1280, 
@@ -36,7 +35,7 @@ theGame.load = proc()=
 theGame.update = proc()= 
     theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.currentFPS
 
-    if theGame.isKeyReleased keyEscape:
+    if theGame.isKeyReleased CoralKey.Escape:
         quit(theGame)
 
 theGame.draw = proc()= 

@@ -11,17 +11,18 @@ import
     renderer,
     ecs,
     gameMath
-    
+
+include input
+
 type
     CoralClock = ref object
         fps, delta, last, timer, last_fps: float
         ticks: int
 
     CoralAssetManager = ref object
-        
 
     # Input handler
-    CoralKey = ref object
+    CoralKeyState = ref object
         state*, last*: int
 
     CoralInputManager = ref object
@@ -34,7 +35,7 @@ type
 
         last_mouse_left_state, curr_mouse_left_state: bool
         last_mouse_right_state, curr_mouse_right_state: bool
-        keyMap: Table[cint, CoralKey]
+        keyMap: Table[cint, CoralKeyState]
 
     CoralConfig = ref object
         resizable: bool
@@ -56,7 +57,7 @@ type
         update*: proc()
         draw*: proc()
         destroy*:proc()
-    
+
 # CLOCK API
 proc timer*         (c: CoralClock): float {.inline.} = c.timer
 proc currentFPS*    (c: CoralClock): float {.inline.} = c.fps
@@ -88,8 +89,8 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
             fps: 0.0,
             delta: config.fps.float / 1000.0,
             timer: 0.0,
-            last: glfwx.getTime().float,
-            last_fps: glfwx.getTime().float,
+            last: getTime().float,
+            last_fps: getTime().float,
             ticks: 0
         ),
         input: CoralInputManager(
@@ -99,7 +100,7 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
             the_first: false, the_block: false,
             last_mouse_left_state: false, curr_mouse_left_state: false,
             last_mouse_right_state: false, curr_mouse_right_state: false,
-            keyMap: initTable[cint, CoralKey]()
+            keyMap: initTable[cint, CoralKeyState]()
         ),
         audio: CoralAudioMixer(
 
@@ -150,8 +151,8 @@ proc input* (game: CoralGame): auto = game.input
 proc r2d* (game: CoralGame):auto = game.r2d
 proc audio* (game: CoralGame):auto = game.audio
 
-proc newKey(): CoralKey=
-    return CoralKey(state: 0, last: 0)
+proc newKey(): CoralKeyState=
+    return CoralKeyState(state: 0, last: 0)
 
 ## Input manager functions
 proc mouseX* (game: CoralGame): float= return game.input.mouse_x
@@ -199,8 +200,7 @@ proc isMouseRightReleased* (game: CoralGame): bool =
         return true
     return false
 
-proc isKeyPressed* (game: CoralGame, key: glfw.Key): bool=
-    var win = getCurrentContext()
+proc isKeyPressed* (game: CoralGame, key: CoralKey): bool=
     if (game.input.the_block): return false
     var ckey = cast[cint](key)
     if (not game.input.keyMap.contains ckey):
@@ -214,7 +214,7 @@ proc isKeyPressed* (game: CoralGame, key: glfw.Key): bool=
             return true
         return false
 
-proc isKeyReleased* (game: CoralGame, key: glfw.Key): bool=
+proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=
     var win = getCurrentContext()
     if (game.input.the_block): return false
     var ckey = cast[cint](key)
@@ -229,7 +229,7 @@ proc isKeyReleased* (game: CoralGame, key: glfw.Key): bool=
             return true
         return false
 
-proc isKeyDown* (game: CoralGame, key: glfw.Key): bool =
+proc isKeyDown* (game: CoralGame, key: CoralKey): bool =
     var win = getCurrentContext()
     var ckey = cast[cint](key)
     if not game.input.keyMap.contains ckey:
@@ -287,8 +287,8 @@ proc run* (game: CoralGame)=
 
     game.load()
     while game.running:
-        glfwx.pollEvents()
-        glfwx.swapBuffers(game.window)
+        pollEvents()
+        swapBuffers(game.window)
 
         let wait_time = 1.0 / game.targetFPS.float
         let now = getTime().float
@@ -308,7 +308,7 @@ proc run* (game: CoralGame)=
             # os.sleep(durr.int)
 
         game.running = 
-            if glfwx.windowShouldClose(game.window) == 0:
+            if windowShouldClose(game.window) == 0:
                 true
             else:
                 false
