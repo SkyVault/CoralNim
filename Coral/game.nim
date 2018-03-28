@@ -65,6 +65,7 @@ proc currentFPS*    (c: CoralClock): float {.inline.} = c.fps
 proc dt*            (c: CoralClock): float {.inline.} = c.delta
 proc ticks*         (c: CoralClock): int   {.inline.} = c.ticks
 
+
 proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=
     CoralConfig(
         resizable: resizable,
@@ -105,7 +106,8 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         ),
         audio: CoralAudioMixer(
 
-        )
+        ),
+        world: nil
     )
 
     result.audio.init()
@@ -151,6 +153,11 @@ proc clock* (game: CoralGame): auto = game.clock
 proc input* (game: CoralGame): auto = game.input
 proc r2d* (game: CoralGame):auto = game.r2d
 proc audio* (game: CoralGame):auto = game.audio
+
+proc world* (c: CoralGame): CoralWorld=
+    if c.world == nil:
+        c.world = newCoralWorld()
+    return c.world
 
 proc newKey(): CoralKeyState=
     return CoralKeyState(state: 0, last: 0)
@@ -334,10 +341,14 @@ proc run* (game: CoralGame)=
         game.input.the_first = false
 
         # Update and draw the game
+        if game.world.isNil == false:
+            game.world.update()
         game.update()
 
         game.r2d.clear()
         game.r2d.begin(game.windowSize)
+        if game.world.isNil == false:
+            game.world.draw()
         game.draw()
         game.r2d.flush()
 

@@ -22,17 +22,15 @@ type
 
     Um = ref object of CoralComponent
 
-let world = newCoralWorld()
-
 ## Paddle controller
-world.createSystem(
+theGame.world.createSystem(
     @["Body", "Paddle"],
 
     load = proc(s: CoralSystem, e: CoralEntity)=
         echo("Matched dude!")
 )
 
-let ent = world.createEntity()
+let ent = theGame.world.createEntity()
 ent.add(Body(position: newV2(0,0), size: newV2(100, 100)))
 ent.add(Paddle(velocity: newV2(0, 0)))
 ent.add(Um())
@@ -53,15 +51,11 @@ theGame.update = proc()=
     if theGame.isKeyReleased CoralKey.Escape:
         quit(theGame)
 
-    world.update()
-
 theGame.draw = proc()= 
     theGame.r2d.setBackgroundColor(P8Peach)
     theGame.r2d.view = camera
     theGame.r2d.drawLineRect(1000, 100, 200, 200, theGame.clock.timer, Red())
     theGame.r2d.drawImage(wat, newV2(0, 0), newV2(500, 500), 0.0, White)
-
-    world.render()
 
 # theGame.destroy = proc()=
 #     discard

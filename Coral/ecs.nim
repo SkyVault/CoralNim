@@ -17,7 +17,7 @@ type
         preUpdate:  proc(s: CoralSystem)
         load:       proc(s: CoralSystem, e: CoralEntity)
         update:     proc(s: CoralSystem, e: CoralEntity)
-        render:     proc(s: CoralSystem, e: CoralEntity)
+        draw:     proc(s: CoralSystem, e: CoralEntity)
         destroy:    proc(s: CoralSystem, e: CoralEntity)
 
     CoralWorld* = ref object
@@ -48,7 +48,7 @@ proc newSystem(
     load:       proc(s: CoralSystem, e: CoralEntity),
     preUpdate:  proc(s: CoralSystem)                ,
     update:     proc(s: CoralSystem, e: CoralEntity),
-    render:     proc(s: CoralSystem, e: CoralEntity),
+    draw:     proc(s: CoralSystem, e: CoralEntity),
     destroy:    proc(s: CoralSystem, e: CoralEntity)
     ): CoralSystem=
 
@@ -61,7 +61,7 @@ proc newSystem(
         load: load,
         preUpdate: preUpdate,
         update: update,
-        render: render,
+        draw: draw,
         destroy: destroy
     )
 
@@ -95,11 +95,11 @@ proc update* (world: CoralWorld)=
                     system.destroy(system, entity)
             world.entities.delete(i)
 
-proc render* (world: CoralWorld)=
+proc draw* (world: CoralWorld)=
     for entity in world.entities:
         for system in world.systems:
             if system.matches entity:
-                system.render(system, entity)
+                system.draw(system, entity)
 
 proc createEntity* (world: CoralWorld): auto {.discardable.}=
     result = CoralEntity(
@@ -115,7 +115,7 @@ proc createSystem* (
     load: proc(s: CoralSystem, e: CoralEntity) = default_load,
     preUpdate: proc(s: CoralSystem) = default_preUpdate,
     update: proc(s: CoralSystem, e: CoralEntity) = default_update,
-    render: proc(s: CoralSystem, e: CoralEntity) = default_render,
+    draw: proc(s: CoralSystem, e: CoralEntity) = default_render,
     destroy: proc(s: CoralSystem, e: CoralEntity) = default_destroy
     ): CoralSystem {.discardable.}=
 
@@ -124,7 +124,7 @@ proc createSystem* (
         load,
         preUpdate,
         update,
-        render,
+        draw,
         destroy
     )
 
