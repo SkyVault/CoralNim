@@ -52,6 +52,7 @@ type
         clock: CoralClock
         input: CoralInputManager
         audio: CoralAudioMixer
+        world: CoralWorld
         title: string
         load*: proc()
         update*: proc()
