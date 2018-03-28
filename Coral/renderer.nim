@@ -126,6 +126,9 @@ type
         ortho_projection: M4
         view_matrix: M2
 
+        primitive_vao: GLuint
+        primitive_vbo: GLuint
+
         shader_program: GLuint
 
         diffuse_location:       GLint
@@ -184,6 +187,10 @@ proc newR2D* ():R2d =
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     glBindVertexArray(0)
+
+    # Load the primitive buffer
+    # result.primitive_vbo
+    glGenBuffers(1, addr result.primitive_vbo)
 
     result.shader_program = newProgram(
         loadShader(VERTEX_SHADER, SPRITE_SHADER_VERTEX),
@@ -292,6 +299,7 @@ proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color
 proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
     self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
 
+# proc drawTriangle* (self: R2D)=
 # proc drawTiledMap* (self: R2D, map: TiledMap, scale: float32 = 1.0)=
 #     let image = map.image
 #     bindImage(image)
