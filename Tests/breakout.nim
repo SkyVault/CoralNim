@@ -5,6 +5,7 @@ import
     ../Coral/gameMath,
     ../Coral/ecs,
     ../Coral/audio,
+    test,
     math
 
 let theGame = newGame(
@@ -12,6 +13,7 @@ let theGame = newGame(
     720, 
     "Breakout!", 
     config())
+export theGame
 
 type 
     Body = ref object of CoralComponent
