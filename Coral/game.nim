@@ -17,8 +17,8 @@ include input
 type
     CoralClock = ref object
         fps, delta, last, timer, last_fps: float
-        avFps: float
-        fpsSamples: seq[float]
+        avFps, avDt: float
+        fpsSamples, dtSamples: seq[float]
         ticks: int
 
     # CoralAssetManager = ref object
@@ -69,6 +69,7 @@ proc currentFPS*    (c: CoralClock): float {.inline.} = c.fps
 proc dt*            (c: CoralClock): float {.inline.} = c.delta
 proc ticks*         (c: CoralClock): int   {.inline.} = c.ticks
 proc averageFps*    (c: CoralClock): float {.inline.} = c.avFps
+proc averageDt*     (c: CoralClock): float {.inline.} = c.avDt
 
 proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=
     CoralConfig(
@@ -94,7 +95,9 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         clock: CoralClock(
             fps: 0.0,
             avFps: 0.0,
+            avDt: 0.0,
             fpsSamples: newSeq[float](),
+            dtSamples: newSeq[float](),
             delta: config.fps.float / 1000.0,
             timer: 0.0,
             last: getTime().float,
@@ -319,7 +322,9 @@ proc run* (game: CoralGame)=
 
         if game.clock.ticks == 0:
             game.clock.avFps = game.clock.fps
-
+            game.clock.avDt = game.clock.dt
+        
+        # Average out the fps
         if game.clock.fpsSamples.len < NUM_AVERAGE_FPS_SAMPLES:
             game.clock.fpsSamples.add game.clock.fps
         else:
@@ -329,6 +334,17 @@ proc run* (game: CoralGame)=
                 sumation += s
             game.clock.avFps = sumation / (len.float)
             game.clock.fpsSamples.setLen(0)
+
+        # Average out the delta time
+        if game.clock.dtSamples.len < NUM_AVERAGE_FPS_SAMPLES:
+            game.clock.dtSamples.add game.clock.dt
+        else:
+            let len = game.clock.dtSamples.len
+            var sumation = 0.0
+            for d in game.clock.dtSamples:
+                sumation += d
+            game.clock.avDt = sumation / (len.float)
+            game.clock.dtSamples.setLen(0)
 
         # if durr > 0:
             # os.sleep(durr.int)
