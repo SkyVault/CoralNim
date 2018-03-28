@@ -46,7 +46,7 @@ theGame.load = proc()=
     discard
 
 theGame.update = proc()= 
-    theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.currentFPS
+    theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.averageFps
 
     if theGame.isKeyReleased CoralKey.Escape:
         quit(theGame)

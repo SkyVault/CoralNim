@@ -17,9 +17,11 @@ include input
 type
     CoralClock = ref object
         fps, delta, last, timer, last_fps: float
+        avFps: float
+        fpsSamples: seq[float]
         ticks: int
 
-    CoralAssetManager = ref object
+    # CoralAssetManager = ref object
 
     # Input handler
     CoralKeyState = ref object
@@ -59,12 +61,14 @@ type
         draw*: proc()
         destroy*:proc()
 
+const NUM_AVERAGE_FPS_SAMPLES = 100
+
 # CLOCK API
 proc timer*         (c: CoralClock): float {.inline.} = c.timer
 proc currentFPS*    (c: CoralClock): float {.inline.} = c.fps
 proc dt*            (c: CoralClock): float {.inline.} = c.delta
 proc ticks*         (c: CoralClock): int   {.inline.} = c.ticks
-
+proc averageFps*    (c: CoralClock): float {.inline.} = c.avFps
 
 proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=
     CoralConfig(
@@ -89,6 +93,8 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         title: title,
         clock: CoralClock(
             fps: 0.0,
+            avFps: 0.0,
+            fpsSamples: newSeq[float](),
             delta: config.fps.float / 1000.0,
             timer: 0.0,
             last: getTime().float,
@@ -223,7 +229,6 @@ proc isKeyPressed* (game: CoralGame, key: CoralKey): bool=
         return false
 
 proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=
-    var win = getCurrentContext()
     if (game.input.the_block): return false
     var ckey = cast[cint](key)
     if (not game.input.keyMap.contains ckey):
@@ -298,7 +303,7 @@ proc run* (game: CoralGame)=
         pollEvents()
         swapBuffers(game.window)
 
-        let wait_time = 1.0 / game.targetFPS.float
+        # let wait_time = 1.0 / game.targetFPS.float
         let now = getTime().float
         let curr_time = (now - game.clock.last)
         # let durr = 1000.0 * (wait_time - curr_time) + 0.5
@@ -311,6 +316,19 @@ proc run* (game: CoralGame)=
                 1.0 / game.clock.delta
             else:
                 0.0
+
+        if game.clock.ticks == 0:
+            game.clock.avFps = game.clock.fps
+
+        if game.clock.fpsSamples.len < NUM_AVERAGE_FPS_SAMPLES:
+            game.clock.fpsSamples.add game.clock.fps
+        else:
+            let len = game.clock.fpsSamples.len
+            var sumation = 0.0
+            for s in game.clock.fpsSamples:
+                sumation += s
+            game.clock.avFps = sumation / (len.float)
+            game.clock.fpsSamples.setLen(0)
 
         # if durr > 0:
             # os.sleep(durr.int)
