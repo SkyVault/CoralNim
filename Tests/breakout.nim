@@ -13,7 +13,6 @@ let theGame = newGame(
     720, 
     "Breakout!", 
     config())
-export theGame
 
 type 
     Body = ref object of CoralComponent
@@ -26,10 +25,13 @@ type
 
 ## Paddle controller
 theGame.world.createSystem(
-    @["Body", "Paddle"],
+    @["Body", "Paddle"]
 
-    load = proc(s: CoralSystem, e: CoralEntity)=
+    , load = proc(s: CoralSystem, e: CoralEntity)=
         echo("Matched dude!")
+    
+    , update = proc(s: CoralSystem, e: CoralEntity)=
+        discard
 )
 
 let ent = theGame.world.createEntity()
@@ -37,7 +39,7 @@ ent.add(Body(position: newV2(0,0), size: newV2(100, 100)))
 ent.add(Paddle(velocity: newV2(0, 0)))
 ent.add(Um())
 
-let wat = loadImage "Tests/wat.png"
+# let wat = loadImage "Tests/wat.png"
 let camera = Camera2D(
     position  : newV2(0, 0),
     zoom      : 1,
@@ -57,7 +59,7 @@ theGame.draw = proc()=
     theGame.r2d.setBackgroundColor(P8Peach)
     theGame.r2d.view = camera
     theGame.r2d.drawLineRect(1000, 100, 200, 200, theGame.clock.timer, Red())
-    theGame.r2d.drawImage(wat, newV2(0, 0), newV2(500, 500), 0.0, White)
+    # theGame.r2d.drawImage(wat, newV2(0, 0), newV2(500, 500), 0.0, White)
 
 # theGame.destroy = proc()=
 #     discard

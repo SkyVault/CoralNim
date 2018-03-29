@@ -15,7 +15,7 @@ import
 include input
 
 type
-    CoralClock = ref object
+    CoralClock* = ref object
         fps, delta, last, timer, last_fps: float
         avFps, avDt: float
         fpsSamples, dtSamples: seq[float]
@@ -24,10 +24,10 @@ type
     # CoralAssetManager = ref object
 
     # Input handler
-    CoralKeyState = ref object
+    CoralKeyState* = ref object
         state*, last*: int
 
-    CoralInputManager = ref object
+    CoralInputManager* = ref object
         mouse_x, mouse_y: float64
         mouse_dx, mouse_dy: float
         last_mouse_x, last_mouse_y: float
@@ -39,13 +39,13 @@ type
         last_mouse_right_state, curr_mouse_right_state: bool
         keyMap: Table[cint, CoralKeyState]
 
-    CoralConfig = ref object
+    CoralConfig* = ref object
         resizable: bool
         fullscreen: bool
         visible: bool
         fps: int
 
-    CoralGame = ref object
+    CoralGame* = ref object
         window: GLFWwindow
         config: CoralConfig
         running: bool
