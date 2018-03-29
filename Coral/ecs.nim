@@ -78,7 +78,7 @@ proc newCoralWorld* (): CoralWorld=
 
 proc update* (world: CoralWorld)=
     let num = world.entities.len
-    for i in num - 1 .. 0:
+    for i in countdown(num - 1, 0):
         let entity = world.entities[i]
 
         for system in world.systems:
@@ -101,12 +101,16 @@ proc draw* (world: CoralWorld)=
             if system.matches entity:
                 system.draw(system, entity)
 
-proc createEntity* (world: CoralWorld): auto {.discardable.}=
+proc createEntity* (world: CoralWorld, components: seq[CoralComponent] = @[]): auto {.discardable.}=
     result = CoralEntity(
         components: initTable[string, CoralComponent](),
         loaded: false,
         remove: false
     )
+
+    for c in components:
+        result.add(c)
+        
     world.entities.add result
 
 proc createSystem* (

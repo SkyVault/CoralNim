@@ -23,10 +23,11 @@ type
 
     Um = ref object of CoralComponent
 
-let ent = Coral.world.createEntity()
-ent.add(Body(position: newV2(0,0), size: newV2(100, 100)))
-ent.add(Paddle(velocity: newV2(0, 0)))
-ent.add(Um())
+for i in 0..10:
+    let ent = Coral.world.createEntity()
+    ent.add(Body(position: newV2(0,0), size: newV2(100, 100)))
+    ent.add(Paddle(velocity: newV2(0, 0)))
+    ent.add(Um())
 
 # let wat = loadImage "Tests/wat.png"
 let camera = Camera2D(
