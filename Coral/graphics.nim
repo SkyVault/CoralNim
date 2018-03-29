@@ -24,6 +24,8 @@ type
         VERTEX_SHADER,
         GEOMETRY_SHADER
 
+    CoralGraphics* = ref object
+
     Color* = ref object
         ## This is the main color structure.
         r* , g* , b* , a* : float32
@@ -205,7 +207,7 @@ proc drawArrays* (vao: GLuint, numVertices: int)=
         glBindVertexArray(0)
 
 ## Shader code
-proc loadShader* (stype: ShaderType, code: string): GLuint=
+proc CoralLoadShader* (stype: ShaderType, code: string): GLuint=
     var theType: GLenum
     if stype == VERTEX_SHADER: theType = GL_VERTEX_SHADER
     if stype == FRAGMENT_SHADER: theType = GL_FRAGMENT_SHADER
@@ -234,7 +236,7 @@ proc loadShader* (stype: ShaderType, code: string): GLuint=
              else: "FRAGMENT::", log
         dealloc(log)
 
-proc newProgram* (v: GLuint, f: GLuint): GLuint=
+proc CoralNewProgram* (v: GLuint, f: GLuint): GLuint=
     result = glCreateProgram()
     glAttachShader(result, v)
     glAttachShader(result, f)
@@ -268,29 +270,36 @@ proc getLocation* (p: GLuint, id: cstring): GLint=
     if result == -1:
         echo "nGetLocation:: cannot find uniform " & $id
 
-proc loadImage* (path: string, filter: GLint = GL_LINEAR): Image=
+proc CoralLoadImage* (path: string, filter: GLint = GL_LINEAR): Image=
     result = Image(id: 0, width: 0, height: 0)
 
+    if not fileExists(path):
+        echo "[WARNING]:: Cannot find image: " & path & "."
+        return
+
     stbi.setFlipVerticallyOnLoad true
-    var data = stbi.load(path, result.width, result.height, result.channels, stbi.Default)
 
-    glGenTextures(1, addr result.id)
-    glBindTexture(GL_TEXTURE_2D, result.id)
+    try:
+        var data = stbi.load(path, result.width, result.height, result.channels, stbi.Default)
+        glGenTextures(1, addr result.id)
+        glBindTexture(GL_TEXTURE_2D, result.id)
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter)
 
-    let lvl: GLint  = 0
-    let fmt         = GLint(GL_RGB)
-    let w           = GLsizei(result.width)
-    let h           = GLsizei(result.height)
+        let lvl: GLint  = 0
+        let fmt         = GLint(GL_RGB)
+        let w           = GLsizei(result.width)
+        let h           = GLsizei(result.height)
 
-    case result.channels:
-    of 3: glTexImage2D(GL_TEXTURE_2D,lvl, fmt, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, addr data[0])
-    of 4: glTexImage2D(GL_TEXTURE_2D,lvl, GLint(GL_RGBA), w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, addr data[0])
-    else: discard
-    glBindTexture(GL_TEXTURE_2D, 0)
-
+        case result.channels:
+        of 3: glTexImage2D(GL_TEXTURE_2D,lvl, fmt, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, addr data[0])
+        of 4: glTexImage2D(GL_TEXTURE_2D,lvl, GLint(GL_RGBA), w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, addr data[0])
+        else: discard
+        glBindTexture(GL_TEXTURE_2D, 0)
+    except STBIException:
+        echo failureReason()
+    
 proc getID* (img: Image): GLuint= return img.id
 
 proc bindImage* (img: Image)= glBindTexture(GL_TEXTURE_2D, img.id)
@@ -299,7 +308,7 @@ proc unBindImage* ()= glBindTexture(GL_TEXTURE_2D, 0)
 proc loadSpriteFont* (path: string, image_path: string): SpriteFont=
   result = SpriteFont(
     glyphs: newTable[uint, Glyph](),
-    image: loadImage(image_path)
+    image: CoralLoadImage(image_path)
   )
 
   for line in lines path:

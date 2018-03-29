@@ -55,6 +55,7 @@ type
         input: CoralInputManager
         audio: CoralAudioMixer
         world: CoralWorld
+        graphics: CoralGraphics
         title: string
         load*: proc()
         update*: proc()
@@ -74,9 +75,9 @@ proc averageFps*    (c: CoralClock): float {.inline.} = c.avFps
 proc averageDt*     (c: CoralClock): float {.inline.} = c.avDt
 
 var lCoral : CoralGame = nil
+newCoralGame()
+
 template Coral* (): auto = 
-    if lCoral == nil:
-        newCoralGame()
     lCoral
 
 proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=
@@ -137,10 +138,8 @@ proc newCoralGame()=
         discard readLine(stdin)
         quit()
 
-proc CoralCreateGame* (width, height: int, title: string, config: CoralConfig)=
+proc createGame* (self: CoralGame, width, height: int, title: string, config: CoralConfig): CoralGame{.discardable.}=
     ## Initializes the game object
-    if lCoral == nil: newCoralGame()
-
     # Set the OpenGL version to 330 core
     # TODO: check to see if this works
     windowHint(CONTEXT_VERSION_MAJOR, 3)
@@ -169,12 +168,14 @@ proc CoralCreateGame* (width, height: int, title: string, config: CoralConfig)=
 
     # initialize the renderer once opengl is initialized
     lCoral.r2d = newR2D()
+    return lCoral
 
 ## Public accessor properties
 proc clock* (game: CoralGame): auto = game.clock
 proc input* (game: CoralGame): auto = game.input
 proc r2d* (game: CoralGame):auto = game.r2d
 proc audio* (game: CoralGame):auto = game.audio
+proc graphics* (game: CoralGame): auto = game.graphics
 
 proc world* (c: CoralGame): CoralWorld=
     if c.world == nil:

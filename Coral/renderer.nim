@@ -192,9 +192,9 @@ proc newR2D* ():R2d =
     # result.primitive_vbo
     glGenBuffers(1, addr result.primitive_vbo)
 
-    result.shader_program = newProgram(
-        loadShader(VERTEX_SHADER, SPRITE_SHADER_VERTEX),
-        loadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
+    result.shader_program = CoralNewProgram(
+        CoralLoadShader(VERTEX_SHADER, SPRITE_SHADER_VERTEX),
+        CoralLoadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
     )
 
     result.view_matrix = newM2(1, 0, 0, 1)
