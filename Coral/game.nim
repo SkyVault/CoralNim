@@ -173,7 +173,10 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
 ## Public accessor properties
 proc clock* (game: CoralGame): auto = game.clock
 proc input* (game: CoralGame): auto = game.input
-proc r2d* (game: CoralGame):auto = game.r2d
+proc r2d* (game: CoralGame):auto = 
+    assert(game.r2d != nil, "[ERROR]:: Game needs to be created before using the renderer")
+    return game.r2d
+
 proc audio* (game: CoralGame):auto = game.audio
 proc graphics* (game: CoralGame): auto = game.graphics
 
