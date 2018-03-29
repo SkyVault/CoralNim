@@ -8,7 +8,7 @@ import
     test,
     math
 
-let theGame = newGame(
+CoralCreateGame(
     1280, 
     720, 
     "Breakout!", 
@@ -23,18 +23,7 @@ type
 
     Um = ref object of CoralComponent
 
-## Paddle controller
-theGame.world.createSystem(
-    @["Body", "Paddle"]
-
-    , load = proc(s: CoralSystem, e: CoralEntity)=
-        echo("Matched dude!")
-    
-    , update = proc(s: CoralSystem, e: CoralEntity)=
-        discard
-)
-
-let ent = theGame.world.createEntity()
+let ent = Coral.world.createEntity()
 ent.add(Body(position: newV2(0,0), size: newV2(100, 100)))
 ent.add(Paddle(velocity: newV2(0, 0)))
 ent.add(Um())
@@ -46,22 +35,18 @@ let camera = Camera2D(
     rotation  : 0.0
 )
 
-theGame.load = proc()=
+Coral.load = proc()=
     discard
 
-theGame.update = proc()= 
-    theGame.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $theGame.clock.averageFps
+Coral.update = proc()= 
+    Coral.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $Coral.clock.averageFps
 
-    if theGame.isKeyReleased CoralKey.Escape:
-        quit(theGame)
+    if Coral.isKeyReleased CoralKey.Escape:
+        quit(Coral)
 
-theGame.draw = proc()= 
-    theGame.r2d.setBackgroundColor(P8Peach)
-    theGame.r2d.view = camera
-    theGame.r2d.drawLineRect(1000, 100, 200, 200, theGame.clock.timer, Red())
-    # theGame.r2d.drawImage(wat, newV2(0, 0), newV2(500, 500), 0.0, White)
+Coral.draw = proc()= 
+    Coral.r2d.setBackgroundColor(P8Peach)
+    Coral.r2d.view = camera
+    Coral.r2d.drawLineRect(1000, 100, 200, 200, Coral.clock.timer, Red())
 
-# theGame.destroy = proc()=
-#     discard
-
-theGame.run()
+Coral.run()

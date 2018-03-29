@@ -61,6 +61,8 @@ type
         draw*: proc()
         destroy*:proc()
 
+proc newCoralGame()
+
 const NUM_AVERAGE_FPS_SAMPLES = 100
 
 # CLOCK API
@@ -71,6 +73,12 @@ proc ticks*         (c: CoralClock): int   {.inline.} = c.ticks
 proc averageFps*    (c: CoralClock): float {.inline.} = c.avFps
 proc averageDt*     (c: CoralClock): float {.inline.} = c.avDt
 
+var lCoral : CoralGame = nil
+template Coral* (): auto = 
+    if lCoral == nil:
+        newCoralGame()
+    lCoral
+
 proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=
     CoralConfig(
         resizable: resizable,
@@ -79,10 +87,10 @@ proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): 
         fps: fps
      )
 
-proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGame=
-    ## Initializes the game object
+proc newCoralGame()=
+    let config = config()
 
-    result = CoralGame(
+    lCoral = CoralGame(
         window: nil,
         config: config,
         targetFPS: config.fps,
@@ -91,7 +99,7 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         draw: proc()=discard,
         destroy: proc()=discard,
         r2d: nil,
-        title: title,
+        title: "",
         clock: CoralClock(
             fps: 0.0,
             avFps: 0.0,
@@ -119,7 +127,7 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         world: nil
     )
 
-    result.audio.init()
+    lCoral.audio.init()
 
     let succ = glfwx.init()
 
@@ -128,6 +136,10 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         echo "TODO: Make less shitty error messages"
         discard readLine(stdin)
         quit()
+
+proc CoralCreateGame* (width, height: int, title: string, config: CoralConfig)=
+    ## Initializes the game object
+    if lCoral == nil: newCoralGame()
 
     # Set the OpenGL version to 330 core
     # TODO: check to see if this works
@@ -138,15 +150,16 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
 
     swapInterval(0)
 
-    result.window = createWindow(cint(width), cint(height), cstring(title), nil, nil)
+    lCoral.window = createWindow(cint(width), cint(height), cstring(title), nil, nil)
+    lCoral.config = config
     
-    if result.window == nil:
+    if lCoral.window == nil:
         echo "ERROR CREATING GLFW WINDOW!!"
         echo "TODO: Make less shitty error messages"
         discard readLine(stdin)
         quit()
 
-    makeContextCurrent(result.window)
+    makeContextCurrent(lCoral.window)
 
     loadExtensions()
     glClear(
@@ -155,7 +168,7 @@ proc newGame* (width, height: int, title: string, config: CoralConfig): CoralGam
         )
 
     # initialize the renderer once opengl is initialized
-    result.r2d = newR2D()
+    lCoral.r2d = newR2D()
 
 ## Public accessor properties
 proc clock* (game: CoralGame): auto = game.clock
