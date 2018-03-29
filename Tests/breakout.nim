@@ -39,6 +39,7 @@ var wat: Image
 var pos = newV2(0, 0)
 
 Coral.load = proc()= 
+    Coral.r2d.rotationMode = CoralRotationMode.Degrees
     wat = CoralLoadImage "Tests/wat.png"
 
 Coral.update = proc()= 
@@ -57,6 +58,6 @@ Coral.draw = proc()=
     Coral.r2d.setBackgroundColor(P8Peach)
     Coral.r2d.view = camera
     Coral.r2d.drawLineRect(1000, 100, 200, 200, 20.0 * Coral.clock.timer, Red)
-    Coral.r2d.drawImage(wat, pos, newV2(256, 256), 45.0, White)
+    Coral.r2d.drawImage(wat, pos, newV2(256, 256), math.PI / 4.0, White)
 
 Coral.createGame(1280, 720, "Breakout!", config()).run()

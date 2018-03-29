@@ -108,6 +108,10 @@ const RECT_INDICES = @[
 ]
 
 type 
+    CoralRotationMode* {.pure.} = enum
+        Degrees,
+        Radians
+
     # image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5
     Drawable* = ref object
       image: Image
@@ -120,6 +124,8 @@ type
   
     R2D* = ref object
         drawables: TableRef[uint32, seq[Drawable]]
+
+        rotation_mode: CoralRotationMode
 
         clear_color: Color
         rvao, rvbo, ribo: GLuint
@@ -172,7 +178,8 @@ proc newDrawable* (image: Image, region: Region, position: V2, size: V2, rotatio
 proc newR2D* ():R2d =
     result = R2D(
       clear_color: Black,
-      drawables: newTable[uint32, seq[Drawable]]()
+      drawables: newTable[uint32, seq[Drawable]](),
+      rotation_mode: CoralRotationMode.Degrees
     )
 
     var verts = RECT_VERTICES
@@ -217,6 +224,12 @@ proc `view=`* (self: R2D, view: M2)=
 
 proc `view=`* (self: R2D, camera: Camera2D)=
     self.view_matrix = camera.view
+
+proc `rotationMode=`* (self: R2D, mode: CoralRotationMode)=
+    self.rotation_mode = mode
+
+proc rotationMode* (self: R2D): auto=
+    return self.rotation_mode
 
 proc setBackgroundColor*(self: R2D, color: Color)=
     self.clear_color = color
@@ -277,7 +290,12 @@ proc drawRect*(self: R2D, x, y, width, height: float, rotation: float, color: Co
     glUniform1i(self.has_texture_location, 0)
     glUniform2f(self.position_location, x, y)
     glUniform2f(self.size_location, width, height)
-    glUniform1f(self.rotation_location, rotation * DEGTORAD)
+
+    if self.rotation_mode == CoralRotationMode.Degrees:
+        glUniform1f(self.rotation_location, rotation * DEGTORAD)
+    else:
+        glUniform1f(self.rotation_location, rotation)
+
     glUniform1f(self.depth_location, 0 - layer)
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
@@ -291,7 +309,12 @@ proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color
     glUniform1i(self.has_texture_location, 0)
     glUniform2f(self.position_location, x, y)
     glUniform2f(self.size_location, width, height)
-    glUniform1f(self.rotation_location, rotation * DEGTORAD)
+
+    if self.rotation_mode == CoralRotationMode.Degrees:
+        glUniform1f(self.rotation_location, rotation * DEGTORAD)
+    else:
+        glUniform1f(self.rotation_location, rotation)
+
     glUniform1f(self.depth_location, 0 - layer)
 
     glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_BYTE, nil)
@@ -430,7 +453,12 @@ proc flush*(self: R2D)=
 
         glUniform2f(self.position_location, position.x, position.y)
         glUniform2f(self.size_location, size.x, size.y)
-        glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
+
+        if self.rotation_mode == CoralRotationMode.Degrees:
+            glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
+        else:
+            glUniform1f(self.rotation_location, drawable.rotation)
+
         glUniform1f(self.depth_location, 0 - drawable.layer)
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
