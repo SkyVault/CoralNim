@@ -277,7 +277,7 @@ proc drawRect*(self: R2D, x, y, width, height: float, rotation: float, color: Co
     glUniform1i(self.has_texture_location, 0)
     glUniform2f(self.position_location, x, y)
     glUniform2f(self.size_location, width, height)
-    glUniform1f(self.rotation_location, rotation)
+    glUniform1f(self.rotation_location, rotation * DEGTORAD)
     glUniform1f(self.depth_location, 0 - layer)
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
@@ -291,7 +291,7 @@ proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color
     glUniform1i(self.has_texture_location, 0)
     glUniform2f(self.position_location, x, y)
     glUniform2f(self.size_location, width, height)
-    glUniform1f(self.rotation_location, rotation)
+    glUniform1f(self.rotation_location, rotation * DEGTORAD)
     glUniform1f(self.depth_location, 0 - layer)
 
     glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_BYTE, nil)
@@ -430,7 +430,7 @@ proc flush*(self: R2D)=
 
         glUniform2f(self.position_location, position.x, position.y)
         glUniform2f(self.size_location, size.x, size.y)
-        glUniform1f(self.rotation_location, drawable.rotation)
+        glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
         glUniform1f(self.depth_location, 0 - drawable.layer)
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)

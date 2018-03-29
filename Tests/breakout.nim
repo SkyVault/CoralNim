@@ -36,6 +36,7 @@ let camera = Camera2D(
 )
 
 var wat: Image
+var pos = newV2(0, 0)
 
 Coral.load = proc()= 
     wat = CoralLoadImage "Tests/wat.png"
@@ -46,10 +47,16 @@ Coral.update = proc()=
     if Coral.isKeyReleased CoralKey.Escape:
         quit(Coral)
 
+    if Coral.isKeyDown CoralKey.Left:
+        pos.x -= Coral.clock.averageDt * 100
+
+    if Coral.isKeyDown CoralKey.Right:
+        pos.x += Coral.clock.averageDt * 100
+
 Coral.draw = proc()= 
     Coral.r2d.setBackgroundColor(P8Peach)
     Coral.r2d.view = camera
-    Coral.r2d.drawLineRect(1000, 100, 200, 200, Coral.clock.timer, Red)
-    Coral.r2d.drawImage(wat, newV2(), newV2(256, 256), 45.0 * DEGTORAD, White)
+    Coral.r2d.drawLineRect(1000, 100, 200, 200, 20.0 * Coral.clock.timer, Red)
+    Coral.r2d.drawImage(wat, pos, newV2(256, 256), 45.0, White)
 
 Coral.createGame(1280, 720, "Breakout!", config()).run()
