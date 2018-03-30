@@ -317,8 +317,8 @@ proc run* (game: CoralGame)=
     ## This method launches the game loop and begins the rendering cycle
 
     game.running = true
-
     game.load()
+
     while game.running:
         pollEvents()
         swapBuffers(game.window)
@@ -363,8 +363,8 @@ proc run* (game: CoralGame)=
             game.clock.avDt = sumation / (len.float)
             game.clock.dtSamples.setLen(0)
 
-        # if durr > 0:
-            # os.sleep(durr.int)
+        if (1.0 / 60.0 > game.clock.dt):
+            os.sleep((((1.0 / 60.0) - game.clock.dt) * 1000.0).int)
 
         game.running = 
             if windowShouldClose(game.window) == 0:
