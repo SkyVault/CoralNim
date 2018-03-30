@@ -32,7 +32,7 @@ proc default_destroy      (s: CoralSystem, e: CoralEntity) = discard
 
 proc add* [T](self: CoralEntity, component: T): T {.discardable.} =
     self.components.add(T.name, component)
-    return component.T
+    return component
 
 proc get* (self: CoralEntity, T: typedesc): T =
     return cast[T](self.components[T.name])

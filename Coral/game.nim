@@ -72,7 +72,7 @@ type
         title: string
         load*: proc()
         update*: proc()
-        draw*: proc()
+        render*: proc()
         destroy*:proc()
 
 proc newCoralGame()
@@ -138,7 +138,7 @@ proc newCoralGame()=
         targetFPS: config.fps,
         load: proc()=discard,
         update: proc()=discard,
-        draw: proc()=discard,
+        render: proc()=discard,
         destroy: proc()=discard,
         r2d: nil,
         title: "",
@@ -360,10 +360,6 @@ proc run* (game: CoralGame)=
     game.running = true
     game.load()
 
-    var frames = 0
-    var start = getTime()
-    var deltaTime = 0.0
-
     while game.running:
         pollEvents()
         swapBuffers(game.window)
@@ -442,7 +438,7 @@ proc run* (game: CoralGame)=
         game.r2d.begin(game.windowSize)
         if game.world.isNil == false:
             game.world.draw()
-        game.draw()
+        game.render()
         game.r2d.flush()
 
         # incrament the timers

@@ -1,3 +1,5 @@
 nimcache/
 Tests/nimcache/
 .exe
+.vscode
+Test/.exe
