@@ -1,4 +1,7 @@
 nimcache/
 Tests/nimcache/
+Coral/nimcache/
 *.exe
+Tests/*.exe
+Coral/*.exe
 .vscode

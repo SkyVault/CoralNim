@@ -209,15 +209,12 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
         )
 
     # initialize the renderer once opengl is initialized
-    # let draw_instanced =
-    #     extensionSupported("glDrawElementsInstanced")   == 1 and
-    #     extensionSupported("glVertexAttribDivisor")     == 1 and
-    #     extensionSupported("glVertexAttribPointer")     == 1
-
-    # echo draw_instanced
+    let draw_instanced = 
+        extensionSupported("GL_ARB_instanced_arrays") == 1 or  
+        extensionSupported("GL_EXT_instanced_arrays") == 1 
 
     lCoral.r2d = newR2D(
-        draw_instanced = true
+        draw_instanced = draw_instanced
     )
     return lCoral
 
