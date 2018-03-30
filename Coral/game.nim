@@ -4,6 +4,7 @@ import
     os,
     glfw,
     tables,
+    typetraits,
     glfw/wrapper as glfwx,
 
     audio,
@@ -35,7 +36,9 @@ type
         ticks: int
         timers: seq[CoralTimer]
 
-    # CoralAssetManager = ref object
+    CoralAssetManager = ref object
+        images: TableRef[string, Image]
+        audio: TableRef[string, Audio]
 
     # Input handler
     CoralKeyState* = ref object
@@ -69,6 +72,7 @@ type
         input: CoralInputManager
         audio: CoralAudioMixer
         world: CoralWorld
+        assets: CoralAssetManager
         title: string
         load*: proc()
         update*: proc()
@@ -167,6 +171,10 @@ proc newCoralGame()=
         audio: CoralAudioMixer(
 
         ),
+        assets: CoralAssetManager(
+            images: newTable[string, Image](),
+            audio: newTable[string, Audio]()
+        ),
         world: nil
     )
 
@@ -231,6 +239,29 @@ proc world* (c: CoralGame): CoralWorld=
     if c.world == nil:
         c.world = newCoralWorld()
     return c.world
+
+proc assets* (c: CoralGame): CoralAssetManager=
+    return c.assets
+
+## Asset manager Api
+proc add* (a: CoralAssetManager, id: string, image: Image): Image{.discardable.}=
+    result = image
+    a.images.add(id, image)
+
+proc add* (a: CoralAssetManager, id: string, audio: Audio): Audio{.discardable.}=
+    result = audio 
+    a.audio.add(id, audio)
+
+# proc get* (a: CoralAssetManager, T: typedesc, id: string): T=
+#     case T.name:
+#         of type(Image).name:
+#             return a.images[id].T
+#         of type(Audio).name:
+#             return a.audio[id].T
+#         else:
+#             echo "Unknown asset type: " & T.name
+#             return nil
+            
 
 proc newKey(): CoralKeyState=
     return CoralKeyState(state: 0, last: 0)

@@ -14,12 +14,16 @@ var image: Image
 Coral.load = proc()=
     image = CoralLoadImage getAppDir() & "/wat.png"
 
+    Coral.assets.add("image", image)
+
 Coral.render = proc()=
+    # discard Coral.assets.get(Image, "image")
+
     for i in 0 .. 100:
         Coral.r2d.drawImage(
             image,
-            newV2(100 + i * 40, 100),
-            newV2(200, 200),
+            100 + i.float * 40.0, 100.0,
+            200.0, 200.0,
             0.0,
             newColor(1.0, 1.0, 1.0, 0.4)
         )

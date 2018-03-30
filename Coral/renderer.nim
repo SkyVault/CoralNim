@@ -83,8 +83,7 @@ type
     Drawable* = ref object
       image: Image
       region: Region
-      position: V2
-      size: V2
+      x, y, width, height: float
       rotation: float
       diffuse: Color
       layer: float
@@ -140,12 +139,11 @@ type
 #             for x in 0..<map.width:
 #                 discard
 
-proc newDrawable* (image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5): Drawable=
+proc newDrawable* (image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5): Drawable=
   Drawable(
     image:      image,
     region:     region,
-    position:   position,
-    size:       size,
+    x: x, y: y, width: width, height: height,
     rotation:   rotation,
     diffuse:    color,
     layer:      layer
@@ -272,7 +270,11 @@ proc begin* (self: R2D, size: (int, int))=
 proc setLineWidth* (width = 1.0)=
     glLineWidth(4.0)
 
+proc drawSprite* (self: R2D, image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5)
 proc drawSprite* (self: R2D, image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5)=
+    drawSprite(self, image, newRegion(0, 0, image.width, image.height), position.x, position.y, size.x, size.y, rotation, color, layer)
+
+proc drawSprite* (self: R2D, image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5)=
     let id = image.id
     if not self.drawables.hasKey id:
       self.drawables.add(id, newSeq[Drawable]())
@@ -292,12 +294,15 @@ proc drawSprite* (self: R2D, image: Image, region: Region, position: V2, size: V
     #     )
 
     self.drawables[id].add(
-        newDrawable(image, region, position, size, rotation, color, layer + self.layer_adder)
+        newDrawable(image, region, x, y, width, height, rotation, color, layer + self.layer_adder)
     )
 
     self.layer_adder += 0.0001
     self.drawable_counter += 1
 
+proc drawImage*(self: R2D, image: Image, x, y, width, height: float, rotation: float = 0, color: Color, layer = 0.5)=
+    drawSprite(self, image, newRegion(0, 0, image.width, image.height), x, y, width, height, rotation, color, layer)
+    
 proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color, layer = 0.5)=
     drawSprite(self, image, newRegion(0, 0, image.width, image.height), position, size, rotation, color, layer)
 
@@ -451,8 +456,11 @@ proc flush*(self: R2D)=
             let color = drawable.diffuse
             let image = drawable.image
             let region = drawable.region
-            let position = drawable.position
-            let size = drawable.size
+
+            let x = drawable.x
+            let y = drawable.y
+            let width = drawable.width
+            let height = drawable.height
 
             var
                 tw = float32(image.width)
@@ -465,10 +473,10 @@ proc flush*(self: R2D)=
                 qh = (float32(region.h) / th)
 
             if self.draw_instanced:
-                rectangle_batch.add(position.x)
-                rectangle_batch.add(position.y)
-                rectangle_batch.add(size.x)
-                rectangle_batch.add(size.y)
+                rectangle_batch.add(x)
+                rectangle_batch.add(y)
+                rectangle_batch.add(width)
+                rectangle_batch.add(height)
 
                 quad_batch.add(qx)
                 quad_batch.add(qy)
@@ -484,8 +492,8 @@ proc flush*(self: R2D)=
                 glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
                 glUniform4f(self.quad_location, qx, qy, qw, qh,)
 
-            glUniform2f(self.position_location, position.x, position.y)
-            glUniform2f(self.size_location, size.x, size.y)
+            glUniform2f(self.position_location, x, y)
+            glUniform2f(self.size_location, width, height)
 
             if self.rotation_mode == CoralRotationMode.Degrees:
                 if self.draw_instanced:
