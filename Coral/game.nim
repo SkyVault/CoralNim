@@ -146,8 +146,8 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
     windowHint(CONTEXT_VERSION_MINOR, 3)
     windowHint(OPENGL_PROFILE, OPENGL_CORE_PROFILE)
     windowHint(VISIBLE, config.visible.cint)
-
-    swapInterval(0)
+    
+    swapInterval(1)
 
     lCoral.window = createWindow(cint(width), cint(height), cstring(title), nil, nil)
     lCoral.config = config
@@ -319,6 +319,10 @@ proc run* (game: CoralGame)=
     game.running = true
     game.load()
 
+    var frames = 0
+    var start = getTime()
+    var deltaTime = 0.0
+
     while game.running:
         pollEvents()
         swapBuffers(game.window)
@@ -363,9 +367,6 @@ proc run* (game: CoralGame)=
             game.clock.avDt = sumation / (len.float)
             game.clock.dtSamples.setLen(0)
 
-        if (1.0 / 60.0 > game.clock.dt):
-            os.sleep((((1.0 / 60.0) - game.clock.dt) * 1000.0).int)
-
         game.running = 
             if windowShouldClose(game.window) == 0:
                 true
@@ -406,6 +407,7 @@ proc run* (game: CoralGame)=
         # incrament the timers
         game.clock.ticks += 1
         game.clock.timer += game.clock.delta
+
     
     game.audio.destroy()
     game.destroy()
