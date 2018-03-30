@@ -117,20 +117,6 @@ Coral.load = proc()=
                             else: P8Pink
                 )
             )
-            entities.add(
-                Brick(
-                    position: newV2((32 + MARGIN + 10) * x, (16 + MARGIN + 10) * y),
-                    size: newV2(32, 16),
-                    velocity: newV2(),
-                    delete: false,
-                    friction: 0.0,
-                    color: case y:
-                            of 0: P8Red
-                            of 1: P8Green
-                            of 2: P8Blue
-                            else: P8Pink
-                )
-            )
 
 Coral.update = proc()= 
     Coral.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $Coral.clock.averageFps

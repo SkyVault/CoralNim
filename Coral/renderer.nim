@@ -96,6 +96,7 @@ type
         draw_instanced: bool
         drawable_counter: int
         last_drawable_counter: int
+        layer_adder: float
 
         clear_color: Color
         rvao, rvbo, ribo: GLuint
@@ -157,7 +158,8 @@ proc newR2D* (draw_instanced = true):R2d =
         rotation_mode: CoralRotationMode.Degrees,
         draw_instanced: draw_instanced,
         drawable_counter: 0,
-        last_drawable_counter: 0
+        last_drawable_counter: 0,
+        layer_adder: 0.0
     )
 
     var verts = RECT_VERTICES
@@ -245,7 +247,7 @@ proc begin* (self: R2D, size: (int, int))=
         width = (float32)size[0]
         height = (float32)size[1]
 
-    self.ortho_projection = NimMath.ortho(0, width, height, 0, -1.0'f32, 1.0'f32)
+    self.ortho_projection = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
 
     var ortho = self.ortho_projection
     glUseProgram(self.shader_program)
@@ -261,8 +263,9 @@ proc begin* (self: R2D, size: (int, int))=
     glActiveTexture(GL_TEXTURE0)
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-    # glBlendFunc(GL_SRC_ALPHA, GL_ONE)
-    # glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+
+    # glEnable(GL_ALPHA_TEST)
+    # glAlphaFunc(GL_GREATER, 0.01)
 
     glLineWidth(4.0)
 
@@ -289,13 +292,14 @@ proc drawSprite* (self: R2D, image: Image, region: Region, position: V2, size: V
     #     )
 
     self.drawables[id].add(
-        newDrawable(image, region, position, size, rotation, color, layer)
+        newDrawable(image, region, position, size, rotation, color, layer + self.layer_adder)
     )
 
+    self.layer_adder += 0.0001
     self.drawable_counter += 1
 
-proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color)=
-    drawSprite(self, image, newRegion(0, 0, image.width, image.height), position, size, rotation, color)
+proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color, layer = 0.5)=
+    drawSprite(self, image, newRegion(0, 0, image.width, image.height), position, size, rotation, color, layer)
 
 proc drawRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=
     glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
@@ -439,6 +443,10 @@ proc flush*(self: R2D)=
         glBindTexture(GL_TEXTURE_2D, key)
         glUniform1i(self.has_texture_location, 1)
 
+        drawables_seq.sort(proc(a, b: Drawable): int=
+            result = cmp(a.layer, b.layer)
+        )
+
         for drawable in drawables_seq:
             let color = drawable.diffuse
             let image = drawable.image
@@ -540,6 +548,7 @@ proc flush*(self: R2D)=
 
     # self.last_drawable_counter = self.drawable_counter
     # self.drawable_counter = 0
+    self.layer_adder = 0.0
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     glBindVertexArray(0)

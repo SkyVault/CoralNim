@@ -49,10 +49,9 @@ void main() {
 		result = color;
 	}
   
-  if (result.a <= 0.1) discard;
+  if (result.a <= 0.1) 
+    discard;
 
-  // TODO: Change back
-  // gl_FragColor += result;
   gl_FragColor = result;
 }
 """
