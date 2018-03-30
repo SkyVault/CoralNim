@@ -9,6 +9,15 @@ import
 
 include shaders
 
+## NOTES ABOUT BATCHING
+#[
+    The renderer does support batching the sprites and instancing them, several problems arise
+    when I do this though, on of which is that I cant do primitives like I would want. Second
+    the batch isnt as fast as I imagined. Finally, with batching you cant play with different 
+    blend modes. So in the end, unless I want something very complex, its not going to work for
+    now.
+]#
+
 type 
     BufferTypes* = enum
         BT_ARRAY_BUFFER,
@@ -65,6 +74,10 @@ type
     CoralRotationMode* {.pure.} = enum
         Degrees,
         Radians
+
+    CoralBlendMode* {.pure.} = enum
+        Alpha,
+        Additive
 
     # image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5
     Drawable* = ref object
@@ -248,6 +261,8 @@ proc begin* (self: R2D, size: (int, int))=
     glActiveTexture(GL_TEXTURE0)
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    # glBlendFunc(GL_SRC_ALPHA, GL_ONE)
+    # glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
 
     glLineWidth(4.0)
 

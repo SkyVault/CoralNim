@@ -214,7 +214,7 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
         extensionSupported("GL_EXT_instanced_arrays") == 1 
 
     lCoral.r2d = newR2D(
-        draw_instanced = draw_instanced
+        draw_instanced = false# draw_instanced
     )
     return lCoral
 
