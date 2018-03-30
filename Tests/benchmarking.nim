@@ -1,3 +1,4 @@
+# import nimprof
 import 
     ../Coral/game,
     ../Coral/graphics,
@@ -5,13 +6,12 @@ import
     ../Coral/gameMath,
     ../Coral/ecs,
     ../Coral/audio,
-    random,
     os
 
 var image: Image
 
 Coral.load = proc()=
-    image = CoralLoadImage getAppDir() & "/wat.png"
+    image = CoralLoadImage getAppDir() & "/smaller.png"
 
 Coral.render = proc()=
     Coral.windowTitle = $Coral.clock.averageFps
@@ -19,12 +19,17 @@ Coral.render = proc()=
     if Coral.isKeyPressed CoralKey.Escape:
         Coral.quit()
 
-    randomize(0xcafebabe)
+    # randomize(0xcafebabe)
     let size = newV2(32, 32)
-    for i in 0 .. 5000:
-        let x = rand(Coral.windowSize[0].float - 32.0)
-        let y = rand(Coral.windowSize[1].float - 32.0)
 
-        Coral.r2d.drawImage(image, newV2(x, y), size, rand(360.0), White)
+    # 40_000 sprites
+    for y in 0 .. 100:
+        for x in 0 .. 100:
+
+            let xx = x * 4
+            let yy = y * 4
+
+            Coral.r2d.drawImage(image, newV2(xx, yy), size, Coral.clock.timer * 100, P8White)
+            # Coral.r2d.drawSprite(image, newRegion(0, 0, 32, 32), newV2(xx, yy), size, Coral.clock.timer * 100, P8White)
 
 Coral.createGame(1280, 720, "Benchmarking!", config()).run()

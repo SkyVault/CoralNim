@@ -7,6 +7,8 @@ import
     strutils,
     algorithm
 
+include shaders
+
 type 
     BufferTypes* = enum
         BT_ARRAY_BUFFER,
@@ -48,63 +50,6 @@ proc makeVbo* (buffer_type: BufferTypes, dimensions: uint32, attrib: uint32, buf
     )
     glBindBuffer(the_type, 0)
 
-const SPRITE_SHADER_VERTEX = """
-#version 330 core
-layout (location = 0) in vec2 Vertex;
-layout (location = 1) in vec4 rectangle;
-layout (location = 2) in vec2 rot_and_depth;
-layout (location = 3) in vec4 quad;
-
-out vec2 uvs;
-
-//uniform vec2 position;
-//uniform vec2 size;
-//uniform float rotation = 0.0;
-//uniform float depth = 0.5;
-
-//uniform vec4 quad;
-uniform mat2 view;
-uniform mat4 ortho;
-
-void main() {
-    vec2 position   = rectangle.xy;
-    vec2 size       = rectangle.zw;
-    float rotation  = rot_and_depth.x;
-    float depth     = rot_and_depth.y;
-
-    vec2 tuvs = Vertex * 1.0 + 0.5;
-    tuvs.y = 1 - tuvs.y;
-
-    uvs.x = (quad.x + (tuvs.x * quad.z));
-    uvs.y = (quad.y + (tuvs.y * quad.w));
-  
-    float s = sin(rotation);
-    float c = cos(rotation);
-    mat2 rot = mat2(c, -s, s, c);
-    vec2 pos = position + (size * ((rot * Vertex) + 0.5));
-    gl_Position = ortho * vec4(pos, 0.0, 1.0) + vec4(0, 0, depth, 0.0);
-}
-"""
-
-const SPRITE_SHADER_FRAGMENT = """
-#version 330 core
-in vec2 uvs;
-uniform bool has_texture = true;
-uniform sampler2D sampler;
-uniform vec4 diffuse;
-void main() {
-  vec4 result = vec4(0.0);
-	if (has_texture){
-		result = diffuse * texture(sampler, uvs);
-	} else {
-		result = diffuse;
-	}
-  
-  if (result.a <= 0.1) discard;
-  gl_FragColor = result;
-}
-"""
-
 const RECT_VERTICES = @[
     -0.5'f32, 0.5,
     -0.5, -0.5,
@@ -135,6 +80,9 @@ type
         drawables: TableRef[uint32, seq[Drawable]]
 
         rotation_mode: CoralRotationMode
+        draw_instanced: bool
+        drawable_counter: int
+        last_drawable_counter: int
 
         clear_color: Color
         rvao, rvbo, ribo: GLuint
@@ -144,6 +92,7 @@ type
         sprite_rectangle_batch_buffer: GLuint
         sprite_rot_and_depth_batch_buffer: GLuint
         sprite_quad_batch_buffer: GLuint
+        sprite_color_batch_buffer: GLuint
 
         primitive_vao: GLuint
         primitive_vbo: GLuint
@@ -190,9 +139,12 @@ proc newDrawable* (image: Image, region: Region, position: V2, size: V2, rotatio
 
 proc newR2D* ():R2d =
     result = R2D(
-      clear_color: Black,
-      drawables: newTable[uint32, seq[Drawable]](),
-      rotation_mode: CoralRotationMode.Degrees
+        clear_color: Black,
+        drawables: newTable[uint32, seq[Drawable]](),
+        rotation_mode: CoralRotationMode.Degrees,
+        draw_instanced: true,
+        drawable_counter: 0,
+        last_drawable_counter: 0
     )
 
     var verts = RECT_VERTICES
@@ -212,16 +164,24 @@ proc newR2D* ():R2d =
     # sprite_rectangle_batch_buffer: GLuint
     # sprite_rot_and_depth_batch_buffer: GLuint
 
-    glGenBuffers(1, addr result.sprite_rectangle_batch_buffer)
-    glGenBuffers(1, addr result.sprite_rot_and_depth_batch_buffer)
-    glGenBuffers(1, addr result.sprite_quad_batch_buffer)
+    if result.draw_instanced:
+        glGenBuffers(1, addr result.sprite_rectangle_batch_buffer)
+        glGenBuffers(1, addr result.sprite_rot_and_depth_batch_buffer)
+        glGenBuffers(1, addr result.sprite_quad_batch_buffer)
+        glGenBuffers(1, addr result.sprite_color_batch_buffer)
 
     # Load the primitive buffer
     # result.primitive_vbo
     glGenBuffers(1, addr result.primitive_vbo)
 
+    let vertex_shader = 
+        if result.draw_instanced:
+            SPRITE_SHADER_VERTEX_INSTANCED
+        else:
+            SPRITE_SHADER_VERTEX
+            
     result.shader_program = CoralNewProgram(
-        CoralLoadShader(VERTEX_SHADER, SPRITE_SHADER_VERTEX),
+        CoralLoadShader(VERTEX_SHADER, vertex_shader),
         CoralLoadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
     )
 
@@ -295,12 +255,29 @@ proc setLineWidth* (width = 1.0)=
     glLineWidth(4.0)
 
 proc drawSprite* (self: R2D, image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5)=
-    if not self.drawables.hasKey image.getId():
-      self.drawables.add(image.getId(), newSeq[Drawable]())
+    let id = image.id
+    if not self.drawables.hasKey id:
+      self.drawables.add(id, newSeq[Drawable]())
 
-    self.drawables[image.getId()].add(
-      newDrawable(image, region, position, size, rotation, color, layer)
+    # if self.drawable_counter < self.drawables[image.getID()].len() - 1:
+    #     var drawable = self.drawables[image.getID()][self.drawable_counter]
+    #     drawable.image      = image
+    #     drawable.region     = region
+    #     drawable.position   = position 
+    #     drawable.size       = size 
+    #     drawable.rotation   = rotation 
+    #     drawable.diffuse    = color
+    #     drawable.layer      = layer 
+    # else:
+    #     self.drawables[image.getID()].add(
+    #         newDrawable(image, region, position, size, rotation, color, layer)
+    #     )
+
+    self.drawables[id].add(
+        newDrawable(image, region, position, size, rotation, color, layer)
     )
+
+    self.drawable_counter += 1
 
 proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color)=
     drawSprite(self, image, newRegion(0, 0, image.width, image.height), position, size, rotation, color)
@@ -436,6 +413,7 @@ proc drawString* (r2d: R2D, font: SpriteFont, text: string, x, y: float, scale =
 var rectangle_batch = newSeq[GLfloat]()
 var rot_and_depth_batch = newSeq[GLfloat]()
 var quad_batch = newSeq[GLfloat]()
+var color_batch = newSeq[GLfloat]()
 
 proc flush*(self: R2D)=
     for key in self.drawables.keys:
@@ -444,10 +422,7 @@ proc flush*(self: R2D)=
         
         # Bind the texture for the next sprites
         glBindTexture(GL_TEXTURE_2D, key)
-        
-
-        # Sort the drawables_seq by the sprites layer from back to front
-        #drawables_seq.reverse()
+        glUniform1i(self.has_texture_location, 1)
 
         for drawable in drawables_seq:
             let color = drawable.diffuse
@@ -455,15 +430,6 @@ proc flush*(self: R2D)=
             let region = drawable.region
             let position = drawable.position
             let size = drawable.size
-
-            glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
-
-            glUniform1i(self.has_texture_location, 1)
-
-            rectangle_batch.add(position.x)
-            rectangle_batch.add(position.y)
-            rectangle_batch.add(size.x)
-            rectangle_batch.add(size.y)
 
             var
                 tw = float32(image.width)
@@ -475,73 +441,94 @@ proc flush*(self: R2D)=
                 qw = (float32(region.w) / tw)
                 qh = (float32(region.h) / th)
 
-            quad_batch.add(qx)
-            quad_batch.add(qy)
-            quad_batch.add(qw)
-            quad_batch.add(qh)
+            if self.draw_instanced:
+                rectangle_batch.add(position.x)
+                rectangle_batch.add(position.y)
+                rectangle_batch.add(size.x)
+                rectangle_batch.add(size.y)
 
-            glUniform4f(self.quad_location,
-                qx,
-                qy,
-                qw,
-                qh,
-                )
+                quad_batch.add(qx)
+                quad_batch.add(qy)
+                quad_batch.add(qw)
+                quad_batch.add(qh)
+
+                color_batch.add(color.r)
+                color_batch.add(color.g)
+                color_batch.add(color.b)
+                color_batch.add(color.a)
+
+            else:
+                glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
+                glUniform4f(self.quad_location, qx, qy, qw, qh,)
 
             glUniform2f(self.position_location, position.x, position.y)
             glUniform2f(self.size_location, size.x, size.y)
 
             if self.rotation_mode == CoralRotationMode.Degrees:
-                glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
-                rot_and_depth_batch.add(drawable.rotation * DEGTORAD)
+                if self.draw_instanced:
+                    rot_and_depth_batch.add(drawable.rotation * DEGTORAD)
+                else:
+                    glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
             else:
-                glUniform1f(self.rotation_location, drawable.rotation)
-                rot_and_depth_batch.add(drawable.rotation)
+                if self.draw_instanced:
+                    rot_and_depth_batch.add(drawable.rotation)
+                else:
+                    glUniform1f(self.rotation_location, drawable.rotation)
 
-            glUniform1f(self.depth_location, 0 - drawable.layer)
-            rot_and_depth_batch.add(0 - drawable.layer)
+            if self.draw_instanced:
+                rot_and_depth_batch.add(0 - drawable.layer)
+            else:
+                glUniform1f(self.depth_location, 0 - drawable.layer)
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
 
-            # glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
-            
-        # layout (location = 0) in vec2 Vertex;
-        # layout (location = 1) in vec4 rectangle;
-        # layout (location = 2) in vec2 rot_and_depth;
-        # layout (location = 3) in vec4 quad;
+        if self.draw_instanced:
+            # Set the buffers
+            glBindBuffer(GL_ARRAY_BUFFER, self.sprite_rectangle_batch_buffer)
+            glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * rectangle_batch.len, addr rectangle_batch[0], GL_DYNAMIC_DRAW)
+            glEnableVertexAttribArray(1)
+            glVertexAttribPointer(1, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
 
-        # Set the buffers
-        glBindBuffer(GL_ARRAY_BUFFER, self.sprite_rectangle_batch_buffer)
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * rectangle_batch.len, addr rectangle_batch[0], GL_DYNAMIC_DRAW)
-        glEnableVertexAttribArray(1)
-        glVertexAttribPointer(1, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
+            glBindBuffer(GL_ARRAY_BUFFER, self.sprite_rot_and_depth_batch_buffer)
+            glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * rot_and_depth_batch.len, addr rot_and_depth_batch[0], GL_DYNAMIC_DRAW)
+            glEnableVertexAttribArray(2)
+            glVertexAttribPointer(2, 2, cGL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), nil)
 
-        glBindBuffer(GL_ARRAY_BUFFER, self.sprite_rot_and_depth_batch_buffer)
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * rot_and_depth_batch.len, addr rot_and_depth_batch[0], GL_DYNAMIC_DRAW)
-        glEnableVertexAttribArray(2)
-        glVertexAttribPointer(2, 2, cGL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), nil)
+            glBindBuffer(GL_ARRAY_BUFFER, self.sprite_quad_batch_buffer)
+            glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * quad_batch.len, addr quad_batch[0], GL_DYNAMIC_DRAW)
+            glEnableVertexAttribArray(3)
+            glVertexAttribPointer(3, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
 
-        glBindBuffer(GL_ARRAY_BUFFER, self.sprite_quad_batch_buffer)
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * quad_batch.len, addr quad_batch[0], GL_DYNAMIC_DRAW)
-        glEnableVertexAttribArray(3)
-        glVertexAttribPointer(3, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
+            glBindBuffer(GL_ARRAY_BUFFER, self.sprite_color_batch_buffer)
+            glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * color_batch.len, addr color_batch[0], GL_DYNAMIC_DRAW)
+            glEnableVertexAttribArray(4)
+            glVertexAttribPointer(4, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
 
-        # Divisors
-        glVertexAttribDivisor(1, 1)
-        glVertexAttribDivisor(2, 1)
-        glVertexAttribDivisor(3, 1)
+            # Divisors
+            glVertexAttribDivisor(1, 1)
+            glVertexAttribDivisor(2, 1)
+            glVertexAttribDivisor(3, 1)
+            glVertexAttribDivisor(4, 1)
 
-        glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil, number_of_drawables.GLsizei)
+            glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil, number_of_drawables.GLsizei)
+
+            rectangle_batch.setLen 0
+            rot_and_depth_batch.setLen 0
+            quad_batch.setLen 0
+            color_batch.setLen 0
 
         # unbind the texture
         glBindTexture(GL_TEXTURE_2D, 0)
 
         # Clear the sequence for the next frame
+
         self.drawables[key].setLen(0)
 
-        rectangle_batch.setLen 0
-        rot_and_depth_batch.setLen 0
-        quad_batch.setLen 0
+    # self.last_drawable_counter = self.drawable_counter
+    # self.drawable_counter = 0
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     glBindVertexArray(0)
     glUseProgram(0)
     glDisable(GL_BLEND)
+
     

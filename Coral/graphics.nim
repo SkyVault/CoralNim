@@ -89,6 +89,8 @@ proc length* (c: Color): float=
         (c.a * c.a)
     )
 
+import random
+
 ## Defines a custom pallet of colors
 template Red*                  ():untyped =newColor(1, 0, 0)
 template Green*                ():untyped =newColor(0, 1, 0)
@@ -100,6 +102,7 @@ template LightGray*            ():untyped =newColor(0.8, 0.8, 0.8)
 template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)
 template Transperent*          ():untyped =newColor(1, 1, 1, 0)
 template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)
+proc CoralRandomColor*         ():Color =newColor(rand(1.0), rand(1.0), rand(1.0), 1.0)
 
 ## Pico 8 Color palette
 template P8Black*      ():untyped = newColor(0, 0, 0, 1)
@@ -298,7 +301,7 @@ proc CoralLoadImage* (path: string, filter: GLint = GL_LINEAR): Image=
     except STBIException:
         echo failureReason()
     
-proc getID* (img: Image): GLuint= return img.id
+proc id* (img: Image): GLuint{.inline.}= return img.id
 
 proc bindImage* (img: Image)= glBindTexture(GL_TEXTURE_2D, img.id)
 proc unBindImage* ()= glBindTexture(GL_TEXTURE_2D, 0)
