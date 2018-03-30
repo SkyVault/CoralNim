@@ -119,7 +119,7 @@ Coral.load = proc()=
             )
 
 Coral.update = proc()= 
-    Coral.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $Coral.clock.currentFps
+    Coral.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $Coral.clock.averageFps
 
     if Coral.isKeyReleased CoralKey.Escape:
         quit(Coral)

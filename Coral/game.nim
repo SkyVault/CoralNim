@@ -15,11 +15,25 @@ import
 include input
 
 type
+    CoralTimerState* {.pure.}= enum
+        Playing,
+        Paused
+
+    CoralTimer* = ref object
+        milliseconds: float
+        repeat: int
+        timer: float
+        times_called: int
+        state: CoralTimerState
+        shouldDelete: bool
+        callback: proc(): void
+
     CoralClock* = ref object
         fps, delta, last, timer, last_fps: float
         avFps, avDt: float
         fpsSamples, dtSamples: seq[float]
         ticks: int
+        timers: seq[CoralTimer]
 
     # CoralAssetManager = ref object
 
@@ -55,7 +69,6 @@ type
         input: CoralInputManager
         audio: CoralAudioMixer
         world: CoralWorld
-        graphics: CoralGraphics
         title: string
         load*: proc()
         update*: proc()
@@ -73,6 +86,34 @@ proc dt*            (c: CoralClock): float {.inline.} = c.delta
 proc ticks*         (c: CoralClock): int   {.inline.} = c.ticks
 proc averageFps*    (c: CoralClock): float {.inline.} = c.avFps
 proc averageDt*     (c: CoralClock): float {.inline.} = c.avDt
+
+proc start* (timer: CoralTimer): CoralTimer{.discardable.}=
+    timer.state = CoralTimerState.Playing
+    return timer
+
+proc pause* (timer: CoralTimer): CoralTimer{.discardable.}=
+    timer.state = CoralTimerState.Paused
+    return timer
+
+proc delete* (timer: CoralTimer)=
+    timer.shouldDelete = true    
+
+proc reset* (timer: CoralTimer)=
+    timer.timer = 0.0
+    timer.times_called = 0
+
+proc timesCalled* (timer: CoralTimer): auto= timer.times_called
+
+proc addTimer* (clock: CoralClock, milliseconds: float, repeat = 0, callback: proc(): void): CoralTimer{.discardable.}=
+    result = CoralTimer(
+            milliseconds: milliseconds,
+            repeat: repeat,
+            callback: callback,
+            timer: 0.0,
+            state: CoralTimerState.Paused,
+            shouldDelete: false
+        )
+    clock.timers.add(result) 
 
 var lCoral : CoralGame = nil
 newCoralGame()
@@ -111,7 +152,8 @@ proc newCoralGame()=
             timer: 0.0,
             last: getTime().float,
             last_fps: getTime().float,
-            ticks: 0
+            ticks: 0,
+            timers: newSeq[CoralTimer]()
         ),
         input: CoralInputManager(
             mouse_x: 0, mouse_y: 0,
@@ -178,7 +220,6 @@ proc r2d* (game: CoralGame):auto =
     return game.r2d
 
 proc audio* (game: CoralGame):auto = game.audio
-proc graphics* (game: CoralGame): auto = game.graphics
 
 proc world* (c: CoralGame): CoralWorld=
     if c.world == nil:
@@ -408,6 +449,21 @@ proc run* (game: CoralGame)=
         game.clock.ticks += 1
         game.clock.timer += game.clock.delta
 
+        # Handle timers
+        for timer in game.clock.timers:
+            if timer.state == CoralTimerState.Paused: continue
+
+            timer.timer += game.clock.dt
+            if (timer.timer * 1000.0) > timer.milliseconds:
+                timer.times_called += 1
+                timer.callback()
+                timer.timer = 0
+        
+        for i in countdown(game.clock.timers.len - 1, 0):
+            let timer = game.clock.timers[i]
+            if timer.repeat > 0 or timer.shouldDelete:
+                if timer.times_called >= timer.repeat:
+                    game.clock.timers.delete(i)
     
     game.audio.destroy()
     game.destroy()

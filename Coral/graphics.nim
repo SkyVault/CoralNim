@@ -24,8 +24,6 @@ type
         VERTEX_SHADER,
         GEOMETRY_SHADER
 
-    CoralGraphics* = ref object
-
     Color* = ref object
         ## This is the main color structure.
         r* , g* , b* , a* : float32
