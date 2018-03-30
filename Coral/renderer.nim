@@ -51,18 +51,27 @@ proc makeVbo* (buffer_type: BufferTypes, dimensions: uint32, attrib: uint32, buf
 const SPRITE_SHADER_VERTEX = """
 #version 330 core
 layout (location = 0) in vec2 Vertex;
+layout (location = 1) in vec4 rectangle;
+layout (location = 2) in vec2 rot_and_depth;
+layout (location = 3) in vec4 quad;
+
 out vec2 uvs;
 
-uniform vec2 position;
-uniform vec2 size;
-uniform float rotation = 0.0;
-uniform float depth = 0.5;
+//uniform vec2 position;
+//uniform vec2 size;
+//uniform float rotation = 0.0;
+//uniform float depth = 0.5;
 
-uniform vec4 quad;
+//uniform vec4 quad;
 uniform mat2 view;
 uniform mat4 ortho;
 
 void main() {
+    vec2 position   = rectangle.xy;
+    vec2 size       = rectangle.zw;
+    float rotation  = rot_and_depth.x;
+    float depth     = rot_and_depth.y;
+
     vec2 tuvs = Vertex * 1.0 + 0.5;
     tuvs.y = 1 - tuvs.y;
 
@@ -132,6 +141,10 @@ type
         ortho_projection: M4
         view_matrix: M2
 
+        sprite_rectangle_batch_buffer: GLuint
+        sprite_rot_and_depth_batch_buffer: GLuint
+        sprite_quad_batch_buffer: GLuint
+
         primitive_vao: GLuint
         primitive_vbo: GLuint
 
@@ -194,6 +207,14 @@ proc newR2D* ():R2d =
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     glBindVertexArray(0)
+
+    # Instancing buffers
+    # sprite_rectangle_batch_buffer: GLuint
+    # sprite_rot_and_depth_batch_buffer: GLuint
+
+    glGenBuffers(1, addr result.sprite_rectangle_batch_buffer)
+    glGenBuffers(1, addr result.sprite_rot_and_depth_batch_buffer)
+    glGenBuffers(1, addr result.sprite_quad_batch_buffer)
 
     # Load the primitive buffer
     # result.primitive_vbo
@@ -412,62 +433,112 @@ proc drawString* (r2d: R2D, font: SpriteFont, text: string, x, y: float, scale =
 
     cursor_x += ((float32)(glyph.region.w) + glyph.xoffset) * scale
 
+var rectangle_batch = newSeq[GLfloat]()
+var rot_and_depth_batch = newSeq[GLfloat]()
+var quad_batch = newSeq[GLfloat]()
+
 proc flush*(self: R2D)=
     for key in self.drawables.keys:
-      
-      # Bind the texture for the next sprites
-      glBindTexture(GL_TEXTURE_2D, key)
-      
-      var drawables_seq = self.drawables[key]
+        var drawables_seq = self.drawables[key]
+        let number_of_drawables = drawables_seq.len
+        
+        # Bind the texture for the next sprites
+        glBindTexture(GL_TEXTURE_2D, key)
+        
 
-      # Sort the drawables_seq by the sprites layer from back to front
-      #drawables_seq.reverse()
+        # Sort the drawables_seq by the sprites layer from back to front
+        #drawables_seq.reverse()
 
-      for drawable in drawables_seq:
-        let color = drawable.diffuse
-        let image = drawable.image
-        let region = drawable.region
-        let position = drawable.position
-        let size = drawable.size
+        for drawable in drawables_seq:
+            let color = drawable.diffuse
+            let image = drawable.image
+            let region = drawable.region
+            let position = drawable.position
+            let size = drawable.size
 
-        glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
+            glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
 
-        glUniform1i(self.has_texture_location, 1)
+            glUniform1i(self.has_texture_location, 1)
 
-        var
-            tw = float32(image.width)
-            th = float32(image.height)
-            rx = float32(region.x)
-            ry = th - float32(region.y) - float32(region.h)
-            qx = (rx / tw)
-            qy = (ry / th)
-            qw = (float32(region.w) / tw)
-            qh = (float32(region.h) / th)
+            rectangle_batch.add(position.x)
+            rectangle_batch.add(position.y)
+            rectangle_batch.add(size.x)
+            rectangle_batch.add(size.y)
 
-        glUniform4f(self.quad_location,
-            qx,
-            qy,
-            qw,
-            qh,
-            )
+            var
+                tw = float32(image.width)
+                th = float32(image.height)
+                rx = float32(region.x)
+                ry = th - float32(region.y) - float32(region.h)
+                qx = (rx / tw)
+                qy = (ry / th)
+                qw = (float32(region.w) / tw)
+                qh = (float32(region.h) / th)
 
-        glUniform2f(self.position_location, position.x, position.y)
-        glUniform2f(self.size_location, size.x, size.y)
+            quad_batch.add(qx)
+            quad_batch.add(qy)
+            quad_batch.add(qw)
+            quad_batch.add(qh)
 
-        if self.rotation_mode == CoralRotationMode.Degrees:
-            glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
-        else:
-            glUniform1f(self.rotation_location, drawable.rotation)
+            glUniform4f(self.quad_location,
+                qx,
+                qy,
+                qw,
+                qh,
+                )
 
-        glUniform1f(self.depth_location, 0 - drawable.layer)
+            glUniform2f(self.position_location, position.x, position.y)
+            glUniform2f(self.size_location, size.x, size.y)
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
-      
-      # unbind the texture
-      glBindTexture(GL_TEXTURE_2D, 0)
+            if self.rotation_mode == CoralRotationMode.Degrees:
+                glUniform1f(self.rotation_location, drawable.rotation * DEGTORAD)
+                rot_and_depth_batch.add(drawable.rotation * DEGTORAD)
+            else:
+                glUniform1f(self.rotation_location, drawable.rotation)
+                rot_and_depth_batch.add(drawable.rotation)
 
-      # Clear the sequence for the next frame
-      self.drawables[key].setLen(0)
+            glUniform1f(self.depth_location, 0 - drawable.layer)
+            rot_and_depth_batch.add(0 - drawable.layer)
+
+            # glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
+            
+        # layout (location = 0) in vec2 Vertex;
+        # layout (location = 1) in vec4 rectangle;
+        # layout (location = 2) in vec2 rot_and_depth;
+        # layout (location = 3) in vec4 quad;
+
+        # Set the buffers
+        glBindBuffer(GL_ARRAY_BUFFER, self.sprite_rectangle_batch_buffer)
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * rectangle_batch.len, addr rectangle_batch[0], GL_DYNAMIC_DRAW)
+        glEnableVertexAttribArray(1)
+        glVertexAttribPointer(1, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
+
+        glBindBuffer(GL_ARRAY_BUFFER, self.sprite_rot_and_depth_batch_buffer)
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * rot_and_depth_batch.len, addr rot_and_depth_batch[0], GL_DYNAMIC_DRAW)
+        glEnableVertexAttribArray(2)
+        glVertexAttribPointer(2, 2, cGL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), nil)
+
+        glBindBuffer(GL_ARRAY_BUFFER, self.sprite_quad_batch_buffer)
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * quad_batch.len, addr quad_batch[0], GL_DYNAMIC_DRAW)
+        glEnableVertexAttribArray(3)
+        glVertexAttribPointer(3, 4, cGL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nil)
+
+        # Divisors
+        glVertexAttribDivisor(1, 1)
+        glVertexAttribDivisor(2, 1)
+        glVertexAttribDivisor(3, 1)
+
+        glDrawElementsInstanced(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil, number_of_drawables.GLsizei)
+
+        # unbind the texture
+        glBindTexture(GL_TEXTURE_2D, 0)
+
+        # Clear the sequence for the next frame
+        self.drawables[key].setLen(0)
+
+        rectangle_batch.setLen 0
+        rot_and_depth_batch.setLen 0
+        quad_batch.setLen 0
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
     glBindVertexArray(0)

@@ -15,6 +15,9 @@ Coral.load = proc()=
 
 Coral.render = proc()=
     Coral.windowTitle = $Coral.clock.averageFps
+    
+    if Coral.isKeyPressed CoralKey.Escape:
+        Coral.quit()
 
     randomize(0xcafebabe)
     let size = newV2(32, 32)
@@ -22,6 +25,6 @@ Coral.render = proc()=
         let x = rand(Coral.windowSize[0].float - 32.0)
         let y = rand(Coral.windowSize[1].float - 32.0)
 
-        Coral.r2d.drawImage(image, newV2(x, y), size, random(360.0), White)
+        Coral.r2d.drawImage(image, newV2(x, y), size, rand(360.0), White)
 
 Coral.createGame(1280, 720, "Benchmarking!", config()).run()
