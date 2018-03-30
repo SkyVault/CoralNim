@@ -137,12 +137,12 @@ proc newDrawable* (image: Image, region: Region, position: V2, size: V2, rotatio
     layer:      layer
   )
 
-proc newR2D* ():R2d =
+proc newR2D* (draw_instanced = true):R2d =
     result = R2D(
         clear_color: Black,
         drawables: newTable[uint32, seq[Drawable]](),
         rotation_mode: CoralRotationMode.Degrees,
-        draw_instanced: true,
+        draw_instanced: draw_instanced,
         drawable_counter: 0,
         last_drawable_counter: 0
     )

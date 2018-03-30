@@ -23,8 +23,8 @@ Coral.render = proc()=
     let size = newV2(32, 32)
 
     # 40_000 sprites
-    for y in 0 .. 100:
-        for x in 0 .. 100:
+    for y in 0 .. 200:
+        for x in 0 .. 200:
 
             let xx = x * 4
             let yy = y * 4
