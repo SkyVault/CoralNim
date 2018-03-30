@@ -12,11 +12,11 @@
 <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA=="/>
 
 <!-- Google fonts -->
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,600,900' rel='stylesheet' type='text/css'/>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,600,900' rel='stylesheet' type='text/css'/>
 <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600' rel='stylesheet' type='text/css'/>
 
 <!-- CSS -->
-<title>Module ecs</title>
+<title>Module audio</title>
 <style type="text/css" >
 /*
 Stylesheet for use with Docutils/rst2html.
@@ -45,18 +45,19 @@ html {
 
 /* Where we want fancier font if available */
 h1, h2, h3, h4, h5, h6, p.module-desc, table.docinfo + blockquote p, table.docinfo blockquote p, h1 + blockquote p {
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important; }
 
 h1.title {
   font-weight: 900; }
 
 body {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
-  color: #666;
-  background-color: rgba(252, 248, 244, 0.75); }
+  color: #444;
+  letter-spacing: 0.15px;
+  background-color: rgba(252, 248, 244, 0.45); }
 
 /* Skeleton grid */
 .container {
@@ -172,8 +173,8 @@ cite {
   font-style: italic !important; }
 
 dt > pre {
-  border-color: rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   margin: 15px 0px 5px; }
 
 dd > pre {
@@ -189,6 +190,17 @@ dd > pre {
 .line-nums-table {
   width: 100%;
   table-layout: fixed; }
+
+/* Nim search input */
+div#searchInput {
+  margin-bottom: 8px;
+}
+div#searchInput input#searchInput {
+  width: 10em;
+}
+div.search-groupby {
+  margin-bottom: 8px;
+}
 
 table.line-nums-table {
   border-radius: 4px;
@@ -333,7 +345,7 @@ img {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 p {
-  margin: 0 0 12px; }
+  margin: 0 0 8px; }
 
 small {
   font-size: 85%; }
@@ -353,7 +365,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: 600;
   line-height: 20px;
   color: inherit;
@@ -361,6 +373,7 @@ h6 {
 
 h1 {
   font-size: 2em;
+  font-weight: 400;
   padding-bottom: .15em;
   border-bottom: 1px solid #aaaaaa;
   margin-top: 1.0em;
@@ -491,13 +504,13 @@ pre {
   box-sizing: border-box;
   min-width: calc(100% - 19.5px);
   padding: 9.5px;
-  margin: 0.25em 10px 0.25em 10px;
-  font-size: 14px;
+  margin: 0.25em 10px 10px 10px;
+  font-size: 15px;
   line-height: 20px;
   white-space: pre !important;
   overflow-y: hidden;
   overflow-x: visible;
-  background-color: whitesmoke;
+  background-color: rgba(0, 0, 0, 0.01);
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -776,14 +789,14 @@ div.admonition p.admonition-title, div.hint p.admonition-title,
 div.important p.admonition-title, div.note p.admonition-title,
 div.tip p.admonition-title {
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 div.attention p.admonition-title, div.caution p.admonition-title,
 div.danger p.admonition-title, div.error p.admonition-title,
 div.warning p.admonition-title, .code .error {
   color: #b30000;
   font-weight: bold;
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 /* Uncomment (and remove this text!) to get reduced vertical space in
    compound paragraphs.
@@ -830,7 +843,7 @@ div.sidebar {
   clear: right; }
 
 div.sidebar p.rubric {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-size: medium; }
 
 div.system-messages {
@@ -937,12 +950,12 @@ p.rubric {
   text-align: center; }
 
 p.sidebar-title {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: larger; }
 
 p.sidebar-subtitle {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 p.topic-title {
@@ -984,15 +997,15 @@ pre.code .inserted, code .inserted {
   background-color: #A3D289; }
 
 span.classifier {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-style: oblique; }
 
 span.classifier-delimiter {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
   font-weight: bold; }
 
 span.interpreted {
-  font-family: "Helvetica Neue", "HelveticaNeue", "Raleway", Helvetica, Arial, sans-serif; }
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif; }
 
 span.option {
   white-space: nowrap; }
@@ -1015,7 +1028,7 @@ table.docinfo {
   margin: 0em;
   margin-top: 2em;
   margin-bottom: 2em;
-  font-family: "Raleway", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
+  font-family: "Lato", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif !important;
   color: #444444; }
 
 table.docutils {
@@ -1145,21 +1158,26 @@ dt pre > span.Operator ~ span.Identifier, dt pre > span.Operator ~ span.Operator
   background-repeat: no-repeat;
   background-image: url("data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAUAAAAF////AP///wD///8A////AP///wD///8A////AP///wD///8A////AAAAAAIAAABbAAAAlQAAAKIAAACbAAAAmwAAAKIAAACVAAAAWwAAAAL///8A////AP///wD///8A////AAAAABQAAADAAAAAYwAAAA3///8A////AP///wD///8AAAAADQAAAGMAAADAAAAAFP///wD///8A////AP///wAAAACdAAAAOv///wD///8A////AP///wD///8A////AP///wD///8AAAAAOgAAAJ3///8A////AP///wAAAAAnAAAAcP///wAAAAAoAAAASv///wD///8A////AP///wAAAABKAAAAKP///wAAAABwAAAAJ////wD///8AAAAAgQAAABwAAACIAAAAkAAAAJMAAACtAAAAFQAAABUAAACtAAAAkwAAAJAAAACIAAAAHAAAAIH///8A////AAAAAKQAAACrAAAAaP///wD///8AAAAARQAAANIAAADSAAAARf///wD///8AAAAAaAAAAKsAAACk////AAAAADMAAACcAAAAnQAAABj///8A////AP///wAAAAAYAAAAGP///wD///8A////AAAAABgAAACdAAAAnAAAADMAAAB1AAAAwwAAAP8AAADpAAAAsQAAAE4AAAAb////AP///wAAAAAbAAAATgAAALEAAADpAAAA/wAAAMMAAAB1AAAAtwAAAOkAAAD/AAAA/wAAAP8AAADvAAAA3gAAAN4AAADeAAAA3gAAAO8AAAD/AAAA/wAAAP8AAADpAAAAtwAAAGUAAAA/AAAA3wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAADfAAAAPwAAAGX///8A////AAAAAEgAAADtAAAAvwAAAL0AAADGAAAA7wAAAO8AAADGAAAAvQAAAL8AAADtAAAASP///wD///8A////AP///wD///8AAAAAO////wD///8A////AAAAAIcAAACH////AP///wD///8AAAAAO////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A//8AAP//AAD4HwAA7/cAAN/7AAD//wAAoYUAAJ55AACf+QAAh+EAAAAAAADAAwAA4AcAAP5/AAD//wAA//8AAA==");
   margin-bottom: -5px; }
-  div.pragma {
-    display: none;
-  }
-  span.pragmabegin {
-    cursor: pointer;
-  }
-  span.pragmaend {
-    cursor: pointer;
-  }
+div.pragma {
+  display: none;
+}
+span.pragmabegin {
+  cursor: pointer;
+}
+span.pragmaend {
+  cursor: pointer;
+}
 
 div.search_results {
   background-color: antiquewhite;
   margin: 3em;
   padding: 1em;
   border: 1px solid #4d4d4d;
+}
+
+div#global-links ul {
+  margin-left: 0;
+  list-style-type: none;
 }
 </style>
 
@@ -1195,10 +1213,14 @@ function main() {
 <body onload="main()">
 <div class="document" id="documentId">
   <div class="container">
-    <h1 class="title">Module ecs</h1>
+    <h1 class="title">Module audio</h1>
     <div class="row">
   <div class="three columns">
-  <div>
+  <div id="global-links">
+    <ul class="simple">
+    </ul>
+  </div>
+  <div id="searchInput">
     Search: <input type="text" id="searchInput"
       onkeyup="search()" />
   </div>
@@ -1219,31 +1241,58 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#CoralComponent"
-    title="CoralComponent = ref object of RootObj"><wbr />Coral<wbr />Component<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralEntity"
-    title="CoralEntity = ref object
-  components: TableRef[string, CoralComponent]"><wbr />Coral<wbr />Entity<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralSystem"
-    title="CoralSystem = ref object"><wbr />Coral<wbr />System<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralWorld"
-    title="CoralWorld = ref object"><wbr />Coral<wbr />World<span class="attachedType" style="visibility:hidden"></span></a></li>
+      <li><a class="reference" href="#CoralAudioMixer"
+    title="CoralAudioMixer = ref object"><wbr />Coral<wbr />Audio<wbr />Mixer<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#CoralAudio"
+    title="CoralAudio = ref object
+  sound: Sound
+  playbackPosForPause: float"><wbr />Coral<wbr />Audio<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#add,CoralEntity,T"
-    title="add[T](self: CoralEntity; component: T): T"><wbr />add<span class="attachedType" style="visibility:hidden">CoralEntity</span></a></li>
-  <li><a class="reference" href="#get,CoralEntity,string"
-    title="get(self: CoralEntity; id: string): CoralComponent"><wbr />get<span class="attachedType" style="visibility:hidden">CoralEntity</span></a></li>
-  <li><a class="reference" href="#perseErnerm,string"
-    title="perseErnerm[T: enum](s: string): T"><wbr />perse<wbr />Ernerm<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#newWorld,"
-    title="newWorld(): CoralWorld"><wbr />new<wbr />World<span class="attachedType" style="visibility:hidden">CoralWorld</span></a></li>
-  <li><a class="reference" href="#create,CoralWorld"
-    title="create(world: CoralWorld): auto"><wbr />create<span class="attachedType" style="visibility:hidden">CoralWorld</span></a></li>
+      <li><a class="reference" href="#init,CoralAudioMixer"
+    title="init(audio: CoralAudioMixer)"><wbr />init<span class="attachedType" style="visibility:hidden">CoralAudioMixer</span></a></li>
+  <li><a class="reference" href="#destroy,CoralAudioMixer"
+    title="destroy(mixer: CoralAudioMixer)"><wbr />destroy<span class="attachedType" style="visibility:hidden">CoralAudioMixer</span></a></li>
+  <li><a class="reference" href="#loadAudio,CoralAudioMixer,string"
+    title="loadAudio(mixer: CoralAudioMixer; path: string): CoralAudio"><wbr />load<wbr />Audio<span class="attachedType" style="visibility:hidden">CoralAudioMixer</span></a></li>
+  <li><a class="reference" href="#play,CoralAudio"
+    title="play(audio: CoralAudio)"><wbr />play<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#stop,CoralAudio"
+    title="stop(audio: CoralAudio)"><wbr />stop<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#destroy,CoralAudio"
+    title="destroy(audio: CoralAudio)"><wbr />destroy<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#playing,CoralAudio"
+    title="playing(audio: CoralAudio): bool"><wbr />playing<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#volume=,CoralAudio,float"
+    title="volume=(audio: CoralAudio; v: float)"><wbr />volume=<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#volume,CoralAudio"
+    title="volume(audio: CoralAudio): auto"><wbr />volume<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#paused,CoralAudio"
+    title="paused(audio: CoralAudio): bool"><wbr />paused<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#pause,CoralAudio"
+    title="pause(audio: CoralAudio)"><wbr />pause<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#resume,CoralAudio"
+    title="resume(audio: CoralAudio)"><wbr />resume<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#paused=,CoralAudio,bool"
+    title="paused=(audio: CoralAudio; val: bool)"><wbr />paused=<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#togglePause,CoralAudio"
+    title="togglePause(audio: CoralAudio)"><wbr />toggle<wbr />Pause<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#looping,CoralAudio"
+    title="looping(audio: CoralAudio): bool"><wbr />looping<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#looping=,CoralAudio,bool"
+    title="looping=(audio: CoralAudio; value: bool)"><wbr />looping=<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#duration,CoralAudio"
+    title="duration(audio: CoralAudio): float"><wbr />duration<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#playing=,CoralAudio,bool"
+    title="playing=(audio: CoralAudio; value: bool)"><wbr />playing=<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#playbackPosition,CoralAudio"
+    title="playbackPosition(audio: CoralAudio): float"><wbr />playback<wbr />Position<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
+  <li><a class="reference" href="#playbackPosition=,CoralAudio,float"
+    title="playbackPosition=(audio: CoralAudio; val: float)"><wbr />playback<wbr />Position=<span class="attachedType" style="visibility:hidden">CoralAudio</span></a></li>
 
   </ul>
 </li>
@@ -1257,29 +1306,20 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="tables.html">tables</a>, <a class="reference external" href="typetraits.html">typetraits</a>
+<a class="reference external" href="os.html">os</a>, <a class="reference external" href="sound/private/sound_al.html">sound/private/sound_al</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="CoralComponent"><a name="CoralComponent"></a><pre><span class="Identifier">CoralComponent</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span></pre></dt>
+<dt id="CoralAudioMixer"><a name="CoralAudioMixer"></a><pre><span class="Identifier">CoralAudioMixer</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralEntity"><a name="CoralEntity"></a><pre><span class="Identifier">CoralEntity</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
-  <span class="Identifier">components</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">CoralComponent</span><span class="Other">]</span>
+<dt id="CoralAudio"><a name="CoralAudio"></a><pre><span class="Identifier">CoralAudio</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+  <span class="Identifier">sound</span><span class="Other">:</span> <span class="Identifier">Sound</span>
+  <span class="Identifier">playbackPosForPause</span><span class="Other">:</span> <span class="Identifier">float</span>
 </pre></dt>
-<dd>
-
-
-</dd>
-<dt id="CoralSystem"><a name="CoralSystem"></a><pre><span class="Identifier">CoralSystem</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="CoralWorld"><a name="CoralWorld"></a><pre><span class="Identifier">CoralWorld</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span></pre></dt>
 <dd>
 
 
@@ -1289,27 +1329,103 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="add"><a name="add,CoralEntity,T"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralEntity</span><span class="Other">;</span> <span class="Identifier">component</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="init"><a name="init,CoralAudioMixer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">init</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudioMixer</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="get"><a name="get,CoralEntity,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">get</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralEntity</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralComponent</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="destroy"><a name="destroy,CoralAudioMixer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">destroy</span><span class="Other">(</span><span class="Identifier">mixer</span><span class="Other">:</span> <span class="Identifier">CoralAudioMixer</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="perseErnerm"><a name="perseErnerm,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">perseErnerm</span><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <span class="Keyword">enum</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+<dt id="loadAudio"><a name="loadAudio,CoralAudioMixer,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadAudio</span><span class="Other">(</span><span class="Identifier">mixer</span><span class="Other">:</span> <span class="Identifier">CoralAudioMixer</span><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="newWorld"><a name="newWorld,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newWorld</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralWorld</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="play"><a name="play,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">play</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="create"><a name="create,CoralWorld"></a><pre><span class="Keyword">proc</span> <span class="Identifier">create</span><span class="Other">(</span><span class="Identifier">world</span><span class="Other">:</span> <span class="Identifier">CoralWorld</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="stop"><a name="stop,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">stop</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="destroy"><a name="destroy,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">destroy</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="playing"><a name="playing,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">playing</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="volume="><a name="volume=,CoralAudio,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">volume=</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">;</span> <span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="volume"><a name="volume,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">volume</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="paused"><a name="paused,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">paused</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="pause"><a name="pause,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pause</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="resume"><a name="resume,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">resume</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="paused="><a name="paused=,CoralAudio,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">paused=</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="togglePause"><a name="togglePause,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">togglePause</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="looping"><a name="looping,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">looping</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="looping="><a name="looping=,CoralAudio,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">looping=</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="duration"><a name="duration,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">duration</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="playing="><a name="playing=,CoralAudio,bool"></a><pre><span class="Keyword">proc</span> <span class="Identifier">playing=</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="playbackPosition"><a name="playbackPosition,CoralAudio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">playbackPosition</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="playbackPosition="><a name="playbackPosition=,CoralAudio,float"></a><pre><span class="Keyword">proc</span> <span class="Identifier">playbackPosition=</span><span class="Other">(</span><span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudio</span><span class="Other">;</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1324,7 +1440,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-03-27 14:08:59 UTC</small>
+        <small>Made with Nim. Generated: 2018-03-29 20:30:00 UTC</small>
       </div>
     </div>
   </div>
