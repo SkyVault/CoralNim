@@ -17,6 +17,7 @@ Coral.load = proc()=
     Coral.assets.add("image", image)
 
 Coral.render = proc()=
+    Coral.windowTitle = "😁"
     # discard Coral.assets.get(Image, "image")
 
     for i in 0 .. 100:
