@@ -9,6 +9,7 @@ import
 
     audio,
     graphics,
+    assets,
     renderer,
     ecs,
     gameMath
@@ -35,10 +36,6 @@ type
         fpsSamples, dtSamples: seq[float]
         ticks: int
         timers: seq[CoralTimer]
-
-    CoralAssetManager = ref object
-        images: TableRef[string, Image]
-        audio: TableRef[string, Audio]
 
     # Input handler
     CoralKeyState* = ref object
@@ -242,28 +239,6 @@ proc world* (c: CoralGame): CoralWorld=
 
 proc assets* (c: CoralGame): CoralAssetManager=
     return c.assets
-
-
-## Asset manager Api
-proc add* (a: CoralAssetManager, id: string, image: Image): Image{.discardable.}=
-    result = image
-    a.images.add(id, image)
-
-proc add* (a: CoralAssetManager, id: string, audio: Audio): Audio{.discardable.}=
-    result = audio 
-    a.audio.add(id, audio)
-
-proc getImage* (a: CoralAssetManager, id: string): Image=
-    return a.images[id]
-    
-proc getAudio* (a: CoralAssetManager, id: string): Audio=
-    return a.audio[id]
-
-proc imageExists* (a: CoralAssetManager, id: string): bool=
-    return a.images.hasKey id
-    
-proc audioExists* (a: CoralAssetManager, id: string): bool=
-    return a.audio.hasKey id
 
 
 proc newKey(): CoralKeyState=

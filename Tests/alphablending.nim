@@ -14,7 +14,7 @@ var image: Image
 Coral.load = proc()=
     image = CoralLoadImage getAppDir() & "/wat.png"
 
-    Coral.assets.add("image", image)
+    # Coral.assets.add("image", image)
 
 Coral.render = proc()=
     Coral.windowTitle = "😁"

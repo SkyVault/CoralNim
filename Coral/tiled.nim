@@ -7,6 +7,8 @@ import
     parseutils,
     os,
     game,
+    renderer,
+    assets,
     ospaths
 
 type
@@ -144,3 +146,14 @@ proc loadTiledMap* (path: string): TiledMap=
 
     for objectsXml in objects_xmlnodes:
         discard """ TODO: Implement"""
+    
+proc drawTiledMap* (r2d: R2D, tiledmap: TiledMap)=
+    
+    for layer in tiledmap.layers:
+        for y in 0..<layer.height:
+            for x in 0..<layer.width:
+                let index = x + y * layer.width
+
+                let gid = layer.tiles[index]
+
+                # if gid != 0:
