@@ -27,6 +27,7 @@ type
         tilecount: int
         columns: int
         image: Image
+        regions: seq[Region]
 
     TiledLayer* = ref object
         name: string
@@ -46,6 +47,8 @@ type
         tilesets: seq[TiledTileset]
         layers: seq[TiledLayer]
 
+        regions: seq[Region]
+
     
 proc loadTileset* (path: string): TiledTileset=
     assert(fileExists path, "[ERROR] :: loadTiledMap :: Cannot find tileset: " & path)
@@ -59,7 +62,12 @@ proc loadTileset* (path: string): TiledTileset=
     result.tilewidth    = theXml.attr("tilewidth").parseInt
     result.tileheight   = theXml.attr("tileheight").parseInt
     result.tilecount    = theXml.attr("tilecount").parseInt
-    result.tilecount    = theXml.attr("columns").parseInt
+    result.columns      = theXml.attr("columns").parseInt
+
+
+    #TODO: Check the assets manager
+    #let region_string = $result.tilewidth & "x" & $result.tileheight
+    # result.regions = newSeq[]
 
     let imageXml = theXml[0]
     let tpath = parentDir(path) & "/" & imageXml.attr("source")
@@ -70,6 +78,20 @@ proc loadTileset* (path: string): TiledTileset=
     else:
         result.image = Coral.assets.getImage tpath
 
+    let num_tiles_w = (result.image.width / result.tilewidth).int
+    let num_tiles_h = (result.image.height / result.tileheight).int
+    
+    result.regions = newSeq[Region](num_tiles_w * num_tiles_h)
+    var index = 0
+    for y in 0..<num_tiles_h:
+        for x in 0..<num_tiles_w:
+            result.regions[index] = newRegion(
+                x * result.tilewidth,
+                y * result.tileheight,
+                result.tilewidth,
+                result.tileheight
+            )
+            index += 1
 
 proc loadTiledMap* (path: string): TiledMap=
     assert(fileExists path, "[ERROR] :: loadTiledMap :: Cannot find map: " & path)
@@ -103,6 +125,8 @@ proc loadTiledMap* (path: string): TiledMap=
 
     result.tilewidth = theXml.attr("tilewidth").parseInt
     result.tileheight = theXml.attr("tileheight").parseInt
+
+    # if Coral.assets.regionsExists region_string:
 
     result.infinite = 
         if theXml.attr("infinite") == "0":
@@ -147,7 +171,9 @@ proc loadTiledMap* (path: string): TiledMap=
     for objectsXml in objects_xmlnodes:
         discard """ TODO: Implement"""
     
-proc drawTiledMap* (r2d: R2D, tiledmap: TiledMap)=
+proc drawTiledMap* (r2d: R2D, tiledmap: TiledMap, color: Color, draw_layer = 0.4)=
+    let tileset = tiledmap.tilesets[0]
+    let image = tileset.image
     
     for layer in tiledmap.layers:
         for y in 0..<layer.height:
@@ -156,4 +182,18 @@ proc drawTiledMap* (r2d: R2D, tiledmap: TiledMap)=
 
                 let gid = layer.tiles[index]
 
-                # if gid != 0:
+                if gid != 0:
+                    let id = gid - 1
+                    let region = tileset.regions[id]
+
+                    r2d.drawSprite(
+                        image,
+                        region,
+                        (x * tileset.tilewidth).float,
+                        (y * tileset.tileheight).float,
+                        tileset.tilewidth.float,
+                        tileset.tileheight.float,
+                        (0.0).float,
+                        color,
+                        draw_layer
+                    )

@@ -36,3 +36,6 @@ proc imageExists* (a: CoralAssetManager, id: string): bool=
     
 proc audioExists* (a: CoralAssetManager, id: string): bool=
     return a.audio.hasKey id
+
+proc regionsExists* (a: CoralAssetManager, id: string): bool=
+    return a.regions.hasKey id
