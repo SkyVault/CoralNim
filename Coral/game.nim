@@ -243,6 +243,7 @@ proc world* (c: CoralGame): CoralWorld=
 proc assets* (c: CoralGame): CoralAssetManager=
     return c.assets
 
+
 ## Asset manager Api
 proc add* (a: CoralAssetManager, id: string, image: Image): Image{.discardable.}=
     result = image
@@ -252,16 +253,18 @@ proc add* (a: CoralAssetManager, id: string, audio: Audio): Audio{.discardable.}
     result = audio 
     a.audio.add(id, audio)
 
-# proc get* (a: CoralAssetManager, T: typedesc, id: string): T=
-#     case T.name:
-#         of type(Image).name:
-#             return a.images[id].T
-#         of type(Audio).name:
-#             return a.audio[id].T
-#         else:
-#             echo "Unknown asset type: " & T.name
-#             return nil
-            
+proc getImage* (a: CoralAssetManager, id: string): Image=
+    return a.images[id]
+    
+proc getAudio* (a: CoralAssetManager, id: string): Audio=
+    return a.audio[id]
+
+proc imageExists* (a: CoralAssetManager, id: string): bool=
+    return a.images.hasKey id
+    
+proc audioExists* (a: CoralAssetManager, id: string): bool=
+    return a.audio.hasKey id
+
 
 proc newKey(): CoralKeyState=
     return CoralKeyState(state: 0, last: 0)

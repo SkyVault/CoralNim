@@ -1,10 +1,12 @@
-import
-    xmlparser,
-    xmltree,
+import 
+    xmlparser, 
+    xmltree, 
     streams,
     strutils,
     graphics,
-    os
+    os,
+    game,
+    ospaths
 
 type
     TiledLayer* = ref object
@@ -33,6 +35,9 @@ type
         width, height: int
         tilewidth, tileheight: int
         infinite: bool
+
+        tilesets: seq[TiledTileset]
+
     
 proc loadTileset* (path: string): TiledTileset=
     assert(fileExists path, "[ERROR] :: loadTiledMap :: Cannot find tileset: " & path)
@@ -42,16 +47,32 @@ proc loadTileset* (path: string): TiledTileset=
         .newStringStream()
         .parseXml()
     
-    echo theXml
+    result.name         = theXml.attr "name"
+    result.tilewidth    = theXml.attr("tilewidth").parseInt
+    result.tileheight   = theXml.attr("tileheight").parseInt
+    result.tilecount    = theXml.attr("tilecount").parseInt
+    result.tilecount    = theXml.attr("columns").parseInt
+
+    let imageXml = theXml[0]
+    let tpath = parentDir(path) & "/" & imageXml.attr("source")
+
+    if not Coral.assets.imageExists tpath:
+        result.image = CoralLoadImage tpath
+        Coral.assets.add(tpath, result.image)
+    else:
+        result.image = Coral.assets.getImage tpath
+
 
 proc loadTiledMap* (path: string): TiledMap=
     assert(fileExists path, "[ERROR] :: loadTiledMap :: Cannot find map: " & path)
 
-    result = TiledMap()
-        
-    let mapcode = readFile path    
-    let document = newStringStream mapcode 
-    let theXml = document.parseXml
+    result = TiledMap(
+        tilesets: newSeq[TiledTileset]()
+    )
+
+    let theXml = readFile(path)
+        .newStringStream()
+        .parseXml()
 
     result.version = theXml.attr "version"
     result.tiledversion = theXml.attr "tiledversion"
@@ -80,10 +101,7 @@ proc loadTiledMap* (path: string): TiledMap=
         else:
             true
 
-    # for node: XmlNode in theXml.items:
-    #     case node.tag
-
     let tileset_xmlnodes = theXml.findAll "tileset"
     for node in tileset_xmlnodes:
-        echo node.attr "source"
-        echo node.attr "firstgid"
+        let tpath = parentDir(path) & "/" & node.attr "source"
+        result.tilesets.add loadTIleset(tpath)
