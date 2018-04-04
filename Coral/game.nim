@@ -208,15 +208,17 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
     makeContextCurrent(lCoral.window)
 
     loadExtensions()
+    # echo "here"
+
     glClear(
         GL_COLOR_BUFFER_BIT or 
         GL_DEPTH_BUFFER_BIT
         )
 
     # initialize the renderer once opengl is initialized
-    let draw_instanced = 
-        extensionSupported("GL_ARB_instanced_arrays") == 1 or  
-        extensionSupported("GL_EXT_instanced_arrays") == 1 
+    # let draw_instanced = 
+    #     extensionSupported("GL_ARB_instanced_arrays") == 1 or  
+    #     extensionSupported("GL_EXT_instanced_arrays") == 1 
 
     lCoral.r2d = newR2D(
         draw_instanced = false# draw_instanced
@@ -377,7 +379,6 @@ proc run* (game: CoralGame)=
 
     while game.running:
         pollEvents()
-        swapBuffers(game.window)
 
         # let wait_time = 1.0 / game.targetFPS.float
         let now = getTime().float
@@ -449,10 +450,11 @@ proc run* (game: CoralGame)=
             game.world.update()
         game.update()
 
+        game.r2d.viewport = game.windowSize
         game.r2d.clear()
-        game.r2d.begin(game.windowSize)
         if game.world.isNil == false:
             game.world.draw()
+
         game.render()
         game.r2d.flush()
 
@@ -475,6 +477,8 @@ proc run* (game: CoralGame)=
             if timer.repeat > 0 or timer.shouldDelete:
                 if timer.times_called >= timer.repeat:
                     game.clock.timers.delete(i)
+
+        swapBuffers(game.window)
     
     game.audio.destroy()
     game.destroy()

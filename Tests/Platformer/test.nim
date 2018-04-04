@@ -1,0 +1,1 @@
+cast[pointer](0)

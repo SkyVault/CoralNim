@@ -80,16 +80,22 @@ type
         Additive
 
     # image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5
-    Drawable* = ref object
+    Drawable* = ref object of RootObj
       image: Image
       region: Region
       x, y, width, height: float
       rotation: float
       diffuse: Color
       layer: float
+
+    CustomBufferDrawable* = ref object of Drawable
+        vao, vbo: GLuint
   
     R2D* = ref object
         drawables: TableRef[uint32, seq[Drawable]]
+        customDBufferDrawable: seq[CustomBufferDrawable]
+        
+        postDrawingProcedures: seq[proc()]
 
         rotation_mode: CoralRotationMode
         draw_instanced: bool
@@ -101,6 +107,8 @@ type
         rvao, rvbo, ribo: GLuint
         ortho_projection: M4
         view_matrix: M2
+
+        viewport: (int, int)
 
         sprite_rectangle_batch_buffer: GLuint
         sprite_rot_and_depth_batch_buffer: GLuint
@@ -153,11 +161,16 @@ proc newR2D* (draw_instanced = true):R2d =
     result = R2D(
         clear_color: Black,
         drawables: newTable[uint32, seq[Drawable]](),
+        customDBufferDrawable: newSeq[CustomBufferDrawable](),
+
+        postDrawingProcedures: newSeq[proc()](),
+
         rotation_mode: CoralRotationMode.Degrees,
         draw_instanced: draw_instanced,
         drawable_counter: 0,
         last_drawable_counter: 0,
-        layer_adder: 0.0
+        layer_adder: 0.0,
+        viewport: (1280, 720)
     )
 
     var verts = RECT_VERTICES
@@ -171,6 +184,7 @@ proc newR2D* (draw_instanced = true):R2d =
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte) * indi.len, addr indi[0], GL_STATIC_DRAW)
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
+    glBindBuffer(GL_ARRAY_BUFFER, 0)
     glBindVertexArray(0)
 
     # Instancing buffers
@@ -219,6 +233,12 @@ proc `view=`* (self: R2D, view: M2)=
 proc `view=`* (self: R2D, camera: Camera2D)=
     self.view_matrix = camera.view
 
+proc `viewport=`* (self: R2D, view: (int, int))=
+    self.viewport = view
+
+proc viewport* (self: R2D): (int, int)=
+    return self.viewport
+
 proc `rotationMode=`* (self: R2D, mode: CoralRotationMode)=
     self.rotation_mode = mode
 
@@ -240,7 +260,7 @@ proc clear* (self: R2D)=
     glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
 proc begin* (self: R2D, size: (int, int))=
-    glViewport(0, 0, cast[GLsizei](size[0]), cast[GLsizei](size[1]))
+    # glViewport(0, 0, cast[GLsizei](size[0]), cast[GLsizei](size[1]))
     let
         width = (float32)size[0]
         height = (float32)size[1]
@@ -440,6 +460,8 @@ var quad_batch = newSeq[GLfloat]()
 var color_batch = newSeq[GLfloat]()
 
 proc flush*(self: R2D)=
+    begin(self, (1280, 720)) # @HARDCODED
+
     for key in self.drawables.keys:
         var drawables_seq = self.drawables[key]
         let number_of_drawables = drawables_seq.len
