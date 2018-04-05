@@ -490,6 +490,65 @@ proc run* (game: CoralGame)=
                 else:
                     discard
 
+        # Handle timing
+        let now = sdl.getTicks().float
+        game.clock.delta = (now - game.clock.last) / 1000.0
+        game.clock.last = now
+
+        game.clock.fps =
+            if game.clock.delta != 0.0:
+                1.0 / game.clock.delta
+            else:
+                0.0
+
+        if game.clock.ticks == 0:
+            game.clock.avFps = game.clock.fps
+            game.clock.avDt = game.clock.dt
+        
+        # Average out the fps
+        if game.clock.fpsSamples.len < NUM_AVERAGE_FPS_SAMPLES:
+            game.clock.fpsSamples.add game.clock.fps
+        else:
+            let len = game.clock.fpsSamples.len
+            var sumation = 0.0
+            for s in game.clock.fpsSamples:
+                sumation += s
+            game.clock.avFps = sumation / (len.float)
+            game.clock.fpsSamples.setLen(0)
+
+        # Average out the delta time
+        if game.clock.dtSamples.len < NUM_AVERAGE_FPS_SAMPLES:
+            game.clock.dtSamples.add game.clock.dt
+        else:
+            let len = game.clock.dtSamples.len
+            var sumation = 0.0
+            for d in game.clock.dtSamples:
+                sumation += d
+            game.clock.avDt = sumation / (len.float)
+            game.clock.dtSamples.setLen(0)
+
+        # incrament the timers
+        game.clock.ticks += 1
+        game.clock.timer += game.clock.delta
+
+        # Handle timers
+        for timer in game.clock.timers:
+            if timer.state == CoralTimerState.Paused: continue
+
+            timer.timer += game.clock.dt
+            if (timer.timer * 1000.0) > timer.milliseconds:
+                timer.times_called += 1
+                timer.callback()
+                timer.timer = 0
+        
+        for i in countdown(game.clock.timers.len - 1, 0):
+            let timer = game.clock.timers[i]
+            if timer.repeat > 0 or timer.shouldDelete:
+                if timer.times_called >= timer.repeat:
+                    game.clock.timers.delete(i)
+
+        # Update and render the world
+
         if game.world.isNil == false:
             game.world.update()
         game.update()
@@ -503,106 +562,6 @@ proc run* (game: CoralGame)=
         game.r2d.flush()
 
         sdl.glSwapWindow(game.window)
-
-        # # let wait_time = 1.0 / game.targetFPS.float
-        # let now = getTime().float
-        # let curr_time = (now - game.clock.last)
-        # # let durr = 1000.0 * (wait_time - curr_time) + 0.5
-
-        # game.clock.delta = curr_time
-        # game.clock.last = now
-
-        # game.clock.fps =
-        #     if game.clock.delta != 0.0:
-        #         1.0 / game.clock.delta
-        #     else:
-        #         0.0
-
-        # if game.clock.ticks == 0:
-        #     game.clock.avFps = game.clock.fps
-        #     game.clock.avDt = game.clock.dt
-        
-        # # Average out the fps
-        # if game.clock.fpsSamples.len < NUM_AVERAGE_FPS_SAMPLES:
-        #     game.clock.fpsSamples.add game.clock.fps
-        # else:
-        #     let len = game.clock.fpsSamples.len
-        #     var sumation = 0.0
-        #     for s in game.clock.fpsSamples:
-        #         sumation += s
-        #     game.clock.avFps = sumation / (len.float)
-        #     game.clock.fpsSamples.setLen(0)
-
-        # # Average out the delta time
-        # if game.clock.dtSamples.len < NUM_AVERAGE_FPS_SAMPLES:
-        #     game.clock.dtSamples.add game.clock.dt
-        # else:
-        #     let len = game.clock.dtSamples.len
-        #     var sumation = 0.0
-        #     for d in game.clock.dtSamples:
-        #         sumation += d
-        #     game.clock.avDt = sumation / (len.float)
-        #     game.clock.dtSamples.setLen(0)
-
-        # game.running = 
-        #     if windowShouldClose(game.window) == 0:
-        #         true
-        #     else:
-        #         false
-
-        # # Update the input manager
-        # game.window.getCursorPos(addr game.input.mouse_x, addr game.input.mouse_y)
-
-        # for key in game.input.keyMap.pairs:
-        #     var k = game.input.keyMap[key[0]]
-        #     k.last = k.state
-        #     game.input.keyMap[key[0]] = k
-        # if (game.input.last_mouse_x < 0 or game.input.last_mouse_y < 0):
-        #     game.input.last_mouse_x = game.mouseX
-        #     game.input.last_mouse_y = game.mouseY
-        # else:
-        #     var mx = game.mouseX
-        #     var my = game.mouseY
-        #     game.input.mouse_dx = mx - game.input.last_mouse_x
-        #     game.input.mouse_dy = my - game.input.last_mouse_y
-        # game.input.last_mouse_left_state  = game.input.curr_mouse_left_state
-        # game.input.last_mouse_right_state = game.input.curr_mouse_right_state
-        # game.input.the_first = false
-
-        # # Update and draw the game
-        # if game.world.isNil == false:
-        #     game.world.update()
-        # game.update()
-
-        # game.r2d.viewport = game.windowSize
-        # game.r2d.clear()
-        # if game.world.isNil == false:
-        #     game.world.draw()
-
-        # game.render()
-        # game.r2d.flush()
-
-        # # incrament the timers
-        # game.clock.ticks += 1
-        # game.clock.timer += game.clock.delta
-
-        # # Handle timers
-        # for timer in game.clock.timers:
-        #     if timer.state == CoralTimerState.Paused: continue
-
-        #     timer.timer += game.clock.dt
-        #     if (timer.timer * 1000.0) > timer.milliseconds:
-        #         timer.times_called += 1
-        #         timer.callback()
-        #         timer.timer = 0
-        
-        # for i in countdown(game.clock.timers.len - 1, 0):
-        #     let timer = game.clock.timers[i]
-        #     if timer.repeat > 0 or timer.shouldDelete:
-        #         if timer.times_called >= timer.repeat:
-        #             game.clock.timers.delete(i)
-
-        # swapBuffers(game.window)
     
     game.audio.destroy()
     game.destroy()

@@ -29,6 +29,11 @@ Coral.update = proc()=
 var image: Image
 Coral.load = proc()=
     image = CoralLoadImage(getCurrentDir() & "/Tests/wat.png")
+# proc addTimer* (clock: CoralClock, milliseconds: float, repeat = 0, callback: proc(): void): CoralTimer{.discardable.}=
+
+    Coral.clock.addTimer(1000, callback = proc()=
+        echo "hello"
+    )
 
 Coral.render = proc()=
     Coral.r2d.setBackgroundColor(P8Peach)
@@ -39,8 +44,11 @@ Coral.render = proc()=
         White
     )
 
+    Coral.r2d.drawRect(200, 300, 300, 300, 0.0, P8Orange)
+    Coral.r2d.drawLineRect(300, 350, 300, 300, Coral.clock.timer * 100.0, P8Blue)
+
 Coral.createGame(
-    11 * (32 + 8), 
+    1280, 
     720, 
     "Moving to SDL2", 
     config(

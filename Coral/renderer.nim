@@ -88,12 +88,27 @@ type
       diffuse: Color
       layer: float
 
+    DrawablePrimitive* = ref object of RootObj
+        x, y, rotation: float
+        color: Color
+        layer: float
+
+    DrawableRectanglePrimitive* = ref object of DrawablePrimitive
+        width, height: float
+
+    DrawableLineRectanglePrimitive* = ref object of DrawablePrimitive
+        width, height: float
+
+    DrawableCirclePrimitive* = ref object of DrawablePrimitive
+        radius: float
+
     CustomBufferDrawable* = ref object of Drawable
         vao, vbo: GLuint
   
     R2D* = ref object
         drawables: TableRef[uint32, seq[Drawable]]
         customDBufferDrawable: seq[CustomBufferDrawable]
+        primitives: seq[DrawablePrimitive]
         
         postDrawingProcedures: seq[proc()]
 
@@ -162,6 +177,8 @@ proc newR2D* (draw_instanced = true):R2d =
         clear_color: Black,
         drawables: newTable[uint32, seq[Drawable]](),
         customDBufferDrawable: newSeq[CustomBufferDrawable](),
+
+        primitives: newSeq[DrawablePrimitive](),
 
         postDrawingProcedures: newSeq[proc()](),
 
@@ -327,39 +344,24 @@ proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float
     drawSprite(self, image, newRegion(0, 0, image.width, image.height), position, size, rotation, color, layer)
 
 proc drawRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=
-    glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
-
-    glUniform1i(self.has_texture_location, 0)
-    glUniform2f(self.position_location, x, y)
-    glUniform2f(self.size_location, width, height)
-
-    if self.rotation_mode == CoralRotationMode.Degrees:
-        glUniform1f(self.rotation_location, rotation * DEGTORAD)
-    else:
-        glUniform1f(self.rotation_location, rotation)
-
-    glUniform1f(self.depth_location, 0 - layer)
-
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
+    self.primitives.add(DrawableRectanglePrimitive(
+        x: x, y: y, width: width, height: height,
+        color: color,
+        layer: layer,
+        rotation: rotation
+    ))
 
 proc drawRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
     self.drawRect(position.x, position.y, size.x, size.y, rotation, color, layer)
 
 proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=
-    glUniform4f(self.diffuse_location, color.r, color.g, color.b, color.a)
+    self.primitives.add(DrawableLineRectanglePrimitive(
+        x: x, y: y, width: width, height: height,
+        color: color,
+        layer: layer,
+        rotation: rotation
+    ))
 
-    glUniform1i(self.has_texture_location, 0)
-    glUniform2f(self.position_location, x, y)
-    glUniform2f(self.size_location, width, height)
-
-    if self.rotation_mode == CoralRotationMode.Degrees:
-        glUniform1f(self.rotation_location, rotation * DEGTORAD)
-    else:
-        glUniform1f(self.rotation_location, rotation)
-
-    glUniform1f(self.depth_location, 0 - layer)
-
-    glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_BYTE, nil)
 
 proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
     self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
@@ -462,6 +464,44 @@ var color_batch = newSeq[GLfloat]()
 proc flush*(self: R2D)=
     begin(self, (1280, 720)) # @HARDCODED
 
+    # Draw primitives
+    for prim in self.primitives.reversed:
+
+        if prim of DrawableRectanglePrimitive:
+            let rprim = (DrawableRectanglePrimitive)prim
+            glUniform4f(self.diffuse_location, rprim.color.r, rprim.color.g, rprim.color.b, rprim.color.a)
+
+            glUniform1i(self.has_texture_location, 0)
+            glUniform2f(self.position_location, rprim.x, rprim.y)
+            glUniform2f(self.size_location, rprim.width, rprim.height)
+
+            if self.rotation_mode == CoralRotationMode.Degrees:
+                glUniform1f(self.rotation_location, rprim.rotation * DEGTORAD)
+            else:
+                glUniform1f(self.rotation_location, rprim.rotation)
+
+            glUniform1f(self.depth_location, 0 - rprim.layer)
+
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
+
+        elif prim of DrawableLineRectanglePrimitive:
+            let rprim = (DrawableLineRectanglePrimitive)prim
+            glUniform4f(self.diffuse_location, rprim.color.r, rprim.color.g, rprim.color.b, rprim.color.a)
+
+            glUniform1i(self.has_texture_location, 0)
+            glUniform2f(self.position_location, rprim.x, rprim.y)
+            glUniform2f(self.size_location, rprim.width, rprim.height)
+
+            if self.rotation_mode == CoralRotationMode.Degrees:
+                glUniform1f(self.rotation_location, rprim.rotation * DEGTORAD)
+            else:
+                glUniform1f(self.rotation_location, rprim.rotation)
+
+            glUniform1f(self.depth_location, 0 - rprim.layer)
+
+            glDrawElements(GL_LINE_LOOP, 6, GL_UNSIGNED_BYTE, nil)
+
+    # Draw drawables
     for key in self.drawables.keys:
         var drawables_seq = self.drawables[key]
         let number_of_drawables = drawables_seq.len
@@ -578,6 +618,7 @@ proc flush*(self: R2D)=
 
     # self.last_drawable_counter = self.drawable_counter
     # self.drawable_counter = 0
+    self.primitives.setLen(0)
     self.layer_adder = 0.0
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
