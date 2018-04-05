@@ -39,8 +39,11 @@ type
         timers: seq[CoralTimer]
 
     # Input handler
-    CoralKeyState* = ref object
+    CoralKeyState* = ref object of RootObj
         state*, last*: int
+
+    # Mouse handler
+    CoralMouseState* = ref object of CoralKeyState
 
     CoralInputManager* = ref object
         mouse_x, mouse_y: float64
@@ -51,6 +54,9 @@ type
 
         last_mouse_left_state, curr_mouse_left_state: bool
         last_mouse_right_state, curr_mouse_right_state: bool
+
+        mouse_left, mouse_right: CoralMouseState
+
         keyMap: Table[int, CoralKeyState]
 
         # gamepadState: Table[cint, ]
@@ -164,11 +170,12 @@ proc newCoralGame()=
         ),
         input: CoralInputManager(
             mouse_x: 0, mouse_y: 0,
-            mouse_dx: 0, mouse_dy: 0,
             last_mouse_x: 0, last_mouse_y: 0,
             the_first: false, the_block: false,
             last_mouse_left_state: false, curr_mouse_left_state: false,
             last_mouse_right_state: false, curr_mouse_right_state: false,
+            mouse_left: CoralMouseState(state : 0, last : 0),
+            mouse_right: CoralMouseState(state : 0, last : 0),
             keyMap: initTable[int, CoralKeyState]()
         ),
         audio: CoralAudioMixer(
@@ -193,11 +200,6 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
     ## Initializes the game object
     # Set the OpenGL version to 330 core
     # TODO: check to see if this works
-
-    # windowHint(CONTEXT_VERSION_MAJOR, 3)
-    # windowHint(CONTEXT_VERSION_MINOR, 3)
-    # windowHint(OPENGL_PROFILE, OPENGL_CORE_PROFILE)
-    # windowHint(VISIBLE, config.visible.cint)
 
     discard sdl.glSetAttribute(sdl.GLContextMajorVersion, 3)
     discard sdl.glSetAttribute(sdl.GLContextMinorVersion, 3)
@@ -306,41 +308,37 @@ proc getKeyInRange(key: cint): int=
     else:
         return key.int 
 
-# proc isMouseLeftDown* (game: CoralGame): bool=
-#     var mwin = getCurrentContext()
-#     return mwin.getMouseButton(0) == 1
+proc isMouseLeftDown* (game: CoralGame): bool=
+    return game.input.mouse_left.state == 1
 
-# proc isMouseRightDown* (game: CoralGame): bool=
-#     var mwin = getCurrentContext()
-#     return mwin.getMouseButton(1) == 1
+proc isMouseLeftUp* (game: CoralGame): bool=
+    return not isMouseLeftDown(game)
 
-# proc isMouseLeftPressed* (game: CoralGame): bool =
-#     var win = getCurrentContext()
-#     game.input.curr_mouse_left_state = win.getMouseButton(0) == 1
-#     if (game.input.curr_mouse_left_state and not game.input.last_mouse_left_state):
-#         return true
-#     return false
+proc isMouseRightDown* (game: CoralGame): bool=
+    return game.input.mouse_right.state == 1
 
-# proc isMouseLeftReleased* (game: CoralGame): bool =
-#     var win = getCurrentContext()
-#     game.input.curr_mouse_left_state = win.getMouseButton(0) == 1
-#     if (not game.input.curr_mouse_left_state and game.input.last_mouse_left_state):
-#         return true
-#     return false
+proc isMouseRightUp* (game: CoralGame): bool=
+    return not isMouseRightDown(game)
 
-# proc isMouseRightPressed* (game: CoralGame): bool =
-#     var win = getCurrentContext()
-#     game.input.curr_mouse_right_state = win.getMouseButton(1) == 1
-#     if (game.input.curr_mouse_right_state and not game.input.last_mouse_right_state):
-#         return true
-#     return false
+proc isMouseLeftPressed* (game: CoralGame): bool =
+    result =
+        game.input.mouse_left.state == 1 and
+        game.input.mouse_left.last == 0
 
-# proc isMouseRightReleased* (game: CoralGame): bool =
-#     var win = getCurrentContext()
-#     game.input.curr_mouse_right_state = win.getMouseButton(1) == 1
-#     if (not game.input.curr_mouse_right_state and game.input.last_mouse_right_state):
-#         return true
-#     return false
+proc isMouseLeftReleased* (game: CoralGame): bool =
+    result =
+        game.input.mouse_left.state == 0 and
+        game.input.mouse_left.last == 1
+
+proc isMouseRightPressed* (game: CoralGame): bool =
+    result =
+        game.input.mouse_right.state == 1 and
+        game.input.mouse_right.last == 0
+
+proc isMouseRightReleased* (game: CoralGame): bool =
+    result =
+        game.input.mouse_right.state == 0 and
+        game.input.mouse_right.last == 1
 
 proc isKeyDown* (game: CoralGame, key: Keycode): bool =
     var ckey = getKeyInRange(key.cint)
@@ -426,6 +424,9 @@ proc run* (game: CoralGame)=
         for key, state in game.input.keyMap.mpairs:
             state.last = state.state
 
+        game.input.mouse_left.last = game.input.mouse_left.state
+        game.input.mouse_right.last = game.input.mouse_right.state
+
         # get the mouse position
         var x, y: cint
         discard sdl.getMouseState(addr(x), addr(y))
@@ -447,11 +448,7 @@ proc run* (game: CoralGame)=
                     if game.input.keyMap.hasKey(key) == false:
                         game.input.keyMap.add(key, newKeyState(1)) 
                     else:
-                        let state = game.input.keyMap[key]
-                        game.input.keyMap[key] = newKeyState(
-                            1,
-                            0
-                        )
+                        game.input.keyMap[key] = newKeyState(1, 0)
 
                 of sdl.KeyUp:
                     if ev.key.repeat > 0: continue
@@ -460,11 +457,35 @@ proc run* (game: CoralGame)=
                     if game.input.keyMap.hasKey(key) == false:
                         game.input.keyMap.add(key, newKeyState(1)) 
                     else:
-                        let state = game.input.keyMap[key]
-                        game.input.keyMap[key] = newKeyState(
-                            0,
-                            1
-                        )
+                        game.input.keyMap[key] = newKeyState(0, 1)
+
+                of sdl.MouseButtonDown:
+                    case ev.button.button:
+                    of sdl.BUTTON_LEFT: 
+                        game.input.mouse_left.state = 1
+
+                    of sdl.BUTTON_RIGHT:
+                        game.input.mouse_right.state = 1
+
+                    of sdl.BUTTON_MIDDLE:
+                        discard
+                    else:
+                        discard
+
+                of sdl.MouseButtonUp:
+                    case ev.button.button:
+                    of sdl.BUTTON_LEFT: 
+                        game.input.mouse_left.state = 0
+                        game.input.mouse_left.last = 1
+
+                    of sdl.BUTTON_RIGHT:
+                        game.input.mouse_right.state = 0
+                        game.input.mouse_right.last = 1
+
+                    of sdl.BUTTON_MIDDLE:
+                        discard
+                    else:
+                        discard
                 
                 else:
                     discard
