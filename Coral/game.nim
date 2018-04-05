@@ -338,34 +338,6 @@ proc getKeyInRange(key: cint): int=
 #         return true
 #     return false
 
-# proc isKeyPressed* (game: CoralGame, key: CoralKey): bool=
-#     if (game.input.the_block): return false
-#     var ckey = cast[cint](key)
-#     if (not game.input.keyMap.contains ckey):
-#         var mykey = newKey()
-#         game.input.keyMap.add ckey, mykey
-#     else:
-#         var k = game.input.keyMap[ckey]
-#         k.state = getKey(game.window, ckey)
-#         game.input.keyMap[ckey] = k
-#         if (k.state == 1 and k.last == 0):
-#             return true
-#         return false
-
-# proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=
-#     if (game.input.the_block): return false
-#     var ckey = cast[cint](key)
-#     if (not game.input.keyMap.contains ckey):
-#         var mykey = newKey()
-#         game.input.keyMap.add ckey, mykey
-#     else:
-#         var k = game.input.keyMap[ckey]
-#         k.state = getKey(game.window, ckey)
-#         game.input.keyMap[ckey] = k
-#         if (k.state == 0 and k.last == 1):
-#             return true
-#         return false
-
 proc isKeyDown* (game: CoralGame, key: Keycode): bool =
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
@@ -450,6 +422,12 @@ proc run* (game: CoralGame)=
         for key, state in game.input.keyMap.mpairs:
             state.last = state.state
 
+        # get the mouse position
+        var x, y: cint
+        discard sdl.getMouseState(addr(x), addr(y))
+
+        game.input.mouse_x = x.float
+        game.input.mouse_y = y.float
 
         while sdl.pollEvent(addr(ev)) != 0:
             case ev.kind:
