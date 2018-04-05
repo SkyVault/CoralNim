@@ -53,6 +53,8 @@ type
         last_mouse_right_state, curr_mouse_right_state: bool
         keyMap: Table[cint, CoralKeyState]
 
+        # gamepadState: Table[cint, ]
+
     CoralConfig* = ref object
         resizable: bool
         fullscreen: bool
@@ -247,6 +249,14 @@ proc newKey(): CoralKeyState=
     return CoralKeyState(state: 0, last: 0)
 
 ## Input manager functions
+
+## Game pad
+proc IsGamepadConnected* (game: CoralGame, which = 0): bool=
+    return 
+        joystickPresent(which.cint) == 1
+
+# proc IsButtonDown(game: CoralGame )
+
 proc mouseX* (game: CoralGame): float= return game.input.mouse_x
 proc mouseY* (game: CoralGame): float= return game.input.mouse_y
 
