@@ -3,7 +3,8 @@ import
     ../Coral/renderer,
     ../Coral/graphics,
     ../Coral/gameMath,
-    sdl2/sdl
+    sdl2/sdl,
+    os
 
 Coral.update = proc()=
     # echo Coral.windowSize
@@ -25,10 +26,17 @@ Coral.update = proc()=
     if Coral.isMouseLeftPressed:
         echo "left mouse pressed"
 
+var image: Image
+Coral.load = proc()=
+    image = CoralLoadImage(getCurrentDir() & "/Tests/wat.png")
+
 Coral.render = proc()=
-    Coral.r2d.drawRect(
-        10, 10, 200, 100, 0.0,
-        P8Green
+    Coral.r2d.setBackgroundColor(P8Peach)
+    Coral.r2d.drawImage(
+        image,
+        10.0, 10.0, 300.0, 250.0,
+        0.0,
+        White
     )
 
 Coral.createGame(

@@ -490,17 +490,19 @@ proc run* (game: CoralGame)=
                 else:
                     discard
 
+        if game.world.isNil == false:
+            game.world.update()
         game.update()
 
         game.r2d.viewport = game.windowSize
-        # game.r2d.clear()
-        # if game.world.isNil == false:
-        #     game.world.draw()
+        game.r2d.clear()
+        if game.world.isNil == false:
+            game.world.draw()
 
-        # game.render()
-        # game.r2d.flush()
+        game.render()
+        game.r2d.flush()
 
-        # pollEvents()
+        sdl.glSwapWindow(game.window)
 
         # # let wait_time = 1.0 / game.targetFPS.float
         # let now = getTime().float
