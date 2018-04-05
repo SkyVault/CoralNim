@@ -374,6 +374,21 @@ proc isKeyDown* (game: CoralGame, key: Keycode): bool =
         return
             game.input.keyMap[ckey].state == 1
 
+proc isKeyUp* (game: CoralGame, key: Keycode): bool =
+    return not isKeyDown(game, key)
+
+proc isKeyPressed* (game: CoralGame, key: Keycode): bool=
+    var ckey = getKeyInRange(key.cint)
+    if not game.input.keyMap.contains ckey:
+        return false
+    else:
+        let state = game.input.keyMap[ckey]
+        result =  
+            state.state == 1 and 
+            state.last  == 0
+
+        game.input.keyMap[ckey].last = state.state
+
 # ## Window functions
 proc windowSize* (self: CoralGame): (int, int)=
     ## Returns the size in pixels of the GLFW window
@@ -443,6 +458,7 @@ proc run* (game: CoralGame)=
 
                 of sdl.KeyUp:
                     let key = getKeyInRange ev.key.keysym.sym.cint
+                    echo key
 
                     if game.input.keyMap.hasKey(key) == false:
                         game.input.keyMap.add(key, newKeyState(1)) 

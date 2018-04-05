@@ -4,7 +4,7 @@ import
 
 Coral.update = proc()=
     # echo Coral.windowSize
-    if Coral.isKeyDown sdl.K_Left:
+    if Coral.isKeyPressed sdl.K_Left:
         echo "LEFT!"
 
 Coral.createGame(
