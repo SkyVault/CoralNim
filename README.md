@@ -2,6 +2,12 @@
 
 ## Simple 2d game development platform for the Nim programming language (Warning) This framework is under heavy development
 
+### Requires SDL2 Dynamic libraries for your specific platform 
+
+[libsdl.org](https://www.libsdl.org/)
+
+### Help support this project
+
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=H5PC5ZLB4GMPE)
 
 ## Getting Started
