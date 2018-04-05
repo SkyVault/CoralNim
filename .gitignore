@@ -3,6 +3,7 @@ Tests/nimcache/
 Coral/nimcache/
 *.exe
 *.dll
+Tests/*.dll
 Tests/*.exe
 Coral/*.exe
 .vscode
