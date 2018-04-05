@@ -377,6 +377,16 @@ proc isKeyDown* (game: CoralGame, key: Keycode): bool =
 proc isKeyUp* (game: CoralGame, key: Keycode): bool =
     return not isKeyDown(game, key)
 
+proc isKeyReleased* (game: CoralGame, key: Keycode): bool=
+    var ckey = getKeyInRange(key.cint)
+    if not game.input.keyMap.contains ckey:
+        return false
+    else:
+        let state = game.input.keyMap[ckey]
+        result =  
+            state.state == 0 and 
+            state.last  == 1
+
 proc isKeyPressed* (game: CoralGame, key: Keycode): bool=
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
@@ -386,8 +396,6 @@ proc isKeyPressed* (game: CoralGame, key: Keycode): bool=
         result =  
             state.state == 1 and 
             state.last  == 0
-
-        game.input.keyMap[ckey].last = state.state
 
 # ## Window functions
 proc windowSize* (self: CoralGame): (int, int)=
@@ -439,12 +447,17 @@ proc run* (game: CoralGame)=
     while game.running:
         # echo cast[int](Keycode.K_Left) - 0x40000000
 
+        for key, state in game.input.keyMap.mpairs:
+            state.last = state.state
+
+
         while sdl.pollEvent(addr(ev)) != 0:
             case ev.kind:
                 of sdl.Quit:
                     game.running = false
 
-                of sdl.KeyDown:
+                of sdl.KeyDown :
+                    if ev.key.repeat > 0: continue
                     let key = getKeyInRange ev.key.keysym.sym.cint
 
                     if game.input.keyMap.hasKey(key) == false:
@@ -453,12 +466,12 @@ proc run* (game: CoralGame)=
                         let state = game.input.keyMap[key]
                         game.input.keyMap[key] = newKeyState(
                             1,
-                            state.state
+                            0
                         )
 
                 of sdl.KeyUp:
+                    if ev.key.repeat > 0: continue
                     let key = getKeyInRange ev.key.keysym.sym.cint
-                    echo key
 
                     if game.input.keyMap.hasKey(key) == false:
                         game.input.keyMap.add(key, newKeyState(1)) 
@@ -466,7 +479,7 @@ proc run* (game: CoralGame)=
                         let state = game.input.keyMap[key]
                         game.input.keyMap[key] = newKeyState(
                             0,
-                            state.state
+                            1
                         )
                 
                 else:
