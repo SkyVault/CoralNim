@@ -8,7 +8,6 @@ import
     opengl,
     glu,
     strutils,
-    glfw,
     os,
     math,
     stb_image/read as stbi,
