@@ -1,5 +1,8 @@
 import 
     ../Coral/game,
+    ../Coral/renderer,
+    ../Coral/graphics,
+    ../Coral/gameMath,
     sdl2/sdl
 
 Coral.update = proc()=
@@ -21,6 +24,12 @@ Coral.update = proc()=
 
     if Coral.isMouseLeftPressed:
         echo "left mouse pressed"
+
+Coral.render = proc()=
+    Coral.r2d.drawRect(
+        10, 10, 200, 100, 0.0,
+        P8Green
+    )
 
 Coral.createGame(
     11 * (32 + 8), 
