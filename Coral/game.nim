@@ -44,7 +44,6 @@ type
 
     CoralInputManager* = ref object
         mouse_x, mouse_y: float64
-        mouse_dx, mouse_dy: float
         last_mouse_x, last_mouse_y: float
 
         the_first: bool
@@ -293,8 +292,13 @@ proc mouseY* (game: CoralGame): float= return game.input.mouse_y
 proc mousePos* (game: CoralGame): (float, float)=
     return (game.mouseX, game.mouseY)
 
-proc mouseDeltaX* (game: CoralGame): float=return game.input.mouse_dx
-proc mouseDeltaY* (game: CoralGame): float=return game.input.mouse_dy
+proc mouseDeltaX* (game: CoralGame): float=return game.input.mouse_x - game.input.last_mouse_x
+proc mouseDeltaY* (game: CoralGame): float=return game.input.mouse_y - game.input.last_mouse_y
+proc mouseDeltaPos* (game: CoralGame): (float, float)=
+    return (
+        mouseDeltaX(game),
+        mouseDeltaY(game)
+    )
 
 proc getKeyInRange(key: cint): int=
     if key > (1 shl 30):
@@ -426,6 +430,8 @@ proc run* (game: CoralGame)=
         var x, y: cint
         discard sdl.getMouseState(addr(x), addr(y))
 
+        game.input.last_mouse_x = game.input.mouse_x
+        game.input.last_mouse_y = game.input.mouse_y
         game.input.mouse_x = x.float
         game.input.mouse_y = y.float
 

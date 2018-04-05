@@ -10,8 +10,6 @@ Coral.update = proc()=
     if Coral.isKeyReleased sdl.K_Left:
         echo "LEFT! Released"
 
-    echo Coral.mousePos
-
 Coral.createGame(
     11 * (32 + 8), 
     720, 
