@@ -31,12 +31,13 @@ Coral.load = proc()=
     glBindVertexArray(0)
 
 Coral.update = proc()=
-    if Coral.IsGamepadConnected:
-        echo "GAMEPAD!"
+    # if Coral.IsGamepadConnected:
+    #     echo "GAMEPAD!"
+    discard
 
 
 Coral.render = proc()=
-    Coral.windowTitle = $Coral.clock.averageFps
+    # Coral.windowTitle = $Coral.clock.averageFps
     Coral.r2d.drawTiledMap(map, White)
 
     glBindVertexArray(vao)

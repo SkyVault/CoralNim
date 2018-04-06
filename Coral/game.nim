@@ -15,7 +15,9 @@ import
 
 include input
 
-const NUM_KEYCODES = 512
+# const NUM_KEYCODES = 512
+const NUM_AVERAGE_FPS_SAMPLES = 100
+const DEFUALT_NUMBER_OF_CONTROLLERS = 4
 
 type
     CoralTimerState* {.pure.}= enum
@@ -49,15 +51,13 @@ type
         mouse_x, mouse_y: float64
         last_mouse_x, last_mouse_y: float
 
-        the_first: bool
-        the_block: bool
-
-        last_mouse_left_state, curr_mouse_left_state: bool
-        last_mouse_right_state, curr_mouse_right_state: bool
+        last_number_of_controllers: int
 
         mouse_left, mouse_right: CoralMouseState
 
         keyMap: Table[int, CoralKeyState]
+
+        controllers: seq[sdl.GameController]
 
         # gamepadState: Table[cint, ]
 
@@ -87,8 +87,6 @@ type
         destroy*:proc()
 
 proc newCoralGame()
-
-const NUM_AVERAGE_FPS_SAMPLES = 100
 
 # CLOCK API
 proc timer*         (c: CoralClock): float {.inline.} = c.timer
@@ -171,12 +169,14 @@ proc newCoralGame()=
         input: CoralInputManager(
             mouse_x: 0, mouse_y: 0,
             last_mouse_x: 0, last_mouse_y: 0,
-            the_first: false, the_block: false,
-            last_mouse_left_state: false, curr_mouse_left_state: false,
-            last_mouse_right_state: false, curr_mouse_right_state: false,
+
+            last_number_of_controllers: 0,
+
             mouse_left: CoralMouseState(state : 0, last : 0),
             mouse_right: CoralMouseState(state : 0, last : 0),
-            keyMap: initTable[int, CoralKeyState]()
+            keyMap: initTable[int, CoralKeyState](),
+
+            controllers: newSeq[sdl.GameController]()
         ),
         audio: CoralAudioMixer(
 
@@ -190,7 +190,7 @@ proc newCoralGame()=
 
     lCoral.audio.init()
 
-    if sdl.init(sdl.InitVideo) != 0:
+    if sdl.init(sdl.InitVideo or sdl.InitJoystick) != 0:
         echo "ERROR INITIALIZING SDL2!!"
         echo "TODO: Make less shitty error messages"
         discard readLine(stdin)
@@ -436,6 +436,22 @@ proc run* (game: CoralGame)=
         game.input.mouse_x = x.float
         game.input.mouse_y = y.float
 
+        if game.input.last_number_of_controllers < sdl.numJoysticks():
+            game.input.last_number_of_controllers = sdl.numJoysticks()
+
+            if not sdl.isGameController(game.input.controllers.len):
+                echo "Unsupported controller interface"
+            else:
+                echo "Controller connected!"
+                # TODO: Attach the controller
+
+        elif game.input.last_number_of_controllers > sdl.numJoysticks():
+            echo "Controller dissconnected!"
+            game.input.last_number_of_controllers = sdl.numJoysticks()
+
+        # GetAttached -> returns if a gamecontroller is still attached, could be useful for disconnection
+         
+
         while sdl.pollEvent(addr(ev)) != 0:
             case ev.kind:
                 of sdl.Quit:
@@ -486,6 +502,9 @@ proc run* (game: CoralGame)=
                         discard
                     else:
                         discard
+
+                # of sdl.JoystickAx
+                    # echo "Wat"
                 
                 else:
                     discard

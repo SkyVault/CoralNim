@@ -1,6 +1,13 @@
 # import
 #     glfw
 
+type
+    CoralControlerNumber* {.pure.} = enum
+        One = 1,
+        Two,
+        Three,
+        Four
+
 # #[
 # GLFW_GAMEPAD_BUTTON_A   0
 # GLFW_GAMEPAD_BUTTON_B   1
