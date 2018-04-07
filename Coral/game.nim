@@ -45,7 +45,13 @@ type
         state*, last*: int
 
     # Mouse handler
-    CoralMouseState* = ref object of CoralKeyState
+    CoralMouseState*  = ref object of CoralKeyState
+    CoralButtonState* = ref object of CoralKeyState
+
+    CoralControllerState* = ref object
+        A, B, X, Y: CoralButtonState
+        Start, Select: CoralButtonState
+        LTrigger, RTrigger, LShoulder, RShoulder: CoralButtonState 
 
     CoralInputManager* = ref object
         mouse_x, mouse_y: float64
@@ -286,6 +292,9 @@ proc newKeyState(state = 0, last = 0): CoralKeyState=
 #     return 
 #         joystickPresent(which.cint) == 1
 
+proc pullControllerInfo(input: CoralInputManager)=
+    discard
+
 # proc IsButtonDown(game: CoralGame )
 
 proc mouseX* (game: CoralGame): float= return game.input.mouse_x
@@ -382,32 +391,29 @@ proc `windowSize=`*(self: CoralGame, width, height: int)=
     ## Sets the size of the window
     sdl.setWindowSize(self.window, width.cint, height.cint)
 
-# proc windowPosition* (self: CoralGame): (int, int)=
-#     ## Returns the windows position on the monitor
-#     var width, height: cint
-#     getWindowPos(self.window, addr width, addr height)
-#     return (width.int, height.int)
+proc windowPosition* (self: CoralGame): (int, int)=
+    ## Returns the windows position on the monitor
+    var width, height: cint
+    sdl.getWindowPosition(self.window, addr width, addr height)
+    return (width.int, height.int)
 
-# proc `windowPosition=`* (self: CoralGame, x, y: int) =
-#     setWindowPos(self.window, x.cint, y.cint)
+proc `windowPosition=`* (self: CoralGame, pos: (int, int)) =
+    sdl.setWindowPosition(self.window, pos[0].cint, pos[1].cint)
 
-# proc windowTitle* (self: CoralGame): string=
-#     return self.title 
+proc windowTitle* (self: CoralGame): string=
+    let title = sdl.getWindowTitle(self.window)
+    return $title
 
-# proc `windowTitle=`* (self: CoralGame, title: string)=
-#     self.title = title
-#     setWindowTitle(self.window, title.cstring)
+proc `windowTitle=`* (self: CoralGame, title: string)=
+    sdl.setWindowTitle(self.window, title.cstring)
 
-# proc windowVisible* (self: CoralGame): bool =
-#     return
-#         if getWindowAttrib(self.window, VISIBLE) == 0:
-#             false
-#         else:
-#             true
-    
-# proc `windowVisible=`* (self: CoralGame, visible: bool) =
-#     if visible: hideWindow(self.window)
-#     else: showWindow(self.window)
+proc windowVisible* (self: CoralGame): bool =
+    let flags = sdl.getWindowFlags(self.window)
+    return (flags and sdl.WINDOW_SHOWN) == 1
+
+proc `windowVisible=`* (self: CoralGame, visible: bool) =
+    if visible: sdl.hideWindow(self.window)
+    else: sdl.showWindow(self.window)
 
 ## Main gameloop
 proc run* (game: CoralGame)=
@@ -439,17 +445,22 @@ proc run* (game: CoralGame)=
         if game.input.last_number_of_controllers < sdl.numJoysticks():
             game.input.last_number_of_controllers = sdl.numJoysticks()
 
-            if not sdl.isGameController(game.input.controllers.len):
+            let index = game.input.controllers.len
+            if not sdl.isGameController(index):
                 echo "Unsupported controller interface"
             else:
-                echo "Controller connected!"
+                echo "Controller ", index, " connected!"
                 # TODO: Attach the controller
+                game.input.controllers.add(sdl.gameControllerOpen(index))
 
         elif game.input.last_number_of_controllers > sdl.numJoysticks():
             echo "Controller dissconnected!"
             game.input.last_number_of_controllers = sdl.numJoysticks()
 
         # GetAttached -> returns if a gamecontroller is still attached, could be useful for disconnection
+
+        for c in game.input.controllers:
+            echo sdl.gameControllerGetAttached(c)
          
 
         while sdl.pollEvent(addr(ev)) != 0:

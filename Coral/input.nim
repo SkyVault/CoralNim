@@ -1,12 +1,36 @@
 # import
 #     glfw
 
+import 
+    sdl2/sdl
+
 type
     CoralControlerNumber* {.pure.} = enum
         One = 1,
         Two,
         Three,
         Four
+
+    CoralControllerButtons* {.pure.} = enum
+        A                   = sdl.CONTROLLER_BUTTON_A, 
+        B                   = sdl.CONTROLLER_BUTTON_B,
+        X                   = sdl.CONTROLLER_BUTTON_X, 
+        Y                   = sdl.CONTROLLER_BUTTON_Y,
+        Back                = sdl.CONTROLLER_BUTTON_BACK,
+        Guide               = sdl.CONTROLLER_BUTTON_GUIDE,
+        Start               = sdl.CONTROLLER_BUTTON_START, 
+        LeftStick           = sdl.CONTROLLER_BUTTON_LEFTSTICK,    
+        RightStick          = sdl.CONTROLLER_BUTTON_RIGHTSTICK,
+        LeftShoulder        = sdl.CONTROLLER_BUTTON_LEFTSHOULDER, 
+        RightShoulder       = sdl.CONTROLLER_BUTTON_RIGHTSHOULDER,
+        DpadUp              = sdl.CONTROLLER_BUTTON_DPAD_UP,      
+        DpadDown            = sdl.CONTROLLER_BUTTON_DPAD_DOWN,
+        DpadLeft            = sdl.CONTROLLER_BUTTON_DPAD_LEFT,    
+        DpadRight           = sdl.CONTROLLER_BUTTON_DPAD_RIGHT,
+        Max                 = sdl.CONTROLLER_BUTTON_MAX,
+        Invalid             = sdl.CONTROLLER_BUTTON_INVALID
+
+
 
 # #[
 # GLFW_GAMEPAD_BUTTON_A   0

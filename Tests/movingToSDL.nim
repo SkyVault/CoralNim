@@ -4,7 +4,16 @@ import
     ../Coral/graphics,
     ../Coral/gameMath,
     sdl2/sdl,
+    math,
     os
+
+var image: Image
+Coral.load = proc()=
+    image = CoralLoadImage(getCurrentDir() & "/Tests/wat.png")
+
+    Coral.clock.addTimer(1000, callback = proc()=
+        echo "hello"
+    )
 
 Coral.update = proc()=
     # echo Coral.windowSize
@@ -26,17 +35,11 @@ Coral.update = proc()=
     if Coral.isMouseLeftPressed:
         echo "left mouse pressed"
 
-var image: Image
-Coral.load = proc()=
-    image = CoralLoadImage(getCurrentDir() & "/Tests/wat.png")
-# proc addTimer* (clock: CoralClock, milliseconds: float, repeat = 0, callback: proc(): void): CoralTimer{.discardable.}=
-
-    Coral.clock.addTimer(1000, callback = proc()=
-        echo "hello"
-    )
+    # Coral.windowPosition = (((math.cos(Coral.clock.timer) * 200.0) + 200).int, Coral.windowPosition[1])
 
 Coral.render = proc()=
     Coral.r2d.setBackgroundColor(P8Peach)
+    Coral.windowTitle = "Hello my mellow fellow"
     Coral.r2d.drawImage(
         image,
         10.0, 10.0, 300.0, 250.0,
