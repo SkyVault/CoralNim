@@ -4,6 +4,7 @@ import
     ../../Coral/renderer,
     ../../Coral/tiled,
     os,
+    sdl2/sdl,
     opengl
 
 var map: TiledMap
@@ -15,9 +16,9 @@ Coral.load = proc()=
     map = loadTiledMap getCurrentDir() & "/assets/map1.tmx"
 
     var vertices: array[9, GLfloat] = [
-        -1.0.GLfloat, -1.0, 0.0,
-        1.0, -1.0, 0.0,
-        0.0,  1.0, 0.0,
+        0.0.GLfloat, -1.0, 0.0,
+        -1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0
     ]
 
     glGenVertexArrays(1, addr vao)
@@ -31,13 +32,11 @@ Coral.load = proc()=
     glBindVertexArray(0)
 
 Coral.update = proc()=
-    # if Coral.IsGamepadConnected:
-    #     echo "GAMEPAD!"
-    discard
-
+    if Coral.isKeyPressed sdl.K_Escape:
+        Coral.quit()
 
 Coral.render = proc()=
-    # Coral.windowTitle = $Coral.clock.averageFps
+    Coral.windowTitle = $Coral.clock.averageFps
     Coral.r2d.drawTiledMap(map, White)
 
     glBindVertexArray(vao)
@@ -56,5 +55,5 @@ Coral.render = proc()=
     glDrawArrays(GL_TRIANGLES, 0, 3)
     glBindVertexArray(0)
 
-Coral.createGame(1280, 720, "Hello World", config())
+Coral.createGame(720, 720, "Hello World", config(resizable = true))
     .run()
