@@ -4,7 +4,6 @@ import
     ../../Coral/renderer,
     ../../Coral/tiled,
     os,
-    sdl2/sdl,
     opengl
 
 var map: TiledMap
@@ -32,7 +31,7 @@ Coral.load = proc()=
     glBindVertexArray(0)
 
 Coral.update = proc()=
-    if Coral.isKeyPressed sdl.K_Escape:
+    if Coral.isKeyPressed CoralKey.Escape:
         Coral.quit()
 
 Coral.render = proc()=
