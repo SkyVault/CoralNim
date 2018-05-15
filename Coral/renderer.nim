@@ -14,7 +14,7 @@ include shaders
 #[
     The renderer does support batching the sprites and instancing them, several problems arise
     when I do this though, on of which is that I cant do primitives like I would want. Second
-    the batch isnt as fast as I imagined. Finally, with batching you cant play with different 
+    the batch isn't as fast as I imagined. Finally, with batching you cant play with different 
     blend modes. So in the end, unless I want something very complex, its not going to work for
     now.
 ]#
@@ -80,7 +80,6 @@ type
         Alpha,
         Additive
 
-    # image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5
     Drawable* = ref object of RootObj
       image: Image
       region: Region
@@ -317,20 +316,6 @@ proc drawSprite* (self: R2D, image: Image, region: Region, x, y, width, height: 
     if not self.drawables.hasKey id:
       self.drawables.add(id, newSeq[Drawable]())
 
-    # if self.drawable_counter < self.drawables[image.getID()].len() - 1:
-    #     var drawable = self.drawables[image.getID()][self.drawable_counter]
-    #     drawable.image      = image
-    #     drawable.region     = region
-    #     drawable.position   = position 
-    #     drawable.size       = size 
-    #     drawable.rotation   = rotation 
-    #     drawable.diffuse    = color
-    #     drawable.layer      = layer 
-    # else:
-    #     self.drawables[image.getID()].add(
-    #         newDrawable(image, region, position, size, rotation, color, layer)
-    #     )
-
     self.drawables[id].add(
         newDrawable(image, region, x, y, width, height, rotation, color, layer + self.layer_adder)
     )
@@ -366,57 +351,6 @@ proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color
 
 proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
     self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
-
-# proc drawTriangle* (self: R2D)=
-# proc drawTiledMap* (self: R2D, map: TiledMap, scale: float32 = 1.0)=
-#     let image = map.image
-#     bindImage(image)
-#     glUniform4f(self.diffuse_location, 1.0, 1.0, 1.0, 1.0)
-#     glUniform1i(self.has_texture_location, 1)
-#     glUniform2f(self.size_location, (float32)(map.tilewidth) * scale, (float32)(map.tileheight) * scale)
-#     glUniform1f(self.rotation_location, 0.0)
-#     glUniform1f(self.depth_location, 0.0)
-
-#     var 
-#         tw = float32(image.width)
-#         th = float32(image.height)
-
-#     for layer in map.layers:
-#         # @Important
-#         # Quick fix, need to look into why the object layer is
-#         # getting added to the tile layers sequence?
-#         if layer.data.len <= 0: continue 
-#         for y in 0.. < map.height:
-#             for x in 0.. < map.width:
-#                 let tid = layer.data[x + y * map.width]
-#                 if tid != 0:
-#                     let id = tid - 1
-#                     let region = map.quads[id]
-
-#                     var
-#                         rx = float32(region.x)
-#                         ry = th - float32(region.y) - float32(region.h)
-#                         qx = (rx / tw)
-#                         qy = (ry / th)
-#                         qw = (float32(region.w) / tw)
-#                         qh = (float32(region.h) / th)
-
-#                     glUniform4f(self.quad_location,
-#                         qx,
-#                         qy,
-#                         qw,
-#                         qh)
-
-#                     glUniform2f(
-#                       self.position_location,
-#                       (float32)(x * map.tilewidth) * scale,
-#                       (float32)(y * map.tileheight) * scale
-#                     )
-
-#                     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
-
-
-#     unBindImage()
 
 proc drawString* (r2d: R2D, font: SpriteFont, text: string, x, y: float, scale = 1.0, color = White())=
   var

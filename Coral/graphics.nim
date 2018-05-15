@@ -167,10 +167,10 @@ proc hexColorToColor* (hex: string): Color=
 
 # Opengl Wrapper stuff
 proc getGLenumArrayType(t: BufferType): GLenum=
-    result = 
+    result =
         case(t):
         of VERTEX_BUFFER: GL_ARRAY_BUFFER
-        of ELEMENT_BUFFER: GL_ELEMENT_ARRAY_BUFFER 
+        of ELEMENT_BUFFER: GL_ELEMENT_ARRAY_BUFFER
         else: GL_ARRAY_BUFFER
 
 proc newVao* (shouldBind = false): GLuint=
