@@ -1,0 +1,40 @@
+
+Platformer/main.nim,107
+Coral.load = proc()=load14,186
+Coral.update = proc()=update33,680
+Coral.render = proc()=render37,768
+
+Platformer/test.nim,0
+
+Platformer/test.c,0
+
+breakout.nim,497
+proc absf(v: float): float=absf25,440
+method update(self: Entity){.base.} = discardupdate29,512
+method collision(self: Entity, other: Entity){.base.} = discardcollision30,558
+proc updatePhysics(self: Entity)=updatePhysics32,623
+method update(self: Paddle)=update39,864
+method update(self: Ball)=update48,1061
+method collision(self: Ball, other: Entity)=collision61,1473
+Coral.load = proc()=load70,1691
+Coral.update = proc()=update121,3115
+Coral.render = proc()= render147,3952
+
+movingToSDL.nim,173
+Coral.load = proc()=load11,145
+    Coral.clock.addTimer(1000, callback = proc()=callback14,230
+Coral.update = proc()=update18,308
+Coral.render = proc()=render40,884
+
+test.nim,59
+    load = proc(s: CoralSystem, e: CoralEntity)=load8,97
+
+window.nim,0
+
+benchmarking.nim,70
+Coral.load = proc()=load13,177
+Coral.render = proc()=render16,255
+
+alphablending.nim,70
+Coral.load = proc()=load14,190
+Coral.render = proc()=render19,304

@@ -349,7 +349,7 @@ proc isMouseRightReleased* (game: CoralGame): bool =
         game.input.mouse_right.state == 0 and
         game.input.mouse_right.last == 1
 
-proc isKeyDown* (game: CoralGame, key: Keycode): bool =
+proc isKeyDown* (game: CoralGame, key: CoralKey): bool =
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
         return false
@@ -357,26 +357,26 @@ proc isKeyDown* (game: CoralGame, key: Keycode): bool =
         return
             game.input.keyMap[ckey].state == 1
 
-proc isKeyUp* (game: CoralGame, key: Keycode): bool =
+proc isKeyUp* (game: CoralGame, key: CoralKey): bool =
     return not isKeyDown(game, key)
 
-proc isKeyReleased* (game: CoralGame, key: Keycode): bool=
+proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
         return false
     else:
         let state = game.input.keyMap[ckey]
-        result =  
+        result =
             state.state == 0 and 
             state.last  == 1
 
-proc isKeyPressed* (game: CoralGame, key: Keycode): bool=
+proc isKeyPressed* (game: CoralGame, key: CoralKey): bool=
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
         return false
     else:
         let state = game.input.keyMap[ckey]
-        result =  
+        result =
             state.state == 1 and 
             state.last  == 0
 
@@ -425,8 +425,6 @@ proc run* (game: CoralGame)=
     var ev: sdl.Event
 
     while game.running:
-        # echo cast[int](Keycode.K_Left) - 0x40000000
-
         for key, state in game.input.keyMap.mpairs:
             state.last = state.state
 

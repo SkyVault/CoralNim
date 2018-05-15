@@ -3,6 +3,7 @@ import
     opengl,
     tables,
     gameMath as NimMath,
+    assets,
     math,
     strutils,
     algorithm

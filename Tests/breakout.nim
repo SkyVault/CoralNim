@@ -67,7 +67,7 @@ method collision(self: Ball, other: Entity)=
         other.delete = true
         self.velocity.y *= -1
 
-Coral.load = proc()= 
+Coral.load = proc()=
     const MARGIN = 8
 
     let ball_vel_x = random(100.0) - 200.0
@@ -76,7 +76,7 @@ Coral.load = proc()=
     entities.add(
         Ball(
             position: newV2(
-                Coral.windowSize[0].float / 2.0 - 16.0 / 2.0, 
+                Coral.windowSize[0].float / 2.0 - 16.0 / 2.0,
                 Coral.windowSize[1].float / 2.0 - 16.0 / 2.0
             ),
             friction: 1.0,
@@ -118,7 +118,7 @@ Coral.load = proc()=
                 )
             )
 
-Coral.update = proc()= 
+Coral.update = proc()=
     Coral.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $Coral.clock.averageFps
 
     if Coral.isKeyReleased CoralKey.Escape:

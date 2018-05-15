@@ -19,7 +19,7 @@ proc add* (a: CoralAssetManager, id: string, regions: seq[Region]): seq[Region]{
     a.regions.add(id, regions)
 
 proc add* (a: CoralAssetManager, id: string, audio: Audio): Audio{.discardable.}=
-    result = audio 
+    result = audio
     a.audio.add(id, audio)
 
 proc getImage* (a: CoralAssetManager, id: string): Image=

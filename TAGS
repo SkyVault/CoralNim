@@ -1,0 +1,643 @@
+
+Tests/Platformer/main.nim,107
+Coral.load = proc()=load14,186
+Coral.update = proc()=update33,680
+Coral.render = proc()=render37,768
+
+Tests/Platformer/test.nim,0
+
+Tests/Platformer/test.c,0
+
+Tests/breakout.nim,497
+proc absf(v: float): float=absf25,440
+method update(self: Entity){.base.} = discardupdate29,512
+method collision(self: Entity, other: Entity){.base.} = discardcollision30,558
+proc updatePhysics(self: Entity)=updatePhysics32,623
+method update(self: Paddle)=update39,864
+method update(self: Ball)=update48,1061
+method collision(self: Ball, other: Entity)=collision61,1473
+Coral.load = proc()=load70,1691
+Coral.update = proc()=update121,3115
+Coral.render = proc()= render147,3952
+
+Tests/movingToSDL.nim,173
+Coral.load = proc()=load11,145
+    Coral.clock.addTimer(1000, callback = proc()=callback14,230
+Coral.update = proc()=update18,308
+Coral.render = proc()=render40,884
+
+Tests/test.nim,59
+    load = proc(s: CoralSystem, e: CoralEntity)=load8,97
+
+Tests/window.nim,0
+
+Tests/benchmarking.nim,70
+Coral.load = proc()=load13,177
+Coral.render = proc()=render16,255
+
+Tests/alphablending.nim,70
+Coral.load = proc()=load14,190
+Coral.render = proc()=render19,304
+
+Tools/gendocs.py,487
+from os import listdirlistdir1,0
+from os.path import isfile, join, realpath, dirnameisfile2,23
+from os.path import isfile, join, realpath, dirnamejoin2,23
+from os.path import isfile, join, realpath, dirnamerealpath2,23
+from os.path import isfile, join, realpath, dirnamedirname2,23
+from subprocess import callcall3,75
+SOURCE_DIR = dirname(realpath(__file__)) + "/../Coral/"SOURCE_DIR5,104
+files = [f for f in listdir(SOURCE_DIR) if isfile(join(SOURCE_DIR, f))]files8,179
+
+Coral/renderer.nim,2918
+    BufferTypes* = enumBufferTypes22,553
+proc getGLBufferType(bttype: BufferTypes): GLenum=getGLBufferType26,635
+proc makeVao* (should_bind = true): uint32=makeVao33,854
+proc makeVbo* (buffer_type: BufferTypes, dimensions: uint32, attrib: uint32, buffer: var seq[float32], dynamic = false): uint32=makeVbo38,1002
+# proc newTileMapDrawable* (map: TiledMap): TileMapDrawable=newTileMapDrawable155,4126
+proc newDrawable* (image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5): Drawable=newDrawable165,4408
+proc newR2D* (draw_instanced = true):R2d =newR2D175,4721
+proc view* (self: R2D): auto= return self.view_matrixview246,7490
+proc `view=`* (self: R2D, view: M2)=view=247,7544
+proc `view=`* (self: R2D, camera: Camera2D)=view=250,7610
+proc `viewport=`* (self: R2D, view: (int, int))=viewport=253,7691
+proc viewport* (self: R2D): (int, int)=viewport256,7766
+proc `rotationMode=`* (self: R2D, mode: CoralRotationMode)=rotationMode=259,7832
+proc rotationMode* (self: R2D): auto=rotationMode262,7923
+proc setBackgroundColor*(self: R2D, color: Color)=setBackgroundColor265,7992
+proc getBackgroundColor*(self: R2D): auto= return self.clear_colorgetBackgroundColor268,8073
+proc clear* (self: R2D)=clear270,8141
+proc begin* (self: R2D, size: (int, int))=begin279,8365
+proc setLineWidth* (width = 1.0)=setLineWidth307,9208
+proc drawSprite* (self: R2D, image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5)drawSprite310,9264
+proc drawSprite* (self: R2D, image: Image, region: Region, position: V2, size: V2, rotation: float, color: Color, layer = 0.5)=drawSprite311,9395
+proc drawSprite* (self: R2D, image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5)=drawSprite314,9660
+proc drawImage*(self: R2D, image: Image, x, y, width, height: float, rotation: float = 0, color: Color, layer = 0.5)=drawImage340,10677
+proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color, layer = 0.5)=drawImage343,10917
+proc drawRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=drawRect346,11144
+proc drawRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=drawRect354,11424
+proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color: Color, layer = 1.0)=drawLineRect357,11602
+proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=drawLineRect366,11891
+# proc drawTriangle* (self: R2D)=drawTriangle369,12077
+# proc drawTiledMap* (self: R2D, map: TiledMap, scale: float32 = 1.0)=drawTiledMap370,12111
+proc drawString* (r2d: R2D, font: SpriteFont, text: string, x, y: float, scale = 1.0, color = White())=drawString420,13950
+proc flush*(self: R2D)=flush464,14983
+
+Coral/gameMath.nim,6339
+    M4Arr = objectM4Arr13,181
+    M4* = object {.union.}M419,361
+    M3Arr = objectM3Arr23,440
+    M3* = object {.union.}M328,562
+    M2Arr = objectM2Arr32,640
+    M2* = object {.union.}M236,716
+proc newV3* (x: float = 0, y: float = 0, z: float = 0): V3=newV344,885
+proc V3Up*     (): V3 = V3Up47,971
+proc V3Right*  (): V3 =     V3Right51,1080
+proc V3Left*   (): V3 = V3Left54,1129
+proc V3One*    (): V3 = V3One57,1175
+proc `+`* (a: V3, b: V3): V3= newV3(a.x + b.x, a.y + b.y, a.z + b.z)+60,1220
+proc `-`* (a: V3, b: V3): V3= newV3(a.x - b.x, a.y - b.y, a.z - b.z)-61,1289
+proc `*`* (a: V3, b: V3): V3= newV3(a.x * b.x, a.y * b.y, a.z * b.z)*62,1358
+proc `/`* (a: V3, b: V3): V3= newV3(a.x / b.x, a.y / b.y, a.z / b.z)/63,1427
+proc `+`* (a: V3, b: float32): V3= newV3(a.x + b, a.y + b, a.z + b)+64,1496
+proc `-`* (a: V3, b: float32): V3= newV3(a.x - b, a.y - b, a.z - b)-65,1564
+proc `*`* (a: V3, b: float32): V3= newV3(a.x * b, a.y * b, a.z * b)*66,1632
+proc `/`* (a: V3, b: float32): V3= newV3(a.x / b, a.y / b, a.z / b)/67,1700
+proc `+=`* (a: V3, b: V3)= a.x += b.x; a.y += b.y; a.z += b.z+=69,1769
+proc `-=`* (a: V3, b: V3)= a.x -= b.x; a.y -= b.y; a.z -= b.z-=70,1831
+proc `*=`* (a: V3, b: V3)= a.x *= b.x; a.y *= b.y; a.z *= b.z*=71,1893
+proc `/=`* (a: V3, b: V3)= a.x /= b.x; a.y /= b.y; a.z /= b.z/=72,1955
+proc `+=`* (a: V3, b: float32)= a.x += b; a.y += b; a.z += b+=73,2017
+proc `-=`* (a: V3, b: float32)= a.x -= b; a.y -= b; a.z -= b-=74,2078
+proc `*=`* (a: V3, b: float32)= a.x *= b; a.y *= b; a.z *= b*=75,2139
+proc `/=`* (a: V3, b: float32)= a.x /= b; a.y /= b; a.z /= b/=76,2200
+proc `-`* (v: V3): V3 = v * -1-77,2261
+proc `==`* (a: V3, b: V3): bool===79,2293
+proc move* (a: V3, by: V3)=move82,2379
+proc length* (a: V3): float32=length85,2451
+proc normalize* (v: V3): V3 =normalize88,2533
+proc dot* (a: V3, b: V3): float32=dot93,2683
+proc cross* (a: V3, b: V3): V3 =cross96,2770
+proc angleBetween* (a: V3, b: V3): float32=angleBetween103,2913
+proc newV2* (x: float = 0, y: float = 0): V2=newV2107,3020
+proc newV2* [T](x: T= 0, y: T= 0): V2=newV2110,3086
+proc toV3*     (v: V2): V3 = newV3(v.x, v.y, 0)toV3113,3163
+proc V2Up*     (): V2 = newV2(0, 1)V2Up114,3211
+proc V2Right*  (): V2 = newV2(1, 0)V2Right115,3247
+proc V2Left*   (): V2 = newV2(-1, 0)V2Left116,3283
+proc V2One*    (): V2 = newV2(1, 1)V2One117,3320
+proc `+`* (a: V2, b: V2): V2= newV2(a.x + b.x, a.y + b.y)+119,3357
+proc `-`* (a: V2, b: V2): V2= newV2(a.x - b.x, a.y - b.y)-120,3415
+proc `*`* (a: V2, b: V2): V2= newV2(a.x * b.x, a.y * b.y)*121,3473
+proc `/`* (a: V2, b: V2): V2= newV2(a.x / b.x, a.y / b.y)/122,3531
+proc `+`* (a: V2, b: float32): V2= newV2(a.x + b, a.y + b)+123,3589
+proc `-`* (a: V2, b: float32): V2= newV2(a.x - b, a.y - b)-124,3648
+proc `*`* (a: V2, b: float32): V2= newV2(a.x * b, a.y * b)*125,3707
+proc `/`* (a: V2, b: float32): V2= newV2(a.x / b, a.y / b)/126,3766
+proc `+=`* (a: V2, b: V2)= a.x += b.x; a.y += b.y+=128,3826
+proc `-=`* (a: V2, b: V2)= a.x -= b.x; a.y -= b.y-=129,3876
+proc `*=`* (a: V2, b: V2)= a.x *= b.x; a.y *= b.y*=130,3926
+proc `/=`* (a: V2, b: V2)= a.x /= b.x; a.y /= b.y/=131,3976
+proc `+=`* (a: V2, b: float32)= a.x += b; a.y += b+=132,4026
+proc `-=`* (a: V2, b: float32)= a.x -= b; a.y -= b-=133,4077
+proc `*=`* (a: V2, b: float32)= a.x *= b; a.y *= b*=134,4128
+proc `/=`* (a: V2, b: float32)= a.x /= b; a.y /= b/=135,4179
+proc `-`* (v: V2): V2 = v * -1-137,4231
+proc `==`* (a: V2, b: V2): bool===138,4262
+proc nMove* (a: V2, by: V2)=nMove141,4333
+proc length* (a: V2): float32=length144,4392
+proc normalize* (v: V2): V2 =normalize147,4460
+proc dot* (a: V2, b: V2): float32=dot152,4596
+proc cross* (a: V2, b: V2): float32 = a.x * b.y - a.y * b.xcross155,4669
+proc angleBetween* (a: V2, b: V2): float32=angleBetween157,4730
+proc rotate* (a: V2, rad: float32)=rotate160,4832
+proc newM4* (): M4=newM4166,4973
+proc newM4* (newM4176,5211
+proc identity* (): M4=identity191,5586
+proc translation* (x: float32, y: float32, z: float32): M4=translation199,5770
+proc translation* (off: V3): M4=translation207,5927
+proc translation* (off: V2): M4=translation210,5998
+proc scale* (x: float32, y: float32, z: float32): M4=scale213,6067
+proc scale* (scale: V3): M4= scale(scale.x, scale.y, scale.z)scale221,6218
+proc rotX* (rad: float32): M4=rotX223,6281
+proc rotY* (rad: float32): M4=rotY232,6449
+proc rotZ* (rad: float32): M4=rotZ241,6617
+proc transpose* (m: M4): M4=transpose250,6785
+proc ortho* (ll: float32, r: float32, b: float32, t: float32, n: float32, f: float32): M4=ortho258,7007
+proc perspective* (fov: float32, ar: float32, nd: float32, fd: float32): M4=perspective270,7335
+proc lookAt* (fr: V3, to: V3, up: V3): M4=lookAt280,7633
+proc mul* (a: M4, b: M4): M4=mul291,7928
+proc transform* (pos: V3, rot: V3, scale: V3): M4=transform299,8150
+proc transform* (pos: V2, rot: float, scale: V2): M4=transform308,8474
+proc newM3* (): M3=newM3316,8748
+proc newM3* (newM3325,8919
+proc identityM3* (): M3=identityM3338,9174
+proc translationM3* (x: float32, y: float32, z: float32): M3=translationM3345,9303
+proc translationM3* (off: V3): M3=translationM3352,9434
+proc scaleM3* (x: float32, y: float32, z: float32): M3=scaleM3355,9509
+proc scaleM3* (scale: V3): M3= scaleM3(scale.x, scale.y, scale.z)scaleM3362,9633
+proc rotXM3* (rad: float32): M3=rotXM3364,9700
+proc rotYM3* (rad: float32): M3=rotYM3372,9842
+proc rotZM3* (rad: float32): M3=rotZM3380,9984
+proc transposeM3* (m: M3): M3=transposeM3388,10126
+proc newM2* (m00, m01, m10, m11: float): M2=newM2395,10279
+proc translation* (x, y: float): M2=translation400,10396
+proc scale* (x, y: float): M2=scale406,10478
+proc rot* (rot: float): M2=rot412,10554
+proc mul* (a: M2, b: M2): M2=mul420,10670
+proc lerp* (a, b, t: float): float=lerp437,10986
+proc lerpPercent* (a, b, t:float): float=lerpPercent440,11050
+proc lerp* (a, b: V2, t: float): V2=lerp443,11124
+proc lerpPercent* (a, b: V2, t:float): V2=lerpPercent447,11228
+proc lerp* (a, b: V3, t: float): V3=lerp451,11352
+proc lerpPercent* (a, b: V3, t:float): V3=lerpPercent456,11489
+proc `$`* (m: M4): string =$461,11653
+proc `$`* (v: V3): string =$468,12032
+proc `$`* (v: V2): string =$471,12123
+
+Coral/audio.nim,1263
+proc playbackPosition* (audio: Audio): floatplaybackPosition15,202
+proc `playbackPosition=`* (audio: Audio, val: float)playbackPosition=16,247
+proc init* (audio: CoralAudioMixer)=init18,301
+proc destroy* (mixer: CoralAudioMixer)=destroy21,368
+proc loadAudio* (mixer: CoralAudioMixer, path: string) : Audio=loadAudio24,432
+proc play* (audio: Audio)=play28,585
+proc stop* (audio: Audio)=stop32,672
+proc destroy* (audio: Audio)=destroy36,759
+proc playing* (audio: Audio): bool=playing39,816
+proc `volume=`* (audio: Audio, v: float)=volume=43,919
+proc volume* (audio: Audio): auto = audio.sound.gainvolume46,987
+proc paused* (audio: Audio): bool=paused48,1041
+proc pause* (audio: Audio)=pause51,1107
+proc resume* (audio: Audio)=resume55,1215
+proc `paused=`* (audio: Audio, val: bool)=paused=59,1325
+proc togglePause* (audio: Audio)=togglePause63,1420
+proc looping* (audio: Audio): bool=looping66,1491
+proc `looping=`* (audio: Audio, value: bool)=looping=70,1588
+proc duration* (audio: Audio): float=duration73,1668
+proc `playing=`* (audio: Audio, value: bool)=playing=76,1739
+proc playbackPosition* (audio: Audio): float=playbackPosition83,1915
+proc `playbackPosition=`* (audio: Audio, val: float)=playbackPosition=86,2006
+
+Coral/assets.nim,768
+proc add* (a: CoralAssetManager, id: string, image: Image): Image{.discardable.}=add13,237
+proc add* (a: CoralAssetManager, id: string, regions: seq[Region]): seq[Region]{.discardable.}=add17,367
+proc add* (a: CoralAssetManager, id: string, audio: Audio): Audio{.discardable.}=add21,516
+proc getImage* (a: CoralAssetManager, id: string): Image=getImage25,646
+proc getAudio* (a: CoralAssetManager, id: string): Audio=getAudio28,733
+proc getRegions* (a: CoralAssetManager, id: string): seq[Region]=getRegions31,815
+proc imageExists* (a: CoralAssetManager, id: string): bool=imageExists34,907
+proc audioExists* (a: CoralAssetManager, id: string): bool=audioExists37,1002
+proc regionsExists* (a: CoralAssetManager, id: string): bool=regionsExists40,1092
+
+Coral/sound/sound.nim,0
+
+Coral/sound/private/openal.nim,1664
+proc alGenBuffers*(n: ALsizei, buffers: ptr ALuint) {.alimport.}alGenBuffers51,1763
+proc alGenSources*(n: ALsizei, sources: ptr ALuint) {.alimport.}alGenSources52,1828
+proc alSourcei*(sid: ALuint, param: ALenum, value: ALint) {.alimport.}alSourcei54,1894
+proc alSourcef*(sid: ALuint, param: ALenum, value: ALfloat) {.alimport.}alSourcef55,1965
+proc alSourcefv* (sid: ALuint, param: ALenum, value: array[3, ALfloat]) {.alimport.}alSourcefv56,2038
+proc alGetSourcef*(sid: ALuint, param: ALenum, value: ptr ALfloat) {.alimport.}alGetSourcef58,2124
+proc alGetSourcei*(sid: ALuint, param: ALenum, value: ptr ALint) {.alimport.}alGetSourcei59,2204
+proc alSourcePlay*(sid: ALuint) {.alimport.}alSourcePlay61,2283
+proc alSourceStop*(sid: ALuint) {.alimport.}alSourceStop62,2328
+proc alSourcePause* (sid: ALuint) {.alimport.}alSourcePause63,2373
+proc alGetBufferi*(bid: ALuint, param: ALenum, value: ptr ALint) {.alimport.}alGetBufferi65,2421
+proc alBufferData*(bid: ALuint, format: ALenum, data: pointer, size: ALsizei, freq: ALsizei) {.alimport.}alBufferData67,2500
+proc alListenerfv*(param: ALenum, values: ptr ALfloat) {.alimport.}alListenerfv68,2606
+proc alDeleteSources*(n: ALsizei, sources: ptr ALuint) {.alimport.}alDeleteSources70,2675
+proc alDeleteBuffers*(n: ALsizei, buffers: ptr ALuint) {.alimport.}alDeleteBuffers71,2743
+proc alcOpenDevice*(devicename: cstring): ALCdevice {.alcimport.}alcOpenDevice87,3046
+proc alcCreateContext*(device: ALCdevice, attrlist: ptr ALCint): ALCcontext {.alcimport.}alcCreateContext88,3112
+proc alcMakeContextCurrent*(context: ALCcontext): ALCboolean {.alcimport.}alcMakeContextCurrent90,3203
+
+Coral/sound/private/sound_js.nim,2865
+proc newAudioContext(): AudioContext {.jsimportgWithName: "function(){AudioContext = (window.AudioContext || window.webkitAudioContext || null); return (AudioContext)?(new AudioContext):null;}".}newAudioContext14,342
+proc createGain(a: AudioContext): GainNode {.jsimport.}createGain16,539
+proc createBufferSource(a: AudioContext): AudioBufferSourceNode {.jsimport.}createBufferSource17,595
+proc decodeAudioData(a: AudioContext, ab: JSObj, handler: proc(b: AudioBuffer), onErr: proc(b: JSObj)) {.jsimport.}decodeAudioData18,672
+proc connect(n1, n2: AudioNode) {.jsimport.}connect20,789
+proc disconnect(n1: AudioNode) {.jsimport.}disconnect21,834
+proc destination(a: AudioContext): AudioNode {.jsimportProp.}destination23,879
+proc buffer(n: AudioBufferSourceNode): AudioBuffer {.jsimportProp.}buffer25,942
+proc loop(n: AudioBufferSourceNode): bool {.jsimportProp.}loop26,1010
+proc `buffer=`(n: AudioBufferSourceNode, b: AudioBuffer) {.jsimportProp.}buffer=27,1069
+proc `loop=`(n: AudioBufferSourceNode, b: bool) {.jsimportProp.}loop=28,1143
+proc `onended=`*(n: AudioBufferSourceNode, p: proc()) {.jsimportProp.}onended=29,1208
+proc duration(b: AudioBuffer): cfloat {.jsimportProp.}duration31,1280
+proc start(s: AudioBufferSourceNode) {.jsimport.}start33,1336
+proc stop(s: AudioBufferSourceNode) {.jsimport.}stop34,1386
+proc gain(g: GainNode): AudioParam {.jsimportProp.}gain36,1436
+proc value(g: AudioParam): cfloat {.jsimportProp.}value37,1488
+proc `value=`(g: AudioParam, v: cfloat) {.jsimportProp.}value=38,1539
+proc createContext() =createContext50,1815
+template createContextIfNeeded() =createContextIfNeeded58,2115
+proc initWithArrayBuffer(s: Sound, ab: ArrayBuffer, handler: proc() = nil) =initWithArrayBuffer62,2197
+        onSuccess = proc(b: AudioBuffer) =onSuccess74,2591
+        onError = proc(e: JSObj) =onError81,2819
+    proc nimSoundCompletionHandler(s: pointer) {.EMSCRIPTEN_KEEPALIVE.} =nimSoundCompletionHandler99,3316
+    proc finalizeSound(s: Sound) =finalizeSound104,3506
+    template newSound(): Sound =newSound107,3598
+    template newSound(): Sound =newSound112,3697
+proc newSoundWithArrayBuffer*(ab: ArrayBuffer): Sound =newSoundWithArrayBuffer117,3778
+proc newSoundWithArrayBufferAsync*(ab: ArrayBuffer, handler: proc(s: Sound)) =newSoundWithArrayBufferAsync121,3894
+proc newSoundWithURL*(url: string): Sound =newSoundWithURL126,4052
+    reqListener = proc() =reqListener134,4267
+proc setLooping*(s: Sound, flag: bool) =setLooping143,4510
+proc recreateSource(s: Sound) =recreateSource147,4608
+proc duration*(s: Sound): float =duration157,4896
+proc play*(s: Sound) =play161,5000
+proc stop*(s: Sound) =stop168,5167
+proc `gain=`*(s: Sound, v: float) =gain=173,5291
+proc gain*(s: Sound): float =gain177,5384
+proc onComplete*(s: Sound, h: proc()) =onComplete181,5476
+
+Coral/sound/private/opensl.nim,7992
+    SLObjectCallback* = proc(caller: SLObjectItf, pContext: pointer, event: uint32, res: SLresult, param: uint32, pInterface: pointer) {.cdecl.}SLObjectCallback12,241
+    SLDataSource* = objectSLDataSource30,1430
+    SLDataSink* = objectSLDataSink34,1509
+    SLPlayCallback* = proc(caller: SLPlayItf, context: pointer, event: uint32) {.cdecl.}SLPlayCallback126,7020
+    SLEngineOption* = objectSLEngineOption145,8259
+    SLDataLocator_URI* = objectSLDataLocator_URI171,9433
+    SLDataLocator_Address* = objectSLDataLocator_Address176,9626
+    SLDataLocator_IODevice* = objectSLDataLocator_IODevice184,9892
+    SLDataLocator_OutputMix* = objectSLDataLocator_OutputMix192,10164
+    SLDataLocator_BufferQueue* = objectSLDataLocator_BufferQueue197,10381
+    SLDataLocator_MIDIBufferQueue* = objectSLDataLocator_MIDIBufferQueue202,10604
+    SLDataLocator_AndroidFD* = object # OpenSLES_Android.hSLDataLocator_AndroidFD208,10740
+    SLDataFormat_MIME* = objectSLDataFormat_MIME217,10985
+proc slCreateEngineImpl(pEngine: var SLObjectItf,slCreateEngineImpl284,14342
+template numInterfaces: uint32 =numInterfaces288,14589
+template pInterfaces: ptr SLInterfaceID =pInterfaces292,14702
+template pInterfaceRequired: ptr SLboolean =pInterfaceRequired295,14808
+proc slCreateEngine*(pEngine: var SLObjectItf, options: openarray[SLEngineOption], interfaces: openarray[SLInterfaceID], interfaceRequired: openarray[SLBoolean]): SLresult =slCreateEngine300,14965
+proc realize*(self: SLObjectItf, async: bool = false): SLresult = self.Realize(self, SLboolean(async))realize305,15346
+proc resume*(self: SLObjectItf, async: bool = false): SLresult = self.Resume(self, SLboolean(async))resume306,15449
+proc getState*(self: SLObjectItf, pState: var uint32): SLresult = self.GetState(self, pState)getState307,15550
+proc getInterface*(self: SLObjectItf, iid: SLInterfaceID, pInterface: ptr pointer): SLresult = self.GetInterface(self, iid, pInterface)getInterface308,15644
+proc registerCallback*(self: SLObjectItf, callback: SLObjectCallback, pContext: pointer): SLresult = self.RegisterCallback(self, callback, pContext)registerCallback309,15780
+proc abortAsyncOperation*(self: SLObjectItf) = self.AbortAsyncOperation(self)abortAsyncOperation310,15929
+proc destroy*(self: SLObjectItf) = self.Destroy(self)destroy311,16007
+proc setPriority*(self: SLObjectItf, priority: int32, preemptable: bool): SLresult = self.SetPriority(self, priority, SLboolean(preemptable))setPriority312,16061
+proc getPriority*(self: SLObjectItf, priority: var int32, preemptable: var bool): SLresult =getPriority313,16203
+proc setLossOfControlInterfaces*(self: SLObjectItf, interfaces: openarray[SLInterfaceID], enabled: bool): SLresult =setLossOfControlInterfaces317,16398
+proc getInterface*(obj: SLObjectItf, engine: var SLEngineItf): SLresult =getInterface322,16695
+proc getInterface*(obj: SLObjectItf, vol: var SLVolumeItf): SLresult =getInterface324,16837
+proc getInterface*(obj: SLObjectItf, seek: var SLSeekItf): SLresult =getInterface326,16973
+proc getInterface*(obj: SLObjectItf, play: var SLPlayItf): SLresult =getInterface328,17107
+proc createLEDDevice*(self: SLEngineItf, pDevice: var SLObjectItf,createLEDDevice332,17265
+proc createVibraDevice*(self: SLEngineItf, pDevice: var SLObjectItf,createVibraDevice337,17604
+proc createAudioPlayer*(self: SLEngineItf, pPlayer: var SLObjectItf,createAudioPlayer342,17947
+proc createAudioRecorder*(self: SLEngineItf, pRecorder: var SLObjectItf,createAudioRecorder348,18372
+proc createMidiPlayer*(self: SLEngineItf, pPlayer: var SLObjectItf,createMidiPlayer354,18805
+proc createListener*(self: SLEngineItf, pListener: var SLObjectItf,createListener361,19322
+proc create3DGroup*(self: SLEngineItf, pGroup: var SLObjectItf,create3DGroup366,19635
+proc createOutputMix*(self: SLEngineItf, pMix: var SLObjectItf,createOutputMix371,19940
+proc createMetadataExtractor*(self: SLEngineItf, pMetadataExtractor: var SLObjectItf,createMetadataExtractor376,20245
+proc createExtensionObject*(self: SLEngineItf, pObject: var SLObjectItf,createExtensionObject382,20670
+proc queryNumSupportedInterfaces*(self: SLEngineItf, objectID: uint32,queryNumSupportedInterfaces388,21088
+proc querySupportedInterfaces*(self: SLEngineItf, objectID, index: uint32,querySupportedInterfaces392,21319
+proc queryNumSupportedExtensions*(self: SLEngineItf, pNumExtensions: var uint32): SLresult =queryNumSupportedExtensions396,21543
+proc querySupportedExtension*(self: SLEngineItf, index: uint32,querySupportedExtension399,21696
+proc isExtensionSupported*(self: SLEngineItf, pExtensionName: cstring,isExtensionSupported404,21962
+proc setVolumeLevel*(self: SLVolumeItf, level: SLmillibel): SLresult = self.SetVolumeLevel(self, level)setVolumeLevel411,22239
+proc getVolumeLevel*(self: SLVolumeItf, level: var SLmillibel): SLresult = self.GetVolumeLevel(self, level)getVolumeLevel412,22343
+proc getMaxVolumeLevel*(self: SLVolumeItf, maxLevel: var SLmillibel): SLresult = self.GetMaxVolumeLevel(self, maxLevel)getMaxVolumeLevel413,22451
+proc setMute*(self: SLVolumeItf, mute: bool): SLresult = self.SetMute(self, SLboolean(mute))setMute414,22571
+proc getMute*(self: SLVolumeItf, mute: var bool): SLresult =getMute415,22664
+proc enableStereoPosition*(self: SLVolumeItf, enable: bool): SLresult = self.EnableStereoPosition(self, SLboolean(enable))enableStereoPosition419,22806
+proc isEnabledStereoPosition*(self: SLVolumeItf, enable: var bool): SLresult =isEnabledStereoPosition420,22929
+proc setStereoPosition*(self: SLVolumeItf, stereoPosition: SLpermille): SLresult = self.SetStereoPosition(self, stereoPosition)setStereoPosition424,23107
+proc getStereoPosition*(self: SLVolumeItf, stereoPosition: var SLpermille): SLresult = self.GetStereoPosition(self, stereoPosition)getStereoPosition425,23235
+proc setPosition*(self: SLSeekItf, pos: SLmillisecond, seekMode: uint32): SLresult = self.SetPosition(self, pos, seekMode)setPosition428,23389
+proc setLoop*(self: SLSeekItf, loopEnable: bool, startPos, endPos: SLmillisecond): SLresult = self.SetLoop(self, SLboolean(loopEnable), startPos, endPos)setLoop429,23512
+proc getLoop*(self: SLSeekItf, loopEnable: var bool, startPos, endPos: var SLmillisecond): SLresult =getLoop430,23666
+proc setPlayState*(self: SLPlayItf, state: SLPlayState): SLresult = self.SetPlayState(self, state)setPlayState436,23904
+proc getPlayState*(self: SLPlayItf, state: var SLPlayState): SLresult = self.GetPlayState(self, state)getPlayState437,24003
+proc getDuration*(self: SLPlayItf, msec: var SLmillisecond): SLresult = self.GetDuration(self, msec)getDuration438,24106
+proc getPosition*(self: SLPlayItf, msec: var SLmillisecond): SLresult = self.GetPosition(self, msec)getPosition439,24207
+proc registerCallback*(self: SLPlayItf, callback: SLPlayCallback, context: pointer): SLresult = self.RegisterCallback(self, callback, context)registerCallback440,24308
+proc setCallbackEventsMask*(self: SLPlayItf, eventFlags: uint32): SLresult = self.SetCallbackEventsMask(self, eventFlags)setCallbackEventsMask441,24451
+proc getCallbackEventsMask*(self: SLPlayItf, eventFlags: var uint32): SLresult = self.GetCallbackEventsMask(self, eventFlags)getCallbackEventsMask442,24573
+proc setMarkerPosition*(self: SLPlayItf, mSec: SLmillisecond): SLresult = self.SetMarkerPosition(self, mSec)setMarkerPosition443,24699
+proc clearMarkerPosition*(self: SLPlayItf): SLresult = self.ClearMarkerPosition(self)clearMarkerPosition444,24808
+proc getMarkerPosition*(self: SLPlayItf, mSec: var SLmillisecond): SLresult = self.GetMarkerPosition(self, mSec)getMarkerPosition445,24894
+proc setPositionUpdatePeriod*(self: SLPlayItf, mSec: SLmillisecond): SLresult = self.SetPositionUpdatePeriod(self, mSec)setPositionUpdatePeriod446,25007
+proc getPositionUpdatePeriod*(self: SLPlayItf, mSec: var SLmillisecond): SLresult = self.GetPositionUpdatePeriod(self, mSec)getPositionUpdatePeriod447,25128
+
+Coral/sound/private/data_source_al.nim,689
+proc finalizeDataSource(s: DataSource) =finalizeDataSource10,148
+proc newDataSource(): DataSource =newDataSource13,248
+proc alFormat(channels, bitsPerSample: int): ALenum {.inline.} =alFormat17,339
+proc newDataSourceWithPCMData*(data: pointer, dataLength, channels, bitsPerSample, samplesPerSecond: int): DataSource =newDataSourceWithPCMData29,721
+proc newDataSourceWithPCMData*(data: openarray[byte], channels, bitsPerSample, samplesPerSecond: int): DataSource {.inline.} =newDataSourceWithPCMData43,1319
+proc newDataSourceWithFile*(path: string): DataSource =newDataSourceWithFile47,1615
+proc newDataSourceWithStream*(s: Stream): DataSource =newDataSourceWithStream54,1960
+
+Coral/sound/private/sound_sl.nim,1776
+proc initSoundEngineWithActivity*(a: jobject) =initSoundEngineWithActivity27,675
+proc initEngine() =initEngine31,845
+proc newSoundWithURL*(url: string): Sound =newSoundWithURL46,1422
+proc newSoundWithFile*(path: string): Sound = # Deprecated... kinda...newSoundWithFile64,1985
+proc loadResourceDescriptorFromAndroidAsset(path: cstring): ResourseDescriptor =loadResourceDescriptorFromAndroidAsset79,2348
+proc loadResourceDescriptorFromFilePath(path: string): ResourseDescriptor =loadResourceDescriptorFromFilePath90,2813
+proc gainToAttenuation(gain: float): float {.inline.} =gainToAttenuation96,3070
+proc setGain(pl: SLObjectItf not nil, v: float) =setGain99,3183
+proc setLooping(pl: SLObjectItf not nil, flag: bool) =setLooping106,3425
+proc setLooping*(s: Sound, flag: bool) =setLooping112,3629
+proc playState(pl: SLObjectItf): SLPlayState =playState120,3794
+proc restart(pl: SLObjectItf not nil) {.inline.} =restart126,3977
+proc setPlayState(pl: SLObjectItf not nil, state: SLPlayState) =setPlayState132,4199
+proc getPlayState(pl: SLObjectItf): SLPlayState =getPlayState140,4476
+proc deletionThread(p: pointer): pointer {.noconv.} =deletionThread157,5116
+proc collectTrash() {.inline.} =collectTrash164,5302
+proc destroy(pl: SLObjectItf not nil, fd: cint) =destroy188,6060
+proc stop*(s: Sound) =stop194,6263
+proc collectInactiveSounds() {.inline.} =collectInactiveSounds206,6578
+proc assumeNotNil[T](v: T): T not nil {.inline.} =assumeNotNil221,7226
+proc play*(s: Sound) =play226,7370
+proc duration*(s: Sound): float =duration277,9141
+proc attenuationToGain(a: float): float {.inline.} =attenuationToGain298,9848
+proc `gain=`*(s: Sound, v: float) =gain=304,9982
+proc gain*(s: Sound): float {.inline.} = s.mGaingain310,10100
+
+Coral/sound/private/context_al.nim,43
+proc createContext*() =createContext6,79
+
+Coral/sound/private/vorbis_utils.nim,642
+proc c_malloc(size: csize): pointer {.c_malloc3,28
+proc c_free(p: pointer) {.c_free5,111
+proc c_realloc(p: pointer, newsize: csize): pointer {.c_realloc7,180
+proc loadVorbis(v: Vorbis, outBuffer: var pointer, outLen, outChannels, outBitsPerSample, outSamplesPerSecond: var int) =loadVorbis10,281
+proc loadVorbisFile*(path: string, buffer: var pointer, len, channels, bitsPerSample, samplesPerSec: var int) =loadVorbisFile44,1556
+proc loadVorbisStream*(s: Stream, buffer: var pointer, len, channels, bitsPerSample, samplesPerSec: var int) =loadVorbisStream47,1779
+proc freeVorbisBuffer*(buffer: pointer) =freeVorbisBuffer51,2050
+
+Coral/sound/private/context_xaudio2.nim,620
+    WAVEFORMATEX* = objectWAVEFORMATEX119,5056
+    XAUDIO2_BUFFER* = objectXAUDIO2_BUFFER128,5277
+    XAUDIO2_VOICE_STATE* = objectXAUDIO2_VOICE_STATE139,5551
+proc CoInitialize*(P1: pointer): HRESULT {.stdcall, dynlib: "ole32", importc.}CoInitialize162,6211
+proc CoCreateInstance*(P1: ptr GUID, P2: pointer, P3: int32, P4: ptr GUID, P5: pointer): HRESULT {.stdcall, dynlib: "ole32", importc.}CoCreateInstance163,6290
+proc createContext*() =createContext168,6478
+        proc XAudio2Create(pXAudio: var IXAudio2, flags: uint32, processor: XAUDIO2_PROCESSOR = 0xffffffff'u32): HRESULT =XAudio2Create175,6609
+
+Coral/sound/private/data_source_xaudio2.nim,540
+proc newDataSource(): DataSource =newDataSource11,182
+proc newDataSourceWithPCMData*(data: pointer, dataLength, channels, bitsPerSample, samplesPerSecond: int): DataSource =newDataSourceWithPCMData15,255
+proc newDataSourceWithPCMData*(data: openarray[byte], channels, bitsPerSample, samplesPerSecond: int): DataSource {.inline.} =newDataSourceWithPCMData31,925
+proc newDataSourceWithFile*(path: string): DataSource =newDataSourceWithFile35,1221
+proc newDataSourceWithStream*(s: Stream): DataSource =newDataSourceWithStream42,1566
+
+Coral/sound/private/stb_vorbis.nim,1004
+    VorbisObj = objectVorbisObj4,34
+    VorbisInfo* = objectVorbisInfo6,58
+proc stb_vorbis_open_filename*(filename: cstring, error: ptr cint, alloc_buffer: pointer): Vorbis {.importc, noconv.}stb_vorbis_open_filename16,286
+proc stb_vorbis_open_memory*(data: pointer, len: cint, error: ptr cint, alloc_buffer: pointer): Vorbis {.importc, noconv.}stb_vorbis_open_memory17,404
+proc stb_vorbis_get_info*(f: Vorbis): VorbisInfo {.importc, noconv.}stb_vorbis_get_info18,527
+proc stb_vorbis_stream_length_in_samples*(f: Vorbis): cuint {.importc, noconv.}stb_vorbis_stream_length_in_samples19,596
+proc stb_vorbis_get_samples_short_interleaved*(f: Vorbis, channels: cint, buffer: ptr uint16, num_shorts: cint): cint {.importc, noconv.}stb_vorbis_get_samples_short_interleaved20,676
+proc stb_vorbis_close*(f: Vorbis) {.importc, noconv.}stb_vorbis_close21,814
+            int range = range_list[g->floor1_multiplier-1];range3212,104655
+               highroom = range - pred;highroom3248,106306
+
+Coral/sound/private/sound_xaudio2.nim,851
+proc newSound(): Sound =newSound13,245
+proc `dataSource=`(s: Sound, dataSource: DataSource) =dataSource=17,311
+proc newSoundWithFile*(path: string): Sound =newSoundWithFile20,398
+proc newSoundWithStream*(s: Stream): Sound =newSoundWithStream25,541
+proc isPlaying(s: IXAudio2SourceVoice): bool {.inline.} =isPlaying31,683
+proc isPlaying* (sound: Sound): bool {.inline.} =isPlaying36,879
+proc reclaimInactiveSource() {.inline.} =reclaimInactiveSource45,1129
+proc submitBuffer(s: Sound) =submitBuffer54,1423
+proc play*(s: Sound) =play62,1722
+proc stop*(s: Sound) =stop75,2275
+proc `gain=`*(s: Sound, v: float) =gain=79,2387
+proc gain*(s: Sound): float {.inline.} = s.mGaingain84,2539
+proc setLooping*(s: Sound, flag: bool) =setLooping86,2589
+proc duration*(s: Sound): float {.inline.} = s.mDataSource.mDurationduration92,2749
+
+Coral/sound/private/sound_al.nim,1707
+proc finalizeSound(s: Sound) =finalizeSound12,193
+proc destroy* (s: Sound)=destroy15,275
+proc destroyAllSounds* ()=destroyAllSounds19,360
+proc newSound(): Sound =newSound23,443
+proc `dataSource=`(s: Sound, ds: DataSource) = # Private for now. Should be public eventuallydataSource=27,520
+proc newSoundWithPCMData*(data: pointer, dataLength, channels, bitsPerSample, samplesPerSecond: int): Sound =newSoundWithPCMData30,638
+proc newSoundWithPCMData*(data: openarray[byte], channels, bitsPerSample, samplesPerSecond: int): Sound {.inline.} =newSoundWithPCMData35,949
+proc newSoundWithFile*(path: string): Sound =newSoundWithFile39,1230
+proc newSoundWithStream*(s: Stream): Sound =newSoundWithStream43,1353
+proc isSourcePlaying(src: ALuint): bool {.inline.} =isSourcePlaying47,1474
+proc isPlaying* (sound: Sound): bool {.inline.} =isPlaying52,1634
+proc duration*(s: Sound): float {.inline.} = s.mDataSource.mDurationduration58,1823
+proc setLooping*(s: Sound, flag: bool) =setLooping60,1893
+proc looping* (s: Sound): bool=looping65,2026
+proc reclaimInactiveSource(): ALuint {.inline.} =reclaimInactiveSource77,2294
+proc stop*(s: Sound) =stop86,2567
+proc play*(s: Sound) =play90,2638
+proc position* (s: Sound): float=position106,3214
+proc playbackPosition* (s: Sound): float=playbackPosition115,3437
+proc `playbackPosition=`* (s: Sound, val: float)=playbackPosition=123,3637
+proc pause* (s: Sound)=pause127,3760
+proc resume* (s: Sound)=resume131,3833
+proc paused* (s: Sound): bool=paused135,3895
+proc `paused=`* (s: Sound, val: bool)=paused=147,4172
+proc `gain=`*(s: Sound, v: float) =gain=154,4306
+proc gain*(s: Sound): float {.inline.} = s.mGaingain159,4415
+
+Coral/shaders.nim,0
+
+Coral/input.nim,0
+
+Coral/ecs.nim,1139
+proc default_load         (s: CoralSystem, e: CoralEntity) = discarddefault_load27,668
+proc default_preUpdate    (s: CoralSystem)                 = discarddefault_preUpdate28,737
+proc default_update       (s: CoralSystem, e: CoralEntity) = discarddefault_update29,806
+proc default_render       (s: CoralSystem, e: CoralEntity) = discarddefault_render30,875
+proc default_destroy      (s: CoralSystem, e: CoralEntity) = discarddefault_destroy31,944
+proc add* [T](self: CoralEntity, component: T): T {.discardable.} =add33,1014
+proc get* (self: CoralEntity, T: typedesc): T =get37,1147
+proc has* (self: CoralEntity, T: typedesc): bool=has40,1240
+proc has* (self: CoralEntity, t: string): bool=has43,1333
+proc newSystem(newSystem46,1419
+proc matches(s: CoralSystem, e: CoralEntity): bool=matches68,2011
+proc newCoralWorld* (): CoralWorld=newCoralWorld73,2144
+proc update* (world: CoralWorld)=update79,2283
+proc draw* (world: CoralWorld)=draw98,2862
+proc createEntity* (world: CoralWorld, components: seq[CoralComponent] = @[]): auto {.discardable.}=createEntity104,3048
+proc createSystem* (createSystem116,3371
+
+Coral/graphics.nim,5313
+    BufferType* = enumBufferType17,275
+    ShaderType* = enumShaderType21,345
+proc `$`* (r: Region): string$57,1205
+proc newRegion* (x, y, w, h: int): Region=newRegion59,1236
+proc newColor*(r: float32 = 1, g: float32 = 1, b: float32 = 1, a: float32 = 1): Color=newColor65,1343
+proc lerp* (a: Color, b: Color, t: float): Color=lerp68,1467
+proc lerpPercent* (a: Color, b: Color, t: float): Color=lerpPercent76,1654
+proc length* (c: Color): float=length84,1876
+template Red*                  ():untyped =newColor(1, 0, 0)Red94,2048
+template Green*                ():untyped =newColor(0, 1, 0)Green95,2109
+template Blue*                 ():untyped =newColor(0, 0, 1)Blue96,2170
+template White*                ():untyped =newColor(1, 1, 1)White97,2231
+template Black*                ():untyped =newColor(0, 0, 0)Black98,2292
+template DarkGray*             ():untyped =newColor(0.2, 0.2, 0.2)DarkGray99,2353
+template LightGray*            ():untyped =newColor(0.8, 0.8, 0.8)LightGray100,2420
+template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)Gray101,2487
+template Transperent*          ():untyped =newColor(1, 1, 1, 0)Transperent102,2554
+template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)TransperentBlack103,2618
+proc CoralRandomColor*         ():Color =newColor(rand(1.0), rand(1.0), rand(1.0), 1.0)CoralRandomColor104,2682
+template P8Black*      ():untyped = newColor(0, 0, 0, 1)P8Black107,2795
+template P8DarkBlue*   ():untyped = newColor(29.0 / 255.0, 43.0 / 255.0, 83.0 / 255.0)P8DarkBlue108,2852
+template P8DarkPurple* ():untyped = newColor(126.0 / 255.0, 37.0 / 255.0, 83.0 / 255.0)P8DarkPurple109,2939
+template P8DarkGreen*  ():untyped = newColor(0.0, 135.0 / 255.0, 81.0 / 255.0)P8DarkGreen110,3027
+template P8Brown*      ():untyped = newColor(171.0 / 255.0, 82.0 / 255.0, 54.0 / 255.0)P8Brown111,3106
+template P8DarkGray*   ():untyped = newColor(95.0 / 255.0, 87.0 / 255.0, 79.0 / 255.0)P8DarkGray112,3194
+template P8LightGray*  ():untyped = newColor(194.0 / 255.0, 195.0 / 255.0, 199.0 / 255.0)P8LightGray113,3281
+template P8White*      ():untyped = newColor(1.0, 241.0 / 255.0, 232.0 / 255.0)P8White114,3371
+template P8Red*        ():untyped = newColor(1.0, 0.0, 77.0 / 255.0)P8Red115,3451
+template P8Orange*     ():untyped = newColor(1.0, 163.0 / 255.0, 0.0) P8Orange116,3520
+template P8Yellow*     ():untyped = newColor(1.0, 236.0 / 255.0, 39.0 / 255.0)P8Yellow117,3591
+template P8Green*      ():untyped = newColor(0.0, 228.0 / 255.0, 54.0 / 255.0)P8Green118,3670
+template P8Blue*       ():untyped = newColor(41.0 / 255.0, 173.0 / 255.0, 1.0)P8Blue119,3749
+template P8Indigo*     ():untyped = newColor(131.0 / 255.0, 118.0 / 255.0, 156.0 / 255.0)P8Indigo120,3828
+template P8Pink*       ():untyped = newColor(1.0, 119.0 / 255.0, 168.0 / 255.0)P8Pink121,3918
+template P8Peach*      ():untyped = newColor(1.0, 204.0 / 255.0, 170.0 / 255.0)P8Peach122,3998
+proc clearScreen* (c: Color)=clearScreen125,4188
+proc toColor* (c: (float32,float32,float32,float32)):Color=toColor129,4312
+proc toColor* (c: V3): Color    = return newColor(c.x, c.y, c.z, 1)toColor133,4471
+proc toV3* (c: Color): V3       = newV3(c.r, c.g, c.b)toV3134,4539
+proc hexColorToFloatColor* (hex: string): (float32, float32, float32, float32)=hexColorToFloatColor136,4595
+proc hexColorToColor* (hex: string): Color=hexColorToColor166,5543
+proc getGLenumArrayType(t: BufferType): GLenum=getGLenumArrayType170,5657
+proc newVao* (shouldBind = false): GLuint=newVao177,5861
+proc newVbo* (btype: BufferType, dimensions: uint32, attrib: uint32, data: var seq[float32], dynamic = false): GLuint=newVbo181,5988
+proc drawArrays* (vao: GLuint, numVertices: int)=drawArrays204,6633
+proc CoralLoadShader* (stype: ShaderType, code: string): GLuint=CoralLoadShader210,6819
+proc CoralNewProgram* (v: GLuint, f: GLuint): GLuint=CoralNewProgram239,7679
+proc bindProgram* (p: GLuint)   = glUseProgram(p)bindProgram257,8264
+proc unBindProgram* ()          = glUseProgram(0)unBindProgram258,8314
+proc setUniform* (p: GLuint, loc: GLint, f: float32)= glUniform1f(loc, f)setUniform260,8365
+proc setUniform* (p: GLuint, loc: GLint, v: V2)= glUniform2f(loc, v.x, v.y)setUniform261,8439
+proc setUniform* (p: GLuint, loc: GLint, v: V3)= glUniform3f(loc, v.x, v.y, v.z)setUniform262,8515
+proc setUniform* (p: GLuint, loc: GLint, v: V3, f: float32)= glUniform4f(loc, v.x, v.y, v.z, f)setUniform263,8596
+proc setUniform* (p: GLuint, loc: GLint, v: int32)= glUniform1i(loc, v)setUniform264,8692
+proc setUniform* (p: GLuint, loc: GLint, m: var M4)=setUniform265,8764
+proc getLocation* (p: GLuint, id: cstring): GLint=getLocation268,8871
+proc CoralLoadImage* (path: string, filter: GLint = GL_LINEAR): Image=CoralLoadImage273,9042
+proc id* (img: Image): GLuint{.inline.}= return img.idid303,10170
+proc bindImage* (img: Image)= glBindTexture(GL_TEXTURE_2D, img.id)bindImage305,10226
+proc unBindImage* ()= glBindTexture(GL_TEXTURE_2D, 0)unBindImage306,10293
+proc loadSpriteFont* (path: string, image_path: string): SpriteFont=loadSpriteFont308,10348
+proc measure* (font: SpriteFont, scale: float, str: string): V2=measure338,11159
+proc view* (camera: Camera2D): M2=view362,11775
+proc `$`* (r: Region): string=$366,11898
+
+Coral/tiled.nim,238
+proc loadTileset* (path: string): TiledTileset=loadTileset53,954
+proc loadTiledMap* (path: string): TiledMap=loadTiledMap96,2430
+proc drawTiledMap* (r2d: R2D, tiledmap: TiledMap, color: Color, draw_layer = 0.4)=drawTiledMap174,4736
+
+Coral/utilities.nim,180
+template CoralPushTerminalColors(fg: ForegroundColor, bg: BackgroundColor, body: untyped): typed=CoralPushTerminalColors4,21
+proc CoralWarning* (msg: string)=CoralWarning7,136
+
+Coral/game.nim,4300
+proc newCoralGame()newCoralGame95,2067
+proc timer*         (c: CoralClock): float {.inline.} = c.timertimer98,2100
+proc currentFPS*    (c: CoralClock): float {.inline.} = c.fpscurrentFPS99,2164
+proc dt*            (c: CoralClock): float {.inline.} = c.deltadt100,2226
+proc ticks*         (c: CoralClock): int   {.inline.} = c.ticksticks101,2290
+proc averageFps*    (c: CoralClock): float {.inline.} = c.avFpsaverageFps102,2354
+proc averageDt*     (c: CoralClock): float {.inline.} = c.avDtaverageDt103,2418
+proc start* (timer: CoralTimer): CoralTimer{.discardable.}=start105,2482
+proc pause* (timer: CoralTimer): CoralTimer{.discardable.}=pause109,2602
+proc delete* (timer: CoralTimer)=delete113,2721
+proc reset* (timer: CoralTimer)=reset116,2790
+proc timesCalled* (timer: CoralTimer): auto= timer.times_calledtimesCalled120,2873
+proc addTimer* (clock: CoralClock, milliseconds: float, repeat = 0, callback: proc(): void): CoralTimer{.discardable.}=addTimer122,2938
+template Coral* (): auto = Coral136,3368
+proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=config139,3408
+proc newCoralGame()=newCoralGame147,3631
+proc createGame* (self: CoralGame, width, height: int, title: string, config: CoralConfig): CoralGame{.discardable.}=createGame205,5226
+proc clock* (game: CoralGame): auto = game.clockclock268,7094
+proc input* (game: CoralGame): auto = game.inputinput269,7143
+proc r2d* (game: CoralGame):auto = r2d270,7192
+proc audio* (game: CoralGame):auto = game.audioaudio274,7341
+proc world* (c: CoralGame): CoralWorld=world276,7390
+proc assets* (c: CoralGame): CoralAssetManager=assets281,7507
+proc newKeyState(state = 0, last = 0): CoralKeyState=newKeyState285,7577
+# proc IsGamepadConnected* (game: CoralGame, which = 0): bool=IsGamepadConnected291,7723
+proc pullControllerInfo(input: CoralInputManager)=pullControllerInfo295,7844
+# proc IsButtonDown(game: CoralGame )IsButtonDown298,7908
+proc mouseX* (game: CoralGame): float= return game.input.mouse_xmouseX300,7947
+proc mouseY* (game: CoralGame): float= return game.input.mouse_ymouseY301,8012
+proc mousePos* (game: CoralGame): (float, float)=mousePos303,8078
+proc mouseDeltaX* (game: CoralGame): float=return game.input.mouse_x - game.input.last_mouse_xmouseDeltaX306,8167
+proc mouseDeltaY* (game: CoralGame): float=return game.input.mouse_y - game.input.last_mouse_ymouseDeltaY307,8262
+proc mouseDeltaPos* (game: CoralGame): (float, float)=mouseDeltaPos308,8357
+proc getKeyInRange(key: cint): int=getKeyInRange314,8485
+proc isMouseLeftDown* (game: CoralGame): bool=isMouseLeftDown320,8642
+proc isMouseLeftUp* (game: CoralGame): bool=isMouseLeftUp323,8734
+proc isMouseRightDown* (game: CoralGame): bool=isMouseRightDown326,8817
+proc isMouseRightUp* (game: CoralGame): bool=isMouseRightUp329,8911
+proc isMouseLeftPressed* (game: CoralGame): bool =isMouseLeftPressed332,8996
+proc isMouseLeftReleased* (game: CoralGame): bool =isMouseLeftReleased337,9146
+proc isMouseRightPressed* (game: CoralGame): bool =isMouseRightPressed342,9297
+proc isMouseRightReleased* (game: CoralGame): bool =isMouseRightReleased347,9450
+proc isKeyDown* (game: CoralGame, key: CoralKey): bool =isKeyDown352,9604
+proc isKeyUp* (game: CoralGame, key: CoralKey): bool =isKeyUp360,9838
+proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=isKeyReleased363,9930
+proc isKeyPressed* (game: CoralGame, key: CoralKey): bool=isKeyPressed373,10229
+proc windowSize* (self: CoralGame): (int, int)=windowSize384,10549
+proc `windowSize=`*(self: CoralGame, width, height: int)=windowSize=390,10774
+proc windowPosition* (self: CoralGame): (int, int)=windowPosition394,10928
+proc `windowPosition=`* (self: CoralGame, pos: (int, int)) =windowPosition=400,11159
+proc windowTitle* (self: CoralGame): string=windowTitle403,11286
+proc `windowTitle=`* (self: CoralGame, title: string)=windowTitle=407,11398
+proc windowVisible* (self: CoralGame): bool =windowVisible410,11505
+proc `windowVisible=`* (self: CoralGame, visible: bool) =windowVisible=414,11645
+proc run* (game: CoralGame)=run419,11803
+    ## This method launches the game loop and begins the rendering cyclelaunches420,11832
+proc quit* (self: CoralGame)=quit598,17763
