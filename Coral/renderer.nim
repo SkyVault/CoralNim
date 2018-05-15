@@ -270,18 +270,18 @@ proc getBackgroundColor*(self: R2D): auto= return self.clear_color
 
 proc clear* (self: R2D)=
     glClearColor(
-        self.clear_color.r, 
-        self.clear_color.g, 
-        self.clear_color.b, 
+        self.clear_color.r,
+        self.clear_color.g,
+        self.clear_color.b,
         self.clear_color.a
         )
     glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
-proc begin* (self: R2D, size: (int, int))=
+proc begin* (self: R2D)=
     # glViewport(0, 0, cast[GLsizei](size[0]), cast[GLsizei](size[1]))
     let
-        width = (float32)size[0]
-        height = (float32)size[1]
+        width = (float32)self.viewport[0]
+        height = (float32)self.viewport[1]
 
     self.ortho_projection = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
 
@@ -463,7 +463,7 @@ var quad_batch = newSeq[GLfloat]()
 var color_batch = newSeq[GLfloat]()
 
 proc flush*(self: R2D)=
-    begin(self, (1280, 720)) # @HARDCODED
+    begin(self) # @HARDCODED
 
     # Draw primitives
     for prim in self.primitives.reversed:

@@ -3,7 +3,6 @@
 
 import
     gameMath,
-    game,
     random,
     opengl,
     glu,
