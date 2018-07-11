@@ -61,7 +61,7 @@ method update(self: Ball)=
 method collision(self: Ball, other: Entity)=
     if other of Paddle:
         self.velocity.y *= -1
-        # self.velocity.x *= -1
+        self.velocity.x += other.velocity.x * 0.2
     
     if other of Brick:
         other.delete = true
