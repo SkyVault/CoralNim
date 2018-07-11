@@ -12,11 +12,11 @@ import
     ospaths
 
 type
-    TiledOrientation {.pure.} = enum
+    TiledOrientation* {.pure.} = enum
         Orthogonal,
         Orthographic
 
-    TiledRenderorder {.pure.} = enum
+    TiledRenderorder* {.pure.} = enum
         RightDown
 
     TiledObject* = ref object
