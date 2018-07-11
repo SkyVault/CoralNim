@@ -445,7 +445,7 @@ proc popScene* (self: CoralGame): auto {.discardable.}=
         result.destroy()
         self.sceneStack.delete(self.sceneStack.len() - 1)
 
-proc gotoScene(self: CoralGame, scene: CoralScene): auto {.discardable.}=
+proc gotoScene* (self: CoralGame, scene: CoralScene): auto {.discardable.}=
     self.popScene()
     result = self.pushScene(scene)
 
