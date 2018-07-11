@@ -433,6 +433,22 @@ proc `windowVisible=`* (self: CoralGame, visible: bool) =
     if visible: sdl.hideWindow(self.window)
     else: sdl.showWindow(self.window)
 
+proc pushScene* (self: CoralGame, scene: CoralScene): auto {.discardable.}=
+    result = scene
+    scene.load()
+    self.sceneStack.add scene
+
+proc popScene* (self: CoralGame): auto {.discardable.}=
+    result = self.currentScene()
+
+    if result != nil:
+        result.destroy()
+        self.sceneStack.delete(self.sceneStack.len() - 1)
+
+proc gotoScene(self: CoralGame, scene: CoralScene): auto {.discardable.}=
+    self.popScene()
+    result = self.pushScene(scene)
+
 ## Main gameloop
 proc run* (game: CoralGame)=
     ## This method launches the game loop and begins the rendering cycle
