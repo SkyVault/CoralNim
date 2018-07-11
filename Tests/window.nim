@@ -1,3 +1,3 @@
 import ../Coral/game
 
-newGame( 1280, 720, "Breakout!", config()).run()
+Coral.createGame(1280, 720, "Test Window!!", config()).run()

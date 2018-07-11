@@ -17,6 +17,7 @@ type
         preUpdate:  proc(s: CoralSystem)
         load:       proc(s: CoralSystem, e: CoralEntity)
         update:     proc(s: CoralSystem, e: CoralEntity)
+        preDraw:    proc(s: CoralSystem)
         draw:     proc(s: CoralSystem, e: CoralEntity)
         destroy:    proc(s: CoralSystem, e: CoralEntity)
 
@@ -27,6 +28,7 @@ type
 proc default_load         (s: CoralSystem, e: CoralEntity) = discard
 proc default_preUpdate    (s: CoralSystem)                 = discard
 proc default_update       (s: CoralSystem, e: CoralEntity) = discard
+proc default_preRender    (s: CoralSystem) = discard
 proc default_render       (s: CoralSystem, e: CoralEntity) = discard
 proc default_destroy      (s: CoralSystem, e: CoralEntity) = discard
 
@@ -48,6 +50,7 @@ proc newSystem(
     load:       proc(s: CoralSystem, e: CoralEntity),
     preUpdate:  proc(s: CoralSystem)                ,
     update:     proc(s: CoralSystem, e: CoralEntity),
+    preDraw:    proc(s: CoralSystem),
     draw:     proc(s: CoralSystem, e: CoralEntity),
     destroy:    proc(s: CoralSystem, e: CoralEntity)
     ): CoralSystem=
@@ -61,6 +64,7 @@ proc newSystem(
         load: load,
         preUpdate: preUpdate,
         update: update,
+        preDraw: preDraw,
         draw: draw,
         destroy: destroy
     )
@@ -119,6 +123,7 @@ proc createSystem* (
     load: proc(s: CoralSystem, e: CoralEntity) = default_load,
     preUpdate: proc(s: CoralSystem) = default_preUpdate,
     update: proc(s: CoralSystem, e: CoralEntity) = default_update,
+    preDraw: proc(s: CoralSystem) = default_preRender,
     draw: proc(s: CoralSystem, e: CoralEntity) = default_render,
     destroy: proc(s: CoralSystem, e: CoralEntity) = default_destroy
     ): CoralSystem {.discardable.}=
@@ -128,6 +133,7 @@ proc createSystem* (
         load,
         preUpdate,
         update,
+        preDraw,
         draw,
         destroy
     )
