@@ -638,3 +638,12 @@ proc run* (game: CoralGame)=
 proc quit* (self: CoralGame)=
     self.running = false
     # setWindowShouldClose(self.window, 1)
+
+# template CoralImportAll*()=
+#     import 
+#         Coral/graphics,
+#         Coral/renderer,
+#         Coral/gameMath,
+#         Coral/graphics,
+#         Coral/ecs,
+#         Coral/audio

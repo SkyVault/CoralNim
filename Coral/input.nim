@@ -37,7 +37,7 @@ type
         UNKNOWN = K_UNKNOWN
         BACKSPACE = K_BACKSPACE
         TAB = K_TAB
-        RETURN = K_RETURN
+        ENTER = K_RETURN
         ESCAPE = K_ESCAPE
         SPACE = K_SPACE
         EXCLAIM = K_EXCLAIM
