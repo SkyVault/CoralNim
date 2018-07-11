@@ -144,7 +144,7 @@ Coral.update = proc()=
         if entity.delete:
             entities.delete(i)
 
-Coral.render = proc()= 
+Coral.draw= proc()=
     Coral.r2d.setBackgroundColor(P8Peach)
 
     for entity in entities:

@@ -10,7 +10,7 @@
 
 #### API
 
-### GAME MATH MODULE
+### GAME MATH **MODULE**
 
 1. Contains vector maths and matrix maths for games
 2. Simple lerp functions and stuff

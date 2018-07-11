@@ -67,6 +67,8 @@ type
 
         # gamepadState: Table[cint, ]
 
+    CoralScene* = ref object of RootObj
+
     CoralConfig* = ref object
         resizable: bool
         fullscreen: bool
@@ -76,6 +78,8 @@ type
     CoralGame* = ref object
         window: sdl.Window
         context: sdl.GLContext
+
+        sceneStack: seq[CoralScene]
         
         config: CoralConfig
         running: bool
@@ -89,8 +93,19 @@ type
         title: string
         load*: proc()
         update*: proc()
-        render*: proc()
+        draw*: proc()
         destroy*:proc()
+
+method load(scene: CoralScene) {.base.} = discard
+method draw(scene: CoralScene) {.base.} = discard
+method update(scene: CoralScene) {.base.} = discard
+method destroy(scene: CoralScene) {.base.} = discard
+
+proc currentScene* (game: CoralGame): CoralScene=
+    result = if game.sceneStack.len() == 0:
+                nil
+            else:
+                game.sceneStack[game.sceneStack.len() - 1]
 
 proc newCoralGame()
 
@@ -151,9 +166,12 @@ proc newCoralGame()=
         window: nil,
         config: config,
         targetFPS: config.fps,
+
+        sceneStack: newSeq[CoralScene](),
+
         load: proc()=discard,
         update: proc()=discard,
-        render: proc()=discard,
+        draw: proc()=discard,
         destroy: proc()=discard,
         r2d: nil,
         title: "",
@@ -459,7 +477,6 @@ proc run* (game: CoralGame)=
 
         for c in game.input.controllers:
             echo sdl.gameControllerGetAttached(c)
-         
 
         while sdl.pollEvent(addr(ev)) != 0:
             case ev.kind:
@@ -579,14 +596,21 @@ proc run* (game: CoralGame)=
 
         if game.world.isNil == false:
             game.world.update()
+
         game.update()
+
+        if game.currentScene() != nil:
+            game.currentScene().update()
 
         game.r2d.viewport = game.windowSize
         game.r2d.clear()
         if game.world.isNil == false:
             game.world.draw()
 
-        game.render()
+        if game.currentScene() != nil:
+            game.currentScene().draw()
+
+        game.draw()
         game.r2d.flush()
 
         sdl.glSwapWindow(game.window)
