@@ -159,6 +159,6 @@ Coral.draw= proc()=
     #         entity.color
     #     )
 
-    Coral.r2d.drawImage(font.image, newV2(0, 0), newV2(256 + 128, 256 + 128), 0.0, newColor(1.0, 1.0, 1.0, 1.0))
+    Coral.r2d.drawImage(font.image, newV2(0, 0), newV2(256 + 128, 256 + 128), 0.0, newColor())
 
 Coral.createGame(11 * (32 + 8), 720, "Breakout!", config()).run()

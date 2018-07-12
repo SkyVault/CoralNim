@@ -7,11 +7,14 @@ import
     opengl,
     glu,
     strutils,
+    sequtils,
     os,
     math,
     stb_image/read as stbi,
+    stb_image/write as stbw,
     stb_truetype,
-    tables
+    tables,
+    unicode
 
 type
     BufferType* = enum
@@ -336,8 +339,10 @@ proc loadFont* (path: string, size: int = 32): Font=
         )
     )
 
-    result.image.width = 1024
-    result.image.height = 1024
+    # result.image.width = 1024
+    # result.image.height = 1024
+    result.image.width = result.atlasWidth
+    result.image.height = result.atlasHeight
     result.image.channels = 1
 
     if not fileExists(path):
@@ -345,20 +350,59 @@ proc loadFont* (path: string, size: int = 32): Font=
         echo "Could not load font.."
 
     let font_data = readFile(path)
-    var atlas_data = newString(result.atlasWidth * result.atlasHeight)
+    var atlas_data = newString(result.image.width * result.image.height)
 
-    discard packBegin(font_context, atlas_data, result.atlasWidth, result.atlasHeight, 0, 1)
-
-    packSetOverampling(font_context, result.oversampleX, result.oversampleY)
-    discard packFontRange(font_context, font_data, 0, result.size.float32, result.firstChar.int, result.charCount, result.charInfo)
+    discard packBegin(font_context, atlas_data, result.image.width, result.image.height, result.image.width, 1)
+    packSetOverampling(font_context, 1, 1)
+    let ranges = packFontRanges(font_context, font_data, 0, [
+        PackRange(typ: packRangeRange, font_size: result.size.float32, first_unicode_char_in_range: 0x0020, num_chars: 0x007F - 0x0020),
+        PackRange(typ: packRangeRange, font_size: result.size.float32, first_unicode_char_in_range: 0x0020, num_chars: 0x007F - 0x0020)
+        ])
     packEnd(font_context)
+
+    # discard packBegin(font_context, atlas_data, result.atlasWidth, result.atlasHeight, 0, 1)
+
+    # packSetOverampling(font_context, result.oversampleX, result.oversampleY)
+    # discard packFontRange(font_context, font_data, 0, result.size.float32, result.firstChar.int, result.charCount, result.charInfo)
+    # packEnd(font_context)
+
+    proc lerp(s, t, v: float32): float32 = s + (t - s) * v
+
+    #scrappy cut out function
+    var
+        x = 0f
+        y = 0f
+    let 
+        rect = getPackedQuad(ranges[1][1][4], result.image.width, result.image.width, x, y, true)
+        rw = int rect.x1 - rect.x0
+        rh = int rect.y1 - rect.y0
+    var singleChar = newSeq[byte](rw * rh)
+    for j in 0..rh - 1:
+        for i in 0..rw - 1:
+            let
+                x = int(lerp(rect.s0, rect.s1, float32(i) / float32(rw)) * result.image.width.float32)
+                y = int(lerp(rect.t0, rect.t1, float32(j) / float32(rh)) * result.image.width.float32)
+            singleChar[i + j * rw] = (byte atlas_data[x + y * result.image.width])
+    # writePNG("test2.png", rw, rh, 1, singleChar) # should contain only an Omega
+    writePng("test.png", result.image.width, result.image.height, 1, cast[seq[uint8]](toSeq(items atlas_data))) # should contain every rendered character
+
+    var d = cast[seq[uint8]](toSeq(items atlas_data))
+    var tmp = newSeq[uint8](result.image.width * result.image.height * 3)
+
+    for i in countup(0, (1024 * 1024) - 1):
+        tmp[(i * 3) + 0] = d[i]
+        tmp[(i * 3) + 1] = d[i]
+        tmp[(i * 3) + 2] = d[i]
 
     glGenTextures(1, addr result.image.id)
     glBindTexture(GL_TEXTURE_2D, result.image.id)
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
-    glTexImage2D(GL_TEXTURE_2D, 0, GLint(GL_RGB), result.atlasWidth.GLsizei, result.atlasHeight.GLsizei, 0, GL_RED, GL_UNSIGNED_BYTE, addr atlas_data[0])
-    # glHint(GL_GENERATE_MIPMAP_HINT, GL_NICEST)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    glTexImage2D(GL_TEXTURE_2D, 0, GLint(GL_RGB), result.image.width.GLsizei, result.image.height.GLsizei, 0, GL_RGB, GL_UNSIGNED_BYTE, addr tmp[0])
     glBindTexture(GL_TEXTURE_2D, 0)
+
+    echo result.image.id
+
 
 proc loadSpriteFont* (path: string, image_path: string): SpriteFont=
   result = SpriteFont(
