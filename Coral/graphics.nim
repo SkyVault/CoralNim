@@ -10,6 +10,7 @@ import
     os,
     math,
     stb_image/read as stbi,
+    stb_truetype,
     tables
 
 type
@@ -52,6 +53,20 @@ type
     SpriteFont* = ref object
       glyphs*: TableRef[uint, Glyph]
       image*: Image
+
+    Font* = ref object
+        size: int
+        atlasWidth, atlasHeight: int
+        oversampleX, oversampleY: int 
+
+        firstChar: char
+        charCount: int
+
+        charInfo: seq[PackedChar]
+        image* : Image # Temp exported
+        
+# Font stuff
+var font_context = PackContext()
 
 proc `$`* (r: Region): string
 
@@ -303,6 +318,47 @@ proc id* (img: Image): GLuint{.inline.}= return img.id
 
 proc bindImage* (img: Image)= glBindTexture(GL_TEXTURE_2D, img.id)
 proc unBindImage* ()= glBindTexture(GL_TEXTURE_2D, 0)
+
+# Font loading
+
+proc loadFont* (path: string, size: int = 32): Font=
+    result = Font(
+        size: size,
+        atlasWidth: 1024,
+        atlasHeight: 1024,
+        oversampleX: 2,
+        oversampleY: 2,
+        firstChar: ' ',
+        charCount: '~'.int - ' '.int,
+        charInfo: newSeq[PackedChar]('~'.int - ' '.int),
+        image: Image(
+            id: 0
+        )
+    )
+
+    result.image.width = 1024
+    result.image.height = 1024
+    result.image.channels = 1
+
+    if not fileExists(path):
+        result = nil
+        echo "Could not load font.."
+
+    let font_data = readFile(path)
+    var atlas_data = newString(result.atlasWidth * result.atlasHeight)
+
+    discard packBegin(font_context, atlas_data, result.atlasWidth, result.atlasHeight, 0, 1)
+
+    packSetOverampling(font_context, result.oversampleX, result.oversampleY)
+    discard packFontRange(font_context, font_data, 0, result.size.float32, result.firstChar.int, result.charCount, result.charInfo)
+    packEnd(font_context)
+
+    glGenTextures(1, addr result.image.id)
+    glBindTexture(GL_TEXTURE_2D, result.image.id)
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
+    glTexImage2D(GL_TEXTURE_2D, 0, GLint(GL_RGB), result.atlasWidth.GLsizei, result.atlasHeight.GLsizei, 0, GL_RED, GL_UNSIGNED_BYTE, addr atlas_data[0])
+    # glHint(GL_GENERATE_MIPMAP_HINT, GL_NICEST)
+    glBindTexture(GL_TEXTURE_2D, 0)
 
 proc loadSpriteFont* (path: string, image_path: string): SpriteFont=
   result = SpriteFont(

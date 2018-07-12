@@ -67,11 +67,15 @@ method collision(self: Ball, other: Entity)=
         other.delete = true
         self.velocity.y *= -1
 
+var font: Font
+
 Coral.load = proc()=
     const MARGIN = 8
 
     let ball_vel_x = random(100.0) - 200.0
     let ball_vel_y = random(100.0) - 200.0
+
+    font = loadFont(getApplicationDir() & "/arial.ttf")
 
     entities.add(
         Ball(
@@ -147,12 +151,14 @@ Coral.update = proc()=
 Coral.draw= proc()=
     Coral.r2d.setBackgroundColor(P8Peach)
 
-    for entity in entities:
-        Coral.r2d.drawRect(
-            entity.position,
-            entity.size,
-            0.0,
-            entity.color
-        )
+    # for entity in entities:
+    #     Coral.r2d.drawRect(
+    #         entity.position,
+    #         entity.size,
+    #         0.0,
+    #         entity.color
+    #     )
+
+    Coral.r2d.drawImage(font.image, newV2(0, 0), newV2(256 + 128, 256 + 128), 0.0, newColor(1.0, 1.0, 1.0, 1.0))
 
 Coral.createGame(11 * (32 + 8), 720, "Breakout!", config()).run()
