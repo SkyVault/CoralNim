@@ -375,7 +375,6 @@ proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color
         rotation: rotation
     ))
 
-
 proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
     self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
 
@@ -404,15 +403,9 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
     var x = pos.x
     var y = height - pos.y
 
-    var bw = 0.0
-    var bh = 0.0
-    for c in text:
-        let g = font.characters[c]
-
-        let gheight = g.size.y * scale
-        if bh < gheight: bh = gheight
-
-        bw += (g.advance shr 6).float * scale
+    var bs = font.measure(text, scale)
+    var bw = bs.x
+    var bh = bs.y
 
     # var vertices = newSeq[float](6 * 4)
     for c in text:

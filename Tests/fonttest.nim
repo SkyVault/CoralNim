@@ -23,7 +23,6 @@ Coral.draw = proc()=
     var size = font.measure(text)
 
     Coral.r2d.drawLineRect(0, 0, size.x, size.y, 0.0, P8Peach)
-    echo size
     Coral.r2d.drawString(font, text, newV2(0.0, 0.0))
 
 Coral.createGame(1280, 720, "Font Test", config()).run()
