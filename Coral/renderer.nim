@@ -135,6 +135,12 @@ type
 
         shader_program: GLuint
 
+        font_shader_program: GLuint
+        font_text_color_location: GLint 
+
+        font_text_vao: GLuint
+        font_text_vbo: GLuint
+
         diffuse_location:       GLint
         has_texture_location:   GLint
         size_location:          GLint
@@ -204,6 +210,18 @@ proc newR2D* (draw_instanced = true):R2d =
     glBindBuffer(GL_ARRAY_BUFFER, 0)
     glBindVertexArray(0)
 
+    # Font text buffers
+    result.font_text_vao = makeVao()
+    glGenBuffers(1, addr result.font_text_vbo)
+    glBindBuffer(GL_ARRAY_BUFFER, result.font_text_vbo)
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, nil, GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, cGL_FLOAT, GL_FALSE, (4 * sizeof(GLfloat)).GLsizei, nil);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0)
+    glBindVertexArray(0)
+
     # Instancing buffers
     # sprite_rectangle_batch_buffer: GLuint
     # sprite_rot_and_depth_batch_buffer: GLuint
@@ -229,6 +247,11 @@ proc newR2D* (draw_instanced = true):R2d =
         CoralLoadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
     )
 
+    result.font_shader_program = CoralNewProgram(
+        CoralLoadShader(VERTEX_SHADER, FONT_RENDERING_VERTEX),
+        CoralLoadShader(FRAGMENT_SHADER, FONT_RENDERING_FRAGMENT)
+    )
+
     result.view_matrix = newM2(1, 0, 0, 1)
 
     glUseProgram(result.shader_program);
@@ -241,6 +264,10 @@ proc newR2D* (draw_instanced = true):R2d =
     result.position_location        = glGetUniformLocation(result.shader_program, "position");
     result.quad_location            = glGetUniformLocation(result.shader_program, "quad");
     result.view_location            = glGetUniformLocation(result.shader_program, "view");
+    glUseProgram(0);
+
+    glUseProgram(result.font_shader_program)
+    result.font_text_color_location = glGetUniformLocation(result.font_shader_program, "textColor");
     glUseProgram(0);
 
 proc view* (self: R2D): auto= return self.view_matrix
@@ -352,44 +379,61 @@ proc drawLineRect*(self: R2D, x, y, width, height: float, rotation: float, color
 proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Color, layer = 1.0)=
     self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
 
-proc drawString* (r2d: R2D, font: SpriteFont, text: string, x, y: float, scale = 1.0, color = White())=
-  var
-    cursor_x = x
-    cursor_y = y
+proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, color = White())=
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
-  for c in text:
-    let id = uint(c)
+    glUseProgram(r2d.font_shader_program)
 
-    if not font.glyphs.hasKey id:
-      continue
+    glUniform3f(r2d.font_text_color_location, color.r, color.g, color.b)
 
-    if c == ' ':
-      cursor_x += font.glyphs[uint(' ')].xadvance * scale
-      continue
-    if c in Newlines:
-      cursor_x = x
-      cursor_y += (float)(font.glyphs[uint('A')].region.h) * scale
-      continue
+    let
+        width = (float32)r2d.viewport[0]
+        height = (float32)r2d.viewport[1]
 
-    let glyph = font.glyphs[id]
+    # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
+    var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -1.0, 1.0)
 
-    r2d.drawSprite(
-      font.image,
-      glyph.region,
-      newV2(
-        x + cursor_x,
-        y + cursor_y + (glyph.yoffset) * scale,
-      ),
-      newV2(
-        (float32)(glyph.region.w) * (float32)(scale),
-        (float32)(glyph.region.h) * (float32)(scale)
-      ),
-      (float)0.0,
-      color,
-      1.0
-    )
+    let proj = glGetUniformLocation(r2d.font_shader_program, "projection")
+    glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
+    
+    glActiveTexture(GL_TEXTURE0)
+    glBindVertexArray(r2d.font_text_vao)
 
-    cursor_x += ((float32)(glyph.region.w) + glyph.xoffset) * scale
+    var x = pos.x
+    var y = pos.y
+
+    # var vertices = newSeq[float](6 * 4)
+    for c in text:
+        doAssert(font.characters.hasKey c, "Font did not load the character: " & $c)
+        let g = font.characters[c]
+
+        let xpos = x + g.bearing.x * scale
+        let ypos = y - (g.size.y - g.bearing.y) * scale
+
+        let w = g.size.x * scale
+        let h = g.size.y * scale
+
+        var vertices = @[
+            (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,            
+            (xpos).GLfloat,     (ypos).GLfloat,       0.0.GLfloat, 1.0.GLfloat,
+            (xpos + w).GLfloat, (ypos).GLfloat,       1.0.GLfloat, 1.0.GLfloat,
+            (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,
+            (xpos + w).GLfloat, (ypos).GLfloat,       1.0.GLfloat, 1.0.GLfloat,
+            (xpos + w).GLfloat, (ypos + h).GLfloat,   1.0.GLfloat, 0.0.GLfloat
+        ]
+
+        glBindTexture(GL_TEXTURE_2D, g.texture_id)
+        glBindBuffer(GL_ARRAY_BUFFER, r2d.font_text_vbo)
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 6 * 4, addr vertices[0]); 
+        glBindBuffer(GL_ARRAY_BUFFER, 0)
+
+        glDrawArrays(GL_TRIANGLES, 0, 6)
+
+        x += (g.advance shr 6).float * scale
+
+    glBindVertexArray(0)
+    glUseProgram(0)
 
 var rectangle_batch = newSeq[GLfloat]()
 var rot_and_depth_batch = newSeq[GLfloat]()

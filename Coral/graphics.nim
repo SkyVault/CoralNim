@@ -42,7 +42,7 @@ type
         x*, y* , w* , h* : float
 
     Image* = ref object
-        id: GLuint
+        id*: GLuint
         width* , height* , channels* : int
 
     Camera2D* = ref object
@@ -61,17 +61,20 @@ type
       image*: Image
 
     FontGlyph* = ref object
-        texture_id: GLuint
-        size: V2
-        bearing: V2
-        advance: GLuint
+        texture_id*: GLuint
+        size*: V2
+        bearing*: V2
+        advance*: GLuint
 
     Font* = ref object
         face: FT_Face
-        characters: TableRef[char, FontGlyph]
+        characters* : TableRef[char, FontGlyph]
 
 var ft_context: FT_Library
 doAssert(FT_Init_FreeType(ft_context) == 0, "Failed to initialize freetype")
+
+proc getChar* (f: Font, c: char): FontGlyph=
+    result = f.characters[c]
 
 proc `$`* (r: Region): string
 
@@ -332,7 +335,8 @@ proc CoralLoadFont* (path: string, size: int = 32): Font=
         echo "Failed to load font: ", path
         return
 
-    discard FT_Set_Pixel_Sizes(result.face, 0, size.FT_UInt)
+    # discard FT_Set_Pixel_Sizes(result.face, 0, size.FT_UInt)
+    discard FT_Set_Pixel_Sizes(result.face, 0, 48)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
 
