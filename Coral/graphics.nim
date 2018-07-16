@@ -8,13 +8,16 @@ import
     glu,
     strutils,
     sequtils,
+    sets,
     os,
     math,
     stb_image/read as stbi,
     stb_image/write as stbw,
-    stb_truetype,
     tables,
-    unicode
+    unicode,
+    sdl2/sdl,
+    freetype/freetype,
+    freetype/fttypes
 
 type
     BufferType* = enum
@@ -49,27 +52,26 @@ type
         rotation*   : float32
 
     Glyph* = ref object
-      id*: uint
-      region*: Region
-      yoffset*, xoffset*, xadvance*: float
+        id*: uint 
+        region*: Region
+        yoffset*, xoffset*, xadvance*: float
     
     SpriteFont* = ref object
       glyphs*: TableRef[uint, Glyph]
       image*: Image
 
+    FontGlyph* = ref object
+        texture_id: GLuint
+        size: V2
+        bearing: V2
+        advance: GLuint
+
     Font* = ref object
-        size: int
-        atlasWidth, atlasHeight: int
-        oversampleX, oversampleY: int 
+        face: FT_Face
+        characters: TableRef[char, FontGlyph]
 
-        firstChar: char
-        charCount: int
-
-        charInfo: seq[PackedChar]
-        image* : Image # Temp exported
-        
-# Font stuff
-var font_context = PackContext()
+var ft_context: FT_Library
+doAssert(FT_Init_FreeType(ft_context) == 0, "Failed to initialize freetype")
 
 proc `$`* (r: Region): string
 
@@ -323,86 +325,50 @@ proc bindImage* (img: Image)= glBindTexture(GL_TEXTURE_2D, img.id)
 proc unBindImage* ()= glBindTexture(GL_TEXTURE_2D, 0)
 
 # Font loading
+proc CoralLoadFont* (path: string, size: int = 32): Font=
+    result = Font(face: nil, characters: newTable[char, FontGlyph]())    
 
-proc loadFont* (path: string, size: int = 32): Font=
-    result = Font(
-        size: size,
-        atlasWidth: 1024,
-        atlasHeight: 1024,
-        oversampleX: 2,
-        oversampleY: 2,
-        firstChar: ' ',
-        charCount: '~'.int - ' '.int,
-        charInfo: newSeq[PackedChar]('~'.int - ' '.int),
-        image: Image(
-            id: 0
+    if (FT_New_Face(ft_context, path, 0, result.face) != 0):
+        echo "Failed to load font: ", path
+        return
+
+    discard FT_Set_Pixel_Sizes(result.face, 0, size.FT_UInt)
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
+
+    for i in 0..<128:
+        if (FT_Load_Char(result.face, i.FT_U_Long, FT_LOAD_RENDER) != 0):
+            echo "Font failed to load the char: ", i.char
+            continue
+
+        var id: GLuint = 0
+        glGenTextures(1, addr id)
+        glBindTexture(GL_TEXTURE_2D, id)
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            GLint(GL_RED),
+            result.face.glyph.bitmap.width.GLsizei,
+            result.face.glyph.bitmap.rows.GLsizei,
+            0,
+            GL_RED,
+            GL_UNSIGNED_BYTE,
+            addr result.face.glyph.bitmap.buffer[0]
         )
-    )
 
-    # result.image.width = 1024
-    # result.image.height = 1024
-    result.image.width = result.atlasWidth
-    result.image.height = result.atlasHeight
-    result.image.channels = 1
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    if not fileExists(path):
-        result = nil
-        echo "Could not load font.."
+        let glyph = FontGlyph(
+            texture_id: id,
+            size: newV2(result.face.glyph.bitmap.width.float, result.face.glyph.bitmap.rows.float),
+            bearing: newV2(result.face.glyph.bitmap_left.float, result.face.glyph.bitmap_top.float),
+            advance: result.face.glyph.advance.x.GLuint
+        )
 
-    let font_data = readFile(path)
-    var atlas_data = newString(result.image.width * result.image.height)
-
-    discard packBegin(font_context, atlas_data, result.image.width, result.image.height, result.image.width, 1)
-    packSetOverampling(font_context, 1, 1)
-    let ranges = packFontRanges(font_context, font_data, 0, [
-        PackRange(typ: packRangeRange, font_size: result.size.float32, first_unicode_char_in_range: 0x0020, num_chars: 0x007F - 0x0020),
-        PackRange(typ: packRangeRange, font_size: result.size.float32, first_unicode_char_in_range: 0x0020, num_chars: 0x007F - 0x0020)
-        ])
-    packEnd(font_context)
-
-    # discard packBegin(font_context, atlas_data, result.atlasWidth, result.atlasHeight, 0, 1)
-
-    # packSetOverampling(font_context, result.oversampleX, result.oversampleY)
-    # discard packFontRange(font_context, font_data, 0, result.size.float32, result.firstChar.int, result.charCount, result.charInfo)
-    # packEnd(font_context)
-
-    proc lerp(s, t, v: float32): float32 = s + (t - s) * v
-
-    #scrappy cut out function
-    var
-        x = 0f
-        y = 0f
-    let 
-        rect = getPackedQuad(ranges[1][1][4], result.image.width, result.image.width, x, y, true)
-        rw = int rect.x1 - rect.x0
-        rh = int rect.y1 - rect.y0
-    var singleChar = newSeq[byte](rw * rh)
-    for j in 0..rh - 1:
-        for i in 0..rw - 1:
-            let
-                x = int(lerp(rect.s0, rect.s1, float32(i) / float32(rw)) * result.image.width.float32)
-                y = int(lerp(rect.t0, rect.t1, float32(j) / float32(rh)) * result.image.width.float32)
-            singleChar[i + j * rw] = (byte atlas_data[x + y * result.image.width])
-    # writePNG("test2.png", rw, rh, 1, singleChar) # should contain only an Omega
-    writePng("test.png", result.image.width, result.image.height, 1, cast[seq[uint8]](toSeq(items atlas_data))) # should contain every rendered character
-
-    var d = cast[seq[uint8]](toSeq(items atlas_data))
-    var tmp = newSeq[uint8](result.image.width * result.image.height * 3)
-
-    for i in countup(0, (1024 * 1024) - 1):
-        tmp[(i * 3) + 0] = d[i]
-        tmp[(i * 3) + 1] = d[i]
-        tmp[(i * 3) + 2] = d[i]
-
-    glGenTextures(1, addr result.image.id)
-    glBindTexture(GL_TEXTURE_2D, result.image.id)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-    glTexImage2D(GL_TEXTURE_2D, 0, GLint(GL_RGB), result.image.width.GLsizei, result.image.height.GLsizei, 0, GL_RGB, GL_UNSIGNED_BYTE, addr tmp[0])
-    glBindTexture(GL_TEXTURE_2D, 0)
-
-    echo result.image.id
-
+        result.characters.add(i.char, glyph)
 
 proc loadSpriteFont* (path: string, image_path: string): SpriteFont=
   result = SpriteFont(
@@ -468,4 +434,3 @@ proc `$`* (r: Region): string=
     result &= "   y: " & $r.y & "\n"
     result &= "   w: " & $r.w & "\n"
     result &= "   h: " & $r.h & "\n}\n"
-
