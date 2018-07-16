@@ -51,15 +51,6 @@ type
         zoom*       : float32
         rotation*   : float32
 
-    Glyph* = ref object
-        id*: uint 
-        region*: Region
-        yoffset*, xoffset*, xadvance*: float
-    
-    SpriteFont* = ref object
-      glyphs*: TableRef[uint, Glyph]
-      image*: Image
-
     FontGlyph* = ref object
         texture_id*: GLuint
         size*: V2
@@ -374,58 +365,18 @@ proc CoralLoadFont* (path: string, size: int = 32): Font=
 
         result.characters.add(i.char, glyph)
 
-proc loadSpriteFont* (path: string, image_path: string): SpriteFont=
-  result = SpriteFont(
-    glyphs: newTable[uint, Glyph](),
-    image: CoralLoadImage(image_path)
-  )
+proc measure* (font: Font, text: string, scale = 1.0): V2=
+    var bw = 0.0
+    var bh = 0.0
+    for c in text:
+        let g = font.characters[c]
 
-  for line in lines path:
-    var tokens = newSeq[string]()
-    let seps = {' ', '='}
-    for token in tokenize(line, seps):
-      tokens.add token.token
+        let gheight = g.size.y * scale
+        if bh < gheight: bh = gheight
 
-    if len(tokens) == 0: continue
-    if tokens[0] == "char":
-      let id = (uint)(parseInt(tokens[4]))
-      let theGlyph = Glyph(
-        id: id,
-        region: newRegion(
-          parseInt(tokens[8]),
-          parseInt(tokens[12]),
-          parseInt(tokens[16]),
-          parseInt(tokens[20])
-        ),
-        xoffset: parseFloat(tokens[24]),
-        yoffset: parseFloat(tokens[28]),
-        xadvance: parseFloat(tokens[32])
-      )
+        bw += (g.advance shr 6).float * scale
 
-      result.glyphs.add(id, theGlyph)
-
-proc measure* (font: SpriteFont, scale: float, str: string): V2=
-  var xlen = 0.0
-  var ylen = 0.0
-  var yoff = 0.0
-  for c in str:
-    if c == ' ':
-      xlen += font.glyphs[uint(' ')].xadvance * scale
-      continue
-
-    if c in Newlines:
-      yoff += (float)(font.glyphs[uint('A')].region.h) * scale
-      continue
-
-    let id = uint(c)
-    let glyph = font.glyphs[id]
-    let height = ((float32)(glyph.region.h) + glyph.yoffset) * scale
-
-    if height > ylen:
-      ylen = height
-
-    xlen += ((float32)(glyph.region.w) + glyph.xoffset) * scale
-  return newV2((float32)xlen, (float32)ylen + yoff)
+    return newV2(bw, bh)
 
 ## Camera 2D
 proc view* (camera: Camera2D): M2=

@@ -18,10 +18,12 @@ Coral.load = proc()=
 Coral.draw = proc()=
     Coral.r2d.setBackgroundColor(P8Indigo)
 
-    # Coral.r2d.drawImage(font.image, newV2(0, font.image.height), newV2(font.image.width, -font.image.height), 0.0, newColor())
+    const text = "Fonts are now correctly positioned!"
 
+    var size = font.measure(text)
 
-    Coral.r2d.drawString(font, "Fonts are now correctly positioned!", newV2(0.0, 0.0))
-    # Coral.r2d.drawString(font, "Hello my mellow fellow!", newV2(100, 100))
+    Coral.r2d.drawLineRect(0, 0, size.x, size.y, 0.0, P8Peach)
+    echo size
+    Coral.r2d.drawString(font, text, newV2(0.0, 0.0))
 
 Coral.createGame(1280, 720, "Font Test", config()).run()
