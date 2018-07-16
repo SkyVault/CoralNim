@@ -67,7 +67,7 @@ type
         advance*: GLuint
 
     Font* = ref object
-        face: FT_Face
+        face*: FT_Face
         characters* : TableRef[char, FontGlyph]
 
 var ft_context: FT_Library
@@ -336,7 +336,7 @@ proc CoralLoadFont* (path: string, size: int = 32): Font=
         return
 
     # discard FT_Set_Pixel_Sizes(result.face, 0, size.FT_UInt)
-    discard FT_Set_Pixel_Sizes(result.face, 0, 48)
+    discard FT_Set_Pixel_Sizes(result.face, 0, size.FT_UInt)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
 

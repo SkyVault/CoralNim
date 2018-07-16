@@ -393,6 +393,7 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
 
     # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
     var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -1.0, 1.0)
+    # var ortho = r2d.ortho_projection
 
     let proj = glGetUniformLocation(r2d.font_shader_program, "projection")
     glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
@@ -401,7 +402,17 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
     glBindVertexArray(r2d.font_text_vao)
 
     var x = pos.x
-    var y = pos.y
+    var y = height - pos.y
+
+    var bw = 0.0
+    var bh = 0.0
+    for c in text:
+        let g = font.characters[c]
+
+        let gheight = g.size.y * scale
+        if bh < gheight: bh = gheight
+
+        bw += (g.advance shr 6).float * scale
 
     # var vertices = newSeq[float](6 * 4)
     for c in text:
@@ -409,10 +420,13 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
         let g = font.characters[c]
 
         let xpos = x + g.bearing.x * scale
-        let ypos = y - (g.size.y - g.bearing.y) * scale
+
+        var ypos = y - ((g.size.y - g.bearing.y) * scale) 
 
         let w = g.size.x * scale
         let h = g.size.y * scale
+
+        ypos -= bh
 
         var vertices = @[
             (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,            
