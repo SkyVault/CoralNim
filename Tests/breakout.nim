@@ -22,6 +22,8 @@ type
     Paddle  = ref object of Entity
     Ball    = ref object of Entity
 
+var score = 0
+
 proc absf(v: float): float=
     if v < 0: return -v
     else: return v
@@ -66,6 +68,7 @@ method collision(self: Ball, other: Entity)=
     if other of Brick:
         other.delete = true
         self.velocity.y *= -1
+        score += 1
 
 var font: Font
 
@@ -75,7 +78,7 @@ Coral.load = proc()=
     let ball_vel_x = random(100.0) - 200.0
     let ball_vel_y = random(100.0) - 200.0
 
-    font = loadFont(getApplicationDir() & "/arial.ttf")
+    font = CoralLoadFont(getApplicationDir() & "/arial.ttf")
 
     entities.add(
         Ball(
@@ -151,14 +154,18 @@ Coral.update = proc()=
 Coral.draw= proc()=
     Coral.r2d.setBackgroundColor(P8Peach)
 
-    # for entity in entities:
-    #     Coral.r2d.drawRect(
-    #         entity.position,
-    #         entity.size,
-    #         0.0,
-    #         entity.color
-    #     )
+    for entity in entities:
+        Coral.r2d.drawRect(
+            entity.position,
+            entity.size,
+            0.0,
+            entity.color
+        )
 
-    Coral.r2d.drawImage(font.image, newV2(0, 0), newV2(256 + 128, 256 + 128), 0.0, newColor())
+    # Draw score
+    let size = font.measure($score, 1)
+    let (winX, winY) = Coral.windowSize
+    let xpos = winX.float / 2.0 - size.x.float
+    Coral.r2d.drawString(font, $score, newV2(xpos, winY.float / 2.0))
 
 Coral.createGame(11 * (32 + 8), 720, "Breakout!", config()).run()
