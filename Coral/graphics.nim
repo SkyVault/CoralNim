@@ -213,6 +213,30 @@ proc newVbo* (btype:BufferType, dimensions: uint32, attrib: uint32, data: var se
         nil
     )
     glBindBuffer(theType, 0)
+    
+proc bindVao*(buffer: GLuint)=
+    glBindVertexArray(buffer)
+
+proc unBindVao*()=
+    glBindVertexArray(0)
+
+template useVao* (buffer: GLuint, body: untyped)=
+    bindVao(buffer)
+    body
+    unBindVao()
+
+proc bindVbo*(buffer: GLuint, btype:BufferType)=
+    let theType = getGLenumArrayType btype
+    glBindBuffer(theType, buffer)
+
+proc unBindVbo*(btype:BufferType)=
+    let theType = getGLenumArrayType btype
+    glBindBuffer(theType, 0)
+
+template useVbo* (buffer: GLuint, btype: BufferType, body: untyped)=
+    bindVbo(buffer, btype)
+    body
+    unBindVbo(btype)
 
 ## Shader code
 proc loadShader* (stype:ShaderType, code: string): GLuint=
@@ -264,6 +288,11 @@ proc newProgram* (v: GLuint, f: GLuint): GLuint=
 
 proc bindProgram* (p: GLuint)   = glUseProgram(p)
 proc unBindProgram* ()          = glUseProgram(0)
+
+template useProgram* (p: GLuint, body: untyped)=
+    bindProgram(p)
+    body
+    unBindProgram()
 
 proc setUniform* (p: GLuint, loc: GLint, f: float32)= glUniform1f(loc, f)
 proc setUniform* (p: GLuint, loc: GLint, v: V2)= glUniform2f(loc, v.x, v.y)

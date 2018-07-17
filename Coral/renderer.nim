@@ -255,20 +255,20 @@ proc newR2D* (draw_instanced = true):R2d =
     result.view_matrix = newM2(1, 0, 0, 1)
 
     glUseProgram(result.shader_program);
-    result.diffuse_location         = glGetUniformLocation(result.shader_program, "diffuse");
-    result.depth_location           = glGetUniformLocation(result.shader_program, "depth");
-    result.has_texture_location     = glGetUniformLocation(result.shader_program, "has_texture");
-    result.ortho_location           = glGetUniformLocation(result.shader_program, "ortho");
-    result.size_location            = glGetUniformLocation(result.shader_program, "size");
-    result.rotation_location        = glGetUniformLocation(result.shader_program, "rotation");
-    result.position_location        = glGetUniformLocation(result.shader_program, "position");
-    result.quad_location            = glGetUniformLocation(result.shader_program, "quad");
-    result.view_location            = glGetUniformLocation(result.shader_program, "view");
-    glUseProgram(0);
 
-    glUseProgram(result.font_shader_program)
-    result.font_text_color_location = glGetUniformLocation(result.font_shader_program, "textColor");
-    glUseProgram(0);
+    useProgram result.shader_program:
+        result.diffuse_location         = glGetUniformLocation(result.shader_program, "diffuse");
+        result.depth_location           = glGetUniformLocation(result.shader_program, "depth");
+        result.has_texture_location     = glGetUniformLocation(result.shader_program, "has_texture");
+        result.ortho_location           = glGetUniformLocation(result.shader_program, "ortho");
+        result.size_location            = glGetUniformLocation(result.shader_program, "size");
+        result.rotation_location        = glGetUniformLocation(result.shader_program, "rotation");
+        result.position_location        = glGetUniformLocation(result.shader_program, "position");
+        result.quad_location            = glGetUniformLocation(result.shader_program, "quad");
+        result.view_location            = glGetUniformLocation(result.shader_program, "view");
+
+    useProgram result.font_shader_program:
+        result.font_text_color_location = glGetUniformLocation(result.font_shader_program, "textColor");
 
 proc view* (self: R2D): auto= return self.view_matrix
 proc `view=`* (self: R2D, view: M2)=
