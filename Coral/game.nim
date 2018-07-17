@@ -207,7 +207,9 @@ proc newCoralGame()=
         ),
         assets: AssetManager(
             images: newTable[string, Image](),
-            audio: newTable[string, Audio]()
+            audio: newTable[string, Audio](),
+            fonts: newTable[string, Font](),
+            regions: newTable[string, seq[Region]]()
         ),
         world: nil
     )

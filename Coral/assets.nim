@@ -8,11 +8,16 @@ type
         images*: TableRef[string, Image]
         audio*: TableRef[string, Audio]
         regions*: TableRef[string, seq[Region]]
+        fonts*: TableRef[string, Font]
 
 ## Asset manager Api
 proc add* (a: AssetManager, id: string, image: Image): Image{.discardable.}=
     result = image
     a.images.add(id, image)
+
+proc add* (a: AssetManager, id: string, font: Font): Font{.discardable.}=
+    result = font
+    a.fonts.add(id, font)
 
 proc add* (a: AssetManager, id: string, regions: seq[Region]): seq[Region]{.discardable.}=
     result = regions
@@ -27,6 +32,9 @@ proc getImage* (a: AssetManager, id: string): Image=
     
 proc getAudio* (a: AssetManager, id: string): Audio=
     return a.audio[id]
+
+proc getFont* (a: AssetManager, id: string): Font=
+    return a.fonts[id]
 
 proc getRegions* (a: AssetManager, id: string): seq[Region]=
     return a.regions[id]
