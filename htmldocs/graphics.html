@@ -1294,8 +1294,8 @@ function main() {
     title="lerpPercent(a: Color; b: Color; t: float): Color"><wbr />lerp<wbr />Percent<span class="attachedType" style="visibility:hidden">Color</span></a></li>
   <li><a class="reference" href="#length,Color"
     title="length(c: Color): float"><wbr />length<span class="attachedType" style="visibility:hidden">Color</span></a></li>
-  <li><a class="reference" href="#CoralRandomColor,"
-    title="CoralRandomColor(): Color"><wbr />Coral<wbr />Random<wbr />Color<span class="attachedType" style="visibility:hidden">Color</span></a></li>
+  <li><a class="reference" href="#RandomColor,"
+    title="RandomColor(): Color"><wbr />Random<wbr />Color<span class="attachedType" style="visibility:hidden">Color</span></a></li>
   <li><a class="reference" href="#clearScreen,Color"
     title="clearScreen(c: Color)"><wbr />clear<wbr />Screen<span class="attachedType" style="visibility:hidden">Color</span></a></li>
   <li><a class="reference" href="#toColor,"
@@ -1313,12 +1313,10 @@ function main() {
   <li><a class="reference" href="#newVbo,BufferType,uint32,uint32,seq[float32]"
     title="newVbo(btype: BufferType; dimensions: uint32; attrib: uint32; data: var seq[float32];
        dynamic = false): GLuint"><wbr />new<wbr />Vbo<span class="attachedType" style="visibility:hidden">BufferType</span></a></li>
-  <li><a class="reference" href="#drawArrays,GLuint,int"
-    title="drawArrays(vao: GLuint; numVertices: int)"><wbr />draw<wbr />Arrays<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralLoadShader,ShaderType,string"
-    title="CoralLoadShader(stype: ShaderType; code: string): GLuint"><wbr />Coral<wbr />Load<wbr />Shader<span class="attachedType" style="visibility:hidden">ShaderType</span></a></li>
-  <li><a class="reference" href="#CoralNewProgram,GLuint,GLuint"
-    title="CoralNewProgram(v: GLuint; f: GLuint): GLuint"><wbr />Coral<wbr />New<wbr />Program<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#loadShader,ShaderType,string"
+    title="loadShader(stype: ShaderType; code: string): GLuint"><wbr />load<wbr />Shader<span class="attachedType" style="visibility:hidden">ShaderType</span></a></li>
+  <li><a class="reference" href="#newProgram,GLuint,GLuint"
+    title="newProgram(v: GLuint; f: GLuint): GLuint"><wbr />new<wbr />Program<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#bindProgram,GLuint"
     title="bindProgram(p: GLuint)"><wbr />bind<wbr />Program<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#unBindProgram,"
@@ -1337,16 +1335,16 @@ function main() {
     title="setUniform(p: GLuint; loc: GLint; m: var M4)"><wbr />set<wbr />Uniform<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#getLocation,GLuint,cstring"
     title="getLocation(p: GLuint; id: cstring): GLint"><wbr />get<wbr />Location<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralLoadImage,string,GLint"
-    title="CoralLoadImage(path: string; filter: GLint = GL_LINEAR): Image"><wbr />Coral<wbr />Load<wbr />Image<span class="attachedType" style="visibility:hidden">Image</span></a></li>
+  <li><a class="reference" href="#loadImage,string,GLint"
+    title="loadImage(path: string; filter: GLint = GL_LINEAR): Image"><wbr />load<wbr />Image<span class="attachedType" style="visibility:hidden">Image</span></a></li>
   <li><a class="reference" href="#id,Image"
     title="id(img: Image): GLuint"><wbr />id<span class="attachedType" style="visibility:hidden">Image</span></a></li>
   <li><a class="reference" href="#bindImage,Image"
     title="bindImage(img: Image)"><wbr />bind<wbr />Image<span class="attachedType" style="visibility:hidden">Image</span></a></li>
   <li><a class="reference" href="#unBindImage,"
     title="unBindImage()"><wbr />un<wbr />Bind<wbr />Image<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralLoadFont,string,int"
-    title="CoralLoadFont(path: string; size: int = 32): Font"><wbr />Coral<wbr />Load<wbr />Font<span class="attachedType" style="visibility:hidden">Font</span></a></li>
+  <li><a class="reference" href="#loadFont,string,int"
+    title="loadFont(path: string; size: int = 32): Font"><wbr />load<wbr />Font<span class="attachedType" style="visibility:hidden">Font</span></a></li>
   <li><a class="reference" href="#measure,Font,string,float"
     title="measure(font: Font; text: string; scale = 1.0): V2"><wbr />measure<span class="attachedType" style="visibility:hidden">Font</span></a></li>
   <li><a class="reference" href="#view,Camera2D"
@@ -1534,7 +1532,7 @@ Defines a float rect
 
 
 </dd>
-<dt id="CoralRandomColor"><a name="CoralRandomColor,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">CoralRandomColor</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="RandomColor"><a name="RandomColor,"></a><pre><span class="Keyword">proc</span> <span class="Identifier">RandomColor</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Color</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1581,19 +1579,13 @@ Converts a 4 unit tuple of floats to a Color.
 
 
 </dd>
-<dt id="drawArrays"><a name="drawArrays,GLuint,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">drawArrays</span><span class="Other">(</span><span class="Identifier">vao</span><span class="Other">:</span> <span class="Identifier">GLuint</span><span class="Other">;</span> <span class="Identifier">numVertices</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="CoralLoadShader"><a name="CoralLoadShader,ShaderType,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">CoralLoadShader</span><span class="Other">(</span><span class="Identifier">stype</span><span class="Other">:</span> <span class="Identifier">ShaderType</span><span class="Other">;</span> <span class="Identifier">code</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GLuint</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="loadShader"><a name="loadShader,ShaderType,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadShader</span><span class="Other">(</span><span class="Identifier">stype</span><span class="Other">:</span> <span class="Identifier">ShaderType</span><span class="Other">;</span> <span class="Identifier">code</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GLuint</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralNewProgram"><a name="CoralNewProgram,GLuint,GLuint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">CoralNewProgram</span><span class="Other">(</span><span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">GLuint</span><span class="Other">;</span> <span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">GLuint</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GLuint</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="newProgram"><a name="newProgram,GLuint,GLuint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">newProgram</span><span class="Other">(</span><span class="Identifier">v</span><span class="Other">:</span> <span class="Identifier">GLuint</span><span class="Other">;</span> <span class="Identifier">f</span><span class="Other">:</span> <span class="Identifier">GLuint</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">GLuint</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1643,7 +1635,7 @@ Converts a 4 unit tuple of floats to a Color.
 
 
 </dd>
-<dt id="CoralLoadImage"><a name="CoralLoadImage,string,GLint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">CoralLoadImage</span><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">filter</span><span class="Other">:</span> <span class="Identifier">GLint</span> <span class="Other">=</span> <span class="Identifier">GL_LINEAR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Image</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">]</span><span class="Other">,</span>
+<dt id="loadImage"><a name="loadImage,string,GLint"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadImage</span><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">filter</span><span class="Other">:</span> <span class="Identifier">GLint</span> <span class="Other">=</span> <span class="Identifier">GL_LINEAR</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Image</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadDirEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
@@ -1664,7 +1656,7 @@ Converts a 4 unit tuple of floats to a Color.
 
 
 </dd>
-<dt id="CoralLoadFont"><a name="CoralLoadFont,string,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">CoralLoadFont</span><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Font</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="loadFont"><a name="loadFont,string,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">loadFont</span><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">size</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other">=</span> <span class="DecNumber">32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Font</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">GLerror</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1829,7 +1821,7 @@ Converts a 4 unit tuple of floats to a Color.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-17 08:25:48 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-17 09:23:34 UTC</small>
       </div>
     </div>
   </div>

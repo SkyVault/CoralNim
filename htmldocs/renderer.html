@@ -1244,12 +1244,12 @@ function main() {
       <li><a class="reference" href="#BufferTypes"
     title="BufferTypes = enum
   BT_ARRAY_BUFFER, BT_ELEMENT_ARRAY_BUFFER"><wbr />Buffer<wbr />Types<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralRotationMode"
-    title="CoralRotationMode = enum
-  Degrees, Radians"><wbr />Coral<wbr />Rotation<wbr />Mode<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralBlendMode"
-    title="CoralBlendMode = enum
-  Alpha, Additive"><wbr />Coral<wbr />Blend<wbr />Mode<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#RotationMode"
+    title="RotationMode = enum
+  Degrees, Radians"><wbr />Rotation<wbr />Mode<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#BlendMode"
+    title="BlendMode = enum
+  Alpha, Additive"><wbr />Blend<wbr />Mode<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#Drawable"
     title="Drawable = ref object of RootObj
   image: Image
@@ -1281,7 +1281,7 @@ function main() {
   customDBufferDrawable: seq[CustomBufferDrawable]
   primitives: seq[DrawablePrimitive]
   postDrawingProcedures: seq[proc ()]
-  rotation_mode: CoralRotationMode
+  rotation_mode: RotationMode
   draw_instanced: bool
   drawable_counter: int
   last_drawable_counter: int
@@ -1466,8 +1466,8 @@ void main()
     title="viewport=(self: R2D; view: (int, int))"><wbr />viewport=<span class="attachedType" style="visibility:hidden">R2D</span></a></li>
   <li><a class="reference" href="#viewport,R2D"
     title="viewport(self: R2D): (int, int)"><wbr />viewport<span class="attachedType" style="visibility:hidden">R2D</span></a></li>
-  <li><a class="reference" href="#rotationMode=,R2D,CoralRotationMode"
-    title="rotationMode=(self: R2D; mode: CoralRotationMode)"><wbr />rotation<wbr />Mode=<span class="attachedType" style="visibility:hidden">R2D</span></a></li>
+  <li><a class="reference" href="#rotationMode=,R2D,RotationMode"
+    title="rotationMode=(self: R2D; mode: RotationMode)"><wbr />rotation<wbr />Mode=<span class="attachedType" style="visibility:hidden">R2D</span></a></li>
   <li><a class="reference" href="#rotationMode,R2D"
     title="rotationMode(self: R2D): auto"><wbr />rotation<wbr />Mode<span class="attachedType" style="visibility:hidden">R2D</span></a></li>
   <li><a class="reference" href="#setBackgroundColor,R2D,Color"
@@ -1529,13 +1529,13 @@ void main()
 
 
 </dd>
-<dt id="CoralRotationMode"><a name="CoralRotationMode"></a><pre><span class="Identifier">CoralRotationMode</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<dt id="RotationMode"><a name="RotationMode"></a><pre><span class="Identifier">RotationMode</span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">Degrees</span><span class="Other">,</span> <span class="Identifier">Radians</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralBlendMode"><a name="CoralBlendMode"></a><pre><span class="Identifier">CoralBlendMode</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<dt id="BlendMode"><a name="BlendMode"></a><pre><span class="Identifier">BlendMode</span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">Alpha</span><span class="Other">,</span> <span class="Identifier">Additive</span></pre></dt>
 <dd>
 
@@ -1595,7 +1595,7 @@ void main()
   <span class="Identifier">customDBufferDrawable</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">CustomBufferDrawable</span><span class="Other">]</span>
   <span class="Identifier">primitives</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">DrawablePrimitive</span><span class="Other">]</span>
   <span class="Identifier">postDrawingProcedures</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">]</span>
-  <span class="Identifier">rotation_mode</span><span class="Other">:</span> <span class="Identifier">CoralRotationMode</span>
+  <span class="Identifier">rotation_mode</span><span class="Other">:</span> <span class="Identifier">RotationMode</span>
   <span class="Identifier">draw_instanced</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">drawable_counter</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Identifier">last_drawable_counter</span><span class="Other">:</span> <span class="Identifier">int</span>
@@ -1835,7 +1835,7 @@ void main()
 
 
 </dd>
-<dt id="rotationMode="><a name="rotationMode=,R2D,CoralRotationMode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rotationMode=</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">R2D</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">CoralRotationMode</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="rotationMode="><a name="rotationMode=,R2D,RotationMode"></a><pre><span class="Keyword">proc</span> <span class="Identifier">rotationMode=</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">R2D</span><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <span class="Identifier">RotationMode</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1940,7 +1940,7 @@ void main()
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-17 08:25:49 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-17 09:23:34 UTC</small>
       </div>
     </div>
   </div>

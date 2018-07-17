@@ -1241,35 +1241,35 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#CoralAssetManager"
-    title="CoralAssetManager = ref object
+      <li><a class="reference" href="#AssetManager"
+    title="AssetManager = ref object
   images*: TableRef[string, Image]
   audio*: TableRef[string, Audio]
-  regions*: TableRef[string, seq[Region]]"><wbr />Coral<wbr />Asset<wbr />Manager<span class="attachedType" style="visibility:hidden"></span></a></li>
+  regions*: TableRef[string, seq[Region]]"><wbr />Asset<wbr />Manager<span class="attachedType" style="visibility:hidden"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#add,CoralAssetManager,string,Image"
-    title="add(a: CoralAssetManager; id: string; image: Image): Image"><wbr />add<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#add,CoralAssetManager,string,seq[Region]"
-    title="add(a: CoralAssetManager; id: string; regions: seq[Region]): seq[Region]"><wbr />add<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#add,CoralAssetManager,string,Audio"
-    title="add(a: CoralAssetManager; id: string; audio: Audio): Audio"><wbr />add<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#getImage,CoralAssetManager,string"
-    title="getImage(a: CoralAssetManager; id: string): Image"><wbr />get<wbr />Image<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#getAudio,CoralAssetManager,string"
-    title="getAudio(a: CoralAssetManager; id: string): Audio"><wbr />get<wbr />Audio<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#getRegions,CoralAssetManager,string"
-    title="getRegions(a: CoralAssetManager; id: string): seq[Region]"><wbr />get<wbr />Regions<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#imageExists,CoralAssetManager,string"
-    title="imageExists(a: CoralAssetManager; id: string): bool"><wbr />image<wbr />Exists<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#audioExists,CoralAssetManager,string"
-    title="audioExists(a: CoralAssetManager; id: string): bool"><wbr />audio<wbr />Exists<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
-  <li><a class="reference" href="#regionsExists,CoralAssetManager,string"
-    title="regionsExists(a: CoralAssetManager; id: string): bool"><wbr />regions<wbr />Exists<span class="attachedType" style="visibility:hidden">CoralAssetManager</span></a></li>
+      <li><a class="reference" href="#add,AssetManager,string,Image"
+    title="add(a: AssetManager; id: string; image: Image): Image"><wbr />add<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#add,AssetManager,string,seq[Region]"
+    title="add(a: AssetManager; id: string; regions: seq[Region]): seq[Region]"><wbr />add<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#add,AssetManager,string,Audio"
+    title="add(a: AssetManager; id: string; audio: Audio): Audio"><wbr />add<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#getImage,AssetManager,string"
+    title="getImage(a: AssetManager; id: string): Image"><wbr />get<wbr />Image<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#getAudio,AssetManager,string"
+    title="getAudio(a: AssetManager; id: string): Audio"><wbr />get<wbr />Audio<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#getRegions,AssetManager,string"
+    title="getRegions(a: AssetManager; id: string): seq[Region]"><wbr />get<wbr />Regions<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#imageExists,AssetManager,string"
+    title="imageExists(a: AssetManager; id: string): bool"><wbr />image<wbr />Exists<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#audioExists,AssetManager,string"
+    title="audioExists(a: AssetManager; id: string): bool"><wbr />audio<wbr />Exists<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
+  <li><a class="reference" href="#regionsExists,AssetManager,string"
+    title="regionsExists(a: AssetManager; id: string): bool"><wbr />regions<wbr />Exists<span class="attachedType" style="visibility:hidden">AssetManager</span></a></li>
 
   </ul>
 </li>
@@ -1288,7 +1288,7 @@ function main() {
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="CoralAssetManager"><a name="CoralAssetManager"></a><pre><span class="Identifier">CoralAssetManager</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<dt id="AssetManager"><a name="AssetManager"></a><pre><span class="Identifier">AssetManager</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">images</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">Image</span><span class="Other">]</span>
   <span class="Identifier">audio</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">Audio</span><span class="Other">]</span>
   <span class="Identifier">regions</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span><span class="Other">]</span>
@@ -1302,51 +1302,50 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="add"><a name="add,CoralAssetManager,string,Image"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Image</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="add"><a name="add,CoralAssetManager,string,seq[Region]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">regions</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma">
-    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="add"><a name="add,CoralAssetManager,string,Audio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">Audio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Audio</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="getImage"><a name="getImage,CoralAssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getImage</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Image</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="getAudio"><a name="getAudio,CoralAssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getAudio</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Audio</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
-<dd>
-
-
-</dd>
-<dt id="getRegions"><a name="getRegions,CoralAssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getRegions</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
+<dt id="add"><a name="add,AssetManager,string,Image"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">image</span><span class="Other">:</span> <span class="Identifier">Image</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Image</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="imageExists"><a name="imageExists,CoralAssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">imageExists</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="add"><a name="add,AssetManager,string,seq[Region]"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">regions</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="audioExists"><a name="audioExists,CoralAssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">audioExists</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="add"><a name="add,AssetManager,string,Audio"></a><pre><span class="Keyword">proc</span> <span class="Identifier">add</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">Audio</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Audio</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="regionsExists"><a name="regionsExists,CoralAssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">regionsExists</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="getImage"><a name="getImage,AssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getImage</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Image</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="getAudio"><a name="getAudio,AssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getAudio</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Audio</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="getRegions"><a name="getRegions,AssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">getRegions</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Region</span><span class="Other">]</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="imageExists"><a name="imageExists,AssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">imageExists</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="audioExists"><a name="audioExists,AssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">audioExists</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dd>
+
+
+</dd>
+<dt id="regionsExists"><a name="regionsExists,AssetManager,string"></a><pre><span class="Keyword">proc</span> <span class="Identifier">regionsExists</span><span class="Other">(</span><span class="Identifier">a</span><span class="Other">:</span> <span class="Identifier">AssetManager</span><span class="Other">;</span> <span class="Identifier">id</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1361,7 +1360,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-17 08:25:48 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-17 09:23:34 UTC</small>
       </div>
     </div>
   </div>

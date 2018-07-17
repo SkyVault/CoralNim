@@ -1241,11 +1241,11 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#CoralControlerNumber"
-    title="CoralControlerNumber = enum
-  One = 1, Two, Three, Four"><wbr />Coral<wbr />Controler<wbr />Number<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralControllerButtons"
-    title="CoralControllerButtons = enum
+      <li><a class="reference" href="#ControlerNumber"
+    title="ControlerNumber = enum
+  One = 1, Two, Three, Four"><wbr />Controler<wbr />Number<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#ControllerButtons"
+    title="ControllerButtons = enum
   A = sdl.CONTROLLER_BUTTON_A, B = sdl.CONTROLLER_BUTTON_B,
   X = sdl.CONTROLLER_BUTTON_X, Y = sdl.CONTROLLER_BUTTON_Y,
   Back = sdl.CONTROLLER_BUTTON_BACK, Guide = sdl.CONTROLLER_BUTTON_GUIDE,
@@ -1257,9 +1257,9 @@ function main() {
   DpadDown = sdl.CONTROLLER_BUTTON_DPAD_DOWN,
   DpadLeft = sdl.CONTROLLER_BUTTON_DPAD_LEFT,
   DpadRight = sdl.CONTROLLER_BUTTON_DPAD_RIGHT, Max = sdl.CONTROLLER_BUTTON_MAX,
-  Invalid = sdl.CONTROLLER_BUTTON_INVALID"><wbr />Coral<wbr />Controller<wbr />Buttons<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralKey"
-    title="CoralKey = enum
+  Invalid = sdl.CONTROLLER_BUTTON_INVALID"><wbr />Controller<wbr />Buttons<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#Key"
+    title="Key = enum
   UNKNOWN = K_UNKNOWN, BACKSPACE = K_BACKSPACE, TAB = K_TAB, ENTER = K_RETURN,
   ESCAPE = K_ESCAPE, SPACE = K_SPACE, EXCLAIM = K_EXCLAIM, QUOTEDBL = K_QUOTEDBL,
   HASH = K_HASH, DOLLAR = K_DOLLAR, PERCENT = K_PERCENT, AMPERSAND = K_AMPERSAND,
@@ -1317,68 +1317,68 @@ function main() {
   DISPLAYSWITCH = K_DISPLAYSWITCH, KBDILLUMTOGGLE = K_KBDILLUMTOGGLE,
   KBDILLUMDOWN = K_KBDILLUMDOWN, KBDILLUMUP = K_KBDILLUMUP, EJECT = K_EJECT,
   SLEEP = K_SLEEP, APP1 = K_APP1, APP2 = K_APP2, AUDIOREWIND = K_AUDIOREWIND,
-  AUDIOFASTFORWARD = K_AUDIOFASTFORWARD"><wbr />Coral<wbr />Key<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralTimerState"
-    title="CoralTimerState = enum
-  Playing, Paused"><wbr />Coral<wbr />Timer<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralTimer"
-    title="CoralTimer = ref object
+  AUDIOFASTFORWARD = K_AUDIOFASTFORWARD"><wbr />Key<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#TimerState"
+    title="TimerState = enum
+  Playing, Paused"><wbr />Timer<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#Timer"
+    title="Timer = ref object
   milliseconds: float
   repeat: int
   timer: float
   times_called: int
-  state: CoralTimerState
+  state: TimerState
   shouldDelete: bool
-  callback: proc (): void"><wbr />Coral<wbr />Timer<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralClock"
-    title="CoralClock = ref object
+  callback: proc (): void"><wbr />Timer<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#Clock"
+    title="Clock = ref object
   fps, delta, last, timer, last_fps: float
   avFps, avDt: float
   fpsSamples, dtSamples: seq[float]
   ticks: int
-  timers: seq[CoralTimer]"><wbr />Coral<wbr />Clock<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralKeyState"
-    title="CoralKeyState = ref object of RootObj
-  state*, last*: int"><wbr />Coral<wbr />Key<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralMouseState"
-    title="CoralMouseState = ref object of CoralKeyState"><wbr />Coral<wbr />Mouse<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralButtonState"
-    title="CoralButtonState = ref object of CoralKeyState"><wbr />Coral<wbr />Button<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralControllerState"
-    title="CoralControllerState = ref object
-  A, B, X, Y: CoralButtonState
-  Start, Select: CoralButtonState
-  LTrigger, RTrigger, LShoulder, RShoulder: CoralButtonState"><wbr />Coral<wbr />Controller<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralInputManager"
-    title="CoralInputManager = ref object
+  timers: seq[Timer]"><wbr />Clock<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#KeyState"
+    title="KeyState = ref object of RootObj
+  state*, last*: int"><wbr />Key<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#MouseState"
+    title="MouseState = ref object of KeyState"><wbr />Mouse<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#ButtonState"
+    title="ButtonState = ref object of KeyState"><wbr />Button<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#ControllerState"
+    title="ControllerState = ref object
+  A, B, X, Y: ButtonState
+  Start, Select: ButtonState
+  LTrigger, RTrigger, LShoulder, RShoulder: ButtonState"><wbr />Controller<wbr />State<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#InputManager"
+    title="InputManager = ref object
   mouse_x, mouse_y: float64
   last_mouse_x, last_mouse_y: float
   last_number_of_controllers: int
-  mouse_left, mouse_right: CoralMouseState
-  keyMap: Table[int, CoralKeyState]
-  controllers: seq[sdl.GameController]"><wbr />Coral<wbr />Input<wbr />Manager<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralScene"
-    title="CoralScene = ref object of RootObj"><wbr />Coral<wbr />Scene<span class="attachedType" style="visibility:hidden"></span></a></li>
-  <li><a class="reference" href="#CoralConfig"
-    title="CoralConfig = ref object
+  mouse_left, mouse_right: MouseState
+  keyMap: Table[int, KeyState]
+  controllers: seq[sdl.GameController]"><wbr />Input<wbr />Manager<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#Scene"
+    title="Scene = ref object of RootObj"><wbr />Scene<span class="attachedType" style="visibility:hidden"></span></a></li>
+  <li><a class="reference" href="#Config"
+    title="Config = ref object
   resizable: bool
   fullscreen: bool
   visible: bool
-  fps: int"><wbr />Coral<wbr />Config<span class="attachedType" style="visibility:hidden"></span></a></li>
+  fps: int"><wbr />Config<span class="attachedType" style="visibility:hidden"></span></a></li>
   <li><a class="reference" href="#CoralGame"
     title="CoralGame = ref object
   window: sdl.Window
   context: sdl.GLContext
-  sceneStack: seq[CoralScene]
-  config: CoralConfig
+  sceneStack: seq[Scene]
+  config: Config
   running: bool
   targetFPS: int
   r2d: R2D
-  clock: CoralClock
-  input: CoralInputManager
-  audio: CoralAudioMixer
-  world: CoralWorld
-  assets: CoralAssetManager
+  clock: Clock
+  input: InputManager
+  audio: AudioMixer
+  world: World
+  assets: AssetManager
   title: string
   load*: proc ()
   update*: proc ()
@@ -1391,36 +1391,36 @@ function main() {
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#currentScene,CoralGame"
-    title="currentScene(game: CoralGame): CoralScene"><wbr />current<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#timer,CoralClock"
-    title="timer(c: CoralClock): float"><wbr />timer<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
-  <li><a class="reference" href="#currentFPS,CoralClock"
-    title="currentFPS(c: CoralClock): float"><wbr />current<wbr />FPS<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
-  <li><a class="reference" href="#dt,CoralClock"
-    title="dt(c: CoralClock): float"><wbr />dt<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
-  <li><a class="reference" href="#ticks,CoralClock"
-    title="ticks(c: CoralClock): int"><wbr />ticks<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
-  <li><a class="reference" href="#averageFps,CoralClock"
-    title="averageFps(c: CoralClock): float"><wbr />average<wbr />Fps<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
-  <li><a class="reference" href="#averageDt,CoralClock"
-    title="averageDt(c: CoralClock): float"><wbr />average<wbr />Dt<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
-  <li><a class="reference" href="#start,CoralTimer"
-    title="start(timer: CoralTimer): CoralTimer"><wbr />start<span class="attachedType" style="visibility:hidden">CoralTimer</span></a></li>
-  <li><a class="reference" href="#pause,CoralTimer"
-    title="pause(timer: CoralTimer): CoralTimer"><wbr />pause<span class="attachedType" style="visibility:hidden">CoralTimer</span></a></li>
-  <li><a class="reference" href="#delete,CoralTimer"
-    title="delete(timer: CoralTimer)"><wbr />delete<span class="attachedType" style="visibility:hidden">CoralTimer</span></a></li>
-  <li><a class="reference" href="#reset,CoralTimer"
-    title="reset(timer: CoralTimer)"><wbr />reset<span class="attachedType" style="visibility:hidden">CoralTimer</span></a></li>
-  <li><a class="reference" href="#timesCalled,CoralTimer"
-    title="timesCalled(timer: CoralTimer): auto"><wbr />times<wbr />Called<span class="attachedType" style="visibility:hidden">CoralTimer</span></a></li>
-  <li><a class="reference" href="#addTimer,CoralClock,float,int,proc)"
-    title="addTimer(clock: CoralClock; milliseconds: float; repeat = 0; callback: proc (): void): CoralTimer"><wbr />add<wbr />Timer<span class="attachedType" style="visibility:hidden">CoralClock</span></a></li>
+    title="currentScene(game: CoralGame): Scene"><wbr />current<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#timer,Clock"
+    title="timer(c: Clock): float"><wbr />timer<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
+  <li><a class="reference" href="#currentFPS,Clock"
+    title="currentFPS(c: Clock): float"><wbr />current<wbr />FPS<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
+  <li><a class="reference" href="#dt,Clock"
+    title="dt(c: Clock): float"><wbr />dt<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
+  <li><a class="reference" href="#ticks,Clock"
+    title="ticks(c: Clock): int"><wbr />ticks<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
+  <li><a class="reference" href="#averageFps,Clock"
+    title="averageFps(c: Clock): float"><wbr />average<wbr />Fps<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
+  <li><a class="reference" href="#averageDt,Clock"
+    title="averageDt(c: Clock): float"><wbr />average<wbr />Dt<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
+  <li><a class="reference" href="#start,Timer"
+    title="start(timer: Timer): Timer"><wbr />start<span class="attachedType" style="visibility:hidden">Timer</span></a></li>
+  <li><a class="reference" href="#pause,Timer"
+    title="pause(timer: Timer): Timer"><wbr />pause<span class="attachedType" style="visibility:hidden">Timer</span></a></li>
+  <li><a class="reference" href="#delete,Timer"
+    title="delete(timer: Timer)"><wbr />delete<span class="attachedType" style="visibility:hidden">Timer</span></a></li>
+  <li><a class="reference" href="#reset,Timer"
+    title="reset(timer: Timer)"><wbr />reset<span class="attachedType" style="visibility:hidden">Timer</span></a></li>
+  <li><a class="reference" href="#timesCalled,Timer"
+    title="timesCalled(timer: Timer): auto"><wbr />times<wbr />Called<span class="attachedType" style="visibility:hidden">Timer</span></a></li>
+  <li><a class="reference" href="#addTimer,Clock,float,int,proc)"
+    title="addTimer(clock: Clock; milliseconds: float; repeat = 0; callback: proc (): void): Timer"><wbr />add<wbr />Timer<span class="attachedType" style="visibility:hidden">Clock</span></a></li>
   <li><a class="reference" href="#config,int"
-    title="config(resizable = false; fullscreen = false; visible = true; fps = 60): CoralConfig"><wbr />config<span class="attachedType" style="visibility:hidden">CoralConfig</span></a></li>
-  <li><a class="reference" href="#createGame,CoralGame,int,int,string,CoralConfig"
+    title="config(resizable = false; fullscreen = false; visible = true; fps = 60): Config"><wbr />config<span class="attachedType" style="visibility:hidden">Config</span></a></li>
+  <li><a class="reference" href="#createGame,CoralGame,int,int,string,Config"
     title="createGame(self: CoralGame; width, height: int; title: string;
-           config: CoralConfig = config()): CoralGame"><wbr />create<wbr />Game<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+           config: Config = config()): CoralGame"><wbr />create<wbr />Game<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#clock,CoralGame"
     title="clock(game: CoralGame): auto"><wbr />clock<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#input,CoralGame"
@@ -1430,9 +1430,9 @@ function main() {
   <li><a class="reference" href="#audio,CoralGame"
     title="audio(game: CoralGame): auto"><wbr />audio<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#world,CoralGame"
-    title="world(c: CoralGame): CoralWorld"><wbr />world<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+    title="world(c: CoralGame): World"><wbr />world<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#assets,CoralGame"
-    title="assets(c: CoralGame): CoralAssetManager"><wbr />assets<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+    title="assets(c: CoralGame): AssetManager"><wbr />assets<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#mouseX,CoralGame"
     title="mouseX(game: CoralGame): float"><wbr />mouse<wbr />X<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#mouseY,CoralGame"
@@ -1461,14 +1461,14 @@ function main() {
     title="isMouseRightPressed(game: CoralGame): bool"><wbr />is<wbr />Mouse<wbr />Right<wbr />Pressed<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#isMouseRightReleased,CoralGame"
     title="isMouseRightReleased(game: CoralGame): bool"><wbr />is<wbr />Mouse<wbr />Right<wbr />Released<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#isKeyDown,CoralGame,CoralKey"
-    title="isKeyDown(game: CoralGame; key: CoralKey): bool"><wbr />is<wbr />Key<wbr />Down<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#isKeyUp,CoralGame,CoralKey"
-    title="isKeyUp(game: CoralGame; key: CoralKey): bool"><wbr />is<wbr />Key<wbr />Up<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#isKeyReleased,CoralGame,CoralKey"
-    title="isKeyReleased(game: CoralGame; key: CoralKey): bool"><wbr />is<wbr />Key<wbr />Released<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#isKeyPressed,CoralGame,CoralKey"
-    title="isKeyPressed(game: CoralGame; key: CoralKey): bool"><wbr />is<wbr />Key<wbr />Pressed<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#isKeyDown,CoralGame,Key"
+    title="isKeyDown(game: CoralGame; key: Key): bool"><wbr />is<wbr />Key<wbr />Down<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#isKeyUp,CoralGame,Key"
+    title="isKeyUp(game: CoralGame; key: Key): bool"><wbr />is<wbr />Key<wbr />Up<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#isKeyReleased,CoralGame,Key"
+    title="isKeyReleased(game: CoralGame; key: Key): bool"><wbr />is<wbr />Key<wbr />Released<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#isKeyPressed,CoralGame,Key"
+    title="isKeyPressed(game: CoralGame; key: Key): bool"><wbr />is<wbr />Key<wbr />Pressed<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#windowSize,CoralGame"
     title="windowSize(self: CoralGame): (int, int)"><wbr />window<wbr />Size<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#windowSize=,CoralGame,int,int"
@@ -1485,12 +1485,12 @@ function main() {
     title="windowVisible(self: CoralGame): bool"><wbr />window<wbr />Visible<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#windowVisible=,CoralGame,bool"
     title="windowVisible=(self: CoralGame; visible: bool)"><wbr />window<wbr />Visible=<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#pushScene,CoralGame,CoralScene"
-    title="pushScene(self: CoralGame; scene: CoralScene): auto"><wbr />push<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#pushScene,CoralGame,Scene"
+    title="pushScene(self: CoralGame; scene: Scene): auto"><wbr />push<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#popScene,CoralGame"
     title="popScene(self: CoralGame): auto"><wbr />pop<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
-  <li><a class="reference" href="#gotoScene,CoralGame,CoralScene"
-    title="gotoScene(self: CoralGame; scene: CoralScene): auto"><wbr />goto<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
+  <li><a class="reference" href="#gotoScene,CoralGame,Scene"
+    title="gotoScene(self: CoralGame; scene: Scene): auto"><wbr />goto<wbr />Scene<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#run,CoralGame"
     title="run(game: CoralGame)"><wbr />run<span class="attachedType" style="visibility:hidden">CoralGame</span></a></li>
   <li><a class="reference" href="#quit,CoralGame"
@@ -1521,13 +1521,13 @@ function main() {
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<dt id="CoralControlerNumber"><a name="CoralControlerNumber"></a><pre><span class="Identifier">CoralControlerNumber</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<dt id="ControlerNumber"><a name="ControlerNumber"></a><pre><span class="Identifier">ControlerNumber</span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">One</span> <span class="Other">=</span> <span class="DecNumber">1</span><span class="Other">,</span> <span class="Identifier">Two</span><span class="Other">,</span> <span class="Identifier">Three</span><span class="Other">,</span> <span class="Identifier">Four</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralControllerButtons"><a name="CoralControllerButtons"></a><pre><span class="Identifier">CoralControllerButtons</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<dt id="ControllerButtons"><a name="ControllerButtons"></a><pre><span class="Identifier">ControllerButtons</span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">A</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">CONTROLLER_BUTTON_A</span><span class="Other">,</span> <span class="Identifier">B</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">CONTROLLER_BUTTON_B</span><span class="Other">,</span>
   <span class="Identifier">X</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">CONTROLLER_BUTTON_X</span><span class="Other">,</span> <span class="Identifier">Y</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">CONTROLLER_BUTTON_Y</span><span class="Other">,</span>
   <span class="Identifier">Back</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">CONTROLLER_BUTTON_BACK</span><span class="Other">,</span> <span class="Identifier">Guide</span> <span class="Other">=</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">CONTROLLER_BUTTON_GUIDE</span><span class="Other">,</span>
@@ -1544,7 +1544,7 @@ function main() {
 
 
 </dd>
-<dt id="CoralKey"><a name="CoralKey"></a><pre><span class="Identifier">CoralKey</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<dt id="Key"><a name="Key"></a><pre><span class="Identifier">Key</span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">UNKNOWN</span> <span class="Other">=</span> <span class="Identifier">K_UNKNOWN</span><span class="Other">,</span> <span class="Identifier">BACKSPACE</span> <span class="Other">=</span> <span class="Identifier">K_BACKSPACE</span><span class="Other">,</span> <span class="Identifier">TAB</span> <span class="Other">=</span> <span class="Identifier">K_TAB</span><span class="Other">,</span> <span class="Identifier">ENTER</span> <span class="Other">=</span> <span class="Identifier">K_RETURN</span><span class="Other">,</span>
   <span class="Identifier">ESCAPE</span> <span class="Other">=</span> <span class="Identifier">K_ESCAPE</span><span class="Other">,</span> <span class="Identifier">SPACE</span> <span class="Other">=</span> <span class="Identifier">K_SPACE</span><span class="Other">,</span> <span class="Identifier">EXCLAIM</span> <span class="Other">=</span> <span class="Identifier">K_EXCLAIM</span><span class="Other">,</span> <span class="Identifier">QUOTEDBL</span> <span class="Other">=</span> <span class="Identifier">K_QUOTEDBL</span><span class="Other">,</span>
   <span class="Identifier">HASH</span> <span class="Other">=</span> <span class="Identifier">K_HASH</span><span class="Other">,</span> <span class="Identifier">DOLLAR</span> <span class="Other">=</span> <span class="Identifier">K_DOLLAR</span><span class="Other">,</span> <span class="Identifier">PERCENT</span> <span class="Other">=</span> <span class="Identifier">K_PERCENT</span><span class="Other">,</span> <span class="Identifier">AMPERSAND</span> <span class="Other">=</span> <span class="Identifier">K_AMPERSAND</span><span class="Other">,</span>
@@ -1607,18 +1607,18 @@ function main() {
 
 
 </dd>
-<dt id="CoralTimerState"><a name="CoralTimerState"></a><pre><span class="Identifier">CoralTimerState</span> <span class="Other">=</span> <span class="Keyword">enum</span>
+<dt id="TimerState"><a name="TimerState"></a><pre><span class="Identifier">TimerState</span> <span class="Other">=</span> <span class="Keyword">enum</span>
   <span class="Identifier">Playing</span><span class="Other">,</span> <span class="Identifier">Paused</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralTimer"><a name="CoralTimer"></a><pre><span class="Identifier">CoralTimer</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<dt id="Timer"><a name="Timer"></a><pre><span class="Identifier">Timer</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">milliseconds</span><span class="Other">:</span> <span class="Identifier">float</span>
   <span class="Identifier">repeat</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">float</span>
   <span class="Identifier">times_called</span><span class="Other">:</span> <span class="Identifier">int</span>
-  <span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">CoralTimerState</span>
+  <span class="Identifier">state</span><span class="Other">:</span> <span class="Identifier">TimerState</span>
   <span class="Identifier">shouldDelete</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">callback</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">void</span>
 </pre></dt>
@@ -1626,61 +1626,61 @@ function main() {
 
 
 </dd>
-<dt id="CoralClock"><a name="CoralClock"></a><pre><span class="Identifier">CoralClock</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<dt id="Clock"><a name="Clock"></a><pre><span class="Identifier">Clock</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">fps</span><span class="Other">,</span> <span class="Identifier">delta</span><span class="Other">,</span> <span class="Identifier">last</span><span class="Other">,</span> <span class="Identifier">timer</span><span class="Other">,</span> <span class="Identifier">last_fps</span><span class="Other">:</span> <span class="Identifier">float</span>
   <span class="Identifier">avFps</span><span class="Other">,</span> <span class="Identifier">avDt</span><span class="Other">:</span> <span class="Identifier">float</span>
   <span class="Identifier">fpsSamples</span><span class="Other">,</span> <span class="Identifier">dtSamples</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">float</span><span class="Other">]</span>
   <span class="Identifier">ticks</span><span class="Other">:</span> <span class="Identifier">int</span>
-  <span class="Identifier">timers</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">CoralTimer</span><span class="Other">]</span>
+  <span class="Identifier">timers</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Timer</span><span class="Other">]</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralKeyState"><a name="CoralKeyState"></a><pre><span class="Identifier">CoralKeyState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
+<dt id="KeyState"><a name="KeyState"></a><pre><span class="Identifier">KeyState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">state</span><span class="Operator">*</span><span class="Other">,</span> <span class="Identifier">last</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralMouseState"><a name="CoralMouseState"></a><pre><span class="Identifier">CoralMouseState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">CoralKeyState</span></pre></dt>
+<dt id="MouseState"><a name="MouseState"></a><pre><span class="Identifier">MouseState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">KeyState</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralButtonState"><a name="CoralButtonState"></a><pre><span class="Identifier">CoralButtonState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">CoralKeyState</span></pre></dt>
+<dt id="ButtonState"><a name="ButtonState"></a><pre><span class="Identifier">ButtonState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">KeyState</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralControllerState"><a name="CoralControllerState"></a><pre><span class="Identifier">CoralControllerState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
-  <span class="Identifier">A</span><span class="Other">,</span> <span class="Identifier">B</span><span class="Other">,</span> <span class="Identifier">X</span><span class="Other">,</span> <span class="Identifier">Y</span><span class="Other">:</span> <span class="Identifier">CoralButtonState</span>
-  <span class="Identifier">Start</span><span class="Other">,</span> <span class="Identifier">Select</span><span class="Other">:</span> <span class="Identifier">CoralButtonState</span>
-  <span class="Identifier">LTrigger</span><span class="Other">,</span> <span class="Identifier">RTrigger</span><span class="Other">,</span> <span class="Identifier">LShoulder</span><span class="Other">,</span> <span class="Identifier">RShoulder</span><span class="Other">:</span> <span class="Identifier">CoralButtonState</span>
+<dt id="ControllerState"><a name="ControllerState"></a><pre><span class="Identifier">ControllerState</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+  <span class="Identifier">A</span><span class="Other">,</span> <span class="Identifier">B</span><span class="Other">,</span> <span class="Identifier">X</span><span class="Other">,</span> <span class="Identifier">Y</span><span class="Other">:</span> <span class="Identifier">ButtonState</span>
+  <span class="Identifier">Start</span><span class="Other">,</span> <span class="Identifier">Select</span><span class="Other">:</span> <span class="Identifier">ButtonState</span>
+  <span class="Identifier">LTrigger</span><span class="Other">,</span> <span class="Identifier">RTrigger</span><span class="Other">,</span> <span class="Identifier">LShoulder</span><span class="Other">,</span> <span class="Identifier">RShoulder</span><span class="Other">:</span> <span class="Identifier">ButtonState</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralInputManager"><a name="CoralInputManager"></a><pre><span class="Identifier">CoralInputManager</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<dt id="InputManager"><a name="InputManager"></a><pre><span class="Identifier">InputManager</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">mouse_x</span><span class="Other">,</span> <span class="Identifier">mouse_y</span><span class="Other">:</span> <span class="Identifier">float64</span>
   <span class="Identifier">last_mouse_x</span><span class="Other">,</span> <span class="Identifier">last_mouse_y</span><span class="Other">:</span> <span class="Identifier">float</span>
   <span class="Identifier">last_number_of_controllers</span><span class="Other">:</span> <span class="Identifier">int</span>
-  <span class="Identifier">mouse_left</span><span class="Other">,</span> <span class="Identifier">mouse_right</span><span class="Other">:</span> <span class="Identifier">CoralMouseState</span>
-  <span class="Identifier">keyMap</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">,</span> <span class="Identifier">CoralKeyState</span><span class="Other">]</span>
+  <span class="Identifier">mouse_left</span><span class="Other">,</span> <span class="Identifier">mouse_right</span><span class="Other">:</span> <span class="Identifier">MouseState</span>
+  <span class="Identifier">keyMap</span><span class="Other">:</span> <span class="Identifier">Table</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">,</span> <span class="Identifier">KeyState</span><span class="Other">]</span>
   <span class="Identifier">controllers</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">GameController</span><span class="Other">]</span>
 </pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralScene"><a name="CoralScene"></a><pre><span class="Identifier">CoralScene</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span></pre></dt>
+<dt id="Scene"><a name="Scene"></a><pre><span class="Identifier">Scene</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="CoralConfig"><a name="CoralConfig"></a><pre><span class="Identifier">CoralConfig</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<dt id="Config"><a name="Config"></a><pre><span class="Identifier">Config</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">resizable</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">fullscreen</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">visible</span><span class="Other">:</span> <span class="Identifier">bool</span>
@@ -1693,16 +1693,16 @@ function main() {
 <dt id="CoralGame"><a name="CoralGame"></a><pre><span class="Identifier">CoralGame</span> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">window</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">Window</span>
   <span class="Identifier">context</span><span class="Other">:</span> <span class="Identifier">sdl</span><span class="Other">.</span><span class="Identifier">GLContext</span>
-  <span class="Identifier">sceneStack</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">CoralScene</span><span class="Other">]</span>
-  <span class="Identifier">config</span><span class="Other">:</span> <span class="Identifier">CoralConfig</span>
+  <span class="Identifier">sceneStack</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">Scene</span><span class="Other">]</span>
+  <span class="Identifier">config</span><span class="Other">:</span> <span class="Identifier">Config</span>
   <span class="Identifier">running</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">targetFPS</span><span class="Other">:</span> <span class="Identifier">int</span>
   <span class="Identifier">r2d</span><span class="Other">:</span> <span class="Identifier">R2D</span>
-  <span class="Identifier">clock</span><span class="Other">:</span> <span class="Identifier">CoralClock</span>
-  <span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">CoralInputManager</span>
-  <span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">CoralAudioMixer</span>
-  <span class="Identifier">world</span><span class="Other">:</span> <span class="Identifier">CoralWorld</span>
-  <span class="Identifier">assets</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span>
+  <span class="Identifier">clock</span><span class="Other">:</span> <span class="Identifier">Clock</span>
+  <span class="Identifier">input</span><span class="Other">:</span> <span class="Identifier">InputManager</span>
+  <span class="Identifier">audio</span><span class="Other">:</span> <span class="Identifier">AudioMixer</span>
+  <span class="Identifier">world</span><span class="Other">:</span> <span class="Identifier">World</span>
+  <span class="Identifier">assets</span><span class="Other">:</span> <span class="Identifier">AssetManager</span>
   <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">load</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span>
   <span class="Identifier">update</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span>
@@ -1718,80 +1718,80 @@ function main() {
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<dt id="currentScene"><a name="currentScene,CoralGame"></a><pre><span class="Keyword">proc</span> <span class="Identifier">currentScene</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralScene</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="currentScene"><a name="currentScene,CoralGame"></a><pre><span class="Keyword">proc</span> <span class="Identifier">currentScene</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Scene</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="timer"><a name="timer,CoralClock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">timer</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="timer"><a name="timer,Clock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">timer</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="currentFPS"><a name="currentFPS,CoralClock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">currentFPS</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="currentFPS"><a name="currentFPS,Clock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">currentFPS</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="dt"><a name="dt,CoralClock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">dt</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="dt"><a name="dt,Clock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">dt</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="ticks"><a name="ticks,CoralClock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ticks</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="ticks"><a name="ticks,Clock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">ticks</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="averageFps"><a name="averageFps,CoralClock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">averageFps</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="averageFps"><a name="averageFps,Clock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">averageFps</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="averageDt"><a name="averageDt,CoralClock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">averageDt</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="averageDt"><a name="averageDt,Clock"></a><pre><span class="Keyword">proc</span> <span class="Identifier">averageDt</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">float</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="start"><a name="start,CoralTimer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">start</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="start"><a name="start,Timer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">start</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">Timer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Timer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="pause"><a name="pause,CoralTimer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pause</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="pause"><a name="pause,Timer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pause</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">Timer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Timer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="delete"><a name="delete,CoralTimer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">delete</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="delete"><a name="delete,Timer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">delete</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">Timer</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="reset"><a name="reset,CoralTimer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">reset</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="reset"><a name="reset,Timer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">reset</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">Timer</span><span class="Other">)</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="timesCalled"><a name="timesCalled,CoralTimer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">timesCalled</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="timesCalled"><a name="timesCalled,Timer"></a><pre><span class="Keyword">proc</span> <span class="Identifier">timesCalled</span><span class="Other">(</span><span class="Identifier">timer</span><span class="Other">:</span> <span class="Identifier">Timer</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="addTimer"><a name="addTimer,CoralClock,float,int,proc)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addTimer</span><span class="Other">(</span><span class="Identifier">clock</span><span class="Other">:</span> <span class="Identifier">CoralClock</span><span class="Other">;</span> <span class="Identifier">milliseconds</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">repeat</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span>
-             <span class="Identifier">callback</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">void</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralTimer</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="addTimer"><a name="addTimer,Clock,float,int,proc)"></a><pre><span class="Keyword">proc</span> <span class="Identifier">addTimer</span><span class="Other">(</span><span class="Identifier">clock</span><span class="Other">:</span> <span class="Identifier">Clock</span><span class="Other">;</span> <span class="Identifier">milliseconds</span><span class="Other">:</span> <span class="Identifier">float</span><span class="Other">;</span> <span class="Identifier">repeat</span> <span class="Other">=</span> <span class="DecNumber">0</span><span class="Other">;</span> <span class="Identifier">callback</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">void</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Timer</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+    <span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="config"><a name="config,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">config</span><span class="Other">(</span><span class="Identifier">resizable</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">fullscreen</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">visible</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">fps</span> <span class="Other">=</span> <span class="DecNumber">60</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralConfig</span> <span class="Other pragmabegin">{.</span><div class="pragma">
+<dt id="config"><a name="config,int"></a><pre><span class="Keyword">proc</span> <span class="Identifier">config</span><span class="Other">(</span><span class="Identifier">resizable</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">fullscreen</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">visible</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">fps</span> <span class="Other">=</span> <span class="DecNumber">60</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Config</span> <span class="Other pragmabegin">{.</span><div class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="createGame"><a name="createGame,CoralGame,int,int,string,CoralConfig"></a><pre><span class="Keyword">proc</span> <span class="Identifier">createGame</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-               <span class="Identifier">config</span><span class="Other">:</span> <span class="Identifier">CoralConfig</span> <span class="Other">=</span> <span class="Identifier">config</span><span class="Other">(</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralGame</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
+<dt id="createGame"><a name="createGame,CoralGame,int,int,string,Config"></a><pre><span class="Keyword">proc</span> <span class="Identifier">createGame</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">width</span><span class="Other">,</span> <span class="Identifier">height</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+               <span class="Identifier">config</span><span class="Other">:</span> <span class="Identifier">Config</span> <span class="Other">=</span> <span class="Identifier">config</span><span class="Other">(</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralGame</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">EOFError</span><span class="Other">,</span> <span class="Identifier">GLerror</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 Initializes the game object
@@ -1817,12 +1817,12 @@ Initializes the game object
 
 
 </dd>
-<dt id="world"><a name="world,CoralGame"></a><pre><span class="Keyword">proc</span> <span class="Identifier">world</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralWorld</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="world"><a name="world,CoralGame"></a><pre><span class="Keyword">proc</span> <span class="Identifier">world</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">World</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="assets"><a name="assets,CoralGame"></a><pre><span class="Keyword">proc</span> <span class="Identifier">assets</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">CoralAssetManager</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="assets"><a name="assets,CoralGame"></a><pre><span class="Keyword">proc</span> <span class="Identifier">assets</span><span class="Other">(</span><span class="Identifier">c</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">AssetManager</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1897,22 +1897,22 @@ Initializes the game object
 
 
 </dd>
-<dt id="isKeyDown"><a name="isKeyDown,CoralGame,CoralKey"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyDown</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">CoralKey</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isKeyDown"><a name="isKeyDown,CoralGame,Key"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyDown</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">Key</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="isKeyUp"><a name="isKeyUp,CoralGame,CoralKey"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyUp</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">CoralKey</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isKeyUp"><a name="isKeyUp,CoralGame,Key"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyUp</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">Key</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="isKeyReleased"><a name="isKeyReleased,CoralGame,CoralKey"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyReleased</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">CoralKey</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isKeyReleased"><a name="isKeyReleased,CoralGame,Key"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyReleased</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">Key</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
 </dd>
-<dt id="isKeyPressed"><a name="isKeyPressed,CoralGame,CoralKey"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyPressed</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">CoralKey</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="isKeyPressed"><a name="isKeyPressed,CoralGame,Key"></a><pre><span class="Keyword">proc</span> <span class="Identifier">isKeyPressed</span><span class="Other">(</span><span class="Identifier">game</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">Key</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1957,8 +1957,8 @@ Returns the windows position on the monitor
 
 
 </dd>
-<dt id="pushScene"><a name="pushScene,CoralGame,CoralScene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pushScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">CoralScene</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="pushScene"><a name="pushScene,CoralGame,Scene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">pushScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -1969,8 +1969,8 @@ Returns the windows position on the monitor
 
 
 </dd>
-<dt id="gotoScene"><a name="gotoScene,CoralGame,CoralScene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">gotoScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">CoralScene</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
+<dt id="gotoScene"><a name="gotoScene,CoralGame,Scene"></a><pre><span class="Keyword">proc</span> <span class="Identifier">gotoScene</span><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <span class="Identifier">CoralGame</span><span class="Other">;</span> <span class="Identifier">scene</span><span class="Other">:</span> <span class="Identifier">Scene</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">auto</span> <span class="Other pragmabegin">{.</span><div class="pragma"><span class="Identifier">discardable</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></div><span class="Other pragmaend">.}</span></pre></dt>
 <dd>
 
 
@@ -2005,7 +2005,7 @@ This method launches the game loop and begins the rendering cycle
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2018-07-17 08:25:49 UTC</small>
+        <small>Made with Nim. Generated: 2018-07-17 09:23:35 UTC</small>
       </div>
     </div>
   </div>
