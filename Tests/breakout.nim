@@ -59,15 +59,19 @@ method update(self: Ball)=
 
     if self.position.y > Coral.windowSize[1].float - self.size.y:
         self.velocity.y = absf(self.velocity.y)
+        self.position.x = Coral.windowSize[0].float / 2.0
+        self.position.y = Coral.windowSize[1].float / 2.0
 
 method collision(self: Ball, other: Entity)=
     if other of Paddle:
         self.velocity.y *= -1
-        self.velocity.x += other.velocity.x * 0.2
+        self.velocity.x += other.velocity.x * 0.8
     
     if other of Brick:
         other.delete = true
         self.velocity.y *= -1
+        self.velocity *= 1.05
+
         score += 1
 
 var font: Font
@@ -168,4 +172,4 @@ Coral.draw= proc()=
     let xpos = winX.float / 2.0 - size.x.float
     Coral.r2d.drawString(font, $score, newV2(xpos, winY.float / 2.0))
 
-Coral.createGame(11 * (32 + 8), 720, "Breakout!", config()).run()
+Coral.createGame(11 * (32 + 8), 720, "Breakout!").run()

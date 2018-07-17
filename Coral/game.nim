@@ -220,7 +220,7 @@ proc newCoralGame()=
         discard readLine(stdin)
         system.quit()
 
-proc createGame* (self: CoralGame, width, height: int, title: string, config: CoralConfig): CoralGame{.discardable.}=
+proc createGame* (self: CoralGame, width, height: int, title: string, config: CoralConfig = config()): CoralGame{.discardable.}=
     ## Initializes the game object
     # Set the OpenGL version to 330 core
     # TODO: check to see if this works
