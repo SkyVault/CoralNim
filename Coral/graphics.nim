@@ -180,7 +180,7 @@ proc hexColorToColor* (hex: string): Color=
     return toColor(hexColorToFloatColor(hex))
 
 # Opengl Wrapper stuff
-proc getGLenumArrayType(t: BufferType): GLenum=
+proc getGLenumArrayType(t:CoralBufferType): GLenum=
     result =
         case(t):
         of VERTEX_BUFFER: GL_ARRAY_BUFFER
@@ -191,7 +191,7 @@ proc newVao* (shouldBind = false): GLuint=
     glGenVertexArrays(1, addr result)
     if shouldBind: glBindVertexArray(result)
 
-proc newVbo* (btype: BufferType, dimensions: uint32, attrib: uint32, data: var seq[float32], dynamic = false): GLuint=
+proc newVbo* (btype:CoralBufferType, dimensions: uint32, attrib: uint32, data: var seq[float32], dynamic = false): GLuint=
     let theType = getGLenumArrayType btype
     
     glGenBuffers(1, addr result)
@@ -216,11 +216,11 @@ proc newVbo* (btype: BufferType, dimensions: uint32, attrib: uint32, data: var s
 
 proc drawArrays* (vao: GLuint, numVertices: int)=
         glBindVertexArray(vao)
-        glDrawArrays(GL_TRIANGLES, 0, (GLsizei)numVertices)
+        BufferType(GL_TRIANGLES, 0, (GLsizei)numVertices)
         glBindVertexArray(0)
 
 ## Shader code
-proc CoralLoadShader* (stype: ShaderType, code: string): GLuint=
+proc CoralLoadShader* (stype:ShaderType, code: string): GLuint=
     var theType: GLenum
     if stype == VERTEX_SHADER: theType = GL_VERTEX_SHADER
     if stype == FRAGMENT_SHADER: theType = GL_FRAGMENT_SHADER
