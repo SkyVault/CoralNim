@@ -9,7 +9,7 @@ import
 
 var image: Image
 Coral.load = proc()=
-    image = CoralLoadImage(getCurrentDir() & "/Tests/wat.png")
+    image = loadImage(getCurrentDir() & "/Tests/wat.png")
 
     Coral.clock.addTimer(1000, callback = proc()=
         echo "hello"

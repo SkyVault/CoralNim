@@ -5,6 +5,6 @@ import
 Coral.world.createSystem(
     @["Body", "Paddle"],
 
-    load = proc(s: CoralSystem, e: CoralEntity)=
+    load = proc(s: System, e: Entity)=
         echo("Hell Yeah bro!")
 )

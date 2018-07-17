@@ -13,7 +13,7 @@ import
 var font: Font
 
 Coral.load = proc()= 
-    font = CoralLoadFont(getApplicationDir() & "/arial.ttf", 60)
+    font = loadFont(getApplicationDir() & "/arial.ttf", 60)
 
 Coral.draw = proc()=
     Coral.r2d.setBackgroundColor(P8Indigo)

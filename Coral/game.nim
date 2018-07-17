@@ -17,59 +17,59 @@ include input
 
 # const NUM_KEYCODES = 512
 const NUM_AVERAGE_FPS_SAMPLES = 100
-const DEFUALT_NUMBER_OF_CONTROLLERS = 4
+# const DEFUALT_NUMBER_OF_CONTROLLERS = 4
 
 type
-    CoralTimerState* {.pure.}= enum
+    TimerState* {.pure.}= enum
         Playing,
         Paused
 
-    CoralTimer* = ref object
+    Timer* = ref object
         milliseconds: float
         repeat: int
         timer: float
         times_called: int
-        state: CoralTimerState
+        state: TimerState
         shouldDelete: bool
         callback: proc(): void
 
-    CoralClock* = ref object
+    Clock* = ref object
         fps, delta, last, timer, last_fps: float
         avFps, avDt: float
         fpsSamples, dtSamples: seq[float]
         ticks: int
-        timers: seq[CoralTimer]
+        timers: seq[Timer]
 
     # Input handler
-    CoralKeyState* = ref object of RootObj
+    KeyState* = ref object of RootObj
         state*, last*: int
 
     # Mouse handler
-    CoralMouseState*  = ref object of CoralKeyState
-    CoralButtonState* = ref object of CoralKeyState
+    MouseState*  = ref object of KeyState
+    ButtonState* = ref object of KeyState
 
-    CoralControllerState* = ref object
-        A, B, X, Y: CoralButtonState
-        Start, Select: CoralButtonState
-        LTrigger, RTrigger, LShoulder, RShoulder: CoralButtonState 
+    ControllerState* = ref object
+        A, B, X, Y: ButtonState
+        Start, Select: ButtonState
+        LTrigger, RTrigger, LShoulder, RShoulder: ButtonState 
 
-    CoralInputManager* = ref object
+    InputManager* = ref object
         mouse_x, mouse_y: float64
         last_mouse_x, last_mouse_y: float
 
         last_number_of_controllers: int
 
-        mouse_left, mouse_right: CoralMouseState
+        mouse_left, mouse_right: MouseState
 
-        keyMap: Table[int, CoralKeyState]
+        keyMap: Table[int, KeyState]
 
         controllers: seq[sdl.GameController]
 
         # gamepadState: Table[cint, ]
 
-    CoralScene* = ref object of RootObj
+    Scene* = ref object of RootObj
 
-    CoralConfig* = ref object
+    Config* = ref object
         resizable: bool
         fullscreen: bool
         visible: bool
@@ -79,29 +79,29 @@ type
         window: sdl.Window
         context: sdl.GLContext
 
-        sceneStack: seq[CoralScene]
+        sceneStack: seq[Scene]
         
-        config: CoralConfig
+        config: Config
         running: bool
         targetFPS: int
         r2d: R2D
-        clock: CoralClock
-        input: CoralInputManager
-        audio: CoralAudioMixer
-        world: CoralWorld
-        assets: CoralAssetManager
+        clock: Clock
+        input: InputManager
+        audio: AudioMixer
+        world: World
+        assets: AssetManager
         title: string
         load*: proc()
         update*: proc()
         draw*: proc()
         destroy*:proc()
 
-method load(scene: CoralScene) {.base.} = discard
-method draw(scene: CoralScene) {.base.} = discard
-method update(scene: CoralScene) {.base.} = discard
-method destroy(scene: CoralScene) {.base.} = discard
+method load(scene: Scene) {.base.} = discard
+method draw(scene: Scene) {.base.} = discard
+method update(scene: Scene) {.base.} = discard
+method destroy(scene: Scene) {.base.} = discard
 
-proc currentScene* (game: CoralGame): CoralScene=
+proc currentScene* (game: CoralGame): Scene=
     result = if game.sceneStack.len() == 0:
                 nil
             else:
@@ -110,37 +110,37 @@ proc currentScene* (game: CoralGame): CoralScene=
 proc newCoralGame()
 
 # CLOCK API
-proc timer*         (c: CoralClock): float {.inline.} = c.timer
-proc currentFPS*    (c: CoralClock): float {.inline.} = c.fps
-proc dt*            (c: CoralClock): float {.inline.} = c.delta
-proc ticks*         (c: CoralClock): int   {.inline.} = c.ticks
-proc averageFps*    (c: CoralClock): float {.inline.} = c.avFps
-proc averageDt*     (c: CoralClock): float {.inline.} = c.avDt
+proc timer*         (c: Clock): float {.inline.} = c.timer
+proc currentFPS*    (c: Clock): float {.inline.} = c.fps
+proc dt*            (c: Clock): float {.inline.} = c.delta
+proc ticks*         (c: Clock): int   {.inline.} = c.ticks
+proc averageFps*    (c: Clock): float {.inline.} = c.avFps
+proc averageDt*     (c: Clock): float {.inline.} = c.avDt
 
-proc start* (timer: CoralTimer): CoralTimer{.discardable.}=
-    timer.state = CoralTimerState.Playing
+proc start* (timer: Timer): Timer{.discardable.}=
+    timer.state = TimerState.Playing
     return timer
 
-proc pause* (timer: CoralTimer): CoralTimer{.discardable.}=
-    timer.state = CoralTimerState.Paused
+proc pause* (timer: Timer): Timer{.discardable.}=
+    timer.state = TimerState.Paused
     return timer
 
-proc delete* (timer: CoralTimer)=
+proc delete* (timer: Timer)=
     timer.shouldDelete = true    
 
-proc reset* (timer: CoralTimer)=
+proc reset* (timer: Timer)=
     timer.timer = 0.0
     timer.times_called = 0
 
-proc timesCalled* (timer: CoralTimer): auto= timer.times_called
+proc timesCalled* (timer: Timer): auto= timer.times_called
 
-proc addTimer* (clock: CoralClock, milliseconds: float, repeat = 0, callback: proc(): void): CoralTimer{.discardable.}=
-    result = CoralTimer(
+proc addTimer* (clock: Clock, milliseconds: float, repeat = 0, callback: proc(): void): Timer{.discardable.}=
+    result = Timer(
             milliseconds: milliseconds,
             repeat: repeat,
             callback: callback,
             timer: 0.0,
-            state: CoralTimerState.Paused,
+            state: TimerState.Paused,
             shouldDelete: false
         )
     clock.timers.add(result) 
@@ -151,8 +151,8 @@ newCoralGame()
 template Coral* (): auto = 
     lCoral
 
-proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): CoralConfig=
-    CoralConfig(
+proc config* (resizable = false, fullscreen = false, visible = true, fps = 60): Config=
+    Config(
         resizable: resizable,
         fullscreen: fullscreen,
         visible: visible,
@@ -167,7 +167,7 @@ proc newCoralGame()=
         config: config,
         targetFPS: config.fps,
 
-        sceneStack: newSeq[CoralScene](),
+        sceneStack: newSeq[Scene](),
 
         load: proc()=discard,
         update: proc()=discard,
@@ -175,7 +175,7 @@ proc newCoralGame()=
         destroy: proc()=discard,
         r2d: nil,
         title: "",
-        clock: CoralClock(
+        clock: Clock(
             fps: 0.0,
             avFps: 0.0,
             avDt: 0.0,
@@ -188,24 +188,24 @@ proc newCoralGame()=
             last: 0.0, #getTime().float,
             last_fps: 0.0, #getTime().float,
             ticks: 0,
-            timers: newSeq[CoralTimer]()
+            timers: newSeq[Timer]()
         ),
-        input: CoralInputManager(
+        input: InputManager(
             mouse_x: 0, mouse_y: 0,
             last_mouse_x: 0, last_mouse_y: 0,
 
             last_number_of_controllers: 0,
 
-            mouse_left: CoralMouseState(state : 0, last : 0),
-            mouse_right: CoralMouseState(state : 0, last : 0),
-            keyMap: initTable[int, CoralKeyState](),
+            mouse_left: MouseState(state : 0, last : 0),
+            mouse_right: MouseState(state : 0, last : 0),
+            keyMap: initTable[int, KeyState](),
 
             controllers: newSeq[sdl.GameController]()
         ),
-        audio: CoralAudioMixer(
+        audio: AudioMixer(
 
         ),
-        assets: CoralAssetManager(
+        assets: AssetManager(
             images: newTable[string, Image](),
             audio: newTable[string, Audio]()
         ),
@@ -220,7 +220,7 @@ proc newCoralGame()=
         discard readLine(stdin)
         system.quit()
 
-proc createGame* (self: CoralGame, width, height: int, title: string, config: CoralConfig = config()): CoralGame{.discardable.}=
+proc createGame* (self: CoralGame, width, height: int, title: string, config: Config = config()): CoralGame{.discardable.}=
     ## Initializes the game object
     # Set the OpenGL version to 330 core
     # TODO: check to see if this works
@@ -291,17 +291,17 @@ proc r2d* (game: CoralGame):auto =
 
 proc audio* (game: CoralGame):auto = game.audio
 
-proc world* (c: CoralGame): CoralWorld=
+proc world* (c: CoralGame): World=
     if c.world == nil:
-        c.world = newCoralWorld()
+        c.world = newWorld()
     return c.world
 
-proc assets* (c: CoralGame): CoralAssetManager=
+proc assets* (c: CoralGame): AssetManager=
     return c.assets
 
 
-proc newKeyState(state = 0, last = 0): CoralKeyState=
-    return CoralKeyState(state: state, last: last)
+proc newKeyState(state = 0, last = 0): KeyState=
+    return KeyState(state: state, last: last)
 
 ## Input manager functions
 
@@ -310,7 +310,7 @@ proc newKeyState(state = 0, last = 0): CoralKeyState=
 #     return 
 #         joystickPresent(which.cint) == 1
 
-proc pullControllerInfo(input: CoralInputManager)=
+proc pullControllerInfo(input: InputManager)=
     discard
 
 # proc IsButtonDown(game: CoralGame )
@@ -367,7 +367,7 @@ proc isMouseRightReleased* (game: CoralGame): bool =
         game.input.mouse_right.state == 0 and
         game.input.mouse_right.last == 1
 
-proc isKeyDown* (game: CoralGame, key: CoralKey): bool =
+proc isKeyDown* (game: CoralGame, key: Key): bool =
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
         return false
@@ -375,10 +375,10 @@ proc isKeyDown* (game: CoralGame, key: CoralKey): bool =
         return
             game.input.keyMap[ckey].state == 1
 
-proc isKeyUp* (game: CoralGame, key: CoralKey): bool =
+proc isKeyUp* (game: CoralGame, key: Key): bool =
     return not isKeyDown(game, key)
 
-proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=
+proc isKeyReleased* (game: CoralGame, key: Key): bool=
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
         return false
@@ -388,7 +388,7 @@ proc isKeyReleased* (game: CoralGame, key: CoralKey): bool=
             state.state == 0 and 
             state.last  == 1
 
-proc isKeyPressed* (game: CoralGame, key: CoralKey): bool=
+proc isKeyPressed* (game: CoralGame, key: Key): bool=
     var ckey = getKeyInRange(key.cint)
     if not game.input.keyMap.contains ckey:
         return false
@@ -433,7 +433,7 @@ proc `windowVisible=`* (self: CoralGame, visible: bool) =
     if visible: sdl.hideWindow(self.window)
     else: sdl.showWindow(self.window)
 
-proc pushScene* (self: CoralGame, scene: CoralScene): auto {.discardable.}=
+proc pushScene* (self: CoralGame, scene: Scene): auto {.discardable.}=
     result = scene
     scene.load()
     self.sceneStack.add scene
@@ -445,7 +445,7 @@ proc popScene* (self: CoralGame): auto {.discardable.}=
         result.destroy()
         self.sceneStack.delete(self.sceneStack.len() - 1)
 
-proc gotoScene* (self: CoralGame, scene: CoralScene): auto {.discardable.}=
+proc gotoScene* (self: CoralGame, scene: Scene): auto {.discardable.}=
     self.popScene()
     result = self.pushScene(scene)
 
@@ -594,7 +594,7 @@ proc run* (game: CoralGame)=
 
         # Handle timers
         for timer in game.clock.timers:
-            if timer.state == CoralTimerState.Paused: continue
+            if timer.state == TimerState.Paused: continue
 
             timer.timer += game.clock.dt
             if (timer.timer * 1000.0) > timer.milliseconds:

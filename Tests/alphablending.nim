@@ -12,7 +12,7 @@ import
 
 var image: Image
 Coral.load = proc()=
-    image = CoralLoadImage getAppDir() & "/wat.png"
+    image = loadImage getAppDir() & "/wat.png"
 
     # Coral.assets.add("image", image)
 

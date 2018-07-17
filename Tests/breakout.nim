@@ -41,10 +41,10 @@ var entities = newSeq[Entity]()
 method update(self: Paddle)=
     const SPEED = 200
 
-    if Coral.isKeyDown CoralKey.Left:
+    if Coral.isKeyDown Key.Left:
         self.velocity.x = -SPEED
 
-    if Coral.isKeyDown CoralKey.Right:
+    if Coral.isKeyDown Key.Right:
         self.velocity.x = +SPEED
 
 method update(self: Ball)=
@@ -82,7 +82,7 @@ Coral.load = proc()=
     let ball_vel_x = random(100.0) - 200.0
     let ball_vel_y = random(100.0) - 200.0
 
-    font = CoralLoadFont(getApplicationDir() & "/arial.ttf")
+    font = loadFont(getApplicationDir() & "/arial.ttf")
 
     entities.add(
         Ball(
@@ -132,7 +132,7 @@ Coral.load = proc()=
 Coral.update = proc()=
     Coral.windowTitle = "カウボーイビバップカウボーイビバップ  :: " & $Coral.clock.averageFps
 
-    if Coral.isKeyReleased CoralKey.Escape:
+    if Coral.isKeyReleased Key.Escape:
         quit(Coral)
 
     for i in countdown(entities.len - 1, 0):

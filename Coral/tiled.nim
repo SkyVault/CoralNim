@@ -73,7 +73,7 @@ proc loadTileset* (path: string): TiledTileset=
     let tpath = parentDir(path) & "/" & imageXml.attr("source")
 
     if not Coral.assets.imageExists tpath:
-        result.image = CoralLoadImage tpath
+        result.image = loadImage tpath
         Coral.assets.add(tpath, result.image)
     else:
         result.image = Coral.assets.getImage tpath

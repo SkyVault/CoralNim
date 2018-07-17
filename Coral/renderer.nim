@@ -72,11 +72,11 @@ const RECT_INDICES = @[
 ]
 
 type 
-    CoralRotationMode* {.pure.} = enum
+    RotationMode* {.pure.} = enum
         Degrees,
         Radians
 
-    CoralBlendMode* {.pure.} = enum
+    BlendMode* {.pure.} = enum
         Alpha,
         Additive
 
@@ -112,7 +112,7 @@ type
         
         postDrawingProcedures: seq[proc()]
 
-        rotation_mode: CoralRotationMode
+        rotation_mode: RotationMode
         draw_instanced: bool
         drawable_counter: int
         last_drawable_counter: int
@@ -188,7 +188,7 @@ proc newR2D* (draw_instanced = true):R2d =
 
         postDrawingProcedures: newSeq[proc()](),
 
-        rotation_mode: CoralRotationMode.Degrees,
+        rotation_mode: RotationMode.Degrees,
         draw_instanced: draw_instanced,
         drawable_counter: 0,
         last_drawable_counter: 0,
@@ -242,14 +242,14 @@ proc newR2D* (draw_instanced = true):R2d =
         else:
             SPRITE_SHADER_VERTEX
             
-    result.shader_program = CoralNewProgram(
-        CoralLoadShader(VERTEX_SHADER, vertex_shader),
-        CoralLoadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
+    result.shader_program = newProgram(
+        loadShader(VERTEX_SHADER, vertex_shader),
+        loadShader(FRAGMENT_SHADER, SPRITE_SHADER_FRAGMENT),
     )
 
-    result.font_shader_program = CoralNewProgram(
-        CoralLoadShader(VERTEX_SHADER, FONT_RENDERING_VERTEX),
-        CoralLoadShader(FRAGMENT_SHADER, FONT_RENDERING_FRAGMENT)
+    result.font_shader_program = newProgram(
+        loadShader(VERTEX_SHADER, FONT_RENDERING_VERTEX),
+        loadShader(FRAGMENT_SHADER, FONT_RENDERING_FRAGMENT)
     )
 
     result.view_matrix = newM2(1, 0, 0, 1)
@@ -283,7 +283,7 @@ proc `viewport=`* (self: R2D, view: (int, int))=
 proc viewport* (self: R2D): (int, int)=
     return self.viewport
 
-proc `rotationMode=`* (self: R2D, mode: CoralRotationMode)=
+proc `rotationMode=`* (self: R2D, mode: RotationMode)=
     self.rotation_mode = mode
 
 proc rotationMode* (self: R2D): auto=
@@ -461,7 +461,7 @@ proc flush*(self: R2D)=
             glUniform2f(self.position_location, rprim.x, rprim.y)
             glUniform2f(self.size_location, rprim.width, rprim.height)
 
-            if self.rotation_mode == CoralRotationMode.Degrees:
+            if self.rotation_mode == RotationMode.Degrees:
                 glUniform1f(self.rotation_location, rprim.rotation * DEGTORAD)
             else:
                 glUniform1f(self.rotation_location, rprim.rotation)
@@ -478,7 +478,7 @@ proc flush*(self: R2D)=
             glUniform2f(self.position_location, rprim.x, rprim.y)
             glUniform2f(self.size_location, rprim.width, rprim.height)
 
-            if self.rotation_mode == CoralRotationMode.Degrees:
+            if self.rotation_mode == RotationMode.Degrees:
                 glUniform1f(self.rotation_location, rprim.rotation * DEGTORAD)
             else:
                 glUniform1f(self.rotation_location, rprim.rotation)
@@ -543,7 +543,7 @@ proc flush*(self: R2D)=
             glUniform2f(self.position_location, x, y)
             glUniform2f(self.size_location, width, height)
 
-            if self.rotation_mode == CoralRotationMode.Degrees:
+            if self.rotation_mode == RotationMode.Degrees:
                 if self.draw_instanced:
                     rot_and_depth_batch.add(drawable.rotation * DEGTORAD)
                 else:

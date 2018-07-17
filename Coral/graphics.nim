@@ -114,7 +114,7 @@ template LightGray*            ():untyped =newColor(0.8, 0.8, 0.8)
 template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)
 template Transperent*          ():untyped =newColor(1, 1, 1, 0)
 template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)
-proc CoralRandomColor*         ():Color =newColor(rand(1.0), rand(1.0), rand(1.0), 1.0)
+proc RandomColor*         ():Color =newColor(rand(1.0), rand(1.0), rand(1.0), 1.0)
 
 ## Pico 8 Color palette
 template P8Black*      ():untyped = newColor(0, 0, 0, 1)
@@ -215,7 +215,7 @@ proc newVbo* (btype:BufferType, dimensions: uint32, attrib: uint32, data: var se
     glBindBuffer(theType, 0)
 
 ## Shader code
-proc CoralLoadShader* (stype:ShaderType, code: string): GLuint=
+proc loadShader* (stype:ShaderType, code: string): GLuint=
     var theType: GLenum
     if stype == VERTEX_SHADER: theType = GL_VERTEX_SHADER
     if stype == FRAGMENT_SHADER: theType = GL_FRAGMENT_SHADER
@@ -244,7 +244,7 @@ proc CoralLoadShader* (stype:ShaderType, code: string): GLuint=
              else: "FRAGMENT::", log
         dealloc(log)
 
-proc CoralNewProgram* (v: GLuint, f: GLuint): GLuint=
+proc newProgram* (v: GLuint, f: GLuint): GLuint=
     result = glCreateProgram()
     glAttachShader(result, v)
     glAttachShader(result, f)
@@ -278,7 +278,7 @@ proc getLocation* (p: GLuint, id: cstring): GLint=
     if result == -1:
         echo "nGetLocation:: cannot find uniform " & $id
 
-proc CoralLoadImage* (path: string, filter: GLint = GL_LINEAR): Image=
+proc loadImage* (path: string, filter: GLint = GL_LINEAR): Image=
     result = Image(id: 0, width: 0, height: 0)
 
     if not fileExists(path):
@@ -314,7 +314,7 @@ proc bindImage* (img: Image)= glBindTexture(GL_TEXTURE_2D, img.id)
 proc unBindImage* ()= glBindTexture(GL_TEXTURE_2D, 0)
 
 # Font loading
-proc CoralLoadFont* (path: string, size: int = 32): Font=
+proc loadFont* (path: string, size: int = 32): Font=
     result = Font(face: nil, characters: newTable[char, FontGlyph]())    
 
     if (FT_New_Face(ft_context, path, 0, result.face) != 0):

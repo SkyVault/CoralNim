@@ -11,7 +11,7 @@ import
 var image: Image
 
 Coral.load = proc()=
-    image = CoralLoadImage getAppDir() & "/smaller.png"
+    image = loadImage getAppDir() & "/smaller.png"
 
 Coral.render = proc()=
     Coral.windowTitle = $Coral.clock.averageFps

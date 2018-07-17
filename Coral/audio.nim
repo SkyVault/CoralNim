@@ -4,7 +4,7 @@ import
     sound.private.sound_al
 
 type 
-    CoralAudioMixer* = ref object
+    AudioMixer* = ref object
     Audio* = ref object
         sound: Sound
         playbackPosForPause: float
@@ -15,13 +15,13 @@ var
 proc playbackPosition* (audio: Audio): float
 proc `playbackPosition=`* (audio: Audio, val: float)
 
-proc init* (audio: CoralAudioMixer)=
+proc init* (audio: AudioMixer)=
     audio_initialized = true
 
-proc destroy* (mixer: CoralAudioMixer)=
+proc destroy* (mixer: AudioMixer)=
     destroyAllSounds()
 
-proc loadAudio* (mixer: CoralAudioMixer, path: string) : Audio=
+proc loadAudio* (mixer: AudioMixer, path: string) : Audio=
     result = Audio(playbackPosForPause : 0.0)
     result.sound = newSoundWithFile(path)
 

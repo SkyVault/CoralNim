@@ -4,38 +4,38 @@ import
     tables
 
 type
-    CoralAssetManager* = ref object
+    AssetManager* = ref object
         images*: TableRef[string, Image]
         audio*: TableRef[string, Audio]
         regions*: TableRef[string, seq[Region]]
 
 ## Asset manager Api
-proc add* (a: CoralAssetManager, id: string, image: Image): Image{.discardable.}=
+proc add* (a: AssetManager, id: string, image: Image): Image{.discardable.}=
     result = image
     a.images.add(id, image)
 
-proc add* (a: CoralAssetManager, id: string, regions: seq[Region]): seq[Region]{.discardable.}=
+proc add* (a: AssetManager, id: string, regions: seq[Region]): seq[Region]{.discardable.}=
     result = regions
     a.regions.add(id, regions)
 
-proc add* (a: CoralAssetManager, id: string, audio: Audio): Audio{.discardable.}=
+proc add* (a: AssetManager, id: string, audio: Audio): Audio{.discardable.}=
     result = audio
     a.audio.add(id, audio)
 
-proc getImage* (a: CoralAssetManager, id: string): Image=
+proc getImage* (a: AssetManager, id: string): Image=
     return a.images[id]
     
-proc getAudio* (a: CoralAssetManager, id: string): Audio=
+proc getAudio* (a: AssetManager, id: string): Audio=
     return a.audio[id]
 
-proc getRegions* (a: CoralAssetManager, id: string): seq[Region]=
+proc getRegions* (a: AssetManager, id: string): seq[Region]=
     return a.regions[id]
 
-proc imageExists* (a: CoralAssetManager, id: string): bool=
+proc imageExists* (a: AssetManager, id: string): bool=
     return a.images.hasKey id
     
-proc audioExists* (a: CoralAssetManager, id: string): bool=
+proc audioExists* (a: AssetManager, id: string): bool=
     return a.audio.hasKey id
 
-proc regionsExists* (a: CoralAssetManager, id: string): bool=
+proc regionsExists* (a: AssetManager, id: string): bool=
     return a.regions.hasKey id

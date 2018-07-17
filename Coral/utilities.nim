@@ -1,8 +1,8 @@
 import
     terminal
 
-template CoralPushTerminalColors(fg: ForegroundColor, bg: BackgroundColor, body: untyped): typed=
+template PushTerminalColors(fg: ForegroundColor, bg: BackgroundColor, body: untyped): typed=
     discard
     
-proc CoralWarning* (msg: string)=
+proc Warning* (msg: string)=
     discard

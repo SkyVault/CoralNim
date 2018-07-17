@@ -5,13 +5,13 @@ import
     sdl2/sdl
 
 type
-    CoralControlerNumber* {.pure.} = enum
+    ControlerNumber* {.pure.} = enum
         One = 1,
         Two,
         Three,
         Four
 
-    CoralControllerButtons* {.pure.} = enum
+    ControllerButtons* {.pure.} = enum
         A                   = sdl.CONTROLLER_BUTTON_A,
         B                   = sdl.CONTROLLER_BUTTON_B,
         X                   = sdl.CONTROLLER_BUTTON_X,
@@ -30,10 +30,10 @@ type
         Max                 = sdl.CONTROLLER_BUTTON_MAX,
         Invalid             = sdl.CONTROLLER_BUTTON_INVALID
 type
-    # CoralButton* {.pure.}=enum
+    # Button* {.pure.}=enum
     #     A = GLFW_GAMEPAD_BUTTON_A
 
-    CoralKey* {.pure.}= enum
+    Key* {.pure.}= enum
         UNKNOWN = K_UNKNOWN
         BACKSPACE = K_BACKSPACE
         TAB = K_TAB
