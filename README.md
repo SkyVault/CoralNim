@@ -21,6 +21,5 @@ import
 Coral.render = proc()=
     Coral.r2d.drawRect(100, 100, 100, 100, 45.0, Red)
 
-Coral.createGame(800, 600, "My Coral Game", config())
-    .run()
+Coral.createGame(800, 600, "My Coral Game")).run()
 ```
