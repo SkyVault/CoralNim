@@ -180,7 +180,7 @@ proc hexColorToColor* (hex: string): Color=
     return toColor(hexColorToFloatColor(hex))
 
 # Opengl Wrapper stuff
-proc getGLenumArrayType(t:CoralBufferType): GLenum=
+proc getGLenumArrayType(t:BufferType): GLenum=
     result =
         case(t):
         of VERTEX_BUFFER: GL_ARRAY_BUFFER
@@ -191,7 +191,7 @@ proc newVao* (shouldBind = false): GLuint=
     glGenVertexArrays(1, addr result)
     if shouldBind: glBindVertexArray(result)
 
-proc newVbo* (btype:CoralBufferType, dimensions: uint32, attrib: uint32, data: var seq[float32], dynamic = false): GLuint=
+proc newVbo* (btype:BufferType, dimensions: uint32, attrib: uint32, data: var seq[float32], dynamic = false): GLuint=
     let theType = getGLenumArrayType btype
     
     glGenBuffers(1, addr result)
@@ -213,11 +213,6 @@ proc newVbo* (btype:CoralBufferType, dimensions: uint32, attrib: uint32, data: v
         nil
     )
     glBindBuffer(theType, 0)
-
-proc drawArrays* (vao: GLuint, numVertices: int)=
-        glBindVertexArray(vao)
-        BufferType(GL_TRIANGLES, 0, (GLsizei)numVertices)
-        glBindVertexArray(0)
 
 ## Shader code
 proc CoralLoadShader* (stype:ShaderType, code: string): GLuint=
