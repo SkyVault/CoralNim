@@ -1,7 +1,8 @@
 import 
     tables,
     sequtils,
-    typetraits
+    typetraits,
+    typeinfo
 
 type
     Component* = ref object of RootObj
@@ -105,19 +106,16 @@ proc draw* (world: World)=
             if system.matches entity:
                 system.draw(system, entity)
 
-proc createEntity* (world: World, components: seq[Component] = @[]): auto {.discardable.}=
+proc newEntity* (world: World): auto {.discardable.}=
     result = Entity(
         components: initTable[string, Component](),
         loaded: false,
         remove: false
     )
 
-    for c in components:
-        result.add(c)
-        
     world.entities.add result
 
-proc createSystem* (
+proc newSystem* (
     world: World, 
     matchlist: seq[string], 
     load: proc(s: System, e: Entity) = default_load,
