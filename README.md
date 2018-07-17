@@ -24,4 +24,4 @@ Coral.draw = proc()=
 
 Coral.createGame(800, 600, "My Coral Game").run()
 ```
-![Results](screenShot.png)
+![Results](screenshot.png)
