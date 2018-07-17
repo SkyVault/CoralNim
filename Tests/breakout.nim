@@ -5,6 +5,7 @@ import
     ../Coral/gameMath,
     ../Coral/ecs,
     ../Coral/audio,
+    ../Coral/assets,
     random,
     test,
     os,
@@ -83,6 +84,8 @@ Coral.load = proc()=
     let ball_vel_y = random(100.0) - 200.0
 
     font = loadFont(getApplicationDir() & "/arial.ttf")
+
+    Coral.assets().add(font, "test")
 
     entities.add(
         Ball(

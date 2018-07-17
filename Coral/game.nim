@@ -285,8 +285,10 @@ proc createGame* (self: CoralGame, width, height: int, title: string, config: Co
     return lCoral
 
 ## Public accessor properties
-proc clock* (game: CoralGame): auto = game.clock
-proc input* (game: CoralGame): auto = game.input
+proc clock*     (game: CoralGame): auto = game.clock
+proc input*     (game: CoralGame): auto = game.input
+proc assets*    (c: CoralGame): auto = return c.assets
+
 proc r2d* (game: CoralGame):auto = 
     assert(game.r2d != nil, "[ERROR]:: Game needs to be created before using the renderer")
     return game.r2d
@@ -297,9 +299,6 @@ proc world* (c: CoralGame): World=
     if c.world == nil:
         c.world = newWorld()
     return c.world
-
-proc assets* (c: CoralGame): AssetManager=
-    return c.assets
 
 
 proc newKeyState(state = 0, last = 0): KeyState=
