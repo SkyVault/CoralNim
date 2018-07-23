@@ -16,8 +16,6 @@ uniform mat2 view;
 uniform mat4 ortho;
 uniform vec4 diffuse;
 
-#define SPRITE_TYPE 0
-
 void main() {
     vec2 tuvs = Vertex * 1.0 + 0.5;
     tuvs.y = 1 - tuvs.y;
