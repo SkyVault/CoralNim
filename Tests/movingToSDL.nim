@@ -50,7 +50,7 @@ Coral.render = proc()=
     Coral.r2d.drawRect(200, 300, 300, 300, 0.0, P8Orange)
     Coral.r2d.drawLineRect(300, 350, 300, 300, Coral.clock.timer * 100.0, P8Blue)
 
-Coral.createGame(
+Coral.newGame(
     1280, 
     720, 
     "Moving to SDL2", 

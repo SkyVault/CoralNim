@@ -8,4 +8,4 @@ var map: TiledMap
 Coral.load = proc() = discard
     # map = loadTiledMap()
 
-Coral.createGame(1280, 720, "").run()
+Coral.newGame(1280, 720, "").run()

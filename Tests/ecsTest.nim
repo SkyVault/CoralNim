@@ -24,4 +24,4 @@ Coral.load = proc()=
     let b = p.get(Body)
     echo b.x
 
-Coral.createGame(256, 128, "").run()
+Coral.newGame(256, 128, "").run()

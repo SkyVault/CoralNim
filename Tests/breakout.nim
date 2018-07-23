@@ -173,4 +173,4 @@ Coral.draw= proc()=
     let xpos = winX.float / 2.0 - size.x.float
     Coral.r2d.drawString(font, $score, newV2(xpos, winY.float / 2.0))
 
-Coral.createGame(11 * (32 + 8), 720, "Breakout!").run()
+Coral.newGame(11 * (32 + 8), 720, "Breakout!").run()

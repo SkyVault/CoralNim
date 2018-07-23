@@ -32,4 +32,4 @@ Coral.render = proc()=
             Coral.r2d.drawImage(image, newV2(xx, yy), size, Coral.clock.timer * 100, P8White)
             # Coral.r2d.drawSprite(image, newRegion(0, 0, 32, 32), newV2(xx, yy), size, Coral.clock.timer * 100, P8White)
 
-Coral.createGame(1280, 720, "Benchmarking!", config()).run()
+Coral.newGame(1280, 720, "Benchmarking!", config()).run()

@@ -22,4 +22,4 @@ Coral.draw = proc()=
     Coral.r2d.drawString(font, text, newV2(0.0, 0.0))
     # Coral.r2d.drawRect(0, 0, 200, 200, 0.0, P8Red)
 
-Coral.createGame(1280, 720, "Font Test", config()).run()
+Coral.newGame(1280, 720, "Font Test", config()).run()

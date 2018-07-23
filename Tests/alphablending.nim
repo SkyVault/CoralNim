@@ -29,4 +29,4 @@ Coral.render = proc()=
             newColor(1.0, 1.0, 1.0, 0.4)
         )
 
-Coral.createGame(1280, 720, "", config()).run()
+Coral.newGame(1280, 720, "", config()).run()
