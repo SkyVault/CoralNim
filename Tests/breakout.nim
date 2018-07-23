@@ -93,7 +93,7 @@ Coral.load = proc()=
             ),
             friction: 1.0,
             delete: false,
-            size: newV2(16, 16),
+            size: newV2( 16, 16),
             velocity: newV2(ball_vel_x, ball_vel_y),
             color: P8Orange
         )

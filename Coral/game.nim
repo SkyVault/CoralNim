@@ -80,7 +80,7 @@ type
         context: sdl.GLContext
 
         sceneStack: seq[Scene]
-        
+
         config: Config
         running: bool
         targetFPS: int

@@ -7,3 +7,4 @@ Tests/*.dll
 Tests/*.exe
 Coral/*.exe
 .vscode
+htmldocs/
