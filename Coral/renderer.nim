@@ -102,6 +102,9 @@ type
     DrawableCirclePrimitive* = ref object of DrawablePrimitive
         radius: float
 
+    DrawableCustomPrimitive* = ref object of DrawablePrimitive
+        vao, vbo: GLuint
+
     CustomBufferDrawable* = ref object of Drawable
         vao, vbo: GLuint
   
@@ -303,34 +306,6 @@ proc clear* (self: R2D)=
         )
     glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
-proc begin* (self: R2D)=
-    # glViewport(0, 0, cast[GLsizei](size[0]), cast[GLsizei](size[1]))
-    let
-        width = (float32)self.viewport[0]
-        height = (float32)self.viewport[1]
-
-    self.ortho_projection = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
-
-    var ortho = self.ortho_projection
-    glUseProgram(self.shader_program)
-    glUniformMatrix4fv(self.ortho_location, 1, GL_TRUE, addr ortho.m[0])
-
-    var view = self.view_matrix
-    glUniformMatrix2fv(self.view_location, 1, GL_TRUE, addr view.m[0])
-
-    glBindVertexArray(self.rvao)
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ribo)
-    glEnable(GL_DEPTH_TEST)
-
-    glActiveTexture(GL_TEXTURE0)
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-
-    # glEnable(GL_ALPHA_TEST)
-    # glAlphaFunc(GL_GREATER, 0.01)
-
-    glLineWidth(4.0)
-
 proc setLineWidth* (width = 1.0)=
     glLineWidth(4.0)
 
@@ -381,6 +356,8 @@ proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Co
 proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, color = White())=
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    # glEnable(GL_ALPHA_TEST)
+    # glAlphaFunc(GL_GREATER, 0.01)
 
     glUseProgram(r2d.font_shader_program)
 
@@ -391,7 +368,7 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
         height = (float32)r2d.viewport[1]
 
     # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
-    var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -1.0, 1.0)
+    var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -10.0, 10.0)
     # var ortho = r2d.ortho_projection
 
     let proj = glGetUniformLocation(r2d.font_shader_program, "projection")
@@ -441,11 +418,37 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
 
     glBindVertexArray(0)
     glUseProgram(0)
+    # glDisable(GL_ALPHA_TEST)
 
 var rectangle_batch = newSeq[GLfloat]()
 var rot_and_depth_batch = newSeq[GLfloat]()
 var quad_batch = newSeq[GLfloat]()
 var color_batch = newSeq[GLfloat]()
+
+proc begin* (self: R2D)=
+    # glViewport(0, 0, cast[GLsizei](size[0]), cast[GLsizei](size[1]))
+    let
+        width = (float32)self.viewport[0]
+        height = (float32)self.viewport[1]
+
+    self.ortho_projection = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
+
+    var ortho = self.ortho_projection
+    glUseProgram(self.shader_program)
+    glUniformMatrix4fv(self.ortho_location, 1, GL_TRUE, addr ortho.m[0])
+
+    var view = self.view_matrix
+    glUniformMatrix2fv(self.view_location, 1, GL_TRUE, addr view.m[0])
+
+    glBindVertexArray(self.rvao)
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ribo)
+    glEnable(GL_DEPTH_TEST)
+
+    glActiveTexture(GL_TEXTURE0)
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+    glLineWidth(4.0)
 
 proc flush*(self: R2D)=
     begin(self) # @HARDCODED

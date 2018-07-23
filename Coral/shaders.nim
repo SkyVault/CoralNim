@@ -16,6 +16,8 @@ uniform mat2 view;
 uniform mat4 ortho;
 uniform vec4 diffuse;
 
+#define SPRITE_TYPE 0
+
 void main() {
     vec2 tuvs = Vertex * 1.0 + 0.5;
     tuvs.y = 1 - tuvs.y;
@@ -24,7 +26,7 @@ void main() {
     uvs.y = (quad.y + (tuvs.y * quad.w));
 
     color = diffuse;
-  
+
     float s = sin(rotation);
     float c = cos(rotation);
     mat2 rot = mat2(c, -s, s, c);
@@ -102,7 +104,7 @@ uniform mat4 projection;
 
 void main()
 {
-    gl_Position = projection * vec4(vertex.xy, 0.0, 1.0);
+    gl_Position = projection * vec4(vertex.xy, -5.0, 1.0);
     TexCoords = vertex.zw;
 } 
 """
@@ -119,5 +121,8 @@ void main()
 {    
     vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);
     color = vec4(textColor, 1.0) * sampled;
+
+  if (color.a <= 0.1) 
+    discard;
 }
 """

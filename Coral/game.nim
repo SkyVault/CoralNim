@@ -457,6 +457,8 @@ proc run* (game: CoralGame)=
     game.running = true
     game.load()
 
+    sdl.raiseWindow(game.window)
+
     var ev: sdl.Event
 
     while game.running:

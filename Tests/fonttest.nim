@@ -6,7 +6,6 @@ import
     ../Coral/ecs,
     ../Coral/audio,
     random,
-    test,
     os,
     math
 
@@ -19,6 +18,8 @@ Coral.draw = proc()=
     Coral.r2d.setBackgroundColor(P8Indigo)
 
     const text = "Fonts are now correctly positioned!"
+    Coral.r2d.drawRect(0, 0, 200, 200, 0.0, P8Red)
     Coral.r2d.drawString(font, text, newV2(0.0, 0.0))
+    # Coral.r2d.drawRect(0, 0, 200, 200, 0.0, P8Red)
 
 Coral.createGame(1280, 720, "Font Test", config()).run()
