@@ -171,6 +171,10 @@ proc loadTiledMap* (path: string): TiledMap=
     for objectsXml in objects_xmlnodes:
         discard """ TODO: Implement"""
     
+discard """
+    This should probably be moved to the renderer, the only problem 
+    is the loop in imports
+"""
 proc drawTiledMap* (r2d: R2D, tiledmap: TiledMap, color: Color, draw_layer = 0.4)=
     let tileset = tiledmap.tilesets[0]
     let image = tileset.image
