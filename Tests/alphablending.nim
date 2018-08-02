@@ -6,7 +6,6 @@ import
     ../Coral/ecs,
     ../Coral/audio,
     random,
-    test,
     os,
     math
 
@@ -16,7 +15,7 @@ Coral.load = proc()=
 
     # Coral.assets.add("image", image)
 
-Coral.render = proc()=
+Coral.draw= proc()=
     Coral.windowTitle = "😁"
     # discard Coral.assets.get(Image, "image")
 
