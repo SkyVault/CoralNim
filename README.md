@@ -13,10 +13,7 @@
 ## Getting Started
 
 ```nim
-import
-    Coral/game,
-    Coral/graphics,
-    Coral/renderer
+import Coral/[game, graphics, renderer]
 
 Coral.draw = proc()=
     Coral.r2d.setBackgroundColor(P8Peach)

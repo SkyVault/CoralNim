@@ -1,11 +1,5 @@
 import
-    ../Coral/game,
-    ../Coral/graphics,
-    ../Coral/renderer,
-    ../Coral/gameMath,
-    ../Coral/ecs,
-    ../Coral/audio,
-    ../Coral/assets,
+    ../Coral/[game,graphics,renderer,gameMath,ecs,audio,assets],
     random,
     os,
     math
