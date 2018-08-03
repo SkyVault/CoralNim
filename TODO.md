@@ -5,9 +5,7 @@
 ### Rendering
 
 1. Text rendering function prototypes
-```nim
-
-```
+2. Rework the drawing api, some of them require color parameters
 
 ### Time
 

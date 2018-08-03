@@ -325,7 +325,7 @@ proc drawSprite* (self: R2D, image: Image, region: Region, x, y, width, height: 
     self.layer_adder += 0.0001
     self.drawable_counter += 1
 
-proc drawImage*(self: R2D, image: Image, x, y, width, height: float, rotation: float = 0, color: Color, layer = 0.5)=
+proc drawImage*(self: R2D, image: Image, x, y, width, height: float, rotation: float = 0.0, color: Color, layer = 0.5)=
     drawSprite(self, image, newRegion(0, 0, image.width, image.height), x, y, width, height, rotation, color, layer)
     
 proc drawImage*(self: R2D, image: Image, position: V2, size: V2, rotation: float = 0, color: Color, layer = 0.5)=
