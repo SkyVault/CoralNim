@@ -124,3 +124,20 @@ void main()
     discard;
 }
 """
+
+const TILED_MAP_VERTEX* = """
+#version 330 core
+layout (location = 0) in vec2 Vertices;
+
+void main(void) {
+  gl_Position = vec4(Vertices, 0.0, 1.0); 
+}
+"""
+
+const TILED_MAP_FRAGMENT* = """
+#version 330 core
+
+void main(void) {
+  gl_FragColor = vec4(1.0, 0.5, 0.0, 1.0);
+}
+"""

@@ -6,6 +6,7 @@ import
     assets,
     math,
     strutils,
+    tiled,
     algorithm
 
 include shaders
@@ -144,6 +145,8 @@ type
         font_text_vao: GLuint
         font_text_vbo: GLuint
 
+        tiled_map_shader_program: GLuint
+
         diffuse_location:       GLint
         has_texture_location:   GLint
         size_location:          GLint
@@ -253,6 +256,11 @@ proc newR2D* (draw_instanced = true):R2d =
     result.font_shader_program = newProgram(
         loadShader(VERTEX_SHADER, FONT_RENDERING_VERTEX),
         loadShader(FRAGMENT_SHADER, FONT_RENDERING_FRAGMENT)
+    )
+
+    result.tiled_map_shader_program = newProgram(
+        loadShader(VERTEX_SHADER, TILED_MAP_VERTEX),
+        loadShader(FRAGMENT_SHADER, TILED_MAP_FRAGMENT)
     )
 
     result.view_matrix = newM2(1, 0, 0, 1)
@@ -419,6 +427,10 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
     glBindVertexArray(0)
     glUseProgram(0)
     # glDisable(GL_ALPHA_TEST)
+
+# Drawing tiled maps
+proc drawTileMap* (r2d: R2D, map: TileMap)=
+  discard
 
 var rectangle_batch = newSeq[GLfloat]()
 var rot_and_depth_batch = newSeq[GLfloat]()
@@ -614,5 +626,3 @@ proc flush*(self: R2D)=
     glBindVertexArray(0)
     glUseProgram(0)
     glDisable(GL_BLEND)
-
-    
