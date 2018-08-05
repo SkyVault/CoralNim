@@ -1,15 +1,20 @@
 import 
-    ../Coral/[game, graphics, renderer, tiled],
+    ../Coral/[game, graphics, renderer, tiled, gameMath],
     os
 
-var map: TiledMap
-var img: Image
+var map: TileMap
+var font: Font
 
 Coral.load = proc() =
-  img = loadImage getAppDir() & "/tileset.png"
-  map = loadTiledMap getAppDir() & "/testMap.tmx"
+  map = loadTileMap getAppDir() & "/smile.tmx"
+  font = loadFont(getApplicationDir() & "/arial.ttf", 32)
 
 Coral.draw = proc()=
-  Coral.r2d.drawImage(img, 10.0, 10.0, 500.0, 500.0, 0.0, newColor())
+  Coral.r2d.drawTileMap(map)
+
+  Coral.r2d.drawString(font, "Hello", newV2(10, 10))
+
+  if Coral.clock.ticks mod 10 == 0:
+    Coral.windowTitle = $Coral.clock.currentFps().int
 
 Coral.newGame(1280, 720, "").run()
