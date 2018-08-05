@@ -108,9 +108,15 @@ type
 
     CustomBufferDrawable* = ref object of Drawable
         vao, vbo: GLuint
+
+    StringDrawable* = ref object of Drawable
+      text*: string
+      font*: Font
+      scale*: float
   
     R2D* = ref object
         drawables: TableRef[uint32, seq[Drawable]]
+        stringDrawables: seq[StringDrawable]
         customDBufferDrawable: seq[CustomBufferDrawable]
         primitives: seq[DrawablePrimitive]
         
@@ -175,7 +181,7 @@ type
 #                 discard
 
 proc newDrawable* (image: Image, region: Region, x, y, width, height: float, rotation: float, color: Color, layer = 0.5): Drawable=
-  Drawable(
+  result = Drawable(
     image:      image,
     region:     region,
     x: x, y: y, width: width, height: height,
@@ -184,10 +190,24 @@ proc newDrawable* (image: Image, region: Region, x, y, width, height: float, rot
     layer:      layer
   )
 
+proc newStringDrawable* (font: Font, text: string, x, y: float, scale, rotation: float, color: Color, layer = 0.5): StringDrawable=
+  result = StringDrawable(
+    image:      nil,
+    region:     nil,
+    x: x, y: y, width: 0, height: 0,
+    rotation:   rotation,
+    diffuse:    color,
+    layer:      layer,
+    scale:      scale,
+    text:       text,
+    font:       font
+  )
+
 proc newR2D* (draw_instanced = true):R2d =
     result = R2D(
         clear_color: Black,
         drawables: newTable[uint32, seq[Drawable]](),
+        stringDrawables: @[],
         customDBufferDrawable: newSeq[CustomBufferDrawable](),
 
         primitives: newSeq[DrawablePrimitive](),
@@ -362,71 +382,18 @@ proc drawLineRect*(self: R2D, position: V2, size: V2, rotation: float, color: Co
     self.drawLineRect(position.x, position.y, size.x, size.y, rotation, color, layer)
 
 proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, color = White())=
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-    # glEnable(GL_ALPHA_TEST)
-    # glAlphaFunc(GL_GREATER, 0.01)
-
-    glUseProgram(r2d.font_shader_program)
-
-    glUniform3f(r2d.font_text_color_location, color.r, color.g, color.b)
-
-    let
-        width = (float32)r2d.viewport[0]
-        height = (float32)r2d.viewport[1]
-
-    # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
-    var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -10.0, 10.0)
-    # var ortho = r2d.ortho_projection
-
-    let proj = glGetUniformLocation(r2d.font_shader_program, "projection")
-    glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
     
-    glActiveTexture(GL_TEXTURE0)
-    glBindVertexArray(r2d.font_text_vao)
+  r2d.stringDrawables.add(
+    newStringDrawable(
+      font,
+      text,
+      pos.x, pos.y,
+      scale,
+      0,
+      color
+    )
+  )
 
-    var x = pos.x
-    var y = height - pos.y
-
-    var bs = font.measure(text, scale)
-    var bw = bs.x
-    var bh = bs.y
-
-    # var vertices = newSeq[float](6 * 4)
-    for c in text:
-        doAssert(font.characters.hasKey c, "Font did not load the character: " & $c)
-        let g = font.characters[c]
-
-        let xpos = x + g.bearing.x * scale
-
-        var ypos = y - ((g.size.y - g.bearing.y) * scale) 
-
-        let w = g.size.x * scale
-        let h = g.size.y * scale
-
-        ypos -= bh
-
-        var vertices = @[
-            (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,            
-            (xpos).GLfloat,     (ypos).GLfloat,       0.0.GLfloat, 1.0.GLfloat,
-            (xpos + w).GLfloat, (ypos).GLfloat,       1.0.GLfloat, 1.0.GLfloat,
-            (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,
-            (xpos + w).GLfloat, (ypos).GLfloat,       1.0.GLfloat, 1.0.GLfloat,
-            (xpos + w).GLfloat, (ypos + h).GLfloat,   1.0.GLfloat, 0.0.GLfloat
-        ]
-
-        glBindTexture(GL_TEXTURE_2D, g.texture_id)
-        glBindBuffer(GL_ARRAY_BUFFER, r2d.font_text_vbo)
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 6 * 4, addr vertices[0]); 
-        glBindBuffer(GL_ARRAY_BUFFER, 0)
-
-        glDrawArrays(GL_TRIANGLES, 0, 6)
-
-        x += (g.advance shr 6).float * scale
-
-    glBindVertexArray(0)
-    glUseProgram(0)
-    # glDisable(GL_ALPHA_TEST)
 
 # Drawing tiled maps
 proc drawTileMap* (r2d: R2D, map: TileMap)=
@@ -617,9 +584,85 @@ proc flush*(self: R2D)=
 
         self.drawables[key].setLen(0)
 
+    # Draw all text primitives
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    # glEnable(GL_ALPHA_TEST)
+    # glAlphaFunc(GL_GREATER, 0.01)
+
+    glUseProgram(self.font_shader_program)
+
+    let
+        width = (float32)self.viewport[0]
+        height = (float32)self.viewport[1]
+
+    # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
+    var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -10.0, 10.0)
+    # var ortho = self.ortho_projection
+
+    let proj = glGetUniformLocation(self.font_shader_program, "projection")
+    glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
+    
+    glActiveTexture(GL_TEXTURE0)
+    glBindVertexArray(self.font_text_vao)
+    glBindBuffer(GL_ARRAY_BUFFER, self.font_text_vbo)
+
+    for stringDraw in self.stringDrawables:
+      var x = stringDraw.x
+      var y = height - stringDraw.y
+      var text = stringDraw.text
+      var font = stringDraw.font
+      let scale = stringDraw.scale
+
+      glUniform3f(
+        self.font_text_color_location,
+        stringDraw.diffuse.r,
+        stringDraw.diffuse.g,
+        stringDraw.diffuse.b)
+
+      var bs = font.measure(text, scale)
+      var bw = bs.x
+      var bh = bs.y
+
+      # var vertices = newSeq[float](6 * 4)
+      for c in text:
+          doAssert(font.characters.hasKey c, "Font did not load the character: " & $c)
+          let g = font.characters[c]
+
+          let xpos = x + g.bearing.x * scale
+
+          var ypos = y - ((g.size.y - g.bearing.y) * scale)
+
+          let w = g.size.x * scale
+          let h = g.size.y * scale
+
+          ypos -= bh
+
+          var vertices = @[
+              (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,
+              (xpos).GLfloat,     (ypos).GLfloat,       0.0.GLfloat, 1.0.GLfloat,
+              (xpos + w).GLfloat, (ypos).GLfloat,       1.0.GLfloat, 1.0.GLfloat,
+              (xpos).GLfloat,     (ypos + h).GLfloat,   0.0.GLfloat, 0.0.GLfloat,
+              (xpos + w).GLfloat, (ypos).GLfloat,       1.0.GLfloat, 1.0.GLfloat,
+              (xpos + w).GLfloat, (ypos + h).GLfloat,   1.0.GLfloat, 0.0.GLfloat
+          ]
+
+          glBindTexture(GL_TEXTURE_2D, g.texture_id)
+          glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(GLfloat) * 6 * 4, addr vertices[0]); 
+
+          glDrawArrays(GL_TRIANGLES, 0, 6)
+
+          x += (g.advance shr 6).float * scale
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0)
+    glBindVertexArray(0)
+    glUseProgram(0)
+    # glDisable(GL_ALPHA_TEST)
+    
     # self.last_drawable_counter = self.drawable_counter
     # self.drawable_counter = 0
     self.primitives.setLen(0)
+    self.stringDrawables.setLen(0)
     self.layer_adder = 0.0
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
