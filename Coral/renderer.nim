@@ -262,7 +262,7 @@ proc newR2D* (draw_instanced = true):R2d =
     # result.primitive_vbo
     glGenBuffers(1, addr result.primitive_vbo)
 
-    let vertex_shader = 
+    let vertex_shader =
         if result.draw_instanced:
             SPRITE_SHADER_VERTEX_INSTANCED
         else:
@@ -288,18 +288,21 @@ proc newR2D* (draw_instanced = true):R2d =
     glUseProgram(result.shader_program);
 
     useProgram result.shader_program:
-        result.diffuse_location         = glGetUniformLocation(result.shader_program, "diffuse");
-        result.depth_location           = glGetUniformLocation(result.shader_program, "depth");
-        result.has_texture_location     = glGetUniformLocation(result.shader_program, "has_texture");
-        result.ortho_location           = glGetUniformLocation(result.shader_program, "ortho");
-        result.size_location            = glGetUniformLocation(result.shader_program, "size");
-        result.rotation_location        = glGetUniformLocation(result.shader_program, "rotation");
-        result.position_location        = glGetUniformLocation(result.shader_program, "position");
-        result.quad_location            = glGetUniformLocation(result.shader_program, "quad");
-        result.view_location            = glGetUniformLocation(result.shader_program, "view");
+      result.diffuse_location         = glGetUniformLocation(result.shader_program, "diffuse");
+      result.depth_location           = glGetUniformLocation(result.shader_program, "depth");
+      result.has_texture_location     = glGetUniformLocation(result.shader_program, "has_texture");
+      result.ortho_location           = glGetUniformLocation(result.shader_program, "ortho");
+      result.size_location            = glGetUniformLocation(result.shader_program, "size");
+      result.rotation_location        = glGetUniformLocation(result.shader_program, "rotation");
+      result.position_location        = glGetUniformLocation(result.shader_program, "position");
+      result.quad_location            = glGetUniformLocation(result.shader_program, "quad");
+      result.view_location            = glGetUniformLocation(result.shader_program, "view");
 
     useProgram result.font_shader_program:
-        result.font_text_color_location = glGetUniformLocation(result.font_shader_program, "textColor");
+      result.font_text_color_location = glGetUniformLocation(result.font_shader_program, "textColor");
+
+    useProgram result.tiled_map_shader_program:
+      discard
 
 proc view* (self: R2D): auto= return self.view_matrix
 proc `view=`* (self: R2D, view: M2)=
@@ -396,8 +399,20 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
 
 
 # Drawing tiled maps
-proc drawTileMap* (r2d: R2D, map: TileMap)=
-  discard
+proc drawTileMap* (self: R2D, map: TileMap)=
+  useProgram self.tiled_map_shader_program:
+    let
+        width = (float32)self.viewport[0]
+        height = (float32)self.viewport[1]
+
+    # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
+    #var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -10.0, 10.0)
+    #let proj = glGetUniformLocation(self.font_shader_program, "projection")
+    #glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
+
+    for drawlayer in map.layerDrawables:
+      useVao drawlayer.vao:
+        glDrawArrays(GL_TRIANGLES, 0, 3)
 
 var rectangle_batch = newSeq[GLfloat]()
 var rot_and_depth_batch = newSeq[GLfloat]()

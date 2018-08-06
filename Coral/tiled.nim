@@ -6,12 +6,14 @@ import
 
 type
   LayerDrawable* = object
-    vao, vbo, ibo, tbo: GLuint
+    vao*, vbo*, ibo*, tbo*: GLuint
+    verticesNum: int
+    indicesNum: int
 
   TileMap* = ref object
-    tiledMap: TiledMap
-    tileset: Image
-    layerDrawables: seq[LayerDrawable]
+    tiledMap*: TiledMap
+    tileset*: Image
+    layerDrawables*: seq[LayerDrawable]
 
 proc loadTileMap* (path: string): TileMap=
   result = TileMap()
@@ -20,17 +22,22 @@ proc loadTileMap* (path: string): TileMap=
 
   let tileset = result.tiledMap.tilesets[0]
   result.tileset = loadImage(tileset.imagePath)
-
+  
+  var i = 0
   for layer in result.tiledMap.layers:
     var drawable = LayerDrawable()
-    var vertices = @[0.5'f32, 1'f32, 1.0'f32, -1'f32, -1.0'f32, -1'f32]
+    var vertices = @[0.0'f32, 1'f32, 1.0'f32, -1'f32, -1.0'f32, -1'f32]
 
     drawable.vao = newVao()
     useVao drawable.vao:
+      echo ">>>>>>>>>>", drawable.vao
       drawable.vbo = newVbo(
         BufferType.VERTEX_BUFFER,
         2,
         0,
         vertices
       )
-      echo drawable.vbo
+      echo ">>", drawable.vbo
+    
+    result.layerDrawables[i] = drawable
+    inc i
