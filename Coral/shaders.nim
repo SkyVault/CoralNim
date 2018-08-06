@@ -33,6 +33,36 @@ void main() {
 }
 """
 
+const SPRITE_AXIS_SHADER_VERTEX* = """
+#version 330 core
+layout (location = 0) in vec2 Vertex;
+
+out vec2 uvs;
+out vec4 color;
+
+uniform vec2 position;
+uniform vec2 size;
+uniform float depth = 0.5;
+
+uniform vec4 quad;
+uniform mat2 view;
+uniform mat4 ortho;
+uniform vec4 diffuse;
+
+void main() {
+    vec2 tuvs = Vertex * 1.0 + 0.5;
+    tuvs.y = 1 - tuvs.y;
+
+    uvs.x = (quad.x + (tuvs.x * quad.z));
+    uvs.y = (quad.y + (tuvs.y * quad.w));
+
+    color = diffuse;
+
+    vec2 pos = position + size;
+    gl_Position = ortho * vec4(pos, 0.0, 1.0) + vec4(0, 0, depth, 0.0);
+}
+"""
+
 const SPRITE_SHADER_FRAGMENT* = """
 #version 330 core
 

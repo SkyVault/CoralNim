@@ -401,9 +401,9 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
 # Drawing tiled maps
 proc drawTileMap* (self: R2D, map: TileMap)=
   useProgram self.tiled_map_shader_program:
-    let
-        width = (float32)self.viewport[0]
-        height = (float32)self.viewport[1]
+    #let
+        #width = (float32)self.viewport[0]
+        #height = (float32)self.viewport[1]
 
     # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
     #var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -10.0, 10.0)
@@ -636,7 +636,7 @@ proc flush*(self: R2D)=
         stringDraw.diffuse.b)
 
       var bs = font.measure(text, scale)
-      var bw = bs.x
+      #var bw = bs.x
       var bh = bs.y
 
       # var vertices = newSeq[float](6 * 4)
