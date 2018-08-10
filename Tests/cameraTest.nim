@@ -13,10 +13,11 @@ Coral.load = proc =
 
 Coral.update = proc =
   let timer = Coral.clock.timer * 0.2
-  camera.position.x = math.cos(timer) * 500.0 - 256.0
-  camera.position.y = math.sin(timer) * 500.0 - 256.0
+  #camera.position.x = math.cos(timer) * 500.0 - 256.0
+  #camera.position.y = math.sin(timer) * 500.0 - 256.0
 
-  camera.zoom = math.cos(timer) * 0.5 + 1.0
+  #camera.zoom = math.cos(timer) * 0.5 + 1.0
+  camera.zoom = 4.0
   camera.rotation = math.sin(timer)
 
 Coral.draw = proc =

@@ -86,7 +86,9 @@ proc newCamera2D* (x, y = 0.0, ox, oy = 0.0): Camera2D=
 proc view* (camera: Camera2D): M4=
   result = identity()
   result = mul(result, translation(camera.position.x - camera.offset.x, camera.position.y - camera.offset.y, 0.0))
-  result = mul(result, scale(camera.zoom, camera.zoom, 1.0))
+  
+  let zoom = (if camera.zoom == 0.0: 0.001 else: camera.zoom)
+  result = mul(result, scale(zoom, zoom, 1.0))
   result = mul(result, rotZ(camera.rotation))
   result = mul(result, translation(camera.position.x + camera.offset.x, camera.position.y + camera.offset.y, 0.0))
   #echo result
