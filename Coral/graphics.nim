@@ -83,6 +83,12 @@ proc newCamera2D* (x, y = 0.0, ox, oy = 0.0): Camera2D=
     rotation: 1.0
   )
 
+proc view* (camera: Camera2D): M2=
+  result = newM2(1, 0, 0, 1)
+  result = mul(result, translation(camera.position.x, camera.position.y))
+  result = mul(result, scale(camera.zoom, camera.zoom))
+  #echo result
+
 # Color stuff
 proc newColor*(r: float32 = 1, g: float32 = 1, b: float32 = 1, a: float32 = 1): Color=
     Color( r: r, g: g, b: b, a: a )
@@ -410,10 +416,6 @@ proc measure* (font: Font, text: string, scale = 1.0): V2=
         bw += (g.advance shr 6).float * scale
 
     return newV2(bw, bh)
-
-## Camera 2D
-proc view* (camera: Camera2D): M2=
-    return translation(camera.position.x, camera.position.y)
 
 # Printing the data types
 proc `$`* (r: Region): string=

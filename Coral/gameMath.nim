@@ -1,5 +1,6 @@
 import
-    math
+    math,
+    strformat
 
 type
     V3* = ref object
@@ -44,17 +45,17 @@ const RADTODEG* = 180.0 / PI
 proc newV3* (x: float = 0, y: float = 0, z: float = 0): V3=
     V3(x: x, y: y, z: z)
 
-proc V3Up*     (): V3 = 
+proc V3Up*     (): V3 =
     ## Returns a zeroed vector with the y coordinate set to one
     newV3(0, 1, 0)
 
-proc V3Right*  (): V3 =     
+proc V3Right*  (): V3 =
     newV3(1, 0, 0)
 
-proc V3Left*   (): V3 = 
+proc V3Left*   (): V3 =
     newV3(-1, 0, 0)
 
-proc V3One*    (): V3 = 
+proc V3One*    (): V3 =
     newV3(1, 1, 1)
 
 proc `+`* (a: V3, b: V3): V3= newV3(a.x + b.x, a.y + b.y, a.z + b.z)
@@ -392,14 +393,15 @@ proc transposeM3* (m: M3): M3=
         m.a.m20, m.a.m21, m.a.m22
     )
 
-proc newM2* (m00, m01, m10, m11: float): M2=
+proc newM2* (m00, m10, m01, m11: float): M2=
     M2(
-        a: M2Arr(m00: m00, m01: m01, m10: m10, m11: m11)
+        a: M2Arr(m00: m00, m10: m10,
+                 m01: m01, m11: m11)
     )
 
 proc translation* (x, y: float): M2=
-    newM2(
-        0, x,
+    result = newM2(
+        1, x,
         0, y
     )
 
@@ -418,19 +420,15 @@ proc rot* (rot: float): M2=
     )
 
 proc mul* (a: M2, b: M2): M2=
-    let A = a.a.m00
-    let B = a.a.m01
-    let C = a.a.m10
-    let D = a.a.m11
+    let A = a.a.m00; let B = a.a.m10
+    let C = a.a.m01; let D = a.a.m11
 
-    let E = a.a.m00
-    let F = a.a.m01
-    let G = a.a.m10
-    let H = a.a.m11
+    let E = b.a.m00; let F = b.a.m10
+    let G = b.a.m01; let H = b.a.m11
 
     return newM2(
-        A * E + B * G, A * F + B * H,
-        C * E + D * G, C * F + D * H
+      A * E + B * G, A * F + B * H,
+      C * E + D * G, C * G + D * H
     )
 
 # USEFUL MATH FUNCTIONS
