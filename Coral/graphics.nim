@@ -75,19 +75,13 @@ proc newRegion* (x, y, w, h: int): Region=
     )
 
 # Camera stuff
-# position*   : V2
-# offset*     : V2
-# zoom*       : float32
-# rotation*   : float32
-
-proc newCamera2D(x, y = 0.0, ox, oy = 0.0): Camera2D=
+proc newCamera2D* (x, y = 0.0, ox, oy = 0.0): Camera2D=
   result = Camera2D(
     position: newV2(x, y),
     offset: newV2(ox, oy),
     zoom: 1.0,
     rotation: 1.0
   )
-
 
 # Color stuff
 proc newColor*(r: float32 = 1, g: float32 = 1, b: float32 = 1, a: float32 = 1): Color=
