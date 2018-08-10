@@ -158,16 +158,26 @@ void main()
 const TILED_MAP_VERTEX* = """
 #version 330 core
 layout (location = 0) in vec2 Vertices;
+layout (location = 1) in vec2 Uvs;
+
+out vec2 uvs;
+
+uniform mat4 projection;
 
 void main(void) {
-  gl_Position = vec4(Vertices, 0.0, 1.0); 
+  uvs = Uvs;
+  gl_Position = 2 * projection * vec4(Vertices, 0.0, 1.0); 
 }
 """
 
 const TILED_MAP_FRAGMENT* = """
 #version 330 core
 
+uniform sampler2D image;
+in vec2 uvs;
+
 void main(void) {
-  gl_FragColor = vec4(1.0, 0.5, 0.0, 1.0);
+  vec4 sample = texture(image, uvs);
+  gl_FragColor = sample + vec4(0.1, 0.1, 0.1, 0.0);
 }
 """

@@ -393,26 +393,27 @@ proc drawString* (r2d: R2D, font: Font, text: string, pos: V2, scale = 1.0, colo
       pos.x, pos.y,
       scale,
       0,
-      color
-    )
-  )
-
+      color))
 
 # Drawing tiled maps
 proc drawTileMap* (self: R2D, map: TileMap)=
   useProgram self.tiled_map_shader_program:
-    #let
-        #width = (float32)self.viewport[0]
-        #height = (float32)self.viewport[1]
+    let
+        width = (float32)self.viewport[0]
+        height = (float32)self.viewport[1]
 
-    # var ortho = NimMath.ortho(0, width, height, 0, -10.0'f32, 1.0'f32)
+    var ortho = NimMath.ortho(0, float32 width, float32 height, 0, -10.0'f32, 10.0'f32)
     #var ortho = NimMath.ortho(0.0, width.float32, 0.0, height.float32, -10.0, 10.0)
-    #let proj = glGetUniformLocation(self.font_shader_program, "projection")
-    #glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
+    let proj = glGetUniformLocation(self.tiled_map_shader_program, "projection")
+    glUniformMatrix4fv(proj, 1, GL_TRUE, addr ortho.m[0])
+
+    glBindTexture(GL_TEXTURE_2D, map.tileset.id)
 
     for drawlayer in map.layerDrawables:
       useVao drawlayer.vao:
-        glDrawArrays(GL_TRIANGLES, 0, 3)
+        glDrawArrays(GL_TRIANGLES, 0,GLsizei drawlayer.verticesNum)
+
+    glBindTexture(GL_TEXTURE_2D, 0)
 
 var rectangle_batch = newSeq[GLfloat]()
 var rot_and_depth_batch = newSeq[GLfloat]()
