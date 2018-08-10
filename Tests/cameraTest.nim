@@ -17,8 +17,8 @@ Coral.update = proc =
   #camera.position.y = math.sin(timer) * 500.0 - 256.0
 
   #camera.zoom = math.cos(timer) * 0.5 + 1.0
-  camera.zoom = 4.0
-  camera.rotation = math.sin(timer)
+  camera.zoom = 1.0
+  #camera.rotation = math.sin(timer)
 
 Coral.draw = proc =
   Coral.r2d.view = camera
