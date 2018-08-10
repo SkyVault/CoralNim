@@ -15,7 +15,7 @@
 ```nim
 import Coral/[game, graphics, renderer]
 
-Coral.draw = proc()=
+Coral.draw = proc =
     Coral.r2d.setBackgroundColor(P8Peach)
     Coral.r2d.drawRect(100, 100, 100, 100, 45.0, Red)
 

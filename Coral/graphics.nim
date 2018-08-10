@@ -80,7 +80,7 @@ proc newCamera2D* (x, y = 0.0, ox, oy = 0.0): Camera2D=
     position: newV2(x, y),
     offset: newV2(ox, oy),
     zoom: 1.0,
-    rotation: 1.0
+    rotation: 0.0
   )
 
 proc view* (camera: Camera2D): M4=
