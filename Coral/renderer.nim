@@ -131,7 +131,7 @@ type
         clear_color: Color
         rvao, rvbo, ribo: GLuint
         ortho_projection: M4
-        view_matrix: M2
+        view_matrix: M4
 
         viewport: (int, int)
 
@@ -283,7 +283,7 @@ proc newR2D* (draw_instanced = true):R2d =
         loadShader(FRAGMENT_SHADER, TILED_MAP_FRAGMENT)
     )
 
-    result.view_matrix = newM2(1, 0, 0, 1)
+    result.view_matrix = identity()
 
     glUseProgram(result.shader_program);
 
@@ -305,7 +305,7 @@ proc newR2D* (draw_instanced = true):R2d =
       discard
 
 proc view* (self: R2D): auto= return self.view_matrix
-proc `view=`* (self: R2D, view: M2)=
+proc `view=`* (self: R2D, view: M4)=
     self.view_matrix = view
 
 proc `view=`* (self: R2D, camera: Camera2D)=
@@ -433,7 +433,7 @@ proc begin* (self: R2D)=
     glUniformMatrix4fv(self.ortho_location, 1, GL_TRUE, addr ortho.m[0])
 
     var view = self.view_matrix
-    glUniformMatrix2fv(self.view_location, 1, GL_TRUE, addr view.m[0])
+    glUniformMatrix4fv(self.view_location, 1, GL_TRUE, addr view.m[0])
 
     glBindVertexArray(self.rvao)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ribo)

@@ -12,7 +12,7 @@ uniform float rotation = 0.0;
 uniform float depth = 0.5;
 
 uniform vec4 quad;
-uniform mat2 view;
+uniform mat4 view;
 uniform mat4 ortho;
 uniform vec4 diffuse;
 
@@ -29,8 +29,7 @@ void main() {
     float c = cos(rotation);
     mat2 rot = mat2(c, -s, s, c);
     vec2 pos = position + (size * ((rot * Vertex) + 0.5));
-    pos *= view;
-    gl_Position = ortho * vec4(pos, 0.0, 1.0) + vec4(0, 0, depth, 0.0);
+    gl_Position = ortho * view * vec4(pos, depth, 1.0);
 }
 """
 

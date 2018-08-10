@@ -1,5 +1,6 @@
 import 
-    ../Coral/[game, renderer, graphics, gameMath]
+    ../Coral/[game, renderer, graphics, gameMath],
+    math
 
 var camera: Camera2D
 
@@ -7,7 +8,8 @@ Coral.load = proc =
   camera = newCamera2D(0, 0)
 
 Coral.update = proc =
-  camera.position.x = Coral.clock.timer * 10.0
+  camera.position.x = math.cos(Coral.clock.timer) * 100
+  camera.position.y = math.sin(Coral.clock.timer) * 100
 
 Coral.draw = proc =
   Coral.r2d.view = camera

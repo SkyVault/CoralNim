@@ -83,10 +83,10 @@ proc newCamera2D* (x, y = 0.0, ox, oy = 0.0): Camera2D=
     rotation: 1.0
   )
 
-proc view* (camera: Camera2D): M2=
-  result = newM2(1, 0, 0, 1)
-  result = mul(result, translation(camera.position.x, camera.position.y))
-  result = mul(result, scale(camera.zoom, camera.zoom))
+proc view* (camera: Camera2D): M4=
+  result = identity()
+  result = mul(result, translation(camera.position.x, camera.position.y, 0.0))
+  #result = mul(result, scale(camera.zoom, camera.zoom))
   #echo result
 
 # Color stuff
