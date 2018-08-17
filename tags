@@ -4,3 +4,17 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+Context	src/Coralpkg/platform.nim	/^template Context* (): auto = context$/;"	t
+Window	src/Coralpkg/platform.nim	/^template Window* (): auto = window$/;"	t
+initGame	src/Coral.nim	/^proc initGame* (width, height: int, title: string)=$/;"	f
+newWindow	src/Coralpkg/platform.nim	/^proc newWindow* (size: (int, int), title="")=$/;"	f
+update	src/Coralpkg/platform.nim	/^proc update* ()=$/;"	f
+updateGame	src/Coral.nim	/^proc updateGame* (): bool=$/;"	f
+windowPosition	src/Coralpkg/platform.nim	/^proc windowPosition* (): (int, int)=$/;"	f
+windowPosition=	src/Coralpkg/platform.nim	/^proc `windowPosition=`* (pos: (int, int)) =$/;"	o
+windowSize	src/Coralpkg/platform.nim	/^proc windowSize* (): (int, int)=$/;"	f
+windowSize=	src/Coralpkg/platform.nim	/^proc `windowSize=`* (size: (int, int))=$/;"	o
+windowTitle	src/Coralpkg/platform.nim	/^proc windowTitle* (): string=$/;"	f
+windowTitle=	src/Coralpkg/platform.nim	/^proc `windowTitle=`* (title: string)=$/;"	o
+windowVisible	src/Coralpkg/platform.nim	/^proc windowVisible* (): bool =$/;"	f
+windowVisible=	src/Coralpkg/platform.nim	/^proc `windowVisible=`* (visible: bool) =$/;"	o
