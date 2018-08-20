@@ -54,39 +54,39 @@ proc newWindow* (size: (int, int), title="")=
   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
 
 # Window methods
-proc windowSize* (): (int, int)=
+proc `size=`* (win: Window, size: (int, int)){.inline.}=
+    ## Sets the size of the window
+    sdl.setWindowSize(win, size[0].cint, size[1].cint)
+
+proc size* (win: Window): (int, int){.inline.}=
     ## Returns the size in pixels of the GLFW window
     var width, height: cint
-    sdl.getWindowSize(window, addr width, addr height)
+    sdl.getWindowSize(win, addr width, addr height)
     return (width.int, height.int)
 
-proc `windowSize=`* (size: (int, int))=
-    ## Sets the size of the window
-    sdl.setWindowSize(window, size[0].cint, size[1].cint)
-
-proc windowPosition* (): (int, int)=
+proc position* (win: Window): (int, int)=
     ## Returns the windows position on the monitor
     var width, height: cint
-    sdl.getWindowPosition(window, addr width, addr height)
+    sdl.getWindowPosition(win, addr width, addr height)
     return (width.int, height.int)
 
-proc `windowPosition=`* (pos: (int, int)) =
-    sdl.setWindowPosition(window, pos[0].cint, pos[1].cint)
+proc `position=`* (win: Window, pos: (int, int)) =
+    sdl.setWindowPosition(win, pos[0].cint, pos[1].cint)
 
-proc windowTitle* (): string=
-    let title = sdl.getWindowTitle(window)
+proc title* (win: Window): string {.inline.}=
+    let title = sdl.getWindowTitle(win)
     return $title
 
-proc `windowTitle=`* (title: string)=
-    sdl.setWindowTitle(window, title.cstring)
+proc `title=`*(win: Window, title: string) {.inline.}=
+    sdl.setWindowTitle(win, title.cstring)
 
-proc windowVisible* (): bool =
-    let flags = sdl.getWindowFlags(window)
+proc visible* (win: Window): bool =
+    let flags = sdl.getWindowFlags(win)
     return (flags and sdl.WINDOW_SHOWN) == 1
 
-proc `windowVisible=`* (visible: bool) =
-    if visible: sdl.hideWindow(window)
-    else: sdl.showWindow(window)
+proc `visible=`* (win: Window, visible: bool) =
+    if visible: sdl.hideWindow(win)
+    else: sdl.showWindow(win)
 
 proc update* ()=
   sdl.glSwapWindow(window)
