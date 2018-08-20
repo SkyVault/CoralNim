@@ -1,5 +1,5 @@
 # Hello Nim!
-import Coralpkg/platform
+import Coralpkg/[platform, input]
 
 import sdl2/sdl
 
@@ -15,8 +15,13 @@ proc initGame* (width, height: int, title: string)=
   coral = Coral(
     running: true)
 
+proc quitGame* ()=
+  coral.running = false
+
 proc updateGame* (): bool=
   result = coral.running
+
+  input.update()
 
   var ev: sdl.Event
   while sdl.pollEvent(addr ev) != 0:
@@ -28,7 +33,7 @@ proc updateGame* (): bool=
     else:
       discard
 
+    input.processEvent(ev)
+
   defer: platform.update()
-
-
 

@@ -1,5 +1,5 @@
 run:
-	nim c -r tests/windowTest.nim
+	nim c -r tests/inputTest.nim
 
 build:
-	nim c tests/windowTest.nim
+	nim c tests/inputTest.nim

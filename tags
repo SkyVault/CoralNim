@@ -565,6 +565,7 @@ Field0	tests/nimcache/Coral_Coral.c	/^NI Field0;$/;"	m	struct:tyTuple_1v9bKyksXW
 Field0	tests/nimcache/Coral_Coral.c	/^tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg* Field0;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field0	tests/nimcache/Coral_mathsTest.c	/^tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg* Field0;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field0	tests/nimcache/Coral_platform.c	/^NI Field0;$/;"	m	struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
+Field0	tests/nimcache/Coral_windowTest.c	/^NI Field0;$/;"	m	struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
 Field0	tests/nimcache/opengl_opengl.c	/^tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg* Field0;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field0	tests/nimcache/stdlib_dynlib.c	/^tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg* Field0;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field0	tests/nimcache/stdlib_strformat.c	/^tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg* Field0;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
@@ -580,6 +581,7 @@ Field1	tests/nimcache/Coral_Coral.c	/^NI Field1;$/;"	m	struct:tyTuple_1v9bKyksXW
 Field1	tests/nimcache/Coral_Coral.c	/^NI Field1;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field1	tests/nimcache/Coral_mathsTest.c	/^NI Field1;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field1	tests/nimcache/Coral_platform.c	/^NI Field1;$/;"	m	struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
+Field1	tests/nimcache/Coral_windowTest.c	/^NI Field1;$/;"	m	struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
 Field1	tests/nimcache/opengl_opengl.c	/^NI Field1;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field1	tests/nimcache/stdlib_dynlib.c	/^NI Field1;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
 Field1	tests/nimcache/stdlib_strformat.c	/^NI Field1;$/;"	m	struct:tyTuple_ujsjpB2O9cjj3uDHsXbnSzg	file:
@@ -597,6 +599,7 @@ GcFrameHeader	src/nimcache/stdlib_system.c	/^typedef struct GcFrameHeader GcFram
 GcFrameHeader	tests/nimcache/stdlib_system.c	/^struct GcFrameHeader {$/;"	s	file:
 GcFrameHeader	tests/nimcache/stdlib_system.c	/^typedef struct GcFrameHeader GcFrameHeader;$/;"	t	typeref:struct:GcFrameHeader	file:
 IdentChars_oT0SU38gSViOGadEZ9cV7OA	tests/nimcache/stdlib_system.c	/^NIM_CONST tySet_tyChar_nmiMWKVIe46vacnhAFrQvw IdentChars_oT0SU38gSViOGadEZ9cV7OA = {$/;"	v
+Input	src/Coralpkg/input.nim	/^template Input* (): auto= input$/;"	t
 LANGUAGE_C	src/nimcache/Coral_Coral.c	11;"	d	file:
 LANGUAGE_C	src/nimcache/Coral_platform.c	13;"	d	file:
 LANGUAGE_C	src/nimcache/opengl_opengl.c	11;"	d	file:
@@ -617,7 +620,7 @@ LANGUAGE_C	tests/nimcache/Coral_Coral.c	13;"	d	file:
 LANGUAGE_C	tests/nimcache/Coral_maths.c	13;"	d	file:
 LANGUAGE_C	tests/nimcache/Coral_mathsTest.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/Coral_platform.c	14;"	d	file:
-LANGUAGE_C	tests/nimcache/Coral_windowTest.c	11;"	d	file:
+LANGUAGE_C	tests/nimcache/Coral_windowTest.c	12;"	d	file:
 LANGUAGE_C	tests/nimcache/opengl_opengl.c	12;"	d	file:
 LANGUAGE_C	tests/nimcache/sdl2_nim_sdl.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/stdlib_algorithm.c	11;"	d	file:
@@ -627,7 +630,7 @@ LANGUAGE_C	tests/nimcache/stdlib_math.c	12;"	d	file:
 LANGUAGE_C	tests/nimcache/stdlib_parseutils.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/stdlib_sequtils.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/stdlib_strformat.c	12;"	d	file:
-LANGUAGE_C	tests/nimcache/stdlib_strutils.c	11;"	d	file:
+LANGUAGE_C	tests/nimcache/stdlib_strutils.c	12;"	d	file:
 LANGUAGE_C	tests/nimcache/stdlib_system.c	21;"	d	file:
 LANGUAGE_C	tests/nimcache/stdlib_unicode.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/x11_keysym.c	11;"	d	file:
@@ -654,7 +657,7 @@ MIPSEB	tests/nimcache/Coral_Coral.c	14;"	d	file:
 MIPSEB	tests/nimcache/Coral_maths.c	14;"	d	file:
 MIPSEB	tests/nimcache/Coral_mathsTest.c	12;"	d	file:
 MIPSEB	tests/nimcache/Coral_platform.c	15;"	d	file:
-MIPSEB	tests/nimcache/Coral_windowTest.c	12;"	d	file:
+MIPSEB	tests/nimcache/Coral_windowTest.c	13;"	d	file:
 MIPSEB	tests/nimcache/opengl_opengl.c	13;"	d	file:
 MIPSEB	tests/nimcache/sdl2_nim_sdl.c	12;"	d	file:
 MIPSEB	tests/nimcache/stdlib_algorithm.c	12;"	d	file:
@@ -664,7 +667,7 @@ MIPSEB	tests/nimcache/stdlib_math.c	13;"	d	file:
 MIPSEB	tests/nimcache/stdlib_parseutils.c	12;"	d	file:
 MIPSEB	tests/nimcache/stdlib_sequtils.c	12;"	d	file:
 MIPSEB	tests/nimcache/stdlib_strformat.c	13;"	d	file:
-MIPSEB	tests/nimcache/stdlib_strutils.c	12;"	d	file:
+MIPSEB	tests/nimcache/stdlib_strutils.c	13;"	d	file:
 MIPSEB	tests/nimcache/stdlib_system.c	22;"	d	file:
 MIPSEB	tests/nimcache/stdlib_unicode.c	12;"	d	file:
 MIPSEB	tests/nimcache/x11_keysym.c	12;"	d	file:
@@ -691,7 +694,7 @@ MIPSEL	tests/nimcache/Coral_Coral.c	15;"	d	file:
 MIPSEL	tests/nimcache/Coral_maths.c	15;"	d	file:
 MIPSEL	tests/nimcache/Coral_mathsTest.c	13;"	d	file:
 MIPSEL	tests/nimcache/Coral_platform.c	16;"	d	file:
-MIPSEL	tests/nimcache/Coral_windowTest.c	13;"	d	file:
+MIPSEL	tests/nimcache/Coral_windowTest.c	14;"	d	file:
 MIPSEL	tests/nimcache/opengl_opengl.c	14;"	d	file:
 MIPSEL	tests/nimcache/sdl2_nim_sdl.c	13;"	d	file:
 MIPSEL	tests/nimcache/stdlib_algorithm.c	13;"	d	file:
@@ -701,7 +704,7 @@ MIPSEL	tests/nimcache/stdlib_math.c	14;"	d	file:
 MIPSEL	tests/nimcache/stdlib_parseutils.c	13;"	d	file:
 MIPSEL	tests/nimcache/stdlib_sequtils.c	13;"	d	file:
 MIPSEL	tests/nimcache/stdlib_strformat.c	14;"	d	file:
-MIPSEL	tests/nimcache/stdlib_strutils.c	13;"	d	file:
+MIPSEL	tests/nimcache/stdlib_strutils.c	14;"	d	file:
 MIPSEL	tests/nimcache/stdlib_system.c	23;"	d	file:
 MIPSEL	tests/nimcache/stdlib_unicode.c	13;"	d	file:
 MIPSEL	tests/nimcache/x11_keysym.c	13;"	d	file:
@@ -792,7 +795,7 @@ NTI_0AN68V1SxxSV9c524STDxRw_	tests/nimcache/Coral_maths.c	/^TNimType NTI_0AN68V1
 NTI_0gXq9agni1qcJ9bZfEJVpjFw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_0gXq9agni1qcJ9bZfEJVpjFw_;$/;"	v
 NTI_13RNkKqUOX1TtorOUlKtqA_	src/nimcache/stdlib_system.c	/^TNimType NTI_13RNkKqUOX1TtorOUlKtqA_;$/;"	v
 NTI_13RNkKqUOX1TtorOUlKtqA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_13RNkKqUOX1TtorOUlKtqA_;$/;"	v
-NTI_48JTohSgTy339bRxHzUD8KA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_48JTohSgTy339bRxHzUD8KA_;$/;"	v
+NTI_3XwRQvmzCEOC4QnT706q1g_	tests/nimcache/stdlib_system.c	/^TNimType NTI_3XwRQvmzCEOC4QnT706q1g_;$/;"	v
 NTI_4lLLxwA63qqrtZ4Xqlg9bRQ_	tests/nimcache/stdlib_macros.c	/^TNimType NTI_4lLLxwA63qqrtZ4Xqlg9bRQ_;$/;"	v
 NTI_58EFneeS9at7cA541QCoGAw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_58EFneeS9at7cA541QCoGAw_;$/;"	v
 NTI_6woiEp3hwhYMr1p5tjkZvA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_6woiEp3hwhYMr1p5tjkZvA_;$/;"	v
@@ -807,13 +810,12 @@ NTI_9czoZw3pzPyrBmb5zTHY1OQ_	tests/nimcache/stdlib_system.c	/^TNimType NTI_9czoZ
 NTI_B2Abt9alpIYSCc1xaKGVFLw_	tests/nimcache/opengl_opengl.c	/^TNimType NTI_B2Abt9alpIYSCc1xaKGVFLw_;$/;"	v
 NTI_BdGSl5vgXXoo8kaIdXXVyw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_BdGSl5vgXXoo8kaIdXXVyw_;$/;"	v
 NTI_BwlOT4zD2iHihMMbMBTpxg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_BwlOT4zD2iHihMMbMBTpxg_;$/;"	v
-NTI_C875xFvYpI7aGybrDGHIaQ_	tests/nimcache/stdlib_system.c	/^TNimType NTI_C875xFvYpI7aGybrDGHIaQ_;$/;"	v
 NTI_DbNqde4lnb4e8I9amn677Kg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_DbNqde4lnb4e8I9amn677Kg_;$/;"	v
+NTI_F9bh3YCIGu9a7lVBdm5Z1UVw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_F9bh3YCIGu9a7lVBdm5Z1UVw_;$/;"	v
 NTI_Fjf9b9b2IlzRO2tspHxG3tgg_	src/nimcache/stdlib_system.c	/^TNimType NTI_Fjf9b9b2IlzRO2tspHxG3tgg_;$/;"	v
 NTI_Fjf9b9b2IlzRO2tspHxG3tgg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_Fjf9b9b2IlzRO2tspHxG3tgg_;$/;"	v
 NTI_GH2CeoFi51LSM6obsJ9aesg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_GH2CeoFi51LSM6obsJ9aesg_;$/;"	v
 NTI_GRbrBa7JIulgD34jGcFb8w_	tests/nimcache/stdlib_system.c	/^TNimType NTI_GRbrBa7JIulgD34jGcFb8w_;$/;"	v
-NTI_Gi06FkNeykJn7mrqRZYrkA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_Gi06FkNeykJn7mrqRZYrkA_;$/;"	v
 NTI_HB3Vy8EBnxxRzFrC71tEmA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_HB3Vy8EBnxxRzFrC71tEmA_;$/;"	v
 NTI_HX2M9cQhE3jaovp9aYJDdslA_	src/nimcache/stdlib_system.c	/^TNimType NTI_HX2M9cQhE3jaovp9aYJDdslA_;$/;"	v
 NTI_HX2M9cQhE3jaovp9aYJDdslA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_HX2M9cQhE3jaovp9aYJDdslA_;$/;"	v
@@ -833,6 +835,7 @@ NTI_S9agCYBinaYZnGWcjTdxclg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_S9agC
 NTI_SQ1ZRvNLcWtZVFeuM8ORlg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_SQ1ZRvNLcWtZVFeuM8ORlg_;$/;"	v
 NTI_ScXE9bXuqo7vlSZ19clDc1fQ_	src/nimcache/stdlib_system.c	/^TNimType NTI_ScXE9bXuqo7vlSZ19clDc1fQ_;$/;"	v
 NTI_ScXE9bXuqo7vlSZ19clDc1fQ_	tests/nimcache/stdlib_system.c	/^TNimType NTI_ScXE9bXuqo7vlSZ19clDc1fQ_;$/;"	v
+NTI_TLVXkEbYONqsuh3EtIf38A_	tests/nimcache/stdlib_system.c	/^TNimType NTI_TLVXkEbYONqsuh3EtIf38A_;$/;"	v
 NTI_TmgWlPUbRr7iGD2UE1cu6A_	tests/nimcache/stdlib_system.c	/^TNimType NTI_TmgWlPUbRr7iGD2UE1cu6A_;$/;"	v
 NTI_UhsUhdse8ntQEMKWaJuOMw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_UhsUhdse8ntQEMKWaJuOMw_;$/;"	v
 NTI_VaVACK0bpYmqIQ0mKcHfQQ_	src/nimcache/stdlib_system.c	/^TNimType NTI_VaVACK0bpYmqIQ0mKcHfQQ_;$/;"	v
@@ -891,6 +894,7 @@ NTI_s9c9aIDOKhg9ckklxfAo3kONQ_	src/nimcache/stdlib_system.c	/^TNimType NTI_s9c9a
 NTI_s9c9aIDOKhg9ckklxfAo3kONQ_	tests/nimcache/stdlib_system.c	/^TNimType NTI_s9c9aIDOKhg9ckklxfAo3kONQ_;$/;"	v
 NTI_sM4lkSb7zS6F7OVMvW9cffQ_	tests/nimcache/stdlib_system.c	/^TNimType NTI_sM4lkSb7zS6F7OVMvW9cffQ_;$/;"	v
 NTI_sO5O0Qy9bzKs0atwA6HUBAw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_sO5O0Qy9bzKs0atwA6HUBAw_;$/;"	v
+NTI_sVg18TP9cLifHyygRe9cro9aA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_sVg18TP9cLifHyygRe9cro9aA_;$/;"	v
 NTI_sVg18TP9cLifHyygRe9cro9aA_	tests/nimcache/stdlib_unicode.c	/^TNimType NTI_sVg18TP9cLifHyygRe9cro9aA_;$/;"	v
 NTI_uB9b75OUPRENsBAu4AnoePA_	src/nimcache/stdlib_system.c	/^TNimType NTI_uB9b75OUPRENsBAu4AnoePA_;$/;"	v
 NTI_uB9b75OUPRENsBAu4AnoePA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_uB9b75OUPRENsBAu4AnoePA_;$/;"	v
@@ -901,7 +905,6 @@ NTI_v8QUszD1sWlSIWZz7mC4bQ_	tests/nimcache/stdlib_system.c	/^TNimType NTI_v8QUsz
 NTI_vr5DoT1jILTGdRlYv1OYpw_	src/nimcache/stdlib_system.c	/^TNimType NTI_vr5DoT1jILTGdRlYv1OYpw_;$/;"	v
 NTI_vr5DoT1jILTGdRlYv1OYpw_	tests/nimcache/stdlib_system.c	/^TNimType NTI_vr5DoT1jILTGdRlYv1OYpw_;$/;"	v
 NTI_wFuRaV3kWqFxI9b4hUjDJYA_	tests/nimcache/stdlib_system.c	/^TNimType NTI_wFuRaV3kWqFxI9b4hUjDJYA_;$/;"	v
-NTI_yCEN9anxCD6mzBxGjuaRBdg_	tests/nimcache/stdlib_system.c	/^TNimType NTI_yCEN9anxCD6mzBxGjuaRBdg_;$/;"	v
 NTI_yzVtHjbKd39bygEUDLqI18Q_	src/nimcache/stdlib_system.c	/^TNimType NTI_yzVtHjbKd39bygEUDLqI18Q_;$/;"	v
 NTI_yzVtHjbKd39bygEUDLqI18Q_	tests/nimcache/stdlib_system.c	/^TNimType NTI_yzVtHjbKd39bygEUDLqI18Q_;$/;"	v
 NTI_z58cIdR0vOibqJ0QwYvB3Q_	tests/nimcache/stdlib_system.c	/^TNimType NTI_z58cIdR0vOibqJ0QwYvB3Q_;$/;"	v
@@ -923,6 +926,8 @@ N_CDECL_PTR	tests/nimcache/Coral_platform.c	/^typedef N_CDECL_PTR(void, tyProc_3
 N_CDECL_PTR	tests/nimcache/Coral_platform.c	/^typedef N_CDECL_PTR(void, tyProc_PhiNc70ll6IvDlrnhDZ1Zw) (void* window, int w, int h);$/;"	t	file:
 N_CDECL_PTR	tests/nimcache/Coral_platform.c	/^typedef N_CDECL_PTR(void, tyProc_WYY8i0I79agBofnUcEGCfig) (void* window, NCSTRING title);$/;"	t	file:
 N_CDECL_PTR	tests/nimcache/Coral_platform.c	/^typedef N_CDECL_PTR(void, tyProc_xmqN0ZWK4lw72DZ4V9b09cTw) (void* window, int* w, int* h);$/;"	t	file:
+N_CDECL_PTR	tests/nimcache/Coral_windowTest.c	/^typedef N_CDECL_PTR(void, tyProc_WYY8i0I79agBofnUcEGCfig) (void* window, NCSTRING title);$/;"	t	file:
+N_CDECL_PTR	tests/nimcache/Coral_windowTest.c	/^typedef N_CDECL_PTR(void, tyProc_xmqN0ZWK4lw72DZ4V9b09cTw) (void* window, int* w, int* h);$/;"	t	file:
 N_CDECL_PTR	tests/nimcache/sdl2_nim_sdl.c	/^typedef N_CDECL_PTR(NCSTRING, tyProc_p1X2BwWx9a3wsChhykvf29aA) (void* window);$/;"	t	file:
 N_CDECL_PTR	tests/nimcache/sdl2_nim_sdl.c	/^typedef N_CDECL_PTR(NU32, tyProc_YCWuptWH9ccDzsGQw3Xmujw) (void* window);$/;"	t	file:
 N_CDECL_PTR	tests/nimcache/sdl2_nim_sdl.c	/^typedef N_CDECL_PTR(int, tyProc_2JzATt9b2JMyWQ9cz79b6sUUg) (tyEnum_GLattr_yw23A00kMmIXT9bFNqSsQ3Q attr, int value);$/;"	t	file:
@@ -1308,11 +1313,17 @@ N_INLINE	tests/nimcache/Coral_mathsTest.c	/^static N_INLINE(void, pluseq__0Q9c9c
 N_INLINE	tests/nimcache/Coral_mathsTest.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_mathsTest.c	/^static N_INLINE(void, rtlAddZCT_MV4BBk6J1qu70IbBxwEn4w_2system)(tyObject_Cell_1zcF9cV8XIAtbN8h5HRUB8g* c) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(NI, chckRange)(NI i, NI a, NI b) {$/;"	f	file:
+N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(NimStringDesc*, title_KsJtIy6bPEXovqAq6GaBDQplatform)(void* win) {$/;"	f	file:
+N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ, size_0hjPpxakReFaPAxtRwDRxwplatform)(void* win) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(void, nimFrame)(TFrame* s) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
+N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(void, sizeeq__QC7OQ8x87trBiCFpBApwgAplatform)(void* win, tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ size) {$/;"	f	file:
+N_INLINE	tests/nimcache/Coral_platform.c	/^static N_INLINE(void, titleeq__tHpWA9ajqiOO78pdq9a1yPLgplatform)(void* win, NimStringDesc* title) {$/;"	f	file:
+N_INLINE	tests/nimcache/Coral_windowTest.c	/^static N_INLINE(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ, size_0hjPpxakReFaPAxtRwDRxwplatform)(void* win) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_windowTest.c	/^static N_INLINE(void, initStackBottomWith)(void* locals) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_windowTest.c	/^static N_INLINE(void, nimFrame)(TFrame* s) {$/;"	f	file:
 N_INLINE	tests/nimcache/Coral_windowTest.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
+N_INLINE	tests/nimcache/Coral_windowTest.c	/^static N_INLINE(void, titleeq__tHpWA9ajqiOO78pdq9a1yPLgplatform)(void* win, NimStringDesc* title) {$/;"	f	file:
 N_INLINE	tests/nimcache/opengl_opengl.c	/^static N_INLINE(NI, addInt)(NI a, NI b) {$/;"	f	file:
 N_INLINE	tests/nimcache/opengl_opengl.c	/^static N_INLINE(NI, chckRange)(NI i, NI a, NI b) {$/;"	f	file:
 N_INLINE	tests/nimcache/opengl_opengl.c	/^static N_INLINE(tyObject_Cell_1zcF9cV8XIAtbN8h5HRUB8g*, usrToCell_yB9aH5WIlwd0xkYrcdPeXrQsystem)(void* usr) {$/;"	f	file:
@@ -1355,9 +1366,6 @@ N_INLINE	tests/nimcache/stdlib_math.c	/^static N_INLINE(NI, divInt)(NI a, NI b) 
 N_INLINE	tests/nimcache/stdlib_math.c	/^static N_INLINE(NI, subInt)(NI a, NI b) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_math.c	/^static N_INLINE(void, nimFrame)(TFrame* s) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_math.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
-N_INLINE	tests/nimcache/stdlib_parseutils.c	/^static N_INLINE(NI, addInt)(NI a, NI b) {$/;"	f	file:
-N_INLINE	tests/nimcache/stdlib_parseutils.c	/^static N_INLINE(NI, divInt)(NI a, NI b) {$/;"	f	file:
-N_INLINE	tests/nimcache/stdlib_parseutils.c	/^static N_INLINE(NI, subInt)(NI a, NI b) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_parseutils.c	/^static N_INLINE(void, nimFrame)(TFrame* s) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_parseutils.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_sequtils.c	/^static N_INLINE(void, nimFrame)(TFrame* s) {$/;"	f	file:
@@ -1381,9 +1389,13 @@ N_INLINE	tests/nimcache/stdlib_strformat.c	/^static N_INLINE(void, nimFrame)(TFr
 N_INLINE	tests/nimcache/stdlib_strformat.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strformat.c	/^static N_INLINE(void, rtlAddZCT_MV4BBk6J1qu70IbBxwEn4w_2system)(tyObject_Cell_1zcF9cV8XIAtbN8h5HRUB8g* c) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NI, addInt)(NI a, NI b) {$/;"	f	file:
+N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NI, chckRange)(NI i, NI a, NI b) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NI, find_b3HPX1XboPhUmnxkTjazFQstrutils)(NIM_CHAR* a, NI aLen_0, NIM_CHAR item) {$/;"	f	file:
+N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NI, subInt)(NI a, NI b) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NIM_BOOL, contains_I9cy9aN2znlBRynMcXN4pBGgstrutils)(NIM_CHAR* a, NI aLen_0, NIM_CHAR item) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NIM_BOOL, contains_MCIiD5bOOJHgEOw1G9anbFQstrutils)(tyObject_HSlice_lKy9cDUCgy9ap43jXru18mYw s, NI value) {$/;"	f	file:
+N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NimStringDesc*, X5BX5D__lkBUIkH7j2jb0vaXPf2frAstrutils)(NimStringDesc* s, tyObject_HSlice_x7qpDivRIi6zcMSMsudNPA x) {$/;"	f	file:
+N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(NimStringDesc*, X5BX5D__xiaaX9b4cczHG39bivOynT9bgstrutils)(NimStringDesc* s, tyObject_HSlice_x7qpDivRIi6zcMSMsudNPA x) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(void, nimFrame)(TFrame* s) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(void, pluseq__7kHiltrvRlcg6wSYR3CxAw_2strutils)(NF* x, NF y) {$/;"	f	file:
 N_INLINE	tests/nimcache/stdlib_strutils.c	/^static N_INLINE(void, popFrame)(void) {$/;"	f	file:
@@ -1752,16 +1764,12 @@ N_NIMCALL	tests/nimcache/Coral_maths.c	/^static N_NIMCALL(void, Marker_tyRef_8Y7
 N_NIMCALL	tests/nimcache/Coral_maths.c	/^static N_NIMCALL(void, Marker_tyRef_WozWLbHhmLJATh2HBi5eng)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/Coral_mathsTest.c	/^static N_NIMCALL(void, TM_yxzHMrDvBVDsHUrCPRerZQ_2)(void) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/Coral_mathsTest.c	/^static N_NIMCALL(void, TM_yxzHMrDvBVDsHUrCPRerZQ_3)(void) {$/;"	f	file:
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, windowVisible_70zUG6UJ9aHjt4zoIHJ0gow)(void) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(NimStringDesc*, windowTitle_xSmTPEFn1mMVyj8Wx0U9b1Q)(void) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ, windowPosition_9c8dQcoTWjdDRtfw2XC7JfA_2)(void) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ, windowSize_9c8dQcoTWjdDRtfw2XC7JfA)(void) {$/;"	f
+N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, visible_q8BvD89bj9cOQWyFB768uCqw)(void* win) {$/;"	f
+N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ, position_7NgmAbhNyaThGCZ4pKSRNQ)(void* win) {$/;"	f
 N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, newWindow_Gh3JOa0qmsNzHzhjkMCang)(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ size, NimStringDesc* title) {$/;"	f
+N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, positioneq__j9a1TfOss9bIdm2PSPjoSTkw)(void* win, tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ pos) {$/;"	f
 N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, update_HyMuIz79a3rBc6eYfYQhCiA)(void) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, windowPositioneq__hyYeq8sGOhYPf2DRAjwFCA)(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ pos) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, windowSizeeq__z2ZF5GrYm7PGQPetLpOnEg)(tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ size) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, windowTitleeq__nIIlKDe49chc0Ktle9cTIV2w)(NimStringDesc* title) {$/;"	f
-N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, windowVisibleeq__PI5Dp8yX9a4DSFVgrRADf9bw)(NIM_BOOL visible) {$/;"	f
+N_NIMCALL	tests/nimcache/Coral_platform.c	/^N_LIB_PRIVATE N_NIMCALL(void, visibleeq__xks9bgl9b9b05oWvT11r9a5QPg)(void* win, NIM_BOOL visible) {$/;"	f
 N_NIMCALL	tests/nimcache/opengl_opengl.c	/^NIM_EXTERNC N_NIMCALL(void, nimLoadProcs0)(void) {	Dl_560204_ = (tyProc_U9cBJZ9bwzSFkyJLzG9ap7kpg) (glGetProc_uJzHCTTu7QyPEm2HLp69bKQ(oglHandle_7KtmgyqsH9cFapNPQ59bcpvQ, "glClear"));$/;"	f
 N_NIMCALL	tests/nimcache/opengl_opengl.c	/^N_LIB_PRIVATE N_NIMCALL(tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg, getGLerrorCode_FNSdQ8T9cNHFtFUEzCLDuDw)(void) {$/;"	f
 N_NIMCALL	tests/nimcache/opengl_opengl.c	/^N_LIB_PRIVATE N_NIMCALL(void*, glGetProc_uJzHCTTu7QyPEm2HLp69bKQ)(void* h, NCSTRING procName) {$/;"	f
@@ -1787,11 +1795,10 @@ N_NIMCALL	tests/nimcache/stdlib_math.c	/^N_LIB_PRIVATE N_NIMCALL(NI, fac_07E8HBG
 N_NIMCALL	tests/nimcache/stdlib_math.c	/^N_LIB_PRIVATE N_NIMCALL(NI, nextPowerOfTwo_gcitR3TEXHJ3GR9bmwIvtRA)(NI x) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_math.c	/^N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, isPowerOfTwo_M0Db9b9cHxuUgw2ZF0P8utPg)(NI x) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_math.c	/^N_LIB_PRIVATE N_NIMCALL(tyEnum_FloatClass_pPga1yW9b8J9cwNnm9b1aPRnA, classify_rfodLs2J9b87EDgWnWZoObA)(NF x) {$/;"	f
-N_NIMCALL	tests/nimcache/stdlib_parseutils.c	/^N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_heAOnV8CAiOgwhPKbfpRgA)(NimStringDesc* s, NI* b, NI start) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_strformat.c	/^N_LIB_PRIVATE N_NIMCALL(NimStringDesc*, alignString_K0KhcBUnoHPpalDPYI9b6bA)(NimStringDesc* s, NI minimumWidth, NIM_CHAR align, NIM_CHAR fill) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_strformat.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_StandardFormatSpecifier_NDU7AW5Eu6Q69c8cH6RDouQ, parseStandardFormatSpecifier_l0Y8k5tIk0aj1kHTtFOjSw)(NimStringDesc* s, NI start, NIM_BOOL ignoreUnknownSuffix) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_strformat.c	/^N_LIB_PRIVATE N_NIMCALL(void, format_0qs1MYNUDLlnJxpKBIQbnA)(NimStringDesc* value, NimStringDesc* specifier, NimStringDesc** res) {$/;"	f
-N_NIMCALL	tests/nimcache/stdlib_strutils.c	/^N_LIB_PRIVATE N_NIMCALL(NimStringDesc*, nsuRepeatChar)(NIM_CHAR c, NI count) {$/;"	f
+N_NIMCALL	tests/nimcache/stdlib_strutils.c	/^N_LIB_PRIVATE N_NIMCALL(NI, nsuFindChar)(NimStringDesc* s, NIM_CHAR sub, NI start, NI last) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(FILE*, open_hqzpWQbdA2B8l9a6wwNoP4g)(NimStringDesc* filename, tyEnum_FileMode_fVUBHvW79bXUw1j55Oo9avSQ mode, NI bufSize) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(NCSTRING*, allocCStringArray_TEzwlF389aOWujK0ZU6Ck9bA)(NimStringDesc** a, NI aLen_0) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(NF, abs_QIvuKzKMDpWGt0aKgdf1ng)(NF x) {$/;"	f
@@ -1882,6 +1889,7 @@ N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_BigC
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg*, getHugeChunk_z9bCNjXTYllZ3pI24nEsw2g_3)(tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg* a, NI size) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg*, requestOsChunks_z9bCNjXTYllZ3pI24nEsw2g_2)(tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg* a, NI size) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_ForeignCell_wAIfO0McG3N1TIBYCy0ltw, protect_WH6dkipWVzoaYnj6aRvybg)(void* x) {$/;"	f
+N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ*, new_a1MmKAZl4xGu1w45AeEvJQ)(void) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_GcStack_7fytPA5bBsob6See21YMRA*, getActiveStack_2XtoPjgvlHPkHLitAW2flw)(tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ* gch) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_PageDesc_fublkgIY4LG3mT51LU2WHg*, cellSetGet_X4WTfs0wkld8wp8XcE9b8BA)(tyObject_CellSet_jG87P0AI9aZtss9ccTYBIISQ* t, NI key) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_PageDesc_fublkgIY4LG3mT51LU2WHg*, cellSetPut_mFUFZ7eVLRT9bMaHzrsxFrQ)(tyObject_CellSet_jG87P0AI9aZtss9ccTYBIISQ* t, NI key) {$/;"	f
@@ -1890,9 +1898,9 @@ N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_PtrT
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_SmallChunk_tXn60W2f8h3jgAYdEmy5NQ*, getSmallChunk_h6cvXbfQjxIdThM5GthosA)(tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg* a) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_Trunk_W0r8S0Y3UGke6T9bIUWnnuw*, intSetGet_FhOZKj4Gih3qQ5OimZYOrg)(tyObject_IntSet_EZObFrE3NC9bIb3YMkY9crZA* t, NI key) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tyObject_Trunk_W0r8S0Y3UGke6T9bIUWnnuw*, intSetPut_KWgRM9bUk6rwhAaHSiuK9aYA)(tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg* a, tyObject_IntSet_EZObFrE3NC9bIb3YMkY9crZA* t, NI key) {$/;"	f
-N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tySequence_48JTohSgTy339bRxHzUD8KA*, newSeq_eYYHkXwVzOzgg15yEr5XtA)(NI len) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tySequence_sM4lkSb7zS6F7OVMvW9cffQ*, cstringArrayToSeq_9csDN6Nz9aAfagut7AuPkswg)(NCSTRING* a) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tySequence_sM4lkSb7zS6F7OVMvW9cffQ*, cstringArrayToSeq_rah74SfPJVlQdet9a6MZ6mg)(NCSTRING* a, NI len) {$/;"	f
+N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tySequence_sM4lkSb7zS6F7OVMvW9cffQ*, newSeq_9cL6dIz2UWtIh3FeS5x4hxA)(NI len) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tySequence_uB9b75OUPRENsBAu4AnoePA*, getStackTraceEntries_clqHrkuaO6cqHGtwD1qH8w)(Exception* e) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(tySequence_uB9b75OUPRENsBAu4AnoePA*, newSeq_cqdhsOVnJP6MqKK9bkcrtdg)(NI len) {$/;"	f
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^N_LIB_PRIVATE N_NIMCALL(void*, alloc0_1iQ1Xo9cXsxq509b5gmDHLoQ)(tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg* allocator, NI size) {$/;"	f
@@ -2092,6 +2100,7 @@ N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_H
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_HX2M9cQhE3jaovp9aYJDdslA)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_ONUz7jwW9bYb3QX1IH3ylJA)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_SQ1ZRvNLcWtZVFeuM8ORlg)(void* p, NI op) {$/;"	f	file:
+N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_TLVXkEbYONqsuh3EtIf38A)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_TmgWlPUbRr7iGD2UE1cu6A)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_UhsUhdse8ntQEMKWaJuOMw)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_YNy1lNsF3WpBz2t9bV09bYvA)(void* p, NI op) {$/;"	f	file:
@@ -2102,9 +2111,7 @@ N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_i
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_jW9bO86m62QwDsO8uZtOqMA)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_nU4gAnbyYYUXplrWivbPYQ)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_oUKtBcKRdK6usj8RWrlp6A)(void* p, NI op) {$/;"	f	file:
-N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_yCEN9anxCD6mzBxGjuaRBdg)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tyRef_z58cIdR0vOibqJ0QwYvB3Q)(void* p, NI op) {$/;"	f	file:
-N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tySequence_48JTohSgTy339bRxHzUD8KA)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tySequence_sM4lkSb7zS6F7OVMvW9cffQ)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, Marker_tySequence_uB9b75OUPRENsBAu4AnoePA)(void* p, NI op) {$/;"	f	file:
 N_NIMCALL	tests/nimcache/stdlib_system.c	/^static N_NIMCALL(void, TM_Q5wkpxktOdTGvlSRo9bzt9aw_56)(void) {$/;"	f	file:
@@ -2363,8 +2370,6 @@ NimStringDesc	tests/nimcache/stdlib_dynlib.c	/^struct NimStringDesc {$/;"	s	file
 NimStringDesc	tests/nimcache/stdlib_dynlib.c	/^typedef struct NimStringDesc NimStringDesc;$/;"	t	typeref:struct:NimStringDesc	file:
 NimStringDesc	tests/nimcache/stdlib_macros.c	/^struct NimStringDesc {$/;"	s	file:
 NimStringDesc	tests/nimcache/stdlib_macros.c	/^typedef struct NimStringDesc NimStringDesc;$/;"	t	typeref:struct:NimStringDesc	file:
-NimStringDesc	tests/nimcache/stdlib_parseutils.c	/^struct NimStringDesc {$/;"	s	file:
-NimStringDesc	tests/nimcache/stdlib_parseutils.c	/^typedef struct NimStringDesc NimStringDesc;$/;"	t	typeref:struct:NimStringDesc	file:
 NimStringDesc	tests/nimcache/stdlib_strformat.c	/^struct NimStringDesc {$/;"	s	file:
 NimStringDesc	tests/nimcache/stdlib_strformat.c	/^typedef struct NimStringDesc NimStringDesc;$/;"	t	typeref:struct:NimStringDesc	file:
 NimStringDesc	tests/nimcache/stdlib_strutils.c	/^struct NimStringDesc {$/;"	s	file:
@@ -2399,7 +2404,7 @@ PPC	tests/nimcache/Coral_Coral.c	16;"	d	file:
 PPC	tests/nimcache/Coral_maths.c	16;"	d	file:
 PPC	tests/nimcache/Coral_mathsTest.c	14;"	d	file:
 PPC	tests/nimcache/Coral_platform.c	17;"	d	file:
-PPC	tests/nimcache/Coral_windowTest.c	14;"	d	file:
+PPC	tests/nimcache/Coral_windowTest.c	15;"	d	file:
 PPC	tests/nimcache/opengl_opengl.c	15;"	d	file:
 PPC	tests/nimcache/sdl2_nim_sdl.c	14;"	d	file:
 PPC	tests/nimcache/stdlib_algorithm.c	14;"	d	file:
@@ -2409,7 +2414,7 @@ PPC	tests/nimcache/stdlib_math.c	15;"	d	file:
 PPC	tests/nimcache/stdlib_parseutils.c	14;"	d	file:
 PPC	tests/nimcache/stdlib_sequtils.c	14;"	d	file:
 PPC	tests/nimcache/stdlib_strformat.c	15;"	d	file:
-PPC	tests/nimcache/stdlib_strutils.c	14;"	d	file:
+PPC	tests/nimcache/stdlib_strutils.c	15;"	d	file:
 PPC	tests/nimcache/stdlib_system.c	24;"	d	file:
 PPC	tests/nimcache/stdlib_unicode.c	14;"	d	file:
 PPC	tests/nimcache/x11_keysym.c	14;"	d	file:
@@ -2442,7 +2447,7 @@ R3000	tests/nimcache/Coral_Coral.c	17;"	d	file:
 R3000	tests/nimcache/Coral_maths.c	17;"	d	file:
 R3000	tests/nimcache/Coral_mathsTest.c	15;"	d	file:
 R3000	tests/nimcache/Coral_platform.c	18;"	d	file:
-R3000	tests/nimcache/Coral_windowTest.c	15;"	d	file:
+R3000	tests/nimcache/Coral_windowTest.c	16;"	d	file:
 R3000	tests/nimcache/opengl_opengl.c	16;"	d	file:
 R3000	tests/nimcache/sdl2_nim_sdl.c	15;"	d	file:
 R3000	tests/nimcache/stdlib_algorithm.c	15;"	d	file:
@@ -2452,7 +2457,7 @@ R3000	tests/nimcache/stdlib_math.c	16;"	d	file:
 R3000	tests/nimcache/stdlib_parseutils.c	15;"	d	file:
 R3000	tests/nimcache/stdlib_sequtils.c	15;"	d	file:
 R3000	tests/nimcache/stdlib_strformat.c	16;"	d	file:
-R3000	tests/nimcache/stdlib_strutils.c	15;"	d	file:
+R3000	tests/nimcache/stdlib_strutils.c	16;"	d	file:
 R3000	tests/nimcache/stdlib_system.c	25;"	d	file:
 R3000	tests/nimcache/stdlib_unicode.c	15;"	d	file:
 R3000	tests/nimcache/x11_keysym.c	15;"	d	file:
@@ -2479,7 +2484,7 @@ R4000	tests/nimcache/Coral_Coral.c	18;"	d	file:
 R4000	tests/nimcache/Coral_maths.c	18;"	d	file:
 R4000	tests/nimcache/Coral_mathsTest.c	16;"	d	file:
 R4000	tests/nimcache/Coral_platform.c	19;"	d	file:
-R4000	tests/nimcache/Coral_windowTest.c	16;"	d	file:
+R4000	tests/nimcache/Coral_windowTest.c	17;"	d	file:
 R4000	tests/nimcache/opengl_opengl.c	17;"	d	file:
 R4000	tests/nimcache/sdl2_nim_sdl.c	16;"	d	file:
 R4000	tests/nimcache/stdlib_algorithm.c	16;"	d	file:
@@ -2489,7 +2494,7 @@ R4000	tests/nimcache/stdlib_math.c	17;"	d	file:
 R4000	tests/nimcache/stdlib_parseutils.c	16;"	d	file:
 R4000	tests/nimcache/stdlib_sequtils.c	16;"	d	file:
 R4000	tests/nimcache/stdlib_strformat.c	17;"	d	file:
-R4000	tests/nimcache/stdlib_strutils.c	16;"	d	file:
+R4000	tests/nimcache/stdlib_strutils.c	17;"	d	file:
 R4000	tests/nimcache/stdlib_system.c	26;"	d	file:
 R4000	tests/nimcache/stdlib_unicode.c	16;"	d	file:
 R4000	tests/nimcache/x11_keysym.c	16;"	d	file:
@@ -2551,7 +2556,6 @@ Sup	tests/nimcache/stdlib_dynlib.c	/^  tyObject_BaseChunk_Sdq7WpT6qAH858F5ZEdG3w
 Sup	tests/nimcache/stdlib_dynlib.c	/^  tyObject_OSError_3XwRQvmzCEOC4QnT706q1g Sup;$/;"	m	struct:tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	file:
 Sup	tests/nimcache/stdlib_dynlib.c	/^  tyObject_SystemError_Fjf9b9b2IlzRO2tspHxG3tgg Sup;$/;"	m	struct:tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	file:
 Sup	tests/nimcache/stdlib_macros.c	/^  TGenericSeq Sup;$/;"	m	struct:NimStringDesc	file:
-Sup	tests/nimcache/stdlib_parseutils.c	/^  TGenericSeq Sup;$/;"	m	struct:NimStringDesc	file:
 Sup	tests/nimcache/stdlib_strformat.c	/^  Exception Sup;$/;"	m	struct:tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	file:
 Sup	tests/nimcache/stdlib_strformat.c	/^  RootObj Sup;$/;"	m	struct:Exception	file:
 Sup	tests/nimcache/stdlib_strformat.c	/^  TGenericSeq Sup;$/;"	m	struct:NimStringDesc	file:
@@ -2563,17 +2567,16 @@ Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_Arit
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_AssertionError_8FC9arcap3s5ZtfMs75krtA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_FieldError_cFRnc8M9cG1X9b9cx0eykcZfA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_FloatingPointError_fSmhDqmh9cSHH2u2OqYKQjA	file:
+Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_IndexError_b0IIwghFQBADkB2c86kXQA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_ObjectConversionError_JqfCBiksDiD877KQxpenZg	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_RangeError_wFuRaV3kWqFxI9b4hUjDJYA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_ReraiseError_GRbrBa7JIulgD34jGcFb8w	file:
 Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_SystemError_Fjf9b9b2IlzRO2tspHxG3tgg	file:
-Sup	tests/nimcache/stdlib_system.c	/^  Exception Sup;$/;"	m	struct:tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  RootObj Sup;$/;"	m	struct:Exception	file:
 Sup	tests/nimcache/stdlib_system.c	/^  RootObj Sup;$/;"	m	struct:tyObject_Env_libslashsystemdotnim__sO5O0Qy9bzKs0atwA6HUBAw	file:
 Sup	tests/nimcache/stdlib_system.c	/^  TGenericSeq Sup;$/;"	m	struct:NimStringDesc	file:
-Sup	tests/nimcache/stdlib_system.c	/^  TGenericSeq Sup;$/;"	m	struct:tySequence_48JTohSgTy339bRxHzUD8KA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  TGenericSeq Sup;$/;"	m	struct:tySequence_sM4lkSb7zS6F7OVMvW9cffQ	file:
 Sup	tests/nimcache/stdlib_system.c	/^  TGenericSeq Sup;$/;"	m	struct:tySequence_uB9b75OUPRENsBAu4AnoePA	file:
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_ArithmeticError_QcJsjWXxMFpjHfkCIK5ExA Sup;$/;"	m	struct:tyObject_DivByZeroError_p6OJ2WGp1zYZkMyhPlJPZA	file:
@@ -2584,8 +2587,10 @@ Sup	tests/nimcache/stdlib_system.c	/^  tyObject_FloatingPointError_fSmhDqmh9cSHH
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_FloatingPointError_fSmhDqmh9cSHH2u2OqYKQjA Sup;$/;"	m	struct:tyObject_FloatOverflowError_DbNqde4lnb4e8I9amn677Kg	file:
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_FloatingPointError_fSmhDqmh9cSHH2u2OqYKQjA Sup;$/;"	m	struct:tyObject_FloatUnderflowError_8IxgQ9cM8cdUg2nyzXOM0Xg	file:
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_IOError_9czoZw3pzPyrBmb5zTHY1OQ Sup;$/;"	m	struct:tyObject_EOFError_yzVtHjbKd39bygEUDLqI18Q	file:
+Sup	tests/nimcache/stdlib_system.c	/^  tyObject_OSError_3XwRQvmzCEOC4QnT706q1g Sup;$/;"	m	struct:tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	file:
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_SystemError_Fjf9b9b2IlzRO2tspHxG3tgg Sup;$/;"	m	struct:tyObject_IOError_9czoZw3pzPyrBmb5zTHY1OQ	file:
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_SystemError_Fjf9b9b2IlzRO2tspHxG3tgg Sup;$/;"	m	struct:tyObject_NilAccessError_le1LLqP8alYTev1dbGWJlg	file:
+Sup	tests/nimcache/stdlib_system.c	/^  tyObject_SystemError_Fjf9b9b2IlzRO2tspHxG3tgg Sup;$/;"	m	struct:tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	file:
 Sup	tests/nimcache/stdlib_system.c	/^  tyObject_SystemError_Fjf9b9b2IlzRO2tspHxG3tgg Sup;$/;"	m	struct:tyObject_OutOfMemError_NrupLB36t9bV7iFDHtrF69aw	file:
 Sup	tests/nimcache/stdlib_unicode.c	/^  TGenericSeq Sup;$/;"	m	struct:NimStringDesc	file:
 Sup	tests/nimcache/stdlib_unicode.c	/^  TGenericSeq Sup;$/;"	m	struct:tySequence_48JTohSgTy339bRxHzUD8KA	file:
@@ -2621,8 +2626,6 @@ TGenericSeq	tests/nimcache/stdlib_dynlib.c	/^struct TGenericSeq {$/;"	s	file:
 TGenericSeq	tests/nimcache/stdlib_dynlib.c	/^typedef struct TGenericSeq TGenericSeq;$/;"	t	typeref:struct:TGenericSeq	file:
 TGenericSeq	tests/nimcache/stdlib_macros.c	/^struct TGenericSeq {$/;"	s	file:
 TGenericSeq	tests/nimcache/stdlib_macros.c	/^typedef struct TGenericSeq TGenericSeq;$/;"	t	typeref:struct:TGenericSeq	file:
-TGenericSeq	tests/nimcache/stdlib_parseutils.c	/^struct TGenericSeq {$/;"	s	file:
-TGenericSeq	tests/nimcache/stdlib_parseutils.c	/^typedef struct TGenericSeq TGenericSeq;$/;"	t	typeref:struct:TGenericSeq	file:
 TGenericSeq	tests/nimcache/stdlib_strformat.c	/^struct TGenericSeq {$/;"	s	file:
 TGenericSeq	tests/nimcache/stdlib_strformat.c	/^typedef struct TGenericSeq TGenericSeq;$/;"	t	typeref:struct:TGenericSeq	file:
 TGenericSeq	tests/nimcache/stdlib_strutils.c	/^struct TGenericSeq {$/;"	s	file:
@@ -2940,6 +2943,7 @@ cmdLine	tests/nimcache/Coral_windowTest.c	/^char** cmdLine;$/;"	v
 code	tests/nimcache/Coral_Coral.c	/^NI32 code;$/;"	m	struct:tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg	file:
 code	tests/nimcache/opengl_opengl.c	/^tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg code;$/;"	m	struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
 code	tests/nimcache/sdl2_nim_sdl.c	/^NI32 code;$/;"	m	struct:tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg	file:
+code	tests/nimcache/stdlib_system.c	/^tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg code;$/;"	m	struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
 colormap	tests/nimcache/x11_xlib.c	/^unsigned long colormap;$/;"	m	struct:tyObject_TXSetWindowAttributes_fGFa7M5Ai9aYS1Qi405emDw	file:
 colormap	tests/nimcache/x11_xlib.c	/^unsigned long colormap;$/;"	m	struct:tyObject_TXWindowAttributes_nlpf8vqbE9bnoZp9bwwYiP6g	file:
 colormap	tests/nimcache/x11_xutil.c	/^unsigned long colormap;$/;"	m	struct:tyObject_TXStandardColormap_zAfXviCBWQ9cAeAzQ7THvUg	file:
@@ -3052,7 +3056,6 @@ data	tests/nimcache/stdlib_dynlib.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	struct
 data	tests/nimcache/stdlib_dynlib.c	/^tyArray_lh2A89ahMmYg9bCmpVaplLbA data;$/;"	m	struct:tyObject_IntSet_EZObFrE3NC9bIb3YMkY9crZA	file:
 data	tests/nimcache/stdlib_dynlib.c	/^tyObject_PageDesc_fublkgIY4LG3mT51LU2WHg** data;$/;"	m	struct:tyObject_CellSet_jG87P0AI9aZtss9ccTYBIISQ	file:
 data	tests/nimcache/stdlib_macros.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	struct:NimStringDesc	file:
-data	tests/nimcache/stdlib_parseutils.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	struct:NimStringDesc	file:
 data	tests/nimcache/stdlib_strformat.c	/^  tyObject_StackTraceEntry_oLyohQ7O2XOvGnflOss8EA data[SEQ_DECL_SIZE];$/;"	m	struct:tySequence_uB9b75OUPRENsBAu4AnoePA	file:
 data	tests/nimcache/stdlib_strformat.c	/^NF data;$/;"	m	struct:tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg	file:
 data	tests/nimcache/stdlib_strformat.c	/^NF data;$/;"	m	struct:tyObject_SmallChunk_tXn60W2f8h3jgAYdEmy5NQ	file:
@@ -3060,7 +3063,6 @@ data	tests/nimcache/stdlib_strformat.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	str
 data	tests/nimcache/stdlib_strformat.c	/^tyArray_lh2A89ahMmYg9bCmpVaplLbA data;$/;"	m	struct:tyObject_IntSet_EZObFrE3NC9bIb3YMkY9crZA	file:
 data	tests/nimcache/stdlib_strformat.c	/^tyObject_PageDesc_fublkgIY4LG3mT51LU2WHg** data;$/;"	m	struct:tyObject_CellSet_jG87P0AI9aZtss9ccTYBIISQ	file:
 data	tests/nimcache/stdlib_strutils.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	struct:NimStringDesc	file:
-data	tests/nimcache/stdlib_system.c	/^  NI32 data[SEQ_DECL_SIZE];$/;"	m	struct:tySequence_48JTohSgTy339bRxHzUD8KA	file:
 data	tests/nimcache/stdlib_system.c	/^  NimStringDesc* data[SEQ_DECL_SIZE];$/;"	m	struct:tySequence_sM4lkSb7zS6F7OVMvW9cffQ	file:
 data	tests/nimcache/stdlib_system.c	/^  tyObject_StackTraceEntry_oLyohQ7O2XOvGnflOss8EA data[SEQ_DECL_SIZE];$/;"	m	struct:tySequence_uB9b75OUPRENsBAu4AnoePA	file:
 data	tests/nimcache/stdlib_system.c	/^NF data;$/;"	m	struct:tyObject_BigChunk_Rv9c70Uhp2TytkX7eH78qEg	file:
@@ -3176,6 +3178,7 @@ endPosition	tests/nimcache/stdlib_strformat.c	/^NI endPosition;$/;"	m	struct:tyO
 error	tests/nimcache/Coral_Coral.c	/^float error;$/;"	m	struct:tyObject_DollarGestureEventObj_9afGfbHjuc5BDKXR9aYAnpJg	file:
 error	tests/nimcache/sdl2_nim_sdl.c	/^float error;$/;"	m	struct:tyObject_DollarGestureEventObj_9afGfbHjuc5BDKXR9aYAnpJg	file:
 errorCode	tests/nimcache/stdlib_dynlib.c	/^NI32 errorCode;$/;"	m	struct:tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	file:
+errorCode	tests/nimcache/stdlib_system.c	/^NI32 errorCode;$/;"	m	struct:tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	file:
 errorMessageWriter_ZXnv0JyrWe3HTd07wpSr7A	src/nimcache/stdlib_system.c	/^tyProc_W6IXMh2CA4X1rFYGjUb4yg errorMessageWriter_ZXnv0JyrWe3HTd07wpSr7A;$/;"	v
 errorMessageWriter_ZXnv0JyrWe3HTd07wpSr7A	tests/nimcache/stdlib_system.c	/^tyProc_W6IXMh2CA4X1rFYGjUb4yg errorMessageWriter_ZXnv0JyrWe3HTd07wpSr7A;$/;"	v
 error_code	tests/nimcache/x11_xlib.c	/^unsigned char error_code;$/;"	m	struct:tyObject_TXErrorEvent_VMyaP4lXub7q8XzdgKpLZA	file:
@@ -3327,6 +3330,7 @@ gch_IcYaEuuWivYAS86vFMTS3Q	src/nimcache/stdlib_system.c	/^tyObject_GcHeap_1TRH1T
 gch_IcYaEuuWivYAS86vFMTS3Q	tests/nimcache/stdlib_system.c	/^tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ gch_IcYaEuuWivYAS86vFMTS3Q;$/;"	v
 gestureId	tests/nimcache/Coral_Coral.c	/^NI64 gestureId;$/;"	m	struct:tyObject_DollarGestureEventObj_9afGfbHjuc5BDKXR9aYAnpJg	file:
 gestureId	tests/nimcache/sdl2_nim_sdl.c	/^NI64 gestureId;$/;"	m	struct:tyObject_DollarGestureEventObj_9afGfbHjuc5BDKXR9aYAnpJg	file:
+getKeyInRange	src/Coralpkg/input.nim	/^proc getKeyInRange(key: cint): int=$/;"	f
 get_pixel	tests/nimcache/x11_xlib.c	/^tyProc_UaF5PEQuIRE9aiUPKYBTmuw get_pixel;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
 get_pixel	tests/nimcache/x11_xutil.c	/^tyProc_UaF5PEQuIRE9aiUPKYBTmuw get_pixel;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
 globalMarkersLen_hgEFy3UCOBoalBh29asu5MA	src/nimcache/stdlib_system.c	/^NI globalMarkersLen_hgEFy3UCOBoalBh29asu5MA;$/;"	v
@@ -3401,7 +3405,7 @@ i386	tests/nimcache/Coral_Coral.c	19;"	d	file:
 i386	tests/nimcache/Coral_maths.c	19;"	d	file:
 i386	tests/nimcache/Coral_mathsTest.c	17;"	d	file:
 i386	tests/nimcache/Coral_platform.c	20;"	d	file:
-i386	tests/nimcache/Coral_windowTest.c	17;"	d	file:
+i386	tests/nimcache/Coral_windowTest.c	18;"	d	file:
 i386	tests/nimcache/opengl_opengl.c	18;"	d	file:
 i386	tests/nimcache/sdl2_nim_sdl.c	17;"	d	file:
 i386	tests/nimcache/stdlib_algorithm.c	17;"	d	file:
@@ -3411,7 +3415,7 @@ i386	tests/nimcache/stdlib_math.c	18;"	d	file:
 i386	tests/nimcache/stdlib_parseutils.c	17;"	d	file:
 i386	tests/nimcache/stdlib_sequtils.c	17;"	d	file:
 i386	tests/nimcache/stdlib_strformat.c	18;"	d	file:
-i386	tests/nimcache/stdlib_strutils.c	17;"	d	file:
+i386	tests/nimcache/stdlib_strutils.c	18;"	d	file:
 i386	tests/nimcache/stdlib_system.c	27;"	d	file:
 i386	tests/nimcache/stdlib_unicode.c	17;"	d	file:
 i386	tests/nimcache/x11_keysym.c	17;"	d	file:
@@ -3429,6 +3433,18 @@ indent	tests/nimcache/stdlib_system.c	/^NI indent;$/;"	m	struct:tyObject_ReprClo
 initGame	src/Coral.nim	/^proc initGame* (width, height: int, title: string)=$/;"	f
 initial_state	tests/nimcache/x11_xutil.c	/^int initial_state;$/;"	m	struct:tyObject_TXWMHints_lUa4DZQSJz1v9a01zIbsbJQ	file:
 input	tests/nimcache/x11_xutil.c	/^NI input;$/;"	m	struct:tyObject_TXWMHints_lUa4DZQSJz1v9a01zIbsbJQ	file:
+isKeyDown	src/Coralpkg/input.nim	/^proc isKeyDown* (input: InputManager, key: Key): bool =$/;"	f
+isKeyPressed	src/Coralpkg/input.nim	/^proc isKeyPressed* (input: InputManager, key: Key): bool=$/;"	f
+isKeyReleased	src/Coralpkg/input.nim	/^proc isKeyReleased* (input: InputManager, key: Key): bool=$/;"	f
+isKeyUp	src/Coralpkg/input.nim	/^proc isKeyUp* (input: InputManager, key: Key): bool =$/;"	f
+isMouseLeftDown	src/Coralpkg/input.nim	/^proc isMouseLeftDown* (input: InputManager): bool=$/;"	f
+isMouseLeftPressed	src/Coralpkg/input.nim	/^proc isMouseLeftPressed* (input: InputManager): bool =$/;"	f
+isMouseLeftReleased	src/Coralpkg/input.nim	/^proc isMouseLeftReleased* (input: InputManager): bool =$/;"	f
+isMouseLeftUp	src/Coralpkg/input.nim	/^proc isMouseLeftUp* (input: InputManager): bool=$/;"	f
+isMouseRightDown	src/Coralpkg/input.nim	/^proc isMouseRightDown* (input: InputManager): bool=$/;"	f
+isMouseRightPressed	src/Coralpkg/input.nim	/^proc isMouseRightPressed* (input: InputManager): bool =$/;"	f
+isMouseRightReleased	src/Coralpkg/input.nim	/^proc isMouseRightReleased* (input: InputManager): bool =$/;"	f
+isMouseRightUp	src/Coralpkg/input.nim	/^proc isMouseRightUp* (input: InputManager): bool=$/;"	f
 iscapture	tests/nimcache/Coral_Coral.c	/^NU8 iscapture;$/;"	m	struct:tyObject_AudioDeviceEventObj_XI9bTqUH9cIPyHTibgkMxZrQ	file:
 iscapture	tests/nimcache/sdl2_nim_sdl.c	/^NU8 iscapture;$/;"	m	struct:tyObject_AudioDeviceEventObj_XI9bTqUH9cIPyHTibgkMxZrQ	file:
 jaxis	tests/nimcache/Coral_Coral.c	/^tyObject_JoyAxisEventObj_9almo0Qaqu9aJI54QQBFQtxw jaxis;$/;"	m	union:tyObject_Event_QLORHniUO5yE9cFPjAVIQUQ	file:
@@ -3598,7 +3614,6 @@ len	tests/nimcache/stdlib_dynlib.c	/^NI len;$/;"	m	struct:tyObject_CellSeq_Axo1X
 len	tests/nimcache/stdlib_dynlib.c	/^NI len;$/;"	m	struct:tyObject_HeapLinks_PDV1HBZ8CQSQJC9aOBFNRSg	file:
 len	tests/nimcache/stdlib_macros.c	/^NI len;$/;"	m	struct:TGenericSeq	file:
 len	tests/nimcache/stdlib_macros.c	/^NI len;$/;"	m	struct:TNimNode	file:
-len	tests/nimcache/stdlib_parseutils.c	/^NI len;$/;"	m	struct:TGenericSeq	file:
 len	tests/nimcache/stdlib_strformat.c	/^NI len;$/;"	m	struct:TGenericSeq	file:
 len	tests/nimcache/stdlib_strformat.c	/^NI len;$/;"	m	struct:TNimNode	file:
 len	tests/nimcache/stdlib_strformat.c	/^NI len;$/;"	m	struct:tyObject_CellSeq_Axo1XVm9aaQueTOldv8le5w	file:
@@ -3667,7 +3682,7 @@ linux	tests/nimcache/Coral_Coral.c	20;"	d	file:
 linux	tests/nimcache/Coral_maths.c	20;"	d	file:
 linux	tests/nimcache/Coral_mathsTest.c	18;"	d	file:
 linux	tests/nimcache/Coral_platform.c	21;"	d	file:
-linux	tests/nimcache/Coral_windowTest.c	18;"	d	file:
+linux	tests/nimcache/Coral_windowTest.c	19;"	d	file:
 linux	tests/nimcache/opengl_opengl.c	19;"	d	file:
 linux	tests/nimcache/sdl2_nim_sdl.c	18;"	d	file:
 linux	tests/nimcache/stdlib_algorithm.c	18;"	d	file:
@@ -3677,7 +3692,7 @@ linux	tests/nimcache/stdlib_math.c	19;"	d	file:
 linux	tests/nimcache/stdlib_parseutils.c	18;"	d	file:
 linux	tests/nimcache/stdlib_sequtils.c	18;"	d	file:
 linux	tests/nimcache/stdlib_strformat.c	19;"	d	file:
-linux	tests/nimcache/stdlib_strutils.c	18;"	d	file:
+linux	tests/nimcache/stdlib_strutils.c	19;"	d	file:
 linux	tests/nimcache/stdlib_system.c	28;"	d	file:
 linux	tests/nimcache/stdlib_unicode.c	18;"	d	file:
 linux	tests/nimcache/x11_keysym.c	18;"	d	file:
@@ -3889,7 +3904,7 @@ mips	tests/nimcache/Coral_Coral.c	21;"	d	file:
 mips	tests/nimcache/Coral_maths.c	21;"	d	file:
 mips	tests/nimcache/Coral_mathsTest.c	19;"	d	file:
 mips	tests/nimcache/Coral_platform.c	22;"	d	file:
-mips	tests/nimcache/Coral_windowTest.c	19;"	d	file:
+mips	tests/nimcache/Coral_windowTest.c	20;"	d	file:
 mips	tests/nimcache/opengl_opengl.c	20;"	d	file:
 mips	tests/nimcache/sdl2_nim_sdl.c	19;"	d	file:
 mips	tests/nimcache/stdlib_algorithm.c	19;"	d	file:
@@ -3899,7 +3914,7 @@ mips	tests/nimcache/stdlib_math.c	20;"	d	file:
 mips	tests/nimcache/stdlib_parseutils.c	19;"	d	file:
 mips	tests/nimcache/stdlib_sequtils.c	19;"	d	file:
 mips	tests/nimcache/stdlib_strformat.c	20;"	d	file:
-mips	tests/nimcache/stdlib_strutils.c	19;"	d	file:
+mips	tests/nimcache/stdlib_strutils.c	20;"	d	file:
 mips	tests/nimcache/stdlib_system.c	29;"	d	file:
 mips	tests/nimcache/stdlib_unicode.c	19;"	d	file:
 mips	tests/nimcache/x11_keysym.c	19;"	d	file:
@@ -3912,6 +3927,12 @@ mods	tests/nimcache/sdl2_nim_sdl.c	/^NU16 mods;$/;"	m	struct:tyObject_Keysym_F9b
 motion	tests/nimcache/Coral_Coral.c	/^tyObject_MouseMotionEventObj_Y5AiWYph9bMQ3GmyLOmToig motion;$/;"	m	union:tyObject_Event_QLORHniUO5yE9cFPjAVIQUQ	file:
 motion	tests/nimcache/sdl2_nim_sdl.c	/^tyObject_MouseMotionEventObj_Y5AiWYph9bMQ3GmyLOmToig motion;$/;"	m	union:tyObject_Event_QLORHniUO5yE9cFPjAVIQUQ	file:
 motion_buffer	tests/nimcache/x11_xlib.c	/^unsigned long motion_buffer;$/;"	m	struct:tyObject_TXPrivDisplay_uVaRnxwue6qUDH69cci9cobQ	file:
+mouseDeltaPos	src/Coralpkg/input.nim	/^proc mouseDeltaPos* (input: InputManager): (float, float)=$/;"	f
+mouseDeltaX	src/Coralpkg/input.nim	/^proc mouseDeltaX* (input: InputManager): float=return input.mouse_x - input.last_mouse_x$/;"	f
+mouseDeltaY	src/Coralpkg/input.nim	/^proc mouseDeltaY* (input: InputManager): float=return input.mouse_y - input.last_mouse_y$/;"	f
+mousePos	src/Coralpkg/input.nim	/^proc mousePos* (input: InputManager): (float, float)=$/;"	f
+mouseX	src/Coralpkg/input.nim	/^proc mouseX* (input: InputManager): float= return input.mouse_x$/;"	f
+mouseY	src/Coralpkg/input.nim	/^proc mouseY* (input: InputManager): float= return input.mouse_y$/;"	f
 move	src/Coralpkg/maths.nim	/^proc move* (a: Vec3, by: Vec3)=$/;"	f
 msg	src/nimcache/stdlib_system.c	/^typedef N_NIMCALL_PTR(void, tyProc_W6IXMh2CA4X1rFYGjUb4yg) (NimStringDesc* msg);$/;"	t	file:
 msg	tests/nimcache/Coral_Coral.c	/^void* msg;$/;"	m	struct:tyObject_SysWMEventObj_NVNWXaYFlMqYyeJw89cqUmw	file:
@@ -3965,7 +3986,7 @@ near	tests/nimcache/Coral_Coral.c	22;"	d	file:
 near	tests/nimcache/Coral_maths.c	22;"	d	file:
 near	tests/nimcache/Coral_mathsTest.c	20;"	d	file:
 near	tests/nimcache/Coral_platform.c	23;"	d	file:
-near	tests/nimcache/Coral_windowTest.c	20;"	d	file:
+near	tests/nimcache/Coral_windowTest.c	21;"	d	file:
 near	tests/nimcache/opengl_opengl.c	21;"	d	file:
 near	tests/nimcache/sdl2_nim_sdl.c	20;"	d	file:
 near	tests/nimcache/stdlib_algorithm.c	20;"	d	file:
@@ -3975,13 +3996,14 @@ near	tests/nimcache/stdlib_math.c	21;"	d	file:
 near	tests/nimcache/stdlib_parseutils.c	20;"	d	file:
 near	tests/nimcache/stdlib_sequtils.c	20;"	d	file:
 near	tests/nimcache/stdlib_strformat.c	21;"	d	file:
-near	tests/nimcache/stdlib_strutils.c	20;"	d	file:
+near	tests/nimcache/stdlib_strutils.c	21;"	d	file:
 near	tests/nimcache/stdlib_system.c	30;"	d	file:
 near	tests/nimcache/stdlib_unicode.c	20;"	d	file:
 near	tests/nimcache/x11_keysym.c	20;"	d	file:
 near	tests/nimcache/x11_x.c	20;"	d	file:
 near	tests/nimcache/x11_xlib.c	20;"	d	file:
 near	tests/nimcache/x11_xutil.c	20;"	d	file:
+newKeyState	src/Coralpkg/input.nim	/^proc newKeyState(state=0, last=0): KeyState=$/;"	f
 newMat2	src/Coralpkg/maths.nim	/^proc newMat2* (m00, m10, m01, m11: float): Mat2=$/;"	f
 newMat3	src/Coralpkg/maths.nim	/^proc newMat3* ($/;"	f
 newMat3	src/Coralpkg/maths.nim	/^proc newMat3* (): Mat3=$/;"	f
@@ -4252,7 +4274,7 @@ powerpc	tests/nimcache/Coral_Coral.c	23;"	d	file:
 powerpc	tests/nimcache/Coral_maths.c	23;"	d	file:
 powerpc	tests/nimcache/Coral_mathsTest.c	21;"	d	file:
 powerpc	tests/nimcache/Coral_platform.c	24;"	d	file:
-powerpc	tests/nimcache/Coral_windowTest.c	21;"	d	file:
+powerpc	tests/nimcache/Coral_windowTest.c	22;"	d	file:
 powerpc	tests/nimcache/opengl_opengl.c	22;"	d	file:
 powerpc	tests/nimcache/sdl2_nim_sdl.c	21;"	d	file:
 powerpc	tests/nimcache/stdlib_algorithm.c	21;"	d	file:
@@ -4262,7 +4284,7 @@ powerpc	tests/nimcache/stdlib_math.c	22;"	d	file:
 powerpc	tests/nimcache/stdlib_parseutils.c	21;"	d	file:
 powerpc	tests/nimcache/stdlib_sequtils.c	21;"	d	file:
 powerpc	tests/nimcache/stdlib_strformat.c	22;"	d	file:
-powerpc	tests/nimcache/stdlib_strutils.c	21;"	d	file:
+powerpc	tests/nimcache/stdlib_strutils.c	22;"	d	file:
 powerpc	tests/nimcache/stdlib_system.c	31;"	d	file:
 powerpc	tests/nimcache/stdlib_unicode.c	21;"	d	file:
 powerpc	tests/nimcache/x11_keysym.c	21;"	d	file:
@@ -4319,6 +4341,7 @@ private8	tests/nimcache/x11_xlib.c	/^int private8;$/;"	m	struct:tyObject_TXPrivD
 private9	tests/nimcache/x11_xlib.c	/^tyObject_TXPrivate_E9c5RM5a2TD8v9c40jOR1tiw* private9;$/;"	m	struct:tyObject_TXPrivDisplay_uVaRnxwue6qUDH69cci9cobQ	file:
 private_data	tests/nimcache/x11_xlib.c	/^NIM_CHAR* private_data;$/;"	m	struct:tyObject_TXExtData_bmVh0W8jZ9c3HbsLjsgs28g	file:
 private_data	tests/nimcache/x11_xutil.c	/^NIM_CHAR* private_data;$/;"	m	struct:tyObject_TXExtData_bmVh0W8jZ9c3HbsLjsgs28g	file:
+processEvent	src/Coralpkg/input.nim	/^proc processEvent* (ev: var sdl.Event)=$/;"	f
 procname	src/nimcache/stdlib_system.c	/^NCSTRING procname;$/;"	m	struct:tyObject_StackTraceEntry_oLyohQ7O2XOvGnflOss8EA	file:
 procname	tests/nimcache/Coral_Coral.c	/^NCSTRING procname;$/;"	m	struct:tyObject_StackTraceEntry_oLyohQ7O2XOvGnflOss8EA	file:
 procname	tests/nimcache/opengl_opengl.c	/^NCSTRING procname;$/;"	m	struct:tyObject_StackTraceEntry_oLyohQ7O2XOvGnflOss8EA	file:
@@ -4333,6 +4356,7 @@ put_pixel	tests/nimcache/x11_xutil.c	/^tyProc_pn5eY0sp29bf8ombZ7R9c45g put_pixel
 qlen	tests/nimcache/x11_xlib.c	/^int qlen;$/;"	m	struct:tyObject_TXPrivDisplay_uVaRnxwue6qUDH69cci9cobQ	file:
 quit	tests/nimcache/Coral_Coral.c	/^tyObject_QuitEventObj_b9aT3LGnCHReVoiRUmUOH6Q quit;$/;"	m	union:tyObject_Event_QLORHniUO5yE9cFPjAVIQUQ	file:
 quit	tests/nimcache/sdl2_nim_sdl.c	/^tyObject_QuitEventObj_b9aT3LGnCHReVoiRUmUOH6Q quit;$/;"	m	union:tyObject_Event_QLORHniUO5yE9cFPjAVIQUQ	file:
+quitGame	src/Coral.nim	/^proc quitGame* ()=$/;"	f
 raiseAction	src/nimcache/stdlib_system.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
 raiseAction	tests/nimcache/Coral_Coral.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
 raiseAction	tests/nimcache/stdlib_system.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
@@ -4390,7 +4414,6 @@ reserved	tests/nimcache/sdl2_nim_sdl.c	/^NI reserved;$/;"	m	struct:TGenericSeq	f
 reserved	tests/nimcache/stdlib_algorithm.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
 reserved	tests/nimcache/stdlib_dynlib.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
 reserved	tests/nimcache/stdlib_macros.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
-reserved	tests/nimcache/stdlib_parseutils.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
 reserved	tests/nimcache/stdlib_strformat.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
 reserved	tests/nimcache/stdlib_strutils.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
 reserved	tests/nimcache/stdlib_system.c	/^NI reserved;$/;"	m	struct:TGenericSeq	file:
@@ -4662,6 +4685,7 @@ tyArray_0aOLqZchNi8nWtMTi8ND8w	tests/nimcache/opengl_opengl.c	/^typedef tyObject
 tyArray_0aOLqZchNi8nWtMTi8ND8w	tests/nimcache/stdlib_dynlib.c	/^typedef tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw* tyArray_0aOLqZchNi8nWtMTi8ND8w[2];$/;"	t	file:
 tyArray_0aOLqZchNi8nWtMTi8ND8w	tests/nimcache/stdlib_strformat.c	/^typedef tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw* tyArray_0aOLqZchNi8nWtMTi8ND8w[2];$/;"	t	file:
 tyArray_0aOLqZchNi8nWtMTi8ND8w	tests/nimcache/stdlib_system.c	/^typedef tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw* tyArray_0aOLqZchNi8nWtMTi8ND8w[2];$/;"	t	file:
+tyArray_24KAM9afIUgUaqBaEBB6r9bg	tests/nimcache/Coral_windowTest.c	/^typedef NimStringDesc* tyArray_24KAM9afIUgUaqBaEBB6r9bg[3];$/;"	t	file:
 tyArray_4aFG3pQPUlTEoAKtMVpzjw	tests/nimcache/x11_xlib.c	/^typedef char tyArray_4aFG3pQPUlTEoAKtMVpzjw[32];$/;"	t	file:
 tyArray_7JTpIvL6tqeRI2Pp9asvFCA	tests/nimcache/stdlib_system.c	/^typedef NimStringDesc* tyArray_7JTpIvL6tqeRI2Pp9asvFCA[5];$/;"	t	file:
 tyArray_7RVc0XQsTsRirawejMZJoA	tests/nimcache/x11_xlib.c	/^typedef long tyArray_7RVc0XQsTsRirawejMZJoA[23];$/;"	t	file:
@@ -4757,6 +4781,7 @@ tyEnum_GLattr_yw23A00kMmIXT9bFNqSsQ3Q	src/nimcache/sdl2_nim_sdl.c	/^typedef NI32
 tyEnum_GLattr_yw23A00kMmIXT9bFNqSsQ3Q	tests/nimcache/Coral_platform.c	/^typedef NI32 tyEnum_GLattr_yw23A00kMmIXT9bFNqSsQ3Q;$/;"	t	file:
 tyEnum_GLattr_yw23A00kMmIXT9bFNqSsQ3Q	tests/nimcache/sdl2_nim_sdl.c	/^typedef NI32 tyEnum_GLattr_yw23A00kMmIXT9bFNqSsQ3Q;$/;"	t	file:
 tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg	tests/nimcache/opengl_opengl.c	/^typedef NI32 tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg;$/;"	t	file:
+tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg	tests/nimcache/stdlib_system.c	/^typedef NI32 tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg;$/;"	t	file:
 tyEnum_GameControllerAxis_SZ9c5QxUIAU7GwhI6uAzqsA	tests/nimcache/Coral_Coral.c	/^typedef NU8 tyEnum_GameControllerAxis_SZ9c5QxUIAU7GwhI6uAzqsA;$/;"	t	file:
 tyEnum_GameControllerAxis_SZ9c5QxUIAU7GwhI6uAzqsA	tests/nimcache/sdl2_nim_sdl.c	/^typedef NU8 tyEnum_GameControllerAxis_SZ9c5QxUIAU7GwhI6uAzqsA;$/;"	t	file:
 tyEnum_GameControllerButton_GCZhKAmuNz63NHEW2cMy6g	tests/nimcache/Coral_Coral.c	/^typedef NU8 tyEnum_GameControllerButton_GCZhKAmuNz63NHEW2cMy6g;$/;"	t	file:
@@ -4961,6 +4986,8 @@ tyObject_FreeCell_u6M5LHprqzkn9axr04yg9bGQ	tests/nimcache/stdlib_system.c	/^stru
 tyObject_FreeCell_u6M5LHprqzkn9axr04yg9bGQ	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_FreeCell_u6M5LHprqzkn9axr04yg9bGQ tyObject_FreeCell_u6M5LHprqzkn9axr04yg9bGQ;$/;"	t	typeref:struct:tyObject_FreeCell_u6M5LHprqzkn9axr04yg9bGQ	file:
 tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	tests/nimcache/opengl_opengl.c	/^struct tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ {$/;"	s	file:
 tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	tests/nimcache/opengl_opengl.c	/^typedef struct tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ;$/;"	t	typeref:struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
+tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	tests/nimcache/stdlib_system.c	/^struct tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ {$/;"	s	file:
+tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ;$/;"	t	typeref:struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
 tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	src/nimcache/stdlib_system.c	/^struct tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ {$/;"	s	file:
 tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	src/nimcache/stdlib_system.c	/^typedef struct tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ;$/;"	t	typeref:struct:tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	file:
 tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	tests/nimcache/Coral_Coral.c	/^struct tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ {$/;"	s	file:
@@ -5091,6 +5118,8 @@ tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw	tests/nimcache/stdlib_system.c	/^struct
 tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw;$/;"	t	typeref:struct:tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw	file:
 tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	tests/nimcache/stdlib_dynlib.c	/^struct tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw {$/;"	s	file:
 tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	tests/nimcache/stdlib_dynlib.c	/^typedef struct tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw;$/;"	t	typeref:struct:tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	file:
+tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	tests/nimcache/stdlib_system.c	/^struct tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw {$/;"	s	file:
+tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw;$/;"	t	typeref:struct:tyObject_LibraryError_F9bh3YCIGu9a7lVBdm5Z1UVw	file:
 tyObject_LineInfo_iaJhdGB5Q2GppYhH0fz7tg	tests/nimcache/stdlib_macros.c	/^struct tyObject_LineInfo_iaJhdGB5Q2GppYhH0fz7tg {$/;"	s	file:
 tyObject_LineInfo_iaJhdGB5Q2GppYhH0fz7tg	tests/nimcache/stdlib_macros.c	/^typedef struct tyObject_LineInfo_iaJhdGB5Q2GppYhH0fz7tg tyObject_LineInfo_iaJhdGB5Q2GppYhH0fz7tg;$/;"	t	typeref:struct:tyObject_LineInfo_iaJhdGB5Q2GppYhH0fz7tg	file:
 tyObject_Mat2Arr_lO2nEzJJzjsrPaR7Bp0LKg	tests/nimcache/Coral_maths.c	/^struct tyObject_Mat2Arr_lO2nEzJJzjsrPaR7Bp0LKg {$/;"	s	file:
@@ -5139,6 +5168,8 @@ tyObject_NilAccessError_le1LLqP8alYTev1dbGWJlg	tests/nimcache/stdlib_system.c	/^
 tyObject_NilAccessError_le1LLqP8alYTev1dbGWJlg	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_NilAccessError_le1LLqP8alYTev1dbGWJlg tyObject_NilAccessError_le1LLqP8alYTev1dbGWJlg;$/;"	t	typeref:struct:tyObject_NilAccessError_le1LLqP8alYTev1dbGWJlg	file:
 tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	tests/nimcache/stdlib_dynlib.c	/^struct tyObject_OSError_3XwRQvmzCEOC4QnT706q1g {$/;"	s	file:
 tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	tests/nimcache/stdlib_dynlib.c	/^typedef struct tyObject_OSError_3XwRQvmzCEOC4QnT706q1g tyObject_OSError_3XwRQvmzCEOC4QnT706q1g;$/;"	t	typeref:struct:tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	file:
+tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	tests/nimcache/stdlib_system.c	/^struct tyObject_OSError_3XwRQvmzCEOC4QnT706q1g {$/;"	s	file:
+tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_OSError_3XwRQvmzCEOC4QnT706q1g tyObject_OSError_3XwRQvmzCEOC4QnT706q1g;$/;"	t	typeref:struct:tyObject_OSError_3XwRQvmzCEOC4QnT706q1g	file:
 tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw	tests/nimcache/stdlib_system.c	/^struct tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw {$/;"	s	file:
 tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw;$/;"	t	typeref:struct:tyObject_ObjectAssignmentError_Zw9aIWZsnX8w9bzfD9cTdEijw	file:
 tyObject_ObjectConversionError_JqfCBiksDiD877KQxpenZg	tests/nimcache/stdlib_system.c	/^struct tyObject_ObjectConversionError_JqfCBiksDiD877KQxpenZg {$/;"	s	file:
@@ -5377,8 +5408,6 @@ tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg	tests/nimcache/sdl2_nim_sdl.c	/^st
 tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg	tests/nimcache/sdl2_nim_sdl.c	/^typedef struct tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg;$/;"	t	typeref:struct:tyObject_UserEventObj_Zjaeqi8Qb8tdMBVF5j19aBg	file:
 tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	tests/nimcache/stdlib_strformat.c	/^struct tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA {$/;"	s	file:
 tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	tests/nimcache/stdlib_strformat.c	/^typedef struct tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA;$/;"	t	typeref:struct:tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	file:
-tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	tests/nimcache/stdlib_system.c	/^struct tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA {$/;"	s	file:
-tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	tests/nimcache/stdlib_system.c	/^typedef struct tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA;$/;"	t	typeref:struct:tyObject_ValueError_Gi06FkNeykJn7mrqRZYrkA	file:
 tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw	tests/nimcache/Coral_maths.c	/^struct tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw {$/;"	s	file:
 tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw	tests/nimcache/Coral_maths.c	/^typedef struct tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw;$/;"	t	typeref:struct:tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw	file:
 tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw	tests/nimcache/Coral_mathsTest.c	/^struct tyObject_Vec2colonObjectType__lwoBVmuk1BM2DVjPZLF0Sw {$/;"	s	file:
@@ -5392,8 +5421,6 @@ tyObject_WindowEventObj_HBP9bGvXZ9cfsCLYB1W6CBWg	tests/nimcache/sdl2_nim_sdl.c	/
 tyProc_KeeAOYBd84Ofsw6Y7LizaQ	src/nimcache/stdlib_system.c	/^} tyProc_KeeAOYBd84Ofsw6Y7LizaQ;$/;"	t	typeref:struct:__anon1	file:
 tyProc_KeeAOYBd84Ofsw6Y7LizaQ	tests/nimcache/Coral_Coral.c	/^} tyProc_KeeAOYBd84Ofsw6Y7LizaQ;$/;"	t	typeref:struct:__anon2	file:
 tyProc_KeeAOYBd84Ofsw6Y7LizaQ	tests/nimcache/stdlib_system.c	/^} tyProc_KeeAOYBd84Ofsw6Y7LizaQ;$/;"	t	typeref:struct:__anon3	file:
-tySequence_48JTohSgTy339bRxHzUD8KA	tests/nimcache/stdlib_system.c	/^struct tySequence_48JTohSgTy339bRxHzUD8KA {$/;"	s	file:
-tySequence_48JTohSgTy339bRxHzUD8KA	tests/nimcache/stdlib_system.c	/^typedef struct tySequence_48JTohSgTy339bRxHzUD8KA tySequence_48JTohSgTy339bRxHzUD8KA;$/;"	t	typeref:struct:tySequence_48JTohSgTy339bRxHzUD8KA	file:
 tySequence_48JTohSgTy339bRxHzUD8KA	tests/nimcache/stdlib_unicode.c	/^struct tySequence_48JTohSgTy339bRxHzUD8KA {$/;"	s	file:
 tySequence_48JTohSgTy339bRxHzUD8KA	tests/nimcache/stdlib_unicode.c	/^typedef struct tySequence_48JTohSgTy339bRxHzUD8KA tySequence_48JTohSgTy339bRxHzUD8KA;$/;"	t	typeref:struct:tySequence_48JTohSgTy339bRxHzUD8KA	file:
 tySequence_sM4lkSb7zS6F7OVMvW9cffQ	tests/nimcache/stdlib_dynlib.c	/^struct tySequence_sM4lkSb7zS6F7OVMvW9cffQ {$/;"	s	file:
@@ -5436,6 +5463,8 @@ tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/Coral_Coral.c	/^struct tyTuple_1v
 tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/Coral_Coral.c	/^typedef struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ;$/;"	t	typeref:struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
 tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/Coral_platform.c	/^struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ {$/;"	s	file:
 tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/Coral_platform.c	/^typedef struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ;$/;"	t	typeref:struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
+tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/Coral_windowTest.c	/^struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ {$/;"	s	file:
+tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/Coral_windowTest.c	/^typedef struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ;$/;"	t	typeref:struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
 tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/stdlib_system.c	/^struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ {$/;"	s	file:
 tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	tests/nimcache/stdlib_system.c	/^typedef struct tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ;$/;"	t	typeref:struct:tyTuple_1v9bKyksXWMsm0vNwmZ4EuQ	file:
 tyTuple_2uzTbg8jwom7zHhmM2RgHg	tests/nimcache/stdlib_system.c	/^struct tyTuple_2uzTbg8jwom7zHhmM2RgHg {$/;"	s	file:
@@ -5497,7 +5526,7 @@ unix	tests/nimcache/Coral_Coral.c	24;"	d	file:
 unix	tests/nimcache/Coral_maths.c	24;"	d	file:
 unix	tests/nimcache/Coral_mathsTest.c	22;"	d	file:
 unix	tests/nimcache/Coral_platform.c	25;"	d	file:
-unix	tests/nimcache/Coral_windowTest.c	22;"	d	file:
+unix	tests/nimcache/Coral_windowTest.c	23;"	d	file:
 unix	tests/nimcache/opengl_opengl.c	23;"	d	file:
 unix	tests/nimcache/sdl2_nim_sdl.c	22;"	d	file:
 unix	tests/nimcache/stdlib_algorithm.c	22;"	d	file:
@@ -5507,7 +5536,7 @@ unix	tests/nimcache/stdlib_math.c	23;"	d	file:
 unix	tests/nimcache/stdlib_parseutils.c	22;"	d	file:
 unix	tests/nimcache/stdlib_sequtils.c	22;"	d	file:
 unix	tests/nimcache/stdlib_strformat.c	23;"	d	file:
-unix	tests/nimcache/stdlib_strutils.c	22;"	d	file:
+unix	tests/nimcache/stdlib_strutils.c	23;"	d	file:
 unix	tests/nimcache/stdlib_system.c	32;"	d	file:
 unix	tests/nimcache/stdlib_unicode.c	22;"	d	file:
 unix	tests/nimcache/x11_keysym.c	22;"	d	file:
@@ -5522,6 +5551,7 @@ up	tests/nimcache/opengl_opengl.c	/^Exception* up;$/;"	m	struct:Exception	file:
 up	tests/nimcache/stdlib_dynlib.c	/^Exception* up;$/;"	m	struct:Exception	file:
 up	tests/nimcache/stdlib_strformat.c	/^Exception* up;$/;"	m	struct:Exception	file:
 up	tests/nimcache/stdlib_system.c	/^Exception* up;$/;"	m	struct:Exception	file:
+update	src/Coralpkg/input.nim	/^proc update* ()=$/;"	f
 update	src/Coralpkg/platform.nim	/^proc update* ()=$/;"	f
 updateGame	src/Coral.nim	/^proc updateGame* (): bool=$/;"	f
 upperBound	src/nimcache/stdlib_system.c	/^NI upperBound;$/;"	m	struct:tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw	file:
@@ -5648,6 +5678,7 @@ x	tests/nimcache/x11_xutil.c	/^short x;$/;"	m	struct:tyObject_TXPoint_0BYJ9aU4Lm
 x	tests/nimcache/x11_xutil.c	/^short x;$/;"	m	struct:tyObject_TXRectangle_S8vGECuhPC3amcQqvwAN9cw	file:
 x1	tests/nimcache/x11_xlib.c	/^short x1;$/;"	m	struct:tyObject_TXSegment_yeXJBnbgbLkjWAFajw1tWg	file:
 x2	tests/nimcache/x11_xlib.c	/^short x2;$/;"	m	struct:tyObject_TXSegment_yeXJBnbgbLkjWAFajw1tWg	file:
+x_UvizAAl4nyMVts9c4KqPDWw	tests/nimcache/Coral_windowTest.c	/^NI x_UvizAAl4nyMVts9c4KqPDWw;$/;"	v
 x_root	tests/nimcache/x11_xlib.c	/^int x_root;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
 x_root	tests/nimcache/x11_xutil.c	/^int x_root;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
 xdefaults	tests/nimcache/x11_xlib.c	/^NCSTRING xdefaults;$/;"	m	struct:tyObject_TXPrivDisplay_uVaRnxwue6qUDH69cci9cobQ	file:
@@ -5686,6 +5717,7 @@ y	tests/nimcache/x11_xutil.c	/^short y;$/;"	m	struct:tyObject_TXPoint_0BYJ9aU4Lm
 y	tests/nimcache/x11_xutil.c	/^short y;$/;"	m	struct:tyObject_TXRectangle_S8vGECuhPC3amcQqvwAN9cw	file:
 y1	tests/nimcache/x11_xlib.c	/^short y1;$/;"	m	struct:tyObject_TXSegment_yeXJBnbgbLkjWAFajw1tWg	file:
 y2	tests/nimcache/x11_xlib.c	/^short y2;$/;"	m	struct:tyObject_TXSegment_yeXJBnbgbLkjWAFajw1tWg	file:
+y_Fb4OVFJf5WJu3qbOPkSx8A	tests/nimcache/Coral_windowTest.c	/^NI y_Fb4OVFJf5WJu3qbOPkSx8A;$/;"	v
 y_root	tests/nimcache/x11_xlib.c	/^int y_root;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
 y_root	tests/nimcache/x11_xutil.c	/^int y_root;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
 your_event_mask	tests/nimcache/x11_xlib.c	/^long your_event_mask;$/;"	m	struct:tyObject_TXWindowAttributes_nlpf8vqbE9bnoZp9bwwYiP6g	file:
