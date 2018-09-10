@@ -10,5 +10,6 @@ bin           = @["Coral"]
 # Dependencies
 
 requires "nim >= 0.18.0"
-requires "sdl2_nim"
+# requires "sdl2_nim"
+requires "nim-glfw"
 requires "opengl"
