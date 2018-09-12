@@ -59,6 +59,22 @@ proc newVertexBufferObject* [T](btype: GLenum, dimensions: uint32, attrib: uint3
 
     glBindBuffer(btype, 0)
 
+proc newElementBuffer* [T](indices: var seq[T]): GLuint =
+  glGenBuffers(1, addr result)
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, result)
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(T) * indices.len, addr indices[0], GL_STATIC_DRAW)
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
+
+proc bindElementBuffer* (id: GLuint)=
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id)
+
+proc unBindElementBuffer* ()=
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
+
+template useElementBuffer* (id: GLuint, body: untyped)=
+  bindElementBuffer(id)
+  body
+  unBindElementBuffer()
 
 proc bindVertexBufferObject* (id: GLuint, btype: GLenum)=
    glBindBuffer(btype, id)

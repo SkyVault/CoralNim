@@ -1,7 +1,8 @@
 include private/key_map
 
 import
-  sdl2/sdl,
+  glfw/wrapper,
+  platform,
   tables
 
 type
@@ -22,7 +23,6 @@ type
     lastNumberOfControllers: int
     mouseLeft, mouseRight: MouseState
     keyMap: Table[int, KeyState]
-    controllers: seq[sdl.GameController]
 
 var input = InputManager(
   mouseX: 0, mouseY: 0,
@@ -30,10 +30,9 @@ var input = InputManager(
   lastNumberOfControllers: 0,
   mouseLeft: MouseState(state : 0, last : 0),
   mouseRight: MouseState(state : 0, last : 0),
-  keyMap: initTable[int, KeyState](),
-  controllers: newSeq[sdl.GameController]())
+  keyMap: initTable[int, KeyState]())
 
-proc newKeyState(state=0, last=0): KeyState=
+proc newKeyState*(state=0, last=0): KeyState=
   result = KeyState(state: state, last: last)
 
 template Input* (): auto= input
@@ -51,12 +50,6 @@ proc mouseDeltaPos* (input: InputManager): (float, float)=
         mouseDeltaX(input),
         mouseDeltaY(input)
     )
-
-proc getKeyInRange(key: cint): int=
-    if key > (1 shl 30):
-        return ((sdl.K_Delete.int) + (key - (1 shl 30))).int
-    else:
-        return key.int 
 
 proc isMouseLeftDown* (input: InputManager): bool=
     return input.mouse_left.state == 1
@@ -91,35 +84,16 @@ proc isMouseRightReleased* (input: InputManager): bool =
         input.mouse_right.last == 1
 
 proc isKeyDown* (input: InputManager, key: Key): bool =
-    var ckey = getKeyInRange(key.cint)
-    if not input.keyMap.contains ckey:
-        return false
-    else:
-        return
-            input.keyMap[ckey].state == 1
+  result = wrapper.getKey(platform.Window, key.int32).KeyAction == kaDown
 
 proc isKeyUp* (input: InputManager, key: Key): bool =
     return not isKeyDown(input, key)
 
 proc isKeyReleased* (input: InputManager, key: Key): bool=
-    var ckey = getKeyInRange(key.cint)
-    if not input.keyMap.contains ckey:
-        return false
-    else:
-        let state = input.keyMap[ckey]
-        result =
-            state.state == 0 and 
-            state.last  == 1
+  discard
 
 proc isKeyPressed* (input: InputManager, key: Key): bool=
-    var ckey = getKeyInRange(key.cint)
-    if not input.keyMap.contains ckey:
-        return false
-    else:
-        let state = input.keyMap[ckey]
-        result =
-            state.state == 1 and 
-            state.last  == 0
+  discard
 
 proc update* ()=
   for key, state in input.keyMap.mpairs:
@@ -130,82 +104,9 @@ proc update* ()=
 
   # get the mouse position
   var x, y: cint
-  discard sdl.getMouseState(addr(x), addr(y))
+  #discard sdl.getMouseState(addr(x), addr(y))
 
   input.last_mouse_x = input.mouse_x
   input.last_mouse_y = input.mouse_y
   input.mouse_x = x.float
   input.mouse_y = y.float
-
-  if input.last_number_of_controllers < sdl.numJoysticks():
-      input.last_number_of_controllers = sdl.numJoysticks()
-
-      let index = input.controllers.len
-      if not sdl.isGameController(index):
-          echo "Unsupported controller interface"
-      else:
-          echo "Controller ", index, " connected!"
-          # TODO: Attach the controller
-          input.controllers.add(sdl.gameControllerOpen(index))
-
-  elif input.last_number_of_controllers > sdl.numJoysticks():
-      echo "Controller dissconnected!"
-      input.last_number_of_controllers = sdl.numJoysticks()
-
-  # GetAttached -> returns if a gamecontroller is still attached, could be useful for disconnection
-  for c in input.controllers:
-    echo sdl.gameControllerGetAttached(c)
-
-proc processEvent* (ev: var sdl.Event)=
-  case ev.kind:
-  of sdl.KeyDown :
-      if ev.key.repeat > 0: return
-      let key = getKeyInRange ev.key.keysym.sym.cint
-
-      if input.keyMap.hasKey(key) == false:
-          input.keyMap.add(key, newKeyState(1))
-      else:
-          input.keyMap[key] = newKeyState(1, 0)
-
-  of sdl.KeyUp:
-      if ev.key.repeat > 0: return
-      let key = getKeyInRange ev.key.keysym.sym.cint
-
-      if input.keyMap.hasKey(key) == false:
-          input.keyMap.add(key, newKeyState(1))
-      else:
-          input.keyMap[key] = newKeyState(0, 1)
-
-  of sdl.MouseButtonDown:
-      case ev.button.button:
-      of sdl.BUTTON_LEFT:
-          input.mouse_left.state = 1
-
-      of sdl.BUTTON_RIGHT:
-          input.mouse_right.state = 1
-
-      of sdl.BUTTON_MIDDLE:
-          discard
-      else:
-          discard
-
-  of sdl.MouseButtonUp:
-      case ev.button.button:
-      of sdl.BUTTON_LEFT:
-          input.mouse_left.state = 0
-          input.mouse_left.last = 1
-
-      of sdl.BUTTON_RIGHT:
-          input.mouse_right.state = 0
-          input.mouse_right.last = 1
-
-      of sdl.BUTTON_MIDDLE:
-          discard
-      else:
-          discard
-
-  # of sdl.JoystickAx
-      # echo "Wat"
-  
-  else:
-    discard

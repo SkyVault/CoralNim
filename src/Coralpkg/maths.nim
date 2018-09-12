@@ -138,7 +138,7 @@ proc `-`* (v: Vec2): Vec2 = v * -1
 proc `==`* (a: Vec2, b: Vec2): bool=
     return a.x == b.x and a.y == b.y
 
-proc nMove* (a: Vec2, by: Vec2)=
+proc move* (a: Vec2, by: Vec2)=
     a.x += by.x; a.y += by.y
 
 proc length* (a: Vec2): float32=

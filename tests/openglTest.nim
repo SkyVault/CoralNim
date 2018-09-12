@@ -1,6 +1,6 @@
 import
   ../src/Coral,
-  ../src/Coralpkg/[cgl, platform],
+  ../src/Coralpkg/[cgl, platform, art],
   opengl,
   math
 
@@ -18,23 +18,23 @@ let shaderProgram = newShaderProgram(
 
   fragment=loadShaderFromString(GL_FRAGMENT_SHADER, """
   #version 330 core
-//  vec4 Result; 
+  out vec4 Result; 
 
   void main(void) {
-    vec4 Result = vec4(1.0, 0.5, 0.0, 1.0);
-    gl_FragColor = Result;
+    Result = vec4(1.0, 0.5, 0.0, 1.0);
   }
-
   """))
 
-var vertices: seq[GLfloat] = @[
-  -1.0'f32,-1.0'f32, 0.0'f32,
-   1.0'f32,-1.0'f32, 0.0'f32,
-   0.0'f32, 1.0'f32, 0.0'f32]
+#var vertices: seq[GLfloat] = @[
+  #-1.0'f32,-1.0'f32, 0.0'f32,
+   #1.0'f32,-1.0'f32, 0.0'f32,
+   #0.0'f32, 1.0'f32, 0.0'f32]
 
-let vao = newVertexArray()
-useVertexArray vao:
-  discard newVertexBufferObject[GLfloat](GL_ARRAY_BUFFER, 3, 0, vertices)
+#let vao = newVertexArray()
+#useVertexArray vao:
+  #discard newVertexBufferObject[GLfloat](GL_ARRAY_BUFFER, 3, 0, vertices)
+
+art.init()
 
 while updateGame():
   glDisable(GL_CULL_FACE)
@@ -42,5 +42,7 @@ while updateGame():
   clearColorAndDepthBuffers (0.1, 0.1, 0.1, 1.0)
 
   useShaderProgram shaderProgram:
-    useVertexArray vao:
-      glDrawArrays(GL_TRIANGLES, 0, GLsizei(3))
+    art.flush()
+  #useShaderProgram shaderProgram:
+    #useVertexArray vao:
+      #glDrawArrays(GL_TRIANGLES, 0, GLsizei(3))
