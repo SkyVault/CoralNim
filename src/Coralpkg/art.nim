@@ -1,10 +1,10 @@
 # Main Renderer for the Coral frame work
 import
   sequtils,
+  platform,
   opengl,
   cgl,
-  maths,
-  sdl2/[sdl]
+  maths
 
 type
   Vertex* = ref object
@@ -43,8 +43,8 @@ var RECT_VERTICES = @[
 var RECT_INDICES = @[0'u8, 1, 2, 2, 3, 0]
 
 proc applyProjection()=
-
-  discard
+  let (ww, wh) = Window.size()
+  #let ortho = ortho()
 
 proc init* ()=
   program = newShaderProgram(

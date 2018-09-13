@@ -37,6 +37,14 @@ template Window*(): auto = window
 proc shouldClose*(window: Window): bool =
   result = glfw.windowShouldClose(window) == 1
 
+proc `size=`* (window: Window, size: (int, int))=
+  glfw.setWindowSize(window, size[0].cint, size[1].cint)
+
+proc size* (window: Window): (int, int)=
+  var w, h: cint = 0
+  glfw.getWindowSize(window, addr w, addr h)
+  result = (w.int, h.int)
+
 proc `title=`*(window: Window, title: string)=
   winTitle = title
   glfw.setWindowTitle(window, title)

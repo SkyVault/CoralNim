@@ -6137,6 +6137,7 @@ shareResourcesWith	tests/nimcache/glfw_glfw.c	/^tyObject_WindowObj_4fLVEmOXbVpKn
 shouldClose	src/Coralpkg/platform.nim	/^proc shouldClose*(window: Window): bool =$/;"	f
 sibling	tests/nimcache/x11_xlib.c	/^unsigned long sibling;$/;"	m	struct:tyObject_TXWindowChanges_UIbJ43gKAx0TVNpLSbt3Ow	file:
 sign	tests/nimcache/stdlib_strformat.c	/^NIM_CHAR sign;$/;"	m	struct:tyObject_StandardFormatSpecifier_NDU7AW5Eu6Q69c8cH6RDouQ	file:
+size	src/Coralpkg/platform.nim	/^proc size* (window: Window): (int, int)=$/;"	f
 size	src/nimcache/Coral_Coral.c	/^NI size;$/;"	m	struct:TNimType	file:
 size	src/nimcache/stdlib_system.c	/^NI size;$/;"	m	struct:TNimType	file:
 size	src/nimcache/stdlib_system.c	/^NI size;$/;"	m	struct:tyObject_BaseChunk_Sdq7WpT6qAH858F5ZEdG3w	file:
@@ -6187,6 +6188,7 @@ size	tests/nimcache/stdlib_tables.c	/^NI size;$/;"	m	struct:tyObject_LLChunk_XsE
 size	tests/nimcache/stdlib_typeinfo.c	/^NI size;$/;"	m	struct:TNimType	file:
 size	tests/nimcache/stdlib_typeinfo.c	/^NI size;$/;"	m	struct:tyObject_BaseChunk_Sdq7WpT6qAH858F5ZEdG3w	file:
 size	tests/nimcache/stdlib_typeinfo.c	/^NI size;$/;"	m	struct:tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw	file:
+size=	src/Coralpkg/platform.nim	/^proc `size=`* (window: Window, size: (int, int))=$/;"	o
 slBitmap	src/nimcache/stdlib_system.c	/^tyArray_BHbOSqU1t9b3Gt7K2c6fQig slBitmap;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 slBitmap	tests/nimcache/Coral_Coral.c	/^tyArray_BHbOSqU1t9b3Gt7K2c6fQig slBitmap;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 slBitmap	tests/nimcache/Coral_art.c	/^tyArray_BHbOSqU1t9b3Gt7K2c6fQig slBitmap;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
