@@ -2,6 +2,7 @@
 import
   strformat,
   opengl,
+  maths,
   typeinfo,
   typetraits
 
@@ -152,6 +153,35 @@ template useShaderProgram* (prog: GLuint, body: untyped)=
   bindShaderProgram(prog)
   body
   unBindShaderProgram()
+
+##
+## Uniforms
+##
+
+proc getUniformLoc* (prog: GLuint, id: string): auto=
+  result = glGetUniformLocation(prog, id)
+
+template `%`* (prog: GLuint, id: string): GLint=
+  result = getUniformLoc(prog, id)
+
+proc setUniform* (id: GLint, i: int)= glUniform1i(id, i.cint)
+proc setUniform* (id: GLint, b: bool)= glUniform1i(id, (if b: 1 else: 0))
+proc setUniform* (id: GLint, f: float)= glUniform1f(id, f)
+proc setUniform* (id: GLint, x, y: float)= glUniform2f(id, x, y)
+proc setUniform* (id: GLint, x, y, z: float)= glUniform3f(id, x, y, z)
+proc setUniform* (id: GLint, x, y, z, w: float)= glUniform4f(id, x, y, z, w)
+
+proc setUniform* (id: GLint, v3: Vec3)=
+  setUniform(id, v3.x, v3.y, v3.z)
+
+proc setUniform* (id: GLint, v3: Vec3, w: float)=
+  setUniform(id, v3.x, v3.y, v3.z, w)
+
+proc setUniform* (id: GLint, m: var array[16, float32])=
+  glUniformMatrix4fv(id, 1.GLsizei, GL_FALSE, addr m[0])
+
+proc setUniform* (id: GLint, m: var Mat4)=
+  glUniformMatrix4fv(id, 1.GLsizei, GL_TRUE, addr m.m[0])
 
 ## GL functions
 proc clearColorBuffer* (clearColor=(0.0, 0.0, 0.0, 1.0))=
