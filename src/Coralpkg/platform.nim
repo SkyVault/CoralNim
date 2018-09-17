@@ -52,6 +52,10 @@ proc `title=`*(window: Window, title: string)=
 proc title*(window: Window): string=
   result = winTitle
 
+## Returns the time in seconds
+proc getTime* (): float=
+  return glfw.getTime()
+
 proc update* ()=
   glfw.pollEvents()
   glfw.swapBuffers(window)

@@ -16,6 +16,10 @@ type
 
 include private/shaders
 
+proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)
+proc drawCircle* (x, y, radius: int | float, resolution=360)
+proc drawRect* (x, y, width, height: int | float, rotation=0.0)
+
 var ortho_projection: Mat4
 var rect_vao, rect_vbo, rect_ibo : GLuint
 
@@ -35,6 +39,7 @@ var RECT_VERTICES = @[
 var RECT_INDICES = @[0'u8, 1, 2, 2, 3, 0]
 
 var PRIM_VERTICES: seq[GLfloat] = @[]
+var lastPrimVerticesLen = 0
 
 proc initArt* ()=
   program = newShaderProgram(
@@ -89,7 +94,12 @@ proc pushVertexRotated* (x, y: int | float | float32, rotation=0.0)=
   (PRIM_VERTICES.add cy)
   (PRIM_VERTICES.add 0.0)
 
-# Primitives
+# Primitives 
+proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)=
+  let l = sqrt(((x2 - x1).float ^ 2) + ((y2 - y1).float ^ 2))
+  let rot = arctan2(y2.float - y1.float, x2.float - x1.float)
+  drawRect(x1.float, y1.float, l, thickness, rot)
+
 proc drawCircle* (x, y, radius: int | float, resolution=360)=
   for i in countup(0, 360, 10):
     let fi = i.float
@@ -99,24 +109,14 @@ proc drawCircle* (x, y, radius: int | float, resolution=360)=
     pushVertex(x.float + sin(degToRad(fi + 10.0))*radius.float, y.float + cos(degToRad(fi + 10.0))*radius.float);
 
 proc drawRect* (x, y, width, height: int | float, rotation=0.0)=
-
   if rotation == 0.0:
     pushVertex x, y + height
     pushVertex x, y
     pushVertex x + width, y
-
     pushVertex x + width, y
     pushVertex x, y + height
     pushVertex x + width, y + height
-
   else:
-    #pushVertexRotated x, y + height, rotation
-    #pushVertex x, y
-    #pushVertexRotated x + width, y, rotation
-    #pushVertexRotated x + width, y, rotation
-    #pushVertexRotated x, y + height, rotation
-    #pushVertexRotated x + width, y + height, rotation
-
     let r = rotation
     let (vx1, vy1) = rotatePoint(x.float, y.float, r, x.float, (y + height).float)
     let (vx2, vy2) = rotatePoint(x.float, y.float, r, (x + width).float, y.float)
@@ -125,7 +125,6 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0)=
     pushVertex x, y
     pushVertex vx1, vy1
     pushVertex vx2, vy2
-
     pushVertex vx2, vy2
     pushVertex vx1, vy1
     pushVertex vx3, vy3
@@ -145,12 +144,20 @@ proc flushArt* ()=
 
     useVertexArray prim_vao:
       useVertexBufferObject prim_vbo, GL_ARRAY_BUFFER:
-        glBufferData(
+        if lastPrimVerticesLen != len(PRIM_VERTICES):
+          glBufferData(
+              GL_ARRAY_BUFFER,
+              cast[GLsizeiptr](sizeof(float32) * PRIM_VERTICES.len),
+              addr PRIM_VERTICES[0],
+              GL_STATIC_DRAW)
+        else:
+          glBufferSubData(
             GL_ARRAY_BUFFER,
-            cast[GLsizeiptr](sizeof(float32) * PRIM_VERTICES.len),
-            addr PRIM_VERTICES[0],
-            GL_STATIC_DRAW)
+            0.GLintptr,
+            sizeof(float32) * lastPrimVerticesLen,
+            addr PRIM_VERTICES[0])
 
       glDrawArrays(GL_TRIANGLES, 0, (PRIM_VERTICES.len / 3).GLsizei)
 
+  lastPrimVerticesLen = len(PRIM_VERTICES)
   (PRIM_VERTICES.setLen 0)
