@@ -24,8 +24,8 @@ proc newWindow* (size: (int, int), title="", contextSettings = ContextSettings(
 
   winTitle = "DevWindow"
 
-  glfw.windowHint(glfw.hContextVersionMajor.int32, 3)
-  glfw.windowHint(glfw.hContextVersionMinor.int32, 3)
+  glfw.windowHint(glfw.hContextVersionMajor.int32, contextSettings.majorVersion.int32)
+  glfw.windowHint(glfw.hContextVersionMinor.int32, contextSettings.minorVersion.int32)
   window = glfw.createWindow(size[0].cint, size[1].cint, "DevWindow", nil, nil)
   glfw.makeContextCurrent(window)
 
