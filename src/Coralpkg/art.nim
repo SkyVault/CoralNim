@@ -171,11 +171,6 @@ proc beginArt* ()=
   ortho_projection = ortho(0.0, ww.float32, wh.float32, 0.0, -10.0, 10.0)
 
 proc flushArt* ()=
-  #useShaderProgram program:
-    #useVertexArray rect_vao:
-      #useElementBuffer rect_ibo:
-        #glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nil)
-
   useShaderProgram primitive_program:
     setUniform getUniformLoc(primitive_program, "projection"), ortho_projection
 
@@ -194,19 +189,19 @@ proc flushArt* ()=
             sizeof(float32) * lastPrimVerticesLen,
             addr PRIM_VERTICES[0])
 
-        #if lastPrimColorsLen != len(PRIM_COLORS):
       useVertexBufferObject prim_cbo, GL_ARRAY_BUFFER:
-        glBufferData(
+        if lastPrimColorsLen != len(PRIM_COLORS):
+          glBufferData(
+              GL_ARRAY_BUFFER,
+              cast[GLsizeiptr](sizeof(float32) * PRIM_COLORS.len),
+              addr PRIM_COLORS[0],
+              GL_DYNAMIC_DRAW)
+        else:
+          glBufferSubData(
             GL_ARRAY_BUFFER,
-            cast[GLsizeiptr](sizeof(float32) * PRIM_COLORS.len),
-            addr PRIM_COLORS[0],
-            GL_DYNAMIC_DRAW)
-        #else:
-          #glBufferSubData(
-            #GL_ARRAY_BUFFER,
-            #0.GLintptr,
-            #sizeof(float32) * lastPrimColorsLen,
-            #addr PRIM_COLORS[0])
+            0.GLintptr,
+            sizeof(float32) * len(PRIM_COLORS),
+            addr PRIM_COLORS[0])
 
       glDrawArrays(GL_TRIANGLES, 0, (PRIM_VERTICES.len / 3).GLsizei)
 

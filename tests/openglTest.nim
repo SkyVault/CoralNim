@@ -23,7 +23,6 @@ while updateGame():
 
   beginArt()
 
-
   setDrawColor 1.0, 0.5, 0.0, 1.0
   drawRect 100, 100, 300, 300
 

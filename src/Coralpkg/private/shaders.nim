@@ -43,7 +43,6 @@ in vec4 color;
 
 void main(void) {
   Result = color;
-//Result = vec4(1.0, 1.0, 1.0, 1.0);
 }
 """
 
