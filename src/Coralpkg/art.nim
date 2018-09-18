@@ -160,6 +160,9 @@ proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.
 proc setDrawColor* (r, g, b=1.0, a=1.0)=
   color = (r, g, b, a)
 
+proc setDrawColor* (c: Color)=
+  color = (c.r, c.g, c.b, c.a)
+
 template useColor* (r, g, b, a: float, body: untyped)=
   let pre = color
   setDrawColor(r, g, b, a)

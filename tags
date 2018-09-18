@@ -44,6 +44,8 @@ $	src/Coralpkg/maths.nim	/^proc `$`* (v: Vec3): string =$/;"	o
 ==	src/Coralpkg/maths.nim	/^proc `==`* (a: Vec2, b: Vec2): bool=$/;"	o
 ==	src/Coralpkg/maths.nim	/^proc `==`* (a: Vec3, b: Vec3): bool=$/;"	o
 AtomicNodes_Rq0ynG1tdFv1swPPc9cZhcg	tests/nimcache/stdlib_macros.c	/^NIM_CONST tySet_tyEnum_NimNodeKind_4lLLxwA63qqrtZ4Xqlg9bRQ AtomicNodes_Rq0ynG1tdFv1swPPc9cZhcg = {$/;"	v
+Black	src/Coralpkg/private/color.nim	/^template Black*                ():untyped =newColor(0, 0, 0)$/;"	t
+Blue	src/Coralpkg/private/color.nim	/^template Blue*                 ():untyped =newColor(0, 0, 1)$/;"	t
 CallNodes_KO9ajNLR9bDAAwecb5g9aCOiA	tests/nimcache/stdlib_macros.c	/^NIM_CONST tySet_tyEnum_NimNodeKind_4lLLxwA63qqrtZ4Xqlg9bRQ CallNodes_KO9ajNLR9bDAAwecb5g9aCOiA = {$/;"	v
 ClE_0	src/nimcache/stdlib_system.c	/^void* ClE_0;$/;"	m	struct:__anon1	file:
 ClE_0	tests/nimcache/Coral_Coral.c	/^void* ClE_0;$/;"	m	struct:__anon15	file:
@@ -69,7 +71,9 @@ ClE_0	tests/nimcache/stdlib_tables.c	/^void* ClE_0;$/;"	m	struct:__anon23	file:
 ClE_0	tests/nimcache/stdlib_tables.c	/^void* ClE_0;$/;"	m	struct:__anon24	file:
 ClE_0	tests/nimcache/stdlib_tables.c	/^void* ClE_0;$/;"	m	struct:__anon25	file:
 Clock	src/Coralpkg/private/clock.nim	/^  Clock* = object$/;"	t
+Color	src/Coralpkg/private/color.nim	/^  Color* = object$/;"	t
 ContextSettings	src/Coralpkg/platform.nim	/^type ContextSettings* = object$/;"	t
+DarkGray	src/Coralpkg/private/color.nim	/^template DarkGray*             ():untyped =newColor(0.2, 0.2, 0.2)$/;"	t
 DefaultOpenglEsWindowConfig_rOQRQtZ9c300kFv9bfu88jrA	tests/nimcache/glfw_glfw.c	/^tyObject_OpenglEsWindowConfig_HZ9aZSIA24jPsvb6t4vmnCw DefaultOpenglEsWindowConfig_rOQRQtZ9c300kFv9bfu88jrA;$/;"	v
 DefaultOpenglWindowConfig_6sgYZUtb8LI4NiJ9aAuR9aVg	tests/nimcache/glfw_glfw.c	/^tyObject_OpenglWindowConfig_NhEgGpqD8rwIl2Og9cvmNCg DefaultOpenglWindowConfig_6sgYZUtb8LI4NiJ9aAuR9aVg;$/;"	v
 Dl_110821_	src/nimcache/sdl2_nim_sdl.c	/^tyProc_qLs9bEMEYHZYOeFIf1LOpoQ Dl_110821_;$/;"	v
@@ -802,12 +806,17 @@ Field4	tests/nimcache/glfw_glfw.c	/^NI Field4;$/;"	m	struct:tyTuple_MTXBxHaXRcwa
 Field4	tests/nimcache/glfw_glfw.c	/^tyObject_Option_qIGytRKplDTHp83XnHPJCQ Field4;$/;"	m	struct:tyTuple_Q6YLGU9bqw9caNanK8ihrg9cA	file:
 Field5	tests/nimcache/glfw_glfw.c	/^NI Field5;$/;"	m	struct:tyTuple_MTXBxHaXRcwaQNyPRMLVqA	file:
 Field5	tests/nimcache/glfw_glfw.c	/^tyObject_Option_qIGytRKplDTHp83XnHPJCQ Field5;$/;"	m	struct:tyTuple_Q6YLGU9bqw9caNanK8ihrg9cA	file:
+Filter	src/Coralpkg/private/image.nim	/^  Filter* = enum$/;"	t
+Format	src/Coralpkg/private/image.nim	/^  Format* = enum$/;"	t
 FormatOpen_129cS4U5eK4wWqE9bNeKN1Aw	tests/nimcache/stdlib_system.c	/^NIM_CONST tyArray_7JTpIvL6tqeRI2Pp9asvFCA FormatOpen_129cS4U5eK4wWqE9bNeKN1Aw = {((NimStringDesc*) &TM_Q5wkpxktOdTGvlSRo9bzt9aw_34),$/;"	v
 GcFrameHeader	src/nimcache/stdlib_system.c	/^struct GcFrameHeader {$/;"	s	file:
 GcFrameHeader	src/nimcache/stdlib_system.c	/^typedef struct GcFrameHeader GcFrameHeader;$/;"	t	typeref:struct:GcFrameHeader	file:
 GcFrameHeader	tests/nimcache/stdlib_system.c	/^struct GcFrameHeader {$/;"	s	file:
 GcFrameHeader	tests/nimcache/stdlib_system.c	/^typedef struct GcFrameHeader GcFrameHeader;$/;"	t	typeref:struct:GcFrameHeader	file:
+Gray	src/Coralpkg/private/color.nim	/^template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)$/;"	t
+Green	src/Coralpkg/private/color.nim	/^template Green*                ():untyped =newColor(0, 1, 0)$/;"	t
 IdentChars_oT0SU38gSViOGadEZ9cV7OA	tests/nimcache/stdlib_system.c	/^NIM_CONST tySet_tyChar_nmiMWKVIe46vacnhAFrQvw IdentChars_oT0SU38gSViOGadEZ9cV7OA = {$/;"	v
+Image	src/Coralpkg/private/image.nim	/^  Image = object$/;"	t
 Input	src/Coralpkg/input.nim	/^template Input* (): auto= input$/;"	t
 Input	src/Coralpkg/private/input_sdl.nim	/^template Input* (): auto= input$/;"	t
 LANGUAGE_C	src/nimcache/Coral_Coral.c	11;"	d	file:
@@ -859,6 +868,7 @@ LANGUAGE_C	tests/nimcache/x11_keysym.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/x11_x.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/x11_xlib.c	11;"	d	file:
 LANGUAGE_C	tests/nimcache/x11_xutil.c	11;"	d	file:
+LightGray	src/Coralpkg/private/color.nim	/^template LightGray*            ():untyped =newColor(0.8, 0.8, 0.8)$/;"	t
 MIPSEB	src/nimcache/Coral_Coral.c	12;"	d	file:
 MIPSEB	src/nimcache/Coral_platform.c	14;"	d	file:
 MIPSEB	src/nimcache/opengl_opengl.c	12;"	d	file:
@@ -3311,6 +3321,22 @@ NimStringDesc	tests/nimcache/x11_xutil.c	/^struct NimStringDesc {$/;"	s	file:
 NimStringDesc	tests/nimcache/x11_xutil.c	/^typedef struct NimStringDesc NimStringDesc;$/;"	t	typeref:struct:NimStringDesc	file:
 Nim_OfCheck_CACHE17	tests/nimcache/stdlib_system.c	/^static TNimType* Nim_OfCheck_CACHE17[2];$/;"	v	file:
 Nim_OfCheck_CACHE22	src/nimcache/stdlib_system.c	/^static TNimType* Nim_OfCheck_CACHE22[2];$/;"	v	file:
+P8_Black	src/Coralpkg/private/color.nim	/^template P8_Black*      ():untyped = newColor(0, 0, 0, 1)$/;"	t
+P8_Blue	src/Coralpkg/private/color.nim	/^template P8_Blue*       ():untyped = newColor(41.0 \/ 255.0, 173.0 \/ 255.0, 1.0)$/;"	t
+P8_Brown	src/Coralpkg/private/color.nim	/^template P8_Brown*      ():untyped = newColor(171.0 \/ 255.0, 82.0 \/ 255.0, 54.0 \/ 255.0)$/;"	t
+P8_DarkBlue	src/Coralpkg/private/color.nim	/^template P8_DarkBlue*   ():untyped = newColor(29.0 \/ 255.0, 43.0 \/ 255.0, 83.0 \/ 255.0)$/;"	t
+P8_DarkGray	src/Coralpkg/private/color.nim	/^template P8_DarkGray*   ():untyped = newColor(95.0 \/ 255.0, 87.0 \/ 255.0, 79.0 \/ 255.0)$/;"	t
+P8_DarkGreen	src/Coralpkg/private/color.nim	/^template P8_DarkGreen*  ():untyped = newColor(0.0, 135.0 \/ 255.0, 81.0 \/ 255.0)$/;"	t
+P8_DarkPurple	src/Coralpkg/private/color.nim	/^template P8_DarkPurple* ():untyped = newColor(126.0 \/ 255.0, 37.0 \/ 255.0, 83.0 \/ 255.0)$/;"	t
+P8_Green	src/Coralpkg/private/color.nim	/^template P8_Green*      ():untyped = newColor(0.0, 228.0 \/ 255.0, 54.0 \/ 255.0)$/;"	t
+P8_Indigo	src/Coralpkg/private/color.nim	/^template P8_Indigo*     ():untyped = newColor(131.0 \/ 255.0, 118.0 \/ 255.0, 156.0 \/ 255.0)$/;"	t
+P8_LightGray	src/Coralpkg/private/color.nim	/^template P8_LightGray*  ():untyped = newColor(194.0 \/ 255.0, 195.0 \/ 255.0, 199.0 \/ 255.0)$/;"	t
+P8_Orange	src/Coralpkg/private/color.nim	/^template P8_Orange*     ():untyped = newColor(1.0, 163.0 \/ 255.0, 0.0)$/;"	t
+P8_Peach	src/Coralpkg/private/color.nim	/^template P8_Peach*      ():untyped = newColor(1.0, 204.0 \/ 255.0, 170.0 \/ 255.0)$/;"	t
+P8_Pink	src/Coralpkg/private/color.nim	/^template P8_Pink*       ():untyped = newColor(1.0, 119.0 \/ 255.0, 168.0 \/ 255.0)$/;"	t
+P8_Red	src/Coralpkg/private/color.nim	/^template P8_Red*        ():untyped = newColor(1.0, 0.0, 77.0 \/ 255.0)$/;"	t
+P8_White	src/Coralpkg/private/color.nim	/^template P8_White*      ():untyped = newColor(1.0, 241.0 \/ 255.0, 232.0 \/ 255.0)$/;"	t
+P8_Yellow	src/Coralpkg/private/color.nim	/^template P8_Yellow*     ():untyped = newColor(1.0, 236.0 \/ 255.0, 39.0 \/ 255.0)$/;"	t
 PPC	src/nimcache/Coral_Coral.c	14;"	d	file:
 PPC	src/nimcache/Coral_platform.c	16;"	d	file:
 PPC	src/nimcache/opengl_opengl.c	14;"	d	file:
@@ -3472,6 +3498,8 @@ R4000	tests/nimcache/x11_xlib.c	16;"	d	file:
 R4000	tests/nimcache/x11_xutil.c	16;"	d	file:
 RECT_INDICES_LLF5npbnbc9bNYDsyepyBZQ	tests/nimcache/Coral_art.c	/^tySequence_6H5Oh5UUvVCLiakt9aTwtUQ* RECT_INDICES_LLF5npbnbc9bNYDsyepyBZQ;$/;"	v
 RECT_VERTICES_eXlx1gjBYqJnmA7R3K1fGQ	tests/nimcache/Coral_art.c	/^tySequence_4Xyxy0Om14N6K1l5e9bUPSQ* RECT_VERTICES_eXlx1gjBYqJnmA7R3K1fGQ;$/;"	v
+Red	src/Coralpkg/private/color.nim	/^template Red*                  ():untyped =newColor(1, 0, 0)$/;"	t
+Region	src/Coralpkg/private/image.nim	/^  Region* = object$/;"	t
 RootObj	src/nimcache/stdlib_system.c	/^struct RootObj {$/;"	s	file:
 RootObj	src/nimcache/stdlib_system.c	/^typedef struct RootObj RootObj;$/;"	t	typeref:struct:RootObj	file:
 RootObj	tests/nimcache/Coral_Coral.c	/^struct RootObj {$/;"	s	file:
@@ -3818,6 +3846,8 @@ TSafePoint	tests/nimcache/Coral_Coral.c	/^typedef struct TSafePoint TSafePoint;$
 TSafePoint	tests/nimcache/stdlib_system.c	/^struct TSafePoint {$/;"	s	file:
 TSafePoint	tests/nimcache/stdlib_system.c	/^typedef struct TSafePoint TSafePoint;$/;"	t	typeref:struct:TSafePoint	file:
 Time	src/Coral.nim	/^template Time* (): auto = clock$/;"	t
+Transperent	src/Coralpkg/private/color.nim	/^template Transperent*          ():untyped =newColor(1, 1, 1, 0)$/;"	t
+TransperentBlack	src/Coralpkg/private/color.nim	/^template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)$/;"	t
 Vec2Left	src/Coralpkg/maths.nim	/^proc Vec2Left*   (): Vec2 = newVec2(-1, 0)$/;"	f
 Vec2One	src/Coralpkg/maths.nim	/^proc Vec2One*    (): Vec2 = newVec2(1, 1)$/;"	f
 Vec2Right	src/Coralpkg/maths.nim	/^proc Vec2Right*  (): Vec2 = newVec2(1, 0)$/;"	f
@@ -3826,6 +3856,7 @@ Vec3Left	src/Coralpkg/maths.nim	/^proc Vec3Left*   (): Vec3 =$/;"	f
 Vec3One	src/Coralpkg/maths.nim	/^proc Vec3One*    (): Vec3 =$/;"	f
 Vec3Right	src/Coralpkg/maths.nim	/^proc Vec3Right*  (): Vec3 =$/;"	f
 Vec3Up	src/Coralpkg/maths.nim	/^proc Vec3Up*     (): Vec3 =$/;"	f
+White	src/Coralpkg/private/color.nim	/^template White*                ():untyped =newColor(1, 1, 1)$/;"	t
 Window	src/Coralpkg/platform.nim	/^template Window*(): auto = window$/;"	t
 a	tests/nimcache/Coral_art.c	/^tyObject_Mat4Arr_zFleDNKGUZKdIzqaSPXTEw a;$/;"	m	union:tyObject_Mat4_OYWnKm0DeDoNmxu6413f0A	file:
 a	tests/nimcache/Coral_cgl.c	/^tyObject_Mat4Arr_zFleDNKGUZKdIzqaSPXTEw a;$/;"	m	union:tyObject_Mat4_OYWnKm0DeDoNmxu6413f0A	file:
@@ -4154,6 +4185,7 @@ cmdLine	tests/nimcache/Coral_openglTest.c	/^char** cmdLine;$/;"	v
 cmdLine	tests/nimcache/Coral_windowTest.c	/^char** cmdLine;$/;"	v
 code	tests/nimcache/opengl_opengl.c	/^tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg code;$/;"	m	struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
 code	tests/nimcache/stdlib_system.c	/^tyEnum_GLerrorCode_ovQg9aLuoEQKuJYv9aVXA3Jg code;$/;"	m	struct:tyObject_GLerror_qpxaKK79cBGlF3IDQRnwFKQ	file:
+colorFromHex	src/Coralpkg/private/color.nim	/^proc colorFromHex* (hex: string): Color=$/;"	f
 color_RbWjJQ6eB9b4bJWfG8LyfrA	tests/nimcache/Coral_art.c	/^tyTuple_0vYzovSm9aKYybyF8MRuBJQ color_RbWjJQ6eB9b4bJWfG8LyfrA;$/;"	v
 colormap	tests/nimcache/x11_xlib.c	/^unsigned long colormap;$/;"	m	struct:tyObject_TXSetWindowAttributes_fGFa7M5Ai9aYS1Qi405emDw	file:
 colormap	tests/nimcache/x11_xlib.c	/^unsigned long colormap;$/;"	m	struct:tyObject_TXWindowAttributes_nlpf8vqbE9bnoZp9bwwYiP6g	file:
@@ -4838,6 +4870,7 @@ heapLinks	tests/nimcache/stdlib_strformat.c	/^tyObject_HeapLinks_PDV1HBZ8CQSQJC9
 heapLinks	tests/nimcache/stdlib_system.c	/^tyObject_HeapLinks_PDV1HBZ8CQSQJC9aOBFNRSg heapLinks;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 heapLinks	tests/nimcache/stdlib_tables.c	/^tyObject_HeapLinks_PDV1HBZ8CQSQJC9aOBFNRSg heapLinks;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 heapLinks	tests/nimcache/stdlib_typeinfo.c	/^tyObject_HeapLinks_PDV1HBZ8CQSQJC9aOBFNRSg heapLinks;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
+height	src/Coralpkg/private/image.nim	/^template height* (self: Image): auto = self.height$/;"	t
 height	tests/nimcache/glfw_glfw.c	/^NI32 height;$/;"	m	struct:tyObject_ImageObj_0Gk4b28XGOmSKs3l0GDWgw	file:
 height	tests/nimcache/glfw_glfw.c	/^NI32 height;$/;"	m	struct:tyObject_VideoModeObj_4mX89a57In2Qaym2USKN4ig	file:
 height	tests/nimcache/glfw_wrapper.c	/^NI32 height;$/;"	m	struct:tyObject_ImageObj_0Gk4b28XGOmSKs3l0GDWgw	file:
@@ -5279,6 +5312,7 @@ llmem	tests/nimcache/stdlib_strformat.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56w
 llmem	tests/nimcache/stdlib_system.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw* llmem;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 llmem	tests/nimcache/stdlib_tables.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw* llmem;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 llmem	tests/nimcache/stdlib_typeinfo.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw* llmem;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
+loadImage	src/Coralpkg/private/image.nim	/^proc loadImage* (path: string, filter=Nearest): Image=$/;"	f
 loadShaderFromString	src/Coralpkg/cgl.nim	/^proc loadShaderFromString* (stype: GLenum, code: string): GLuint=$/;"	f
 localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg	src/nimcache/stdlib_system.c	/^tyProc_hgOQFBQi19biNdOUUkFOOxA localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg;$/;"	v
 localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg	tests/nimcache/stdlib_system.c	/^tyProc_hgOQFBQi19biNdOUUkFOOxA localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg;$/;"	v
@@ -5770,6 +5804,7 @@ near	tests/nimcache/x11_x.c	20;"	d	file:
 near	tests/nimcache/x11_xlib.c	20;"	d	file:
 near	tests/nimcache/x11_xutil.c	20;"	d	file:
 newClock	src/Coralpkg/private/clock.nim	/^proc newClock* (): auto =$/;"	f
+newColor	src/Coralpkg/private/color.nim	/^proc newColor* (r, g, b, a=1.0): auto {.noSideEffect.}=$/;"	f
 newElementBuffer	src/Coralpkg/cgl.nim	/^proc newElementBuffer* [T](indices: var seq[T]): GLuint =$/;"	f
 newKeyState	src/Coralpkg/input.nim	/^proc newKeyState*(state=0, last=0): KeyState=$/;"	f
 newKeyState	src/Coralpkg/private/input_sdl.nim	/^proc newKeyState(state=0, last=0): KeyState=$/;"	f
@@ -5778,6 +5813,7 @@ newMat3	src/Coralpkg/maths.nim	/^proc newMat3* ($/;"	f
 newMat3	src/Coralpkg/maths.nim	/^proc newMat3* (): Mat3=$/;"	f
 newMat4	src/Coralpkg/maths.nim	/^proc newMat4* ($/;"	f
 newMat4	src/Coralpkg/maths.nim	/^proc newMat4* (): Mat4=$/;"	f
+newRegion	src/Coralpkg/private/image.nim	/^proc newRegion* (x, y, width, height: int): auto=$/;"	f
 newShaderProgram	src/Coralpkg/cgl.nim	/^proc newShaderProgram* (vertex = 0.GLuint, fragment = 0.GLuint, geometry = 0.GLuint): GLuint=$/;"	f
 newVec2	src/Coralpkg/maths.nim	/^proc newVec2* (x: float = 0, y: float = 0): Vec2=$/;"	f
 newVec2	src/Coralpkg/maths.nim	/^proc newVec2* [T](x: T= 0, y: T= 0): Vec2=$/;"	f
@@ -6198,6 +6234,7 @@ quitGame	src/Coral.nim	/^proc quitGame* ()=$/;"	f
 raiseAction	src/nimcache/stdlib_system.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
 raiseAction	tests/nimcache/Coral_Coral.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
 raiseAction	tests/nimcache/stdlib_system.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
+randomColor	src/Coralpkg/private/color.nim	/^proc randomColor* ():Color=$/;"	f
 rawTypePtr	tests/nimcache/stdlib_typeinfo.c	/^void* rawTypePtr;$/;"	m	struct:tyObject_Any_bEXZHc2yZOebOeouZDUZ7A	file:
 rbearing	tests/nimcache/x11_xlib.c	/^short rbearing;$/;"	m	struct:tyObject_TXCharStruct_9b8aHyUNXTN7SXta1udUzNA	file:
 recGcLock	src/nimcache/stdlib_system.c	/^NI recGcLock;$/;"	m	struct:tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	file:
@@ -6365,6 +6402,7 @@ serial	tests/nimcache/x11_xlib.c	/^unsigned long serial;$/;"	m	struct:tyObject_T
 serial	tests/nimcache/x11_xlib.c	/^unsigned long serial;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
 serial	tests/nimcache/x11_xlib.c	/^unsigned long serial;$/;"	m	struct:tyObject_TXMappingEvent_K9a0wTeRaGzWPEDOpi09bVUA	file:
 serial	tests/nimcache/x11_xutil.c	/^unsigned long serial;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
+setDrawColor	src/Coralpkg/art.nim	/^proc setDrawColor* (c: Color)=$/;"	f
 setDrawColor	src/Coralpkg/art.nim	/^proc setDrawColor* (r, g, b=1.0, a=1.0)=$/;"	f
 setUniform	src/Coralpkg/cgl.nim	/^proc setUniform* (id: GLint, b: bool)= glUniform1i(id, (if b: 1 else: 0))$/;"	f
 setUniform	src/Coralpkg/cgl.nim	/^proc setUniform* (id: GLint, f: float)= glUniform1f(id, f)$/;"	f
@@ -8003,6 +8041,7 @@ visualid	tests/nimcache/x11_xutil.c	/^unsigned long visualid;$/;"	m	struct:tyObj
 visualid	tests/nimcache/x11_xutil.c	/^unsigned long visualid;$/;"	m	struct:tyObject_TXVisualInfo_1VtEjmAVZ8Q9aLR0s41Pjnw	file:
 visuals	tests/nimcache/x11_xlib.c	/^tyObject_TVisual_sqcKqLNOQefL6fxiLETvYw* visuals;$/;"	m	struct:tyObject_TDepth_ARrarU2uMafEedutiF7fxA	file:
 white_pixel	tests/nimcache/x11_xlib.c	/^unsigned long white_pixel;$/;"	m	struct:tyObject_TScreen_XzlPmpd9b5d0WUxKxwkWabw	file:
+width	src/Coralpkg/private/image.nim	/^template width* (self: Image): auto = self.width$/;"	t
 width	tests/nimcache/glfw_glfw.c	/^NI32 width;$/;"	m	struct:tyObject_ImageObj_0Gk4b28XGOmSKs3l0GDWgw	file:
 width	tests/nimcache/glfw_glfw.c	/^NI32 width;$/;"	m	struct:tyObject_VideoModeObj_4mX89a57In2Qaym2USKN4ig	file:
 width	tests/nimcache/glfw_wrapper.c	/^NI32 width;$/;"	m	struct:tyObject_ImageObj_0Gk4b28XGOmSKs3l0GDWgw	file:

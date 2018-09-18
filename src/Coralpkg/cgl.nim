@@ -6,6 +6,9 @@ import
   typeinfo,
   typetraits
 
+include private/color
+include private/image
+
 ## Vertex arrays
 proc newVertexArray* (shouldBind = true): GLuint=
   glGenVertexArrays(1, addr result)

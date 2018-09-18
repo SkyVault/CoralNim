@@ -17,16 +17,16 @@ while updateGame():
   let dt = Time.deltaTime
   timer += dt
 
-  glDisable(GL_CULL_FACE)
+  #glDisable(GL_CULL_FACE)
 
   clearColorAndDepthBuffers (0.1, 0.1, 0.1, 1.0)
 
   beginArt()
 
-  setDrawColor 1.0, 0.5, 0.0, 1.0
+  setDrawColor (colorFromHex "FF00FF")
   drawRect 100, 100, 300, 300
 
-  setDrawColor 0.0, 1.0, 1.0, 1.0
+  setDrawColor P8_Indigo
   drawCircle 800, 400, 100
 
   flushArt()
