@@ -18,17 +18,18 @@ include private/shaders
 
 proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)
 proc drawCircle* (x, y, radius: int | float, resolution=360)
-proc drawRect* (x, y, width, height: int | float, rotation=0.0)
+proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)
+proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)
 
 var ortho_projection: Mat4
 var rect_vao, rect_vbo, rect_ibo : GLuint
 
-var prim_vao, prim_vbo: GLuint
+var prim_vao, prim_vbo, prim_cbo: GLuint
 
 var program: GLuint
 var primitive_program: GLuint
 
-#var color = (0.0, 0.0, 0.0, 0.0)
+var color = (1.0, 1.0, 1.0, 1.0)
 
 var RECT_VERTICES = @[
     -0.5'f32,   0.5,
@@ -39,7 +40,10 @@ var RECT_VERTICES = @[
 var RECT_INDICES = @[0'u8, 1, 2, 2, 3, 0]
 
 var PRIM_VERTICES: seq[GLfloat] = @[]
+var PRIM_COLORS: seq[GLfloat] = @[]
+
 var lastPrimVerticesLen = 0
+var lastPrimColorsLen = 4
 
 proc initArt* ()=
   program = newShaderProgram(
@@ -58,7 +62,14 @@ proc initArt* ()=
   prim_vao = newVertexArray()
   useVertexArray prim_vao:
     var v = @[0.0'f32]
+    var c: seq[float32] = @[]
     prim_vbo = newVertexBufferObject[GLfloat](GL_ARRAY_BUFFER, 3, 0, v, dynamic=true)
+    prim_cbo = newVertexBufferObject[GLfloat](
+      GL_ARRAY_BUFFER,
+      4,
+      1,
+      c,
+      dynamic=true)
 
 proc rotatePoint* (cx, cy, angle, px, py: float): (float, float)=
   let
@@ -85,6 +96,11 @@ proc pushVertex* (x, y: int | float | float32)=
   (PRIM_VERTICES.add y.float32)
   (PRIM_VERTICES.add 0.0)
 
+  (PRIM_COLORS.add color[0])
+  (PRIM_COLORS.add color[1])
+  (PRIM_COLORS.add color[2])
+  (PRIM_COLORS.add color[3])
+
 proc pushVertexRotated* (x, y: int | float | float32, rotation=0.0)=
   let rcos = cos rotation
   let rsin = sin rotation
@@ -108,7 +124,7 @@ proc drawCircle* (x, y, radius: int | float, resolution=360)=
     pushVertex(x.float + sin(irad)*radius.float, y.float + cos(irad)*radius.float)
     pushVertex(x.float + sin(degToRad(fi + 10.0))*radius.float, y.float + cos(degToRad(fi + 10.0))*radius.float);
 
-proc drawRect* (x, y, width, height: int | float, rotation=0.0)=
+proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)=
   if rotation == 0.0:
     pushVertex x, y + height
     pushVertex x, y
@@ -118,9 +134,9 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0)=
     pushVertex x + width, y + height
   else:
     let r = rotation
-    let (vx1, vy1) = rotatePoint(x.float, y.float, r, x.float, (y + height).float)
-    let (vx2, vy2) = rotatePoint(x.float, y.float, r, (x + width).float, y.float)
-    let (vx3, vy3) = rotatePoint(x.float, y.float, r, (x + width).float, (y + height).float)
+    let (vx1, vy1) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, (y + height).float)
+    let (vx2, vy2) = rotatePoint(x.float + offsetX, y.float + offsetY, r, (x + width).float, y.float)
+    let (vx3, vy3) = rotatePoint(x.float + offsetX, y.float + offsetY, r, (x + width).float, (y + height).float)
 
     pushVertex x, y
     pushVertex vx1, vy1
@@ -128,6 +144,27 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0)=
     pushVertex vx2, vy2
     pushVertex vx1, vy1
     pushVertex vx3, vy3
+
+proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)=
+  let 
+    fx = x.float
+    fy = y.float
+    fw = width.float
+    fh = height.float
+
+  drawRect(fx, fy, fw, thickness)
+  drawRect(fx, fy, thickness, fh)
+  drawRect(fx, fy+fh-thickness, fw, thickness)
+  drawRect(fx+fw-thickness, fy, thickness, fh)
+
+proc setDrawColor* (r, g, b=1.0, a=1.0)=
+  color = (r, g, b, a)
+
+template useColor* (r, g, b, a: float, body: untyped)=
+  let pre = color
+  setDrawColor(r, g, b, a)
+  body
+  color = pre
 
 proc beginArt* ()=
   let (ww, wh) = Window.size()
@@ -149,7 +186,7 @@ proc flushArt* ()=
               GL_ARRAY_BUFFER,
               cast[GLsizeiptr](sizeof(float32) * PRIM_VERTICES.len),
               addr PRIM_VERTICES[0],
-              GL_STATIC_DRAW)
+              GL_DYNAMIC_DRAW)
         else:
           glBufferSubData(
             GL_ARRAY_BUFFER,
@@ -157,7 +194,24 @@ proc flushArt* ()=
             sizeof(float32) * lastPrimVerticesLen,
             addr PRIM_VERTICES[0])
 
+        #if lastPrimColorsLen != len(PRIM_COLORS):
+      useVertexBufferObject prim_cbo, GL_ARRAY_BUFFER:
+        glBufferData(
+            GL_ARRAY_BUFFER,
+            cast[GLsizeiptr](sizeof(float32) * PRIM_COLORS.len),
+            addr PRIM_COLORS[0],
+            GL_DYNAMIC_DRAW)
+        #else:
+          #glBufferSubData(
+            #GL_ARRAY_BUFFER,
+            #0.GLintptr,
+            #sizeof(float32) * lastPrimColorsLen,
+            #addr PRIM_COLORS[0])
+
       glDrawArrays(GL_TRIANGLES, 0, (PRIM_VERTICES.len / 3).GLsizei)
 
   lastPrimVerticesLen = len(PRIM_VERTICES)
+  lastPrimColorsLen = len(PRIM_COLORS)
+
   (PRIM_VERTICES.setLen 0)
+  (PRIM_COLORS.setLen 0)

@@ -25,12 +25,12 @@ const PRIM_VERTEX_SHADER* ="""
 layout (location = 0) in vec3 Vertices;
 layout (location = 1) in vec4 Colors;
 
-out vec4 colors;
+out vec4 color;
 
 uniform mat4 projection;
 
 void main(void) {
-  colors = Colors;
+  color = Colors;
   gl_Position = projection * vec4(Vertices, 1.0); 
 }
 """
@@ -39,11 +39,11 @@ const PRIM_FRAGMENT_SHADER* ="""
 #version 330 core
 out vec4 Result; 
 
-in vec4 colors;
+in vec4 color;
 
 void main(void) {
-//  Result = colors;
-Result = vec4(1.0, 1.0, 1.0, 1.0);
+  Result = color;
+//Result = vec4(1.0, 1.0, 1.0, 1.0);
 }
 """
 

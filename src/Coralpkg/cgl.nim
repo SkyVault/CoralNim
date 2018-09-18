@@ -30,7 +30,7 @@ proc newVertexBufferObject* [T](btype: GLenum, dimensions: uint32, attrib: uint3
     glBufferData(
         btype,
         cast[GLsizeiptr](sizeof(T) * data.len),
-        addr data[0],
+        (if data.len == 0: cast[pointer](0) else: addr data[0]),
         if dynamic: GL_DYNAMIC_DRAW
         else: GL_STATIC_DRAW)
 
