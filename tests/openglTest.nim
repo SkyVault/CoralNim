@@ -26,12 +26,14 @@ while updateGame():
 
   beginArt()
 
-  #setDrawColor (colorFromHex "FF00FF")
-  #drawRect 100, 100, 300, 300
+  setDrawColor (colorFromHex "FF00FF")
+  drawRect 100, 100, 300, 300
 
-  #setDrawColor P8_Indigo
-  #drawCircle 800, 400, 100
+  setDrawColor P8_Indigo
+  drawCircle 800, 400, 100
 
-  drawImage lolwut, 0, 0, 200, 200
+  for y in 0..100:
+    for x in 0..200:
+      drawImage lolwut, x*10, y*10, 10, 10
 
-  #flushArt()
+  flushArt()

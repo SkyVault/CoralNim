@@ -26,6 +26,7 @@ proc newRegion* (x, y, width, height: int): auto=
 
 template width* (self: Image): auto = self.width
 template height* (self: Image): auto = self.height
+template id* (self: Image): auto = self.id
 
 proc loadImage* (path: string, filter=Nearest): Image=
   result = Image(id: 0, width: 0, height: 0, format: Rgba)

@@ -4,6 +4,7 @@ import
   platform,
   opengl,
   math,
+  tables,
   cgl,
   maths
 
@@ -13,6 +14,12 @@ type
 
   Renderer* = ref object
     rectBuffers: (GLuint, GLuint)
+
+  Drawable = object
+    region: Region
+    body: (float, float, float, float) # x y w h
+    transform: (float, float) # rot depth
+
 
 include private/shaders
 
@@ -31,33 +38,19 @@ var primitive_program: GLuint
 
 var color = (1.0, 1.0, 1.0, 1.0)
 
-#                    0.0f, 1.0f,
-#        1.0f, 0.0f, 1.0f, 0.0f,
-#        0.0f, 0.0f, 0.0f, 0.0f, 
-#    
-#        0.0f, 1.0f, 0.0f, 1.0f,
-#        1.0f, 1.0f, 1.0f, 1.0f,
-#        1.0f, 0.0f, 1.0f, 0.0f
-
 var RECT_VERTICES = @[
-# Pos           Tex
   0.0'f32, 1.0,
   1.0,     0.0,
   0.0,     0.0,
   0.0,     1.0,
   1.0,     1.0,
   1.0,     0.0,
-
- #-1.0'f32, 1.0,  0.0, 1.0,
- #-1.0,    -1.0,  0.0, 0.0,
-  #1.0,    -1.0,  1.0, 0.0,
- #-1.0,     1.0,  0.0, 1.0,
-  #1.0,    -1.0,  1.0, 0.0,
-  #1.0,     1.0,  1.0, 1.0
 ]
 
 var PRIM_VERTICES: seq[GLfloat] = @[]
 var PRIM_COLORS: seq[GLfloat] = @[]
+
+var DRAWABLES_TABLE = newTable[GLuint, (Image, seq[Drawable])]()
 
 var lastPrimVerticesLen = 0
 var lastPrimColorsLen = 4
@@ -178,22 +171,16 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY
     pushVertex vx1, vy1
     pushVertex vx3, vy3
 
-proc drawImage* (image: Image, x, y, width, height: float)=
-  useShaderProgram program:
-    setUniform getUniformLoc(program, "projection"), ortho_projection
-    setUniform getUniformLoc(program, "body"), 100, 100, 100, 100
+proc drawImage* (image: Image, x, y, width, height: int | float)=
 
-    let height = 64.0 / image.height.float
-    let width = 64.0 / image.width.float
-    let x = 64.0 / image.width.float
-    let y = 64.0 / image.height.float
-    setUniform getUniformLoc(program, "region"), x, 1 - y + (1 - height), width, height
-    #setUniform getUniformLoc(program, "transform"), degToRad(25.0), 0.0
+  if not DRAWABLES_TABLE.hasKey image.id:
+    DRAWABLES_TABLE.add(image.id, (image, @[]))
 
-    glActiveTexture(GL_TEXTURE0);
-    useImage image:
-      useVertexArray rect_vao:
-        glDrawArrays(GL_TRIANGLES, 0, 6)
+  DRAWABLES_TABLE[image.id][1].add Drawable(
+    region: newRegion(0, 0, image.width, image.height),
+    body: (x.float, y.float, width.float, height.float),
+    transform: (0.0, 0.0)
+  )
 
 proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)=
   let 
@@ -222,11 +209,13 @@ template useColor* (r, g, b, a: float, body: untyped)=
 proc beginArt* ()=
   let (ww, wh) = Window.size()
   ortho_projection = ortho(0.0, ww.float32, wh.float32, 0.0, -10.0, 10.0)
+  glViewport(0, 0, ww.GLsizei, wh.GLsizei)
 
 proc flushArt* ()=
   if PRIM_VERTICES.len == 0 or PRIM_COLORS.len == 0:
     return
 
+  # Drawing primitives
   useShaderProgram primitive_program:
     setUniform getUniformLoc(primitive_program, "projection"), ortho_projection
 
@@ -260,6 +249,37 @@ proc flushArt* ()=
             addr PRIM_COLORS[0])
 
       glDrawArrays(GL_TRIANGLES, 0, (PRIM_VERTICES.len / 3).GLsizei)
+
+  # Drawing drawables
+  useShaderProgram program:
+    setUniform getUniformLoc(program, "projection"), ortho_projection
+    useVertexArray rect_vao:
+
+      for key in DRAWABLES_TABLE.keys:
+        var (image, _) = DRAWABLES_TABLE[key]
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, key)
+
+        for drawable in DRAWABLES_TABLE[key][1]:
+          setUniform(
+            getUniformLoc(program, "body"),
+            drawable.body[0],
+            drawable.body[1],
+            drawable.body[2],
+            drawable.body[3])
+
+          let x = drawable.region.x.float / image.width.float
+          let y = drawable.region.y.float / image.height.float
+          let width = drawable.region.width.float / image.width.float
+          let height = drawable.region.height.float / image.height.float
+
+          setUniform getUniformLoc(program, "region"), x, 1 - y + (1 - height), width, height
+          setUniform getUniformLoc(program, "transform"), drawable.transform[0], drawable.transform[1]
+
+          glDrawArrays(GL_TRIANGLES, 0, 6)
+        DRAWABLES_TABLE[key][1].setLen 0
+
+      glBindTexture(GL_TEXTURE_2D, 0)
 
   lastPrimVerticesLen = len(PRIM_VERTICES)
   lastPrimColorsLen = len(PRIM_COLORS)
