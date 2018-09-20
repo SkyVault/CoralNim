@@ -26,6 +26,7 @@ while updateGame():
 
   beginArt()
 
+  drawImage(lolwut, 0, 0)
   drawImageRegion(lolwut, newRegion(32, 32, 128, 64), 128, 64, 128 * 4, 64 * 4)
 
   #setDrawColor (colorFromHex "FF00FF")

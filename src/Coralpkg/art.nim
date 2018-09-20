@@ -28,7 +28,8 @@ proc drawCircle* (x, y, radius: int | float, resolution=360)
 proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)
 proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)
 
-proc drawImage* (image: Image, x, y: int | float = 0.0)
+proc drawImage* (image: Image, x, y = 0)
+proc drawImage* (image: Image, x, y = 0.0)
 proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)
 proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)
 
@@ -185,17 +186,15 @@ proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | 
     transform: (rot, depth)
   )
 
+template drawSprite* = drawImageRegion
+
 proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)=
-  if not DRAWABLES_TABLE.hasKey image.id:
-    DRAWABLES_TABLE.add(image.id, (image, @[]))
+  drawImageRegion(image, newRegion(0, 0, image.width, image.height), x, y, width, height, rot, depth)
 
-  DRAWABLES_TABLE[image.id][1].add Drawable(
-    region: newRegion(0, 0, image.width, image.height),
-    body: (x.float, y.float, width.float, height.float),
-    transform: (rot, depth)
-  )
+proc drawImage* (image: Image, x, y = 0.0)=
+  drawImage(image, x, y, image.width, image.height)
 
-proc drawImage* (image: Image, x, y: int | float = 0.0)=
+proc drawImage* (image: Image, x, y = 0)=
   drawImage(image, x, y, image.width, image.height)
 
 proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)=

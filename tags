@@ -3036,10 +3036,12 @@ doubleBuffer	tests/nimcache/glfw_glfw.c	/^NIM_BOOL doubleBuffer;$/;"	m	struct:ty
 doubleBuffer	tests/nimcache/glfw_glfw.c	/^NIM_BOOL doubleBuffer;$/;"	m	struct:tyObject_OpenglWindowConfig_NhEgGpqD8rwIl2Og9cvmNCg	file:
 drawCircle	src/Coralpkg/art.nim	/^proc drawCircle* (x, y, radius: int | float, resolution=360)$/;"	f
 drawCircle	src/Coralpkg/art.nim	/^proc drawCircle* (x, y, radius: int | float, resolution=360)=$/;"	f
+drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y = 0)$/;"	f
+drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y = 0)=$/;"	f
+drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y = 0.0)$/;"	f
+drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y = 0.0)=$/;"	f
 drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)$/;"	f
 drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)=$/;"	f
-drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y: int | float = 0.0)$/;"	f
-drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y: int | float = 0.0)=$/;"	f
 drawImageRegion	src/Coralpkg/art.nim	/^proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)$/;"	f
 drawImageRegion	src/Coralpkg/art.nim	/^proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)=$/;"	f
 drawLine	src/Coralpkg/art.nim	/^proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)$/;"	f
@@ -3048,6 +3050,7 @@ drawLineRect	src/Coralpkg/art.nim	/^proc drawLineRect* (x, y, width, height: int
 drawLineRect	src/Coralpkg/art.nim	/^proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)=$/;"	f
 drawRect	src/Coralpkg/art.nim	/^proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)$/;"	f
 drawRect	src/Coralpkg/art.nim	/^proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)=$/;"	f
+drawSprite	src/Coralpkg/art.nim	/^template drawSprite* = drawImageRegion$/;"	t
 dropCb	src/nimcache/glfw_glfw.c	/^tyProc_F5dHnElazv79aBAmeG9c9clDQ dropCb;$/;"	m	struct:tyObject_WindowObj_4fLVEmOXbVpKnVtJFE0cHw	file:
 dropCb	src/nimcache/stdlib_tables.c	/^tyProc_F5dHnElazv79aBAmeG9c9clDQ dropCb;$/;"	m	struct:tyObject_WindowObj_4fLVEmOXbVpKnVtJFE0cHw	file:
 dropCb	tests/nimcache/glfw_glfw.c	/^tyProc_F5dHnElazv79aBAmeG9c9clDQ dropCb;$/;"	m	struct:tyObject_WindowObj_4fLVEmOXbVpKnVtJFE0cHw	file:
