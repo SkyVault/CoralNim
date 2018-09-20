@@ -3040,6 +3040,8 @@ drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y, width, hei
 drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)=$/;"	f
 drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y: int | float = 0.0)$/;"	f
 drawImage	src/Coralpkg/art.nim	/^proc drawImage* (image: Image, x, y: int | float = 0.0)=$/;"	f
+drawImageRegion	src/Coralpkg/art.nim	/^proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)$/;"	f
+drawImageRegion	src/Coralpkg/art.nim	/^proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)=$/;"	f
 drawLine	src/Coralpkg/art.nim	/^proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)$/;"	f
 drawLine	src/Coralpkg/art.nim	/^proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)=$/;"	f
 drawLineRect	src/Coralpkg/art.nim	/^proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)$/;"	f

@@ -30,6 +30,7 @@ proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.
 
 proc drawImage* (image: Image, x, y: int | float = 0.0)
 proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)
+proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)
 
 var ortho_projection: Mat4
 var rect_vao, rect_vbo: GLuint
@@ -174,6 +175,16 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY
     pushVertex vx1, vy1
     pushVertex vx3, vy3
 
+proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)=
+  if not DRAWABLES_TABLE.hasKey image.id:
+    DRAWABLES_TABLE.add(image.id, (image, @[]))
+
+  DRAWABLES_TABLE[image.id][1].add Drawable(
+    region: region,
+    body: (x.float, y.float, width.float, height.float),
+    transform: (rot, depth)
+  )
+
 proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)=
   if not DRAWABLES_TABLE.hasKey image.id:
     DRAWABLES_TABLE.add(image.id, (image, @[]))
@@ -240,7 +251,7 @@ proc flushArt* ()=
           let width = drawable.region.width.float / image.width.float
           let height = drawable.region.height.float / image.height.float
 
-          setUniform getUniformLoc(program, "region"), x, 1 - y + (1 - height), width, height
+          setUniform getUniformLoc(program, "region"), x, y, width, height
           setUniform getUniformLoc(program, "transform"), drawable.transform[0], drawable.transform[1]
 
           glDrawArrays(GL_TRIANGLES, 0, 6)
