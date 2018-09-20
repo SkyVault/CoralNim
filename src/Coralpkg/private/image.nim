@@ -5,7 +5,7 @@ import
   stb_image/read as stbi
 
 type
-  Image = object
+  Image* = object
     id: GLuint
     width, height: int
     format: Format
@@ -73,6 +73,18 @@ proc loadImage* (path: string, filter=Nearest): Image=
       glTexImage2D(GL_TEXTURE_2D,lvl, GLint(GL_RGBA), w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, addr data[0])
       result.format = Rgba
     else: discard
+
     glBindTexture(GL_TEXTURE_2D, 0)
   except STBIException:
     echo failureReason()
+
+proc bindImage* (image: Image)=
+  glBindTexture(GL_TEXTURE_2D, image.id)
+
+proc unBindImage* (image: Image)=
+  glBindTexture(GL_TEXTURE_2D, 0)
+
+template useImage* (image: Image, body: untyped)=
+  image.bindImage()
+  body
+  image.unBindImage()

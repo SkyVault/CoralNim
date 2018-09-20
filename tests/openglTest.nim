@@ -3,17 +3,20 @@ import
   ../src/Coralpkg/[cgl, platform, art],
   opengl,
   math,
-  strformat
+  strformat,
+  os,
+  ospaths
 
 initGame(1280, 720, ":)", ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
-
 initArt()
 
 var timer = 0.0
 
-while updateGame():
+let lolwut = loadImage(joinPath(getAppDir(), "lolwut.png"))
 
+while updateGame():
   Window.title = &"FPS: {Time.framesPerSecond.int}"
+ 
   let dt = Time.deltaTime
   timer += dt
 
@@ -23,10 +26,12 @@ while updateGame():
 
   beginArt()
 
-  setDrawColor (colorFromHex "FF00FF")
-  drawRect 100, 100, 300, 300
+  #setDrawColor (colorFromHex "FF00FF")
+  #drawRect 100, 100, 300, 300
 
-  setDrawColor P8_Indigo
-  drawCircle 800, 400, 100
+  #setDrawColor P8_Indigo
+  #drawCircle 800, 400, 100
 
-  flushArt()
+  drawImage lolwut, 0, 0, 200, 200
+
+  #flushArt()

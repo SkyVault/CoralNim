@@ -31,13 +31,30 @@ var primitive_program: GLuint
 
 var color = (1.0, 1.0, 1.0, 1.0)
 
-var RECT_VERTICES = @[
-    -0.5'f32,   0.5,
-    -0.5,      -0.5,
-     0.5,      -0.5,
-     0.5,       0.5]
+#                    0.0f, 1.0f,
+#        1.0f, 0.0f, 1.0f, 0.0f,
+#        0.0f, 0.0f, 0.0f, 0.0f, 
+#    
+#        0.0f, 1.0f, 0.0f, 1.0f,
+#        1.0f, 1.0f, 1.0f, 1.0f,
+#        1.0f, 0.0f, 1.0f, 0.0f
 
-var RECT_INDICES = @[0'u8, 1, 2, 2, 3, 0]
+var RECT_VERTICES = @[
+# Pos           Tex
+  0.0'f32, 1.0,
+  1.0,     0.0,
+  0.0,     0.0,
+  0.0,     1.0,
+  1.0,     1.0,
+  1.0,     0.0,
+
+ #-1.0'f32, 1.0,  0.0, 1.0,
+ #-1.0,    -1.0,  0.0, 0.0,
+  #1.0,    -1.0,  1.0, 0.0,
+ #-1.0,     1.0,  0.0, 1.0,
+  #1.0,    -1.0,  1.0, 0.0,
+  #1.0,     1.0,  1.0, 1.0
+]
 
 var PRIM_VERTICES: seq[GLfloat] = @[]
 var PRIM_COLORS: seq[GLfloat] = @[]
@@ -56,8 +73,24 @@ proc initArt* ()=
 
   rect_vao = newVertexArray()
   useVertexArray rect_vao:
-    rect_vbo = newVertexBufferObject[GLfloat](GL_ARRAY_BUFFER, 2, 0, RECT_VERTICES)
-    rect_ibo = newElementBuffer(RECT_INDICES)
+    glGenBuffers(1, addr rect_vbo)
+    glBindBuffer(GL_ARRAY_BUFFER, rect_vbo)
+    glBufferData(
+      GL_ARRAY_BUFFER,
+      sizeof(RECT_VERTICES[0])*(RECT_VERTICES.len),
+      addr RECT_VERTICES[0],
+      GL_STATIC_DRAW)
+
+    glEnableVertexAttribArray(0)
+    glVertexAttribPointer(
+      0,
+      2,
+      cGL_FLOAT,
+      GL_FALSE,
+      0,
+      cast[pointer](0))
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0)
 
   prim_vao = newVertexArray()
   useVertexArray prim_vao:
@@ -145,6 +178,23 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY
     pushVertex vx1, vy1
     pushVertex vx3, vy3
 
+proc drawImage* (image: Image, x, y, width, height: float)=
+  useShaderProgram program:
+    setUniform getUniformLoc(program, "projection"), ortho_projection
+    setUniform getUniformLoc(program, "body"), 100, 100, 100, 100
+
+    let height = 64.0 / image.height.float
+    let width = 64.0 / image.width.float
+    let x = 64.0 / image.width.float
+    let y = 64.0 / image.height.float
+    setUniform getUniformLoc(program, "region"), x, 1 - y + (1 - height), width, height
+    #setUniform getUniformLoc(program, "transform"), degToRad(25.0), 0.0
+
+    glActiveTexture(GL_TEXTURE0);
+    useImage image:
+      useVertexArray rect_vao:
+        glDrawArrays(GL_TRIANGLES, 0, 6)
+
 proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)=
   let 
     fx = x.float
@@ -174,6 +224,9 @@ proc beginArt* ()=
   ortho_projection = ortho(0.0, ww.float32, wh.float32, 0.0, -10.0, 10.0)
 
 proc flushArt* ()=
+  if PRIM_VERTICES.len == 0 or PRIM_COLORS.len == 0:
+    return
+
   useShaderProgram primitive_program:
     setUniform getUniformLoc(primitive_program, "projection"), ortho_projection
 
