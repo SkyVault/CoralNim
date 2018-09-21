@@ -4716,6 +4716,8 @@ Vec3Left	src/Coralpkg/maths.nim	/^proc Vec3Left*   (): Vec3 =$/;"	f
 Vec3One	src/Coralpkg/maths.nim	/^proc Vec3One*    (): Vec3 =$/;"	f
 Vec3Right	src/Coralpkg/maths.nim	/^proc Vec3Right*  (): Vec3 =$/;"	f
 Vec3Up	src/Coralpkg/maths.nim	/^proc Vec3Up*     (): Vec3 =$/;"	f
+VorbisInfo	src/Coralpkg/private/stb_vorbis.nim	/^    VorbisInfo* = object$/;"	t
+VorbisObj	src/Coralpkg/private/stb_vorbis.nim	/^    VorbisObj = object$/;"	t
 White	src/Coralpkg/private/color.nim	/^template White*                ():untyped =newColor(1, 1, 1)$/;"	t
 Window	src/Coralpkg/platform.nim	/^template Window*(): auto = window$/;"	t
 a	tests/nimcache/Coral_art.c	/^NF a;$/;"	m	struct:tyObject_Color_kWUlhNbxu9bYGZcio9b2obTw	file:
@@ -4815,6 +4817,25 @@ adjTime	tests/nimcache/stdlib_times.c	/^NI64 adjTime;$/;"	m	struct:tyObject_Zone
 adjTime	tests/nimcache/stdlib_times.c	/^typedef N_CLOSURE_PTR(tyObject_ZonedTime_WigfH9apQAxJ69bBPh3wB8RQ, TM_6NbDwwj5FY059b1gz2AsAZQ_157) (NI64 adjTime);$/;"	t	file:
 adjTime	tests/nimcache/stdlib_times.c	/^typedef N_CLOSURE_PTR(tyObject_ZonedTime_WigfH9apQAxJ69bBPh3wB8RQ, TM_6NbDwwj5FY059b1gz2AsAZQ_421) (NI64 adjTime);$/;"	t	file:
 adjTime	tests/nimcache/stdlib_times.c	/^typedef N_CLOSURE_PTR(tyObject_ZonedTime_WigfH9apQAxJ69bBPh3wB8RQ, TM_6NbDwwj5FY059b1gz2AsAZQ_444) (NI64 adjTime);$/;"	t	file:
+alBufferData	src/Coralpkg/private/openal.nim	/^proc alBufferData*(bid: ALuint, format: ALenum, data: pointer, size: ALsizei, freq: ALsizei) {.alimport.}$/;"	f
+alDeleteBuffers	src/Coralpkg/private/openal.nim	/^proc alDeleteBuffers*(n: ALsizei, buffers: ptr ALuint) {.alimport.}$/;"	f
+alDeleteSources	src/Coralpkg/private/openal.nim	/^proc alDeleteSources*(n: ALsizei, sources: ptr ALuint) {.alimport.}$/;"	f
+alFormat	src/Coralpkg/private/data_source_al.nim	/^proc alFormat(channels, bitsPerSample: int): ALenum {.inline.} =$/;"	f
+alGenBuffers	src/Coralpkg/private/openal.nim	/^proc alGenBuffers*(n: ALsizei, buffers: ptr ALuint) {.alimport.}$/;"	f
+alGenSources	src/Coralpkg/private/openal.nim	/^proc alGenSources*(n: ALsizei, sources: ptr ALuint) {.alimport.}$/;"	f
+alGetBufferi	src/Coralpkg/private/openal.nim	/^proc alGetBufferi*(bid: ALuint, param: ALenum, value: ptr ALint) {.alimport.}$/;"	f
+alGetSourcef	src/Coralpkg/private/openal.nim	/^proc alGetSourcef*(sid: ALuint, param: ALenum, value: ptr ALfloat) {.alimport.}$/;"	f
+alGetSourcei	src/Coralpkg/private/openal.nim	/^proc alGetSourcei*(sid: ALuint, param: ALenum, value: ptr ALint) {.alimport.}$/;"	f
+alListenerfv	src/Coralpkg/private/openal.nim	/^proc alListenerfv*(param: ALenum, values: ptr ALfloat) {.alimport.}$/;"	f
+alSourcePause	src/Coralpkg/private/openal.nim	/^proc alSourcePause* (sid: ALuint) {.alimport.}$/;"	f
+alSourcePlay	src/Coralpkg/private/openal.nim	/^proc alSourcePlay*(sid: ALuint) {.alimport.}$/;"	f
+alSourceStop	src/Coralpkg/private/openal.nim	/^proc alSourceStop*(sid: ALuint) {.alimport.}$/;"	f
+alSourcef	src/Coralpkg/private/openal.nim	/^proc alSourcef*(sid: ALuint, param: ALenum, value: ALfloat) {.alimport.}$/;"	f
+alSourcefv	src/Coralpkg/private/openal.nim	/^proc alSourcefv* (sid: ALuint, param: ALenum, value: array[3, ALfloat]) {.alimport.}$/;"	f
+alSourcei	src/Coralpkg/private/openal.nim	/^proc alSourcei*(sid: ALuint, param: ALenum, value: ALint) {.alimport.}$/;"	f
+alcCreateContext	src/Coralpkg/private/openal.nim	/^proc alcCreateContext*(device: ALCdevice, attrlist: ptr ALCint): ALCcontext {.alcimport.}$/;"	f
+alcMakeContextCurrent	src/Coralpkg/private/openal.nim	/^proc alcMakeContextCurrent*(context: ALCcontext): ALCboolean {.alcimport.}$/;"	f
+alcOpenDevice	src/Coralpkg/private/openal.nim	/^proc alcOpenDevice*(devicename: cstring): ALCdevice {.alcimport.}$/;"	f
 align	tests/nimcache/stdlib_strformat.c	/^NIM_CHAR align;$/;"	m	struct:tyObject_StandardFormatSpecifier_NDU7AW5Eu6Q69c8cH6RDouQ	file:
 alignChars_LBVGk5lO18m7LtF49bc1EDA	tests/nimcache/stdlib_strformat.c	/^NIM_CONST tySet_tyChar_nmiMWKVIe46vacnhAFrQvw alignChars_LBVGk5lO18m7LtF49bc1EDA = {$/;"	v
 all_chars_exist	tests/nimcache/x11_xlib.c	/^NI all_chars_exist;$/;"	m	struct:tyObject_TXFontStruct_kEB3LjTa20biXuJNQPnZ1w	file:
@@ -5067,6 +5088,9 @@ bytes_per_line	tests/nimcache/x11_xutil.c	/^int bytes_per_line;$/;"	m	struct:tyO
 c_class	tests/nimcache/x11_xlib.c	/^int c_class;$/;"	m	struct:tyObject_TVisual_sqcKqLNOQefL6fxiLETvYw	file:
 c_class	tests/nimcache/x11_xlib.c	/^int c_class;$/;"	m	struct:tyObject_TXWindowAttributes_nlpf8vqbE9bnoZp9bwwYiP6g	file:
 c_class	tests/nimcache/x11_xutil.c	/^int c_class;$/;"	m	struct:tyObject_TVisual_sqcKqLNOQefL6fxiLETvYw	file:
+c_free	src/Coralpkg/private/vorbis_utils.nim	/^proc c_free(p: pointer) {.$/;"	f
+c_malloc	src/Coralpkg/private/vorbis_utils.nim	/^proc c_malloc(size: csize): pointer {.$/;"	f
+c_realloc	src/Coralpkg/private/vorbis_utils.nim	/^proc c_realloc(p: pointer, newsize: csize): pointer {.$/;"	f
 cap	src/nimcache/Coral_input.c	/^NI cap;$/;"	m	struct:tyObject_CellSeq_Axo1XVm9aaQueTOldv8le5w	file:
 cap	src/nimcache/Coral_platform.c	/^NI cap;$/;"	m	struct:tyObject_CellSeq_Axo1XVm9aaQueTOldv8le5w	file:
 cap	src/nimcache/glfw_glfw.c	/^NI cap;$/;"	m	struct:tyObject_CellSeq_Axo1XVm9aaQueTOldv8le5w	file:
@@ -5248,6 +5272,7 @@ counter	tests/nimcache/stdlib_tables.c	/^NI counter;$/;"	m	struct:tyObject_Table
 counter	tests/nimcache/stdlib_tables.c	/^NI counter;$/;"	m	struct:tyObject_Table_Tqr7sSq1dLS4GUqPpM19bCg	file:
 counter	tests/nimcache/stdlib_times.c	/^NI counter;$/;"	m	struct:tyObject_CellSet_jG87P0AI9aZtss9ccTYBIISQ	file:
 counter	tests/nimcache/stdlib_typeinfo.c	/^NI counter;$/;"	m	struct:tyObject_CellSet_jG87P0AI9aZtss9ccTYBIISQ	file:
+createContext	src/Coralpkg/private/context_al.nim	/^proc createContext*() =$/;"	f
 create_image	tests/nimcache/x11_xlib.c	/^tyProc_aUq6i6REPBuUaZLVB75EEA create_image;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
 create_image	tests/nimcache/x11_xutil.c	/^tyProc_aUq6i6REPBuUaZLVB75EEA create_image;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
 cross	src/Coralpkg/maths.nim	/^proc cross* (a: Vec2, b: Vec2): float32 = a.x * b.y - a.y * b.x$/;"	f
@@ -5569,6 +5594,7 @@ data	tests/nimcache/x11_xlib.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	struct:NimS
 data	tests/nimcache/x11_xlib.c	/^tyArray_xDUyu9aScDpt0JZLU6q9aEZQ data;$/;"	m	struct:tyObject_TXClientMessageEvent_9aKsQgal9ajVMpFB4b5QPZ9cQ	file:
 data	tests/nimcache/x11_xutil.c	/^NCSTRING data;$/;"	m	struct:tyObject_TXImage_e0S5K9cN9cczbNOLyWrYKsCQ	file:
 data	tests/nimcache/x11_xutil.c	/^NIM_CHAR data[SEQ_DECL_SIZE];$/;"	m	struct:NimStringDesc	file:
+dataSource=	src/Coralpkg/private/sound_al.nim	/^proc `dataSource=`(s: Sound, ds: DataSource) = # Private for now. Should be public eventually$/;"	o
 days	tests/nimcache/stdlib_times.c	/^NI days;$/;"	m	struct:tyObject_TimeInterval_cjp9a8xfOSwcBf7ZMOopG0A	file:
 daysUntilMonthLeap_bWLQu3i9bqoFDTyygQP29aFA	tests/nimcache/stdlib_times.c	/^NIM_CONST tyArray_Splpnswz3rudLg9bDsQoDXg daysUntilMonthLeap_bWLQu3i9bqoFDTyygQP29aFA = {((NI) 0),$/;"	v
 daysUntilMonth_TV2R7Va3CeAXpg6eZUosdg	tests/nimcache/stdlib_times.c	/^NIM_CONST tyArray_Splpnswz3rudLg9bDsQoDXg daysUntilMonth_TV2R7Va3CeAXpg6eZUosdg = {((NI) 0),$/;"	v
@@ -5677,6 +5703,10 @@ depth	tests/nimcache/x11_xutil.c	/^int depth;$/;"	m	struct:tyObject_TXVisualInfo
 depths	tests/nimcache/x11_xlib.c	/^tyObject_TDepth_ARrarU2uMafEedutiF7fxA* depths;$/;"	m	struct:tyObject_TScreen_XzlPmpd9b5d0WUxKxwkWabw	file:
 descent	tests/nimcache/x11_xlib.c	/^int descent;$/;"	m	struct:tyObject_TXFontStruct_kEB3LjTa20biXuJNQPnZ1w	file:
 descent	tests/nimcache/x11_xlib.c	/^short descent;$/;"	m	struct:tyObject_TXCharStruct_9b8aHyUNXTN7SXta1udUzNA	file:
+destroy	src/Coralpkg/audio.nim	/^proc destroy* ()=$/;"	f
+destroy	src/Coralpkg/audio.nim	/^proc destroy* (audio: Audio)=$/;"	f
+destroy	src/Coralpkg/private/sound_al.nim	/^proc destroy* (s: Sound)=$/;"	f
+destroyAllSounds	src/Coralpkg/private/sound_al.nim	/^proc destroyAllSounds* ()=$/;"	f
 destroy_image	tests/nimcache/x11_xlib.c	/^tyProc_5e3MrwvuEVXmu69cIETQoWA destroy_image;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
 destroy_image	tests/nimcache/x11_xutil.c	/^tyProc_5e3MrwvuEVXmu69cIETQoWA destroy_image;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
 direction	tests/nimcache/x11_xlib.c	/^int direction;$/;"	m	struct:tyObject_TXFontStruct_kEB3LjTa20biXuJNQPnZ1w	file:
@@ -5748,6 +5778,8 @@ dummy	tests/nimcache/x11_xlib.c	/^char dummy;$/;"	m	struct:tyObject_TXrmHashBuck
 dummy	tests/nimcache/x11_xutil.c	/^char dummy;$/;"	m	struct:tyObject_TXDisplay_gMxDwwqjHjGHbrH7kUchGA	file:
 dummy	tests/nimcache/x11_xutil.c	/^char dummy;$/;"	m	struct:tyObject_TXGC_ETFLsgVh1BdkG6EX5H5zfA	file:
 dummy	tests/nimcache/x11_xutil.c	/^char dummy;$/;"	m	struct:tyObject_TXRegion_RT9a0bSeCV49bxhFbk39ahF7A	file:
+duration	src/Coralpkg/audio.nim	/^proc duration* (audio: Audio): float=$/;"	f
+duration	src/Coralpkg/private/sound_al.nim	/^proc duration*(s: Sound): float {.inline.} = s.mDataSource.mDuration$/;"	f
 e	src/nimcache/stdlib_system.c	/^typedef N_CLOSURE_PTR(NIM_BOOL, TM_Q5wkpxktOdTGvlSRo9bzt9aw_20) (Exception* e);$/;"	t	file:
 e	src/nimcache/stdlib_system.c	/^typedef N_NIMCALL_PTR(NIM_BOOL, tyProc_hgOQFBQi19biNdOUUkFOOxA) (Exception* e);$/;"	t	file:
 e	tests/nimcache/stdlib_system.c	/^typedef N_CLOSURE_PTR(NIM_BOOL, TM_Q5wkpxktOdTGvlSRo9bzt9aw_15) (Exception* e);$/;"	t	file:
@@ -5800,6 +5832,8 @@ filename	tests/nimcache/stdlib_typeinfo.c	/^NCSTRING filename;$/;"	m	struct:tyOb
 fill	tests/nimcache/stdlib_strformat.c	/^NIM_CHAR fill;$/;"	m	struct:tyObject_StandardFormatSpecifier_NDU7AW5Eu6Q69c8cH6RDouQ	file:
 fill_rule	tests/nimcache/x11_xlib.c	/^int fill_rule;$/;"	m	struct:tyObject_TXGCValues_mq5lla9cIwcMYIyqefWs9cGg	file:
 fill_style	tests/nimcache/x11_xlib.c	/^int fill_style;$/;"	m	struct:tyObject_TXGCValues_mq5lla9cIwcMYIyqefWs9cGg	file:
+finalizeDataSource	src/Coralpkg/private/data_source_al.nim	/^proc finalizeDataSource(s: DataSource) =$/;"	f
+finalizeSound	src/Coralpkg/private/sound_al.nim	/^proc finalizeSound(s: Sound) =$/;"	f
 finalizer	src/nimcache/Coral_Coral.c	/^void* finalizer;$/;"	m	struct:TNimType	file:
 finalizer	src/nimcache/Coral_input.c	/^void* finalizer;$/;"	m	struct:TNimType	file:
 finalizer	src/nimcache/Coral_platform.c	/^void* finalizer;$/;"	m	struct:TNimType	file:
@@ -6046,6 +6080,7 @@ freeSmallChunks	tests/nimcache/stdlib_system.c	/^tyArray_SiRwrEKZdLgxqz9a9aoVBgl
 freeSmallChunks	tests/nimcache/stdlib_tables.c	/^tyArray_SiRwrEKZdLgxqz9a9aoVBglg freeSmallChunks;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 freeSmallChunks	tests/nimcache/stdlib_times.c	/^tyArray_SiRwrEKZdLgxqz9a9aoVBglg freeSmallChunks;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 freeSmallChunks	tests/nimcache/stdlib_typeinfo.c	/^tyArray_SiRwrEKZdLgxqz9a9aoVBglg freeSmallChunks;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
+freeVorbisBuffer	src/Coralpkg/private/vorbis_utils.nim	/^proc freeVorbisBuffer*(buffer: pointer) =$/;"	f
 free_private	tests/nimcache/x11_xlib.c	/^tyProc_PmEMm3nFNXrCrvxl43MgjQ free_private;$/;"	m	struct:tyObject_TXExtData_bmVh0W8jZ9c3HbsLjsgs28g	file:
 free_private	tests/nimcache/x11_xutil.c	/^tyProc_PmEMm3nFNXrCrvxl43MgjQ free_private;$/;"	m	struct:tyObject_TXExtData_bmVh0W8jZ9c3HbsLjsgs28g	file:
 fsLookupTable_Gn52IZvqY4slyBTOYwGNRQ	src/nimcache/stdlib_system.c	/^NIM_CONST tyArray_mkmEeKAWtk2yS9bBb1lUWXA fsLookupTable_Gn52IZvqY4slyBTOYwGNRQ = {((NI8) -1),$/;"	v
@@ -6075,6 +6110,9 @@ gMonitorCb_OHIoNdNrspUO8VoOTk4f9bg	src/nimcache/glfw_glfw.c	/^tyProc_BJQTQAsu1K0
 gMonitorCb_OHIoNdNrspUO8VoOTk4f9bg	tests/nimcache/glfw_glfw.c	/^tyProc_BJQTQAsu1K0HJO2l2LG0ww gMonitorCb_OHIoNdNrspUO8VoOTk4f9bg;$/;"	v
 gWindowTable_jfWlaq2Xz4MVPK9c7ATTFqQ	src/nimcache/glfw_glfw.c	/^tyObject_Table_Tqr7sSq1dLS4GUqPpM19bCg gWindowTable_jfWlaq2Xz4MVPK9c7ATTFqQ;$/;"	v
 gWindowTable_jfWlaq2Xz4MVPK9c7ATTFqQ	tests/nimcache/glfw_glfw.c	/^tyObject_Table_Tqr7sSq1dLS4GUqPpM19bCg gWindowTable_jfWlaq2Xz4MVPK9c7ATTFqQ;$/;"	v
+gain	src/Coralpkg/private/sound_al.nim	/^proc gain*(s: Sound): float {.inline.} = s.mGain$/;"	f
+gain=	src/Coralpkg/private/sound_al.nim	/^proc `gain=`*(s: Sound, v: float) =$/;"	o
+gameLoop	src/Coral.nim	/^template gameLoop* (body: untyped)=$/;"	t
 gcFramePtr_ot48iojqko9aFxGhyjjjVaA	src/nimcache/stdlib_system.c	/^GcFrameHeader* gcFramePtr_ot48iojqko9aFxGhyjjjVaA;$/;"	v
 gcFramePtr_ot48iojqko9aFxGhyjjjVaA	tests/nimcache/stdlib_system.c	/^GcFrameHeader* gcFramePtr_ot48iojqko9aFxGhyjjjVaA;$/;"	v
 gcThreadId	src/nimcache/Coral_input.c	/^NI gcThreadId;$/;"	m	struct:tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	file:
@@ -6221,6 +6259,7 @@ height	tests/nimcache/x11_xutil.c	/^unsigned short height;$/;"	m	struct:tyObject
 height_inc	tests/nimcache/x11_xutil.c	/^int height_inc;$/;"	m	struct:tyObject_TXIconSize_F3Me9c0P8GYk9cUOuLc9amqJQ	file:
 height_inc	tests/nimcache/x11_xutil.c	/^int height_inc;$/;"	m	struct:tyObject_TXSizeHints_ZCZZOwbq6eefPoUNI8vGTQ	file:
 helper_cbo2WAcymPI9ccL5RtkWE1w	tests/nimcache/stdlib_random.c	/^NIM_CONST tyArray_NzKR9bw29cLPrd712Xt6Liiw helper_cbo2WAcymPI9ccL5RtkWE1w = {13739361407582206667ULL,$/;"	v
+highroom	src/Coralpkg/private/stb_vorbis.nim	/^               highroom = range - pred;$/;"	t
 hour	tests/nimcache/stdlib_times.c	/^NI hour;$/;"	m	struct:tyObject_DateTime_S7qec11z7km5Pal3UXrHmw	file:
 hours	tests/nimcache/stdlib_times.c	/^NI hours;$/;"	m	struct:tyObject_TimeInterval_cjp9a8xfOSwcBf7ZMOopG0A	file:
 i386	src/nimcache/Coral_Coral.c	17;"	d	file:
@@ -6331,6 +6370,8 @@ isMouseRightReleased	src/Coralpkg/input.nim	/^proc isMouseRightReleased* (input:
 isMouseRightReleased	src/Coralpkg/private/input_sdl.nim	/^proc isMouseRightReleased* (input: InputManager): bool =$/;"	f
 isMouseRightUp	src/Coralpkg/input.nim	/^proc isMouseRightUp* (input: InputManager): bool=$/;"	f
 isMouseRightUp	src/Coralpkg/private/input_sdl.nim	/^proc isMouseRightUp* (input: InputManager): bool=$/;"	f
+isPlaying	src/Coralpkg/private/sound_al.nim	/^proc isPlaying* (sound: Sound): bool {.inline.} =$/;"	f
+isSourcePlaying	src/Coralpkg/private/sound_al.nim	/^proc isSourcePlaying(src: ALuint): bool {.inline.} =$/;"	f
 join_style	tests/nimcache/x11_xlib.c	/^int join_style;$/;"	m	struct:tyObject_TXGCValues_mq5lla9cIwcMYIyqefWs9cGg	file:
 joy	tests/nimcache/glfw_glfw.c	/^typedef N_CDECL_PTR(NCSTRING, tyProc_1zn66FjGj9a4yc8N0skkfZg) (NI32 joy);$/;"	t	file:
 joy	tests/nimcache/glfw_glfw.c	/^typedef N_CDECL_PTR(NI32, tyProc_GK8T7pIDb2GuXFntInSebA) (NI32 joy);$/;"	t	file:
@@ -6827,8 +6868,12 @@ llmem	tests/nimcache/stdlib_system.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw*
 llmem	tests/nimcache/stdlib_tables.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw* llmem;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 llmem	tests/nimcache/stdlib_times.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw* llmem;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 llmem	tests/nimcache/stdlib_typeinfo.c	/^tyObject_LLChunk_XsENErzHIZV9bhvyJx56wGw* llmem;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
+loadAudio	src/Coralpkg/audio.nim	/^proc loadAudio* (path: string) : Audio=$/;"	f
 loadImage	src/Coralpkg/private/image.nim	/^proc loadImage* (path: string, filter=Nearest): Image=$/;"	f
 loadShaderFromString	src/Coralpkg/cgl.nim	/^proc loadShaderFromString* (stype: GLenum, code: string): GLuint=$/;"	f
+loadVorbis	src/Coralpkg/private/vorbis_utils.nim	/^proc loadVorbis(v: Vorbis, outBuffer: var pointer, outLen, outChannels, outBitsPerSample, outSamplesPerSecond: var int) =$/;"	f
+loadVorbisFile	src/Coralpkg/private/vorbis_utils.nim	/^proc loadVorbisFile*(path: string, buffer: var pointer, len, channels, bitsPerSample, samplesPerSec: var int) =$/;"	f
+loadVorbisStream	src/Coralpkg/private/vorbis_utils.nim	/^proc loadVorbisStream*(s: Stream, buffer: var pointer, len, channels, bitsPerSample, samplesPerSec: var int) =$/;"	f
 localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg	src/nimcache/stdlib_system.c	/^tyProc_hgOQFBQi19biNdOUUkFOOxA localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg;$/;"	v
 localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg	tests/nimcache/stdlib_system.c	/^tyProc_hgOQFBQi19biNdOUUkFOOxA localRaiseHook_EIvMhANBvB9cp2Ezvt29cADg;$/;"	v
 locked	src/nimcache/Coral_input.c	/^NIM_BOOL locked;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
@@ -6858,6 +6903,9 @@ lolwut_0UiE1wHnC7d8h8lsT4Ic2Q	tests/nimcache/Coral_openglTest.c	/^tyObject_Image
 lookAt	src/Coralpkg/maths.nim	/^proc lookAt* (fr: Vec3, to: Vec3, up: Vec3): Mat4=$/;"	f
 lookup_IB8FEhrsfJB9bJ4pdJwsiUg	tests/nimcache/stdlib_times.c	/^NIM_CONST tyArray_U9c9awdXtZAHsB9c3Nd9ctSGAQ lookup_IB8FEhrsfJB9bJ4pdJwsiUg = {((NimStringDesc*) &TM_6NbDwwj5FY059b1gz2AsAZQ_163),$/;"	v
 lookup_IB8FEhrsfJB9bJ4pdJwsiUg_2	tests/nimcache/stdlib_times.c	/^NIM_CONST tyArray_Af4rAX1tTrtdurDsMy6IgQ lookup_IB8FEhrsfJB9bJ4pdJwsiUg_2 = {((NimStringDesc*) &TM_6NbDwwj5FY059b1gz2AsAZQ_170),$/;"	v
+looping	src/Coralpkg/audio.nim	/^proc looping* (audio: Audio): bool=$/;"	f
+looping	src/Coralpkg/private/sound_al.nim	/^proc looping* (s: Sound): bool=$/;"	f
+looping=	src/Coralpkg/audio.nim	/^proc `looping=`* (audio: Audio, value: bool)=$/;"	o
 m	tests/nimcache/Coral_art.c	/^tyArray_EH3vwk2gvJbf6WGsCM9baJQ m;$/;"	m	union:tyObject_Mat4_OYWnKm0DeDoNmxu6413f0A	file:
 m	tests/nimcache/Coral_cgl.c	/^tyArray_EH3vwk2gvJbf6WGsCM9baJQ m;$/;"	m	union:tyObject_Mat4_OYWnKm0DeDoNmxu6413f0A	file:
 m	tests/nimcache/Coral_maths.c	/^tyArray_9aTCwbdg1cSQimdVd0OEKVw m;$/;"	m	union:tyObject_Mat2_aOV9cjYtf30yRDyj38PgOhA	file:
@@ -7510,6 +7558,11 @@ near	tests/nimcache/x11_xlib.c	20;"	d	file:
 near	tests/nimcache/x11_xutil.c	20;"	d	file:
 newClock	src/Coralpkg/private/clock.nim	/^proc newClock* (): auto =$/;"	f
 newColor	src/Coralpkg/private/color.nim	/^proc newColor* (r, g, b, a=1.0): auto {.noSideEffect.}=$/;"	f
+newDataSource	src/Coralpkg/private/data_source_al.nim	/^proc newDataSource(): DataSource =$/;"	f
+newDataSourceWithFile	src/Coralpkg/private/data_source_al.nim	/^proc newDataSourceWithFile*(path: string): DataSource =$/;"	f
+newDataSourceWithPCMData	src/Coralpkg/private/data_source_al.nim	/^proc newDataSourceWithPCMData*(data: openarray[byte], channels, bitsPerSample, samplesPerSecond: int): DataSource {.inline.} =$/;"	f
+newDataSourceWithPCMData	src/Coralpkg/private/data_source_al.nim	/^proc newDataSourceWithPCMData*(data: pointer, dataLength, channels, bitsPerSample, samplesPerSecond: int): DataSource =$/;"	f
+newDataSourceWithStream	src/Coralpkg/private/data_source_al.nim	/^proc newDataSourceWithStream*(s: Stream): DataSource =$/;"	f
 newElementBuffer	src/Coralpkg/cgl.nim	/^proc newElementBuffer* [T](indices: var seq[T]): GLuint =$/;"	f
 newKeyState	src/Coralpkg/input.nim	/^proc newKeyState*(state=0, last=0): KeyState=$/;"	f
 newKeyState	src/Coralpkg/private/input_sdl.nim	/^proc newKeyState(state=0, last=0): KeyState=$/;"	f
@@ -7520,6 +7573,11 @@ newMat4	src/Coralpkg/maths.nim	/^proc newMat4* ($/;"	f
 newMat4	src/Coralpkg/maths.nim	/^proc newMat4* (): Mat4=$/;"	f
 newRegion	src/Coralpkg/private/image.nim	/^proc newRegion* (x, y, width, height: int): auto=$/;"	f
 newShaderProgram	src/Coralpkg/cgl.nim	/^proc newShaderProgram* (vertex = 0.GLuint, fragment = 0.GLuint, geometry = 0.GLuint): GLuint=$/;"	f
+newSound	src/Coralpkg/private/sound_al.nim	/^proc newSound(): Sound =$/;"	f
+newSoundWithFile	src/Coralpkg/private/sound_al.nim	/^proc newSoundWithFile*(path: string): Sound =$/;"	f
+newSoundWithPCMData	src/Coralpkg/private/sound_al.nim	/^proc newSoundWithPCMData*(data: openarray[byte], channels, bitsPerSample, samplesPerSecond: int): Sound {.inline.} =$/;"	f
+newSoundWithPCMData	src/Coralpkg/private/sound_al.nim	/^proc newSoundWithPCMData*(data: pointer, dataLength, channels, bitsPerSample, samplesPerSecond: int): Sound =$/;"	f
+newSoundWithStream	src/Coralpkg/private/sound_al.nim	/^proc newSoundWithStream*(s: Stream): Sound =$/;"	f
 newVec2	src/Coralpkg/maths.nim	/^proc newVec2* (x: float = 0, y: float = 0): Vec2=$/;"	f
 newVec2	src/Coralpkg/maths.nim	/^proc newVec2* [T](x: T= 0, y: T= 0): Vec2=$/;"	f
 newVec3	src/Coralpkg/maths.nim	/^proc newVec3* (x: float = 0, y: float = 0, z: float = 0): Vec3=$/;"	f
@@ -7818,6 +7876,15 @@ offset	tests/nimcache/stdlib_times.c	/^NI offset;$/;"	m	struct:TNimNode	file:
 offset	tests/nimcache/stdlib_typeinfo.c	/^NI offset;$/;"	m	struct:TNimNode	file:
 oglHandle_7KtmgyqsH9cFapNPQ59bcpvQ	src/nimcache/opengl_opengl.c	/^void* oglHandle_7KtmgyqsH9cFapNPQ59bcpvQ;$/;"	v
 oglHandle_7KtmgyqsH9cFapNPQ59bcpvQ	tests/nimcache/opengl_opengl.c	/^void* oglHandle_7KtmgyqsH9cFapNPQ59bcpvQ;$/;"	v
+onRead	src/Coralpkg/private/dr_mp3.nim	/^    drmp3_read_proc onRead;$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^    drmp3_src_read_proc onRead;$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^drmp3_bool32 drmp3_init(drmp3* pMP3, drmp3_read_proc onRead, drmp3_seek_proc onSeek, void* pUserData, const drmp3_config* pConfig)$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^drmp3_bool32 drmp3_init(drmp3* pMP3, drmp3_read_proc onRead, drmp3_seek_proc onSeek, void* pUserData, const drmp3_config* pConfig);$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^drmp3_bool32 drmp3_init_internal(drmp3* pMP3, drmp3_read_proc onRead, drmp3_seek_proc onSeek, void* pUserData, const drmp3_config* pConfig)$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^drmp3_bool32 drmp3_src_init(const drmp3_src_config* pConfig, drmp3_src_read_proc onRead, void* pUserData, drmp3_src* pSRC)$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^float* drmp3_open_and_decode_f32(drmp3_read_proc onRead, drmp3_seek_proc onSeek, void* pUserData, drmp3_config* pConfig, drmp3_uint64* pTotalFrameCount)$/;"	f
+onRead	src/Coralpkg/private/dr_mp3.nim	/^float* drmp3_open_and_decode_f32(drmp3_read_proc onRead, drmp3_seek_proc onSeek, void* pUserData, drmp3_config* pConfig, drmp3_uint64* pTotalFrameCount);$/;"	f
+onSeek	src/Coralpkg/private/dr_mp3.nim	/^    drmp3_seek_proc onSeek;$/;"	f
 onUnhandledException_bFrawQlTKZhLweDD36j9b8g	src/nimcache/stdlib_system.c	/^tyProc_W6IXMh2CA4X1rFYGjUb4yg onUnhandledException_bFrawQlTKZhLweDD36j9b8g;$/;"	v
 onUnhandledException_bFrawQlTKZhLweDD36j9b8g	tests/nimcache/stdlib_system.c	/^tyProc_W6IXMh2CA4X1rFYGjUb4yg onUnhandledException_bFrawQlTKZhLweDD36j9b8g;$/;"	v
 openglVersion	src/nimcache/glfw_glfw.c	/^NIM_BOOL openglVersion;$/;"	m	struct:tyObject_OpenglEsWindowConfig_HZ9aZSIA24jPsvb6t4vmnCw	file:
@@ -7903,6 +7970,12 @@ paths	src/nimcache/glfw_glfw.c	/^NCSTRING* paths;$/;"	m	struct:tyObject_PathDrop
 paths	src/nimcache/stdlib_tables.c	/^NCSTRING* paths;$/;"	m	struct:tyObject_PathDropInfo_pJ5bVb9c19cEs3HINm9cCedrA	file:
 paths	tests/nimcache/glfw_glfw.c	/^NCSTRING* paths;$/;"	m	struct:tyObject_PathDropInfo_pJ5bVb9c19cEs3HINm9cCedrA	file:
 paths	tests/nimcache/stdlib_tables.c	/^NCSTRING* paths;$/;"	m	struct:tyObject_PathDropInfo_pJ5bVb9c19cEs3HINm9cCedrA	file:
+pause	src/Coralpkg/audio.nim	/^proc pause* (audio: Audio)=$/;"	f
+pause	src/Coralpkg/private/sound_al.nim	/^proc pause* (s: Sound)=$/;"	f
+paused	src/Coralpkg/audio.nim	/^proc paused* (audio: Audio): bool=$/;"	f
+paused	src/Coralpkg/private/sound_al.nim	/^proc paused* (s: Sound): bool=$/;"	f
+paused=	src/Coralpkg/audio.nim	/^proc `paused=`* (audio: Audio, val: bool)=$/;"	o
+paused=	src/Coralpkg/private/sound_al.nim	/^proc `paused=`* (s: Sound, val: bool)=$/;"	o
 per_char	tests/nimcache/x11_xlib.c	/^tyObject_TXCharStruct_9b8aHyUNXTN7SXta1udUzNA* per_char;$/;"	m	struct:tyObject_TXFontStruct_kEB3LjTa20biXuJNQPnZ1w	file:
 perspective	src/Coralpkg/maths.nim	/^proc perspective* (fov: float32, ar: float32, nd: float32, fd: float32): Mat4=$/;"	f
 pixel	tests/nimcache/x11_xlib.c	/^unsigned long pixel;$/;"	m	struct:tyObject_TXColor_GM29bfMy9bxdSX9b529cgGMQXQ	file:
@@ -7910,6 +7983,17 @@ pixels	tests/nimcache/glfw_glfw.c	/^unsigned char* pixels;$/;"	m	struct:tyObject
 pixels	tests/nimcache/glfw_wrapper.c	/^unsigned char* pixels;$/;"	m	struct:tyObject_ImageObj_0Gk4b28XGOmSKs3l0GDWgw	file:
 pixmap_format	tests/nimcache/x11_xlib.c	/^tyObject_TScreenFormat_b9cIvOZqa3DGDIZwdqNaYUQ* pixmap_format;$/;"	m	struct:tyObject_TXPrivDisplay_uVaRnxwue6qUDH69cci9cobQ	file:
 plane_mask	tests/nimcache/x11_xlib.c	/^unsigned long plane_mask;$/;"	m	struct:tyObject_TXGCValues_mq5lla9cIwcMYIyqefWs9cGg	file:
+play	src/Coralpkg/audio.nim	/^proc play* (audio: Audio)=$/;"	f
+play	src/Coralpkg/private/sound_al.nim	/^proc play*(s: Sound) =$/;"	f
+playbackPosition	src/Coralpkg/audio.nim	/^proc playbackPosition* (audio: Audio): float$/;"	f
+playbackPosition	src/Coralpkg/audio.nim	/^proc playbackPosition* (audio: Audio): float=$/;"	f
+playbackPosition	src/Coralpkg/private/sound_al.nim	/^proc playbackPosition* (s: Sound): float=$/;"	f
+playbackPosition=	src/Coralpkg/audio.nim	/^proc `playbackPosition=`* (audio: Audio, val: float)$/;"	o
+playbackPosition=	src/Coralpkg/audio.nim	/^proc `playbackPosition=`* (audio: Audio, val: float)=$/;"	o
+playbackPosition=	src/Coralpkg/private/sound_al.nim	/^proc `playbackPosition=`* (s: Sound, val: float)=$/;"	o
+playing	src/Coralpkg/audio.nim	/^proc playing* (audio: Audio): bool=$/;"	f
+playing=	src/Coralpkg/audio.nim	/^proc `playing=`* (audio: Audio, value: bool)=$/;"	o
+position	src/Coralpkg/private/sound_al.nim	/^proc position* (s: Sound): float=$/;"	f
 powerpc	src/nimcache/Coral_Coral.c	21;"	d	file:
 powerpc	src/nimcache/Coral_input.c	21;"	d	file:
 powerpc	src/nimcache/Coral_platform.c	21;"	d	file:
@@ -8110,6 +8194,7 @@ raiseAction	tests/nimcache/Coral_cgl.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseActi
 raiseAction	tests/nimcache/stdlib_system.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
 raiseAction	tests/nimcache/stdlib_times.c	/^tyProc_KeeAOYBd84Ofsw6Y7LizaQ raiseAction;$/;"	m	struct:TSafePoint	file:
 randomColor	src/Coralpkg/private/color.nim	/^proc randomColor* ():Color=$/;"	f
+range	src/Coralpkg/private/stb_vorbis.nim	/^            int range = range_list[g->floor1_multiplier-1];$/;"	t
 rawTypePtr	tests/nimcache/stdlib_typeinfo.c	/^void* rawTypePtr;$/;"	m	struct:tyObject_Any_bEXZHc2yZOebOeouZDUZ7A	file:
 rbearing	tests/nimcache/x11_xlib.c	/^short rbearing;$/;"	m	struct:tyObject_TXCharStruct_9b8aHyUNXTN7SXta1udUzNA	file:
 recGcLock	src/nimcache/Coral_input.c	/^NI recGcLock;$/;"	m	struct:tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	file:
@@ -8136,6 +8221,7 @@ recGcLock	tests/nimcache/stdlib_tables.c	/^NI recGcLock;$/;"	m	struct:tyObject_G
 recGcLock	tests/nimcache/stdlib_times.c	/^NI recGcLock;$/;"	m	struct:tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	file:
 recGcLock	tests/nimcache/stdlib_typeinfo.c	/^NI recGcLock;$/;"	m	struct:tyObject_GcHeap_1TRH1TZMaVZTnLNcIHuNFQ	file:
 recdepth	tests/nimcache/stdlib_system.c	/^NI recdepth;$/;"	m	struct:tyObject_ReprClosure_QK7SSKN8dPEpZedUTVKSLw	file:
+reclaimInactiveSource	src/Coralpkg/private/sound_al.nim	/^proc reclaimInactiveSource(): ALuint {.inline.} =$/;"	f
 rect_vao_e29a77o9b2TXwHfb9bOI1vGgA	tests/nimcache/Coral_art.c	/^NU32 rect_vao_e29a77o9b2TXwHfb9bOI1vGgA;$/;"	v
 rect_vbo_CpoJoTBwB03h6H9b9bUywj9bA	tests/nimcache/Coral_art.c	/^NU32 rect_vbo_CpoJoTBwB03h6H9b9bUywj9bA;$/;"	v
 red	tests/nimcache/glfw_glfw.c	/^NU16* red;$/;"	m	struct:tyObject_GammaRampcolonObjectType__Y9cPGi0NARX9ajEWg88ST4oA	file:
@@ -8253,6 +8339,8 @@ resizable	tests/nimcache/glfw_glfw.c	/^NIM_BOOL resizable;$/;"	m	struct:tyObject
 resizable	tests/nimcache/glfw_glfw.c	/^NIM_BOOL resizable;$/;"	m	struct:tyObject_OpenglWindowConfig_NhEgGpqD8rwIl2Og9cvmNCg	file:
 resource_alloc	tests/nimcache/x11_xlib.c	/^tyProc_pmQQmg0FgjEKwykEzm1NIA resource_alloc;$/;"	m	struct:tyObject_TXPrivDisplay_uVaRnxwue6qUDH69cci9cobQ	file:
 resourceid	tests/nimcache/x11_xlib.c	/^unsigned long resourceid;$/;"	m	struct:tyObject_TXErrorEvent_VMyaP4lXub7q8XzdgKpLZA	file:
+resume	src/Coralpkg/audio.nim	/^proc resume* (audio: Audio)=$/;"	f
+resume	src/Coralpkg/private/sound_al.nim	/^proc resume* (s: Sound)=$/;"	f
 root	src/nimcache/Coral_input.c	/^tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw* root;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 root	src/nimcache/Coral_platform.c	/^tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw* root;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
 root	src/nimcache/glfw_glfw.c	/^tyObject_AvlNode_IaqjtwKhxLEpvDS9bct9blEw* root;$/;"	m	struct:tyObject_MemRegion_x81NhDv59b8ercDZ9bi85jyg	file:
@@ -8331,6 +8419,7 @@ serial	tests/nimcache/x11_xlib.c	/^unsigned long serial;$/;"	m	struct:tyObject_T
 serial	tests/nimcache/x11_xutil.c	/^unsigned long serial;$/;"	m	struct:tyObject_TXKeyEvent_YmaqpZgRYdl9cHeEfN7EtEw	file:
 setDrawColor	src/Coralpkg/art.nim	/^proc setDrawColor* (c: Color)=$/;"	f
 setDrawColor	src/Coralpkg/art.nim	/^proc setDrawColor* (r, g, b=1.0, a=1.0)=$/;"	f
+setLooping	src/Coralpkg/private/sound_al.nim	/^proc setLooping*(s: Sound, flag: bool) =$/;"	f
 setUniform	src/Coralpkg/cgl.nim	/^proc setUniform* (id: GLint, b: bool)= glUniform1i(id, (if b: 1 else: 0))$/;"	f
 setUniform	src/Coralpkg/cgl.nim	/^proc setUniform* (id: GLint, f: float)= glUniform1f(id, f)$/;"	f
 setUniform	src/Coralpkg/cgl.nim	/^proc setUniform* (id: GLint, i: int)= glUniform1i(id, i.cint)$/;"	f
@@ -8576,11 +8665,19 @@ status	tests/nimcache/Coral_Coral.c	/^NI status;$/;"	m	struct:TSafePoint	file:
 status	tests/nimcache/Coral_cgl.c	/^NI status;$/;"	m	struct:TSafePoint	file:
 status	tests/nimcache/stdlib_system.c	/^NI status;$/;"	m	struct:TSafePoint	file:
 status	tests/nimcache/stdlib_times.c	/^NI status;$/;"	m	struct:TSafePoint	file:
+stb_vorbis_close	src/Coralpkg/private/stb_vorbis.nim	/^proc stb_vorbis_close*(f: Vorbis) {.importc, noconv.}$/;"	f
+stb_vorbis_get_info	src/Coralpkg/private/stb_vorbis.nim	/^proc stb_vorbis_get_info*(f: Vorbis): VorbisInfo {.importc, noconv.}$/;"	f
+stb_vorbis_get_samples_short_interleaved	src/Coralpkg/private/stb_vorbis.nim	/^proc stb_vorbis_get_samples_short_interleaved*(f: Vorbis, channels: cint, buffer: ptr uint16, num_shorts: cint): cint {.importc, noconv.}$/;"	f
+stb_vorbis_open_filename	src/Coralpkg/private/stb_vorbis.nim	/^proc stb_vorbis_open_filename*(filename: cstring, error: ptr cint, alloc_buffer: pointer): Vorbis {.importc, noconv.}$/;"	f
+stb_vorbis_open_memory	src/Coralpkg/private/stb_vorbis.nim	/^proc stb_vorbis_open_memory*(data: pointer, len: cint, error: ptr cint, alloc_buffer: pointer): Vorbis {.importc, noconv.}$/;"	f
+stb_vorbis_stream_length_in_samples	src/Coralpkg/private/stb_vorbis.nim	/^proc stb_vorbis_stream_length_in_samples*(f: Vorbis): cuint {.importc, noconv.}$/;"	f
 stereo	src/nimcache/glfw_glfw.c	/^NIM_BOOL stereo;$/;"	m	struct:tyObject_OpenglEsWindowConfig_HZ9aZSIA24jPsvb6t4vmnCw	file:
 stereo	src/nimcache/glfw_glfw.c	/^NIM_BOOL stereo;$/;"	m	struct:tyObject_OpenglWindowConfig_NhEgGpqD8rwIl2Og9cvmNCg	file:
 stereo	tests/nimcache/glfw_glfw.c	/^NIM_BOOL stereo;$/;"	m	struct:tyObject_OpenglEsWindowConfig_HZ9aZSIA24jPsvb6t4vmnCw	file:
 stereo	tests/nimcache/glfw_glfw.c	/^NIM_BOOL stereo;$/;"	m	struct:tyObject_OpenglWindowConfig_NhEgGpqD8rwIl2Og9cvmNCg	file:
 stipple	tests/nimcache/x11_xlib.c	/^unsigned long stipple;$/;"	m	struct:tyObject_TXGCValues_mq5lla9cIwcMYIyqefWs9cGg	file:
+stop	src/Coralpkg/audio.nim	/^proc stop* (audio: Audio)=$/;"	f
+stop	src/Coralpkg/private/sound_al.nim	/^proc stop*(s: Sound) =$/;"	f
 strDesc_D0UzA4zsDu5tgpJQ9a9clXPg	src/nimcache/stdlib_system.c	/^TNimType strDesc_D0UzA4zsDu5tgpJQ9a9clXPg;$/;"	v
 strDesc_D0UzA4zsDu5tgpJQ9a9clXPg	tests/nimcache/stdlib_system.c	/^TNimType strDesc_D0UzA4zsDu5tgpJQ9a9clXPg;$/;"	v
 sub_image	tests/nimcache/x11_xlib.c	/^tyProc_fhzx9b9cH9a259aAHjIP0M0EEA sub_image;$/;"	m	struct:tyObject_TF_UE19anzg85i4kcN5z8YAH3w	file:
@@ -8645,6 +8742,7 @@ title	tests/nimcache/glfw_glfw.c	/^NimStringDesc* title;$/;"	m	struct:tyObject_O
 title	tests/nimcache/glfw_glfw.c	/^NimStringDesc* title;$/;"	m	struct:tyObject_OpenglWindowConfig_NhEgGpqD8rwIl2Og9cvmNCg	file:
 title=	src/Coralpkg/platform.nim	/^proc `title=`*(window: Window, title: string)=$/;"	o
 toVec3	src/Coralpkg/maths.nim	/^proc toVec3*     (v: Vec2): Vec3 = newVec3(v.x, v.y, 0)$/;"	f
+togglePause	src/Coralpkg/audio.nim	/^proc togglePause* (audio: Audio)=$/;"	f
 trace	src/nimcache/stdlib_system.c	/^tySequence_uB9b75OUPRENsBAu4AnoePA* trace;$/;"	m	struct:Exception	file:
 trace	tests/nimcache/Coral_Coral.c	/^tySequence_uB9b75OUPRENsBAu4AnoePA* trace;$/;"	m	struct:Exception	file:
 trace	tests/nimcache/Coral_cgl.c	/^tySequence_uB9b75OUPRENsBAu4AnoePA* trace;$/;"	m	struct:Exception	file:
@@ -10844,6 +10942,8 @@ visualid	tests/nimcache/x11_xutil.c	/^unsigned long visualid;$/;"	m	struct:tyObj
 visualid	tests/nimcache/x11_xutil.c	/^unsigned long visualid;$/;"	m	struct:tyObject_TXStandardColormap_zAfXviCBWQ9cAeAzQ7THvUg	file:
 visualid	tests/nimcache/x11_xutil.c	/^unsigned long visualid;$/;"	m	struct:tyObject_TXVisualInfo_1VtEjmAVZ8Q9aLR0s41Pjnw	file:
 visuals	tests/nimcache/x11_xlib.c	/^tyObject_TVisual_sqcKqLNOQefL6fxiLETvYw* visuals;$/;"	m	struct:tyObject_TDepth_ARrarU2uMafEedutiF7fxA	file:
+volume	src/Coralpkg/audio.nim	/^proc volume* (audio: Audio): auto = audio.sound.gain$/;"	f
+volume=	src/Coralpkg/audio.nim	/^proc `volume=`* (audio: Audio, v: float)=$/;"	o
 weekday	tests/nimcache/stdlib_times.c	/^tyEnum_WeekDay_SVfemTA9aCOyua2TJYa6yBg weekday;$/;"	m	struct:tyObject_DateTime_S7qec11z7km5Pal3UXrHmw	file:
 white_pixel	tests/nimcache/x11_xlib.c	/^unsigned long white_pixel;$/;"	m	struct:tyObject_TScreen_XzlPmpd9b5d0WUxKxwkWabw	file:
 width	src/Coralpkg/private/image.nim	/^template width* (self: Image): auto = self.width$/;"	t

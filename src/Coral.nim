@@ -36,3 +36,8 @@ proc updateGame* (): bool=
 
   defer: platform.update()
   return Window.shouldClose == false
+
+template gameLoop* (body: untyped)=
+  while coral.running:
+    discard updateGame()
+    body
