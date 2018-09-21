@@ -9,8 +9,8 @@
 ## Getting started
 ```nim
 import
-  ../src/Coral,
-  ../src/Coralpkg/[cgl, platform, art],
+  Coral,
+  Coral/[cgl, platform, art],
   
 initGame(1280, 720, ":)", ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
 
