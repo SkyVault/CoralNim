@@ -186,8 +186,6 @@ proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | 
     transform: (rot, depth)
   )
 
-template drawSprite* = drawImageRegion
-
 proc drawImage* (image: Image, x, y, width, height: int | float, rot=0.0, depth=0.0)=
   drawImageRegion(image, newRegion(0, 0, image.width, image.height), x, y, width, height, rot, depth)
 
