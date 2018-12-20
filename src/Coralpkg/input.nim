@@ -93,7 +93,7 @@ proc isKeyReleased* (input: InputManager, key: Key): bool=
   discard
 
 proc isKeyPressed* (input: InputManager, key: Key): bool=
-  discard
+  let now = isKeyDown(input, key)
 
 proc update* ()=
   for key, state in input.keyMap.mpairs:
