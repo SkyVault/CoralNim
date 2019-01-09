@@ -38,10 +38,16 @@ proc newVertexBufferObject* [T](btype: GLenum, dimensions: uint32, attrib: uint3
     var GLType = EGL_FLOAT
     var ctype = sizeof(T)
 
-    if T is float or T is float64 or T is int or T is int32 or T is uint or T is uint32:
+    if T is float or
+      T is float32 or
+      T is float64 or
+      T is int or
+      T is int32 or
+      T is uint or
+      T is uint32:
       discard
     else:
-      echo "Un supported type passed into newVertexBufferObject"
+      echo "Unsupported type passed into newVertexBufferObject: ", type(T).name
       ctype = sizeof(cint)
 
     glBufferData(

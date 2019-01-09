@@ -85,8 +85,30 @@ proc loadImage* (path: string, filter=Nearest): Image=
   let h           = result.height.int32
 
   case result.format:
-  # of Format.fmtGray:
-  # of Foramt.fmtGrayAlpha:
+  of Format.fmtGray:
+    glTexImage2D(
+      GL_TEXTURE_2D,
+      lvl,
+      GL_RED.ord,
+      w,
+      h,
+      0,
+      GL_RED.ord,
+      GL_UNSIGNED_BYTE,
+      data)
+  of Format.fmtGrayAlpha:
+    # TODO(Dustin): Find out if this is correct
+    # It might be GL_RG
+    glTexImage2D(
+      GL_TEXTURE_2D,
+      lvl,
+      GL_ALPHA.ord,
+      w,
+      h,
+      0,
+      GL_ALPHA.ord,
+      GL_UNSIGNED_BYTE,
+      data)
   of Format.fmtRGB:
     glTexImage2D(
       GL_TEXTURE_2D,
