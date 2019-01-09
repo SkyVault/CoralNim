@@ -1,12 +1,17 @@
 # Coral opengl wrapper
 import
   strformat,
-  opengl,
   maths,
   typeinfo,
   typetraits
 
 include private/color
+
+# NOTE(Dustin): Includes nimgl/opengl
+# TODO(Dustin): Find a way to work around having the image
+# needing to include opengl, maybe we should have all the opengl
+# related stuff over here and just have the pixel loading in the 
+# image file??
 include private/image
 
 ## Vertex arrays
@@ -30,34 +35,29 @@ proc newVertexBufferObject* [T](btype: GLenum, dimensions: uint32, attrib: uint3
     glGenBuffers(1, addr result)
     glBindBuffer(btype, result)
 
+    var GLType = EGL_FLOAT
+    var ctype = sizeof(T)
+
+    if T is float or T is float64 or T is int or T is int32 or T is uint or T is uint32:
+      discard
+    else:
+      echo "Un supported type passed into newVertexBufferObject"
+      ctype = sizeof(cint)
+
     glBufferData(
         btype,
-        cast[GLsizeiptr](sizeof(T) * data.len),
+        cast[GLsizeiptr](ctype * data.len),
         (if data.len == 0: cast[pointer](0) else: addr data[0]),
         if dynamic: GL_DYNAMIC_DRAW
         else: GL_STATIC_DRAW)
 
-    let GLType = case T.name:
-      of "float32", "GLfloat":
-        cGL_FLOAT
-      of "float", "float64":
-        cGL_DOUBLE
-      of "int", "uint32", "uint":
-        cGL_INT
-      of "int16", "uint16":
-        cGL_SHORT
-      of "int8", "uint8":
-        cGL_BYTE
-      else:
-        cGL_FLOAT
-    
     glEnableVertexAttribArray(GLuint(attrib))
 
     glVertexAttribPointer(
         (GLuint)attrib,
         (GLint)dimensions,
         GLType,
-        GL_FALSE,
+        false,
         0,
         cast[pointer](0))
 
@@ -94,8 +94,12 @@ template useVertexBufferObject* (id: GLuint, btype: GLenum, body: untyped)=
 ## Shaders
 proc loadShaderFromString* (stype: GLenum, code: string): GLuint=
     result = glCreateShader(stype)
-    let cstra = allocCStringArray([code])
-    glShaderSource(result, 1, cstra, nil)
+
+    # NOTE(Dustin): We need to look into this and see 
+    # if this leaks memory, if it does the garbage collector
+    # will probably take care of it, but idk
+    var cstr = code.cstring 
+    glShaderSource(result, 1, cstr.addr, nil)
     glCompileShader(result)
 
     var
@@ -129,7 +133,7 @@ proc loadShaderFromString* (stype: GLenum, code: string): GLuint=
 proc newShaderProgram* (vertex = 0.GLuint, fragment = 0.GLuint, geometry = 0.GLuint): GLuint=
   result = glCreateProgram()
 
-  if vertex   != 0: glAttachShader(result, vertex)
+  if vertex != 0: glAttachShader(result, vertex)
   if fragment != 0: glAttachShader(result, fragment)
   if geometry != 0: glAttachShader(result, geometry)
   glLinkProgram(result)
@@ -181,10 +185,12 @@ proc setUniform* (id: GLint, v3: Vec3, w: float)=
   setUniform(id, v3.x, v3.y, v3.z, w)
 
 proc setUniform* (id: GLint, m: var array[16, float32])=
-  glUniformMatrix4fv(id, 1.GLsizei, GL_FALSE, addr m[0])
+  glUniformMatrix4fv(id, 1, false, addr m[0])
 
 proc setUniform* (id: GLint, m: var Mat4)=
-  glUniformMatrix4fv(id, 1.GLsizei, GL_TRUE, addr m.m[0])
+  # TODO(Dustin): Fix the matrix maths so that we
+  # dont need to transpose it
+  glUniformMatrix4fv(id, 1, true, addr m.m[0])
 
 ## GL functions
 proc clearColorBuffer* (clearColor=(0.0, 0.0, 0.0, 1.0))=

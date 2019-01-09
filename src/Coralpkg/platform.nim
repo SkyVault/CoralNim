@@ -1,10 +1,12 @@
 import
-  glfw/wrapper as glfw,
-  opengl,
-  strformat
+    nimgl/[opengl, glfw],
+    strformat
+
+{.pragma: glfw_lib, cdecl.}
+proc glfwSetWindowSize*(window: GLFWWindow, width: int32, height: int32) {.glfw_lib, importc: "glfwSetWindowSize".}
 
 var
-  window: Window
+  window: GLFWWindow
 
 echo "Initializing GLFW"
 var winTitle = ""
@@ -19,43 +21,50 @@ proc newWindow* (size: (int, int), title="", contextSettings = ContextSettings(
   core: true
 ))=
 
-  if glfw.init() == 0:
+  if not glfwInit():
     echo "Failed to initialize glfw"
 
   winTitle = "DevWindow"
 
-  glfw.windowHint(glfw.hContextVersionMajor.int32, contextSettings.majorVersion.int32)
-  glfw.windowHint(glfw.hContextVersionMinor.int32, contextSettings.minorVersion.int32)
-  window = glfw.createWindow(size[0].cint, size[1].cint, "DevWindow", nil, nil)
-  glfw.makeContextCurrent(window)
+  glfwWindowHint(whContextVersionMajor, 4)
+  glfwWindowHint(whContextVersionMinor, 5)
+  glfwWindowHint(whOpenglForwardCompat, GLFW_TRUE)
+  glfwWindowHint(whOpenglProfile, GLFW_OPENGL_CORE_PROFILE)
+  glfwWindowHint(whResizable, GLFW_TRUE)
 
-  loadExtensions()
+  # glfw.windowHint(glfw.hContextVersionMajor.int32, contextSettings.majorVersion.int32)
+  # glfw.windowHint(glfw.hContextVersionMinor.int32, contextSettings.minorVersion.int32)
+
+  window = glfwCreateWindow(1280, 720, "DevWindow", nil, nil)
+  window.makeContextCurrent()
+
+  assert glInit()
   #glfw.setSwapInterval(1)
 
 template Window*(): auto = window
 
-proc shouldClose*(window: Window): bool =
-  result = glfw.windowShouldClose(window) == 1
+proc shouldClose*(window: GLFWWindow): bool =
+  result = glfw.windowShouldClose(window)
 
-proc `size=`* (window: Window, size: (int, int))=
-  glfw.setWindowSize(window, size[0].cint, size[1].cint)
+proc `size=`* (window: GLFWWindow, size: (int, int))=
+  glfwSetWindowSize(window, size[0].cint, size[1].cint)
 
-proc size* (window: Window): (int, int)=
+proc size* (window: GLFWWindow): (int, int)=
   var w, h: cint = 0
   glfw.getWindowSize(window, addr w, addr h)
   result = (w.int, h.int)
 
-proc `title=`*(window: Window, title: string)=
+proc `title=`*(window: GLFWWindow, title: string)=
   winTitle = title
   glfw.setWindowTitle(window, title)
 
-proc title*(window: Window): string=
+proc title*(window: GLFWWindow): string=
   result = winTitle
-
-## Returns the time in seconds
+#
+### Returns the time in seconds
 proc getTime* (): float=
-  return glfw.getTime()
+  return glfw.glfwGetTime()
 
 proc update* ()=
-  glfw.pollEvents()
+  glfwPollEvents()
   glfw.swapBuffers(window)

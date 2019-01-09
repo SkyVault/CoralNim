@@ -1,8 +1,8 @@
 # Main Renderer for the Coral frame work
 import
+  nimgl/[opengl],
   sequtils,
   platform,
-  opengl,
   math,
   tables,
   cgl,
@@ -83,9 +83,9 @@ proc initArt* ()=
     glVertexAttribPointer(
       0,
       2,
-      cGL_FLOAT,
-      GL_FALSE,
-      0,
+      EGL_FLOAT,
+      false,
+      0.int32,
       cast[pointer](0))
 
     glBindBuffer(GL_ARRAY_BUFFER, 0)
@@ -94,8 +94,15 @@ proc initArt* ()=
   useVertexArray prim_vao:
     var v = @[0.0'f32]
     var c: seq[float32] = @[]
-    prim_vbo = newVertexBufferObject[GLfloat](GL_ARRAY_BUFFER, 3, 0, v, dynamic=true)
-    prim_cbo = newVertexBufferObject[GLfloat](
+
+    prim_vbo = newVertexBufferObject[float32](
+      GL_ARRAY_BUFFER,
+      3,
+      0,
+      v,
+      dynamic=true)
+
+    prim_cbo = newVertexBufferObject[float32](
       GL_ARRAY_BUFFER,
       4,
       1,

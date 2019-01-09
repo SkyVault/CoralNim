@@ -1,7 +1,6 @@
 import
   ../src/Coral,
   ../src/Coralpkg/[cgl, platform, art],
-  opengl,
   math,
   strformat,
   os,

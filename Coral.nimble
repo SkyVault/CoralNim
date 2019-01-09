@@ -11,8 +11,7 @@ bin           = @["Coral"]
 
 requires "nim >= 0.18.0"
 # requires "sdl2_nim"
-requires "nim-glfw"
-requires "nim-tiled"
-requires "opengl"
+# requires "nim-tiled" 
+# requires "glfw"
+requires "nimgl"
 requires "https://github.com/oprypin/nim-random"
-requires "https://github.com/define-private-public/stb_image-Nim"

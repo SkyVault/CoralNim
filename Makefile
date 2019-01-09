@@ -1,5 +1,5 @@
 run:
-	nim c -r tests/tileEngineTest.nim
+	nim c -r tests/openglTest.nim
 
 build:
-	nim c tests/tileEngineTest.nim
+	nim c tests/openglTest.nim

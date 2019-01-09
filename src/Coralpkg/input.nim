@@ -1,8 +1,8 @@
 include private/key_map
 
 import
-  glfw/wrapper,
   platform,
+
   tables
 
 type
@@ -84,7 +84,7 @@ proc isMouseRightReleased* (input: InputManager): bool =
         input.mouse_right.last == 1
 
 proc isKeyDown* (input: InputManager, key: Key): bool =
-  result = wrapper.getKey(platform.Window, key.int32).KeyAction == kaDown
+  result = glfw.getKey(platform.Window, key.GLFWKey) == kaPress
 
 proc isKeyUp* (input: InputManager, key: Key): bool =
     return not isKeyDown(input, key)

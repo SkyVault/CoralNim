@@ -1,5 +1,6 @@
 import
-    glfw
+  nimgl/[glfw]
+    
 
 type
     ControlerNumber* {.pure.} = enum

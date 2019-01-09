@@ -1,8 +1,14 @@
 import
-  opengl,
+  nimgl/[opengl, stb/image],
   strformat,
-  os,
-  stb_image/read as stbi
+  os
+
+# TODO(Dustin): Make a new issue for the nimgl library for
+# not including these enums
+const STBI_default = 0
+const STBI_gray_alpha = 2
+const STBI_rgb = 3
+const STBI_rgb_alpha = 4
 
 type
   Image* = object
@@ -15,8 +21,10 @@ type
     Nearest
 
   Format* = enum
-    Rgb,
-    Rgba
+    fmtGray = 1,
+    fmtGrayAlpha = 2,
+    fmtRgb = 3,
+    fmtRgba = 4
 
   Region* = object
     x, y, width, height: int
@@ -29,7 +37,7 @@ template height* (self: Image): auto = self.height
 template id* (self: Image): auto = self.id
 
 proc loadImage* (path: string, filter=Nearest): Image=
-  result = Image(id: 0, width: 0, height: 0, format: Rgba)
+  result = Image(id: 0, width: 0, height: 0, format: fmtRgba)
 
   if not fileExists(path):
     echo &"loadImage::Warning:: Cannot find image: {path}"
@@ -37,47 +45,73 @@ proc loadImage* (path: string, filter=Nearest): Image=
 
   # NOTE(Dustin): Probably dont need to do this on each load, 
   # but I'm guessing its cheap
-  stbi.setFlipVerticallyOnLoad true
+  stbiSetFlipVerticallyOnLoad true
 
-  try:
-    var format = 0
-    var data = stbi.load(
-      path,
-      result.width,
-      result.height,
-      format,
-      stbi.Default)
+  var width, height, channels = 0'i32
 
-    glGenTextures(1, addr result.id)
-    glBindTexture(GL_TEXTURE_2D, result.id)
+  var format = 0
+  var data = stbiLoad(
+    path.cstring,
+    addr width,
+    addr height,
+    addr channels,
+    STBI_default)
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-      case filter:
-      of Nearest: GL_NEAREST
-      of Linear: GL_LINEAR)
+  # TODO(Dustin): Better error handling
+  if data == nil:
+    echo "Failed to load image: ", path
+    return
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-      case filter:
-      of Nearest: GL_NEAREST
-      of Linear: GL_LINEAR)
+  result.width = width
+  result.height = height
+  result.format = (Format)channels
 
-    let lvl: GLint  = 0
-    let fmt         = GLint(GL_RGB)
-    let w           = GLsizei(result.width)
-    let h           = GLsizei(result.height)
+  glGenTextures(1, addr result.id)
+  glBindTexture(GL_TEXTURE_2D, result.id)
 
-    case format:
-    of 3:
-      glTexImage2D(GL_TEXTURE_2D,lvl, fmt, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, addr data[0])
-      result.format = Rgb
-    of 4:
-      glTexImage2D(GL_TEXTURE_2D,lvl, GLint(GL_RGBA), w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, addr data[0])
-      result.format = Rgba
-    else: discard
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+    case filter:
+    of Nearest: (GLint)GL_NEAREST
+    of Linear:  (GLint)GL_LINEAR)
 
-    glBindTexture(GL_TEXTURE_2D, 0)
-  except STBIException:
-    echo failureReason()
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+    case filter:
+    of Nearest: (GLint)GL_NEAREST
+    of Linear:  (GLint)GL_LINEAR)
+
+  let lvl: GLint  = 0
+  let fmt         = GLint(GL_RGB)
+  let w           = result.width.int32
+  let h           = result.height.int32
+
+  case result.format:
+  # of Format.fmtGray:
+  # of Foramt.fmtGrayAlpha:
+  of Format.fmtRGB:
+    glTexImage2D(
+      GL_TEXTURE_2D,
+      lvl,
+      GL_RGB.ord,
+      w,
+      h,
+      0,
+      GL_RGB.ord,
+      GL_UNSIGNED_BYTE,
+      data)
+  of Format.fmtRGBA:
+    glTexImage2D(
+      GL_TEXTURE_2D,
+      lvl,
+      GL_RGBA.ord,
+      w,
+      h,
+      0,
+      GL_RGBA.ord,
+      GL_UNSIGNED_BYTE,
+      data)
+  else: discard
+
+  glBindTexture(GL_TEXTURE_2D, 0)
 
 proc bindImage* (image: Image)=
   glBindTexture(GL_TEXTURE_2D, image.id)
