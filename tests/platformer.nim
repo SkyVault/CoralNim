@@ -26,6 +26,7 @@ const WorldMap = [
 ]
 
 const TileSize = 32
+const EntitySize = 28
 
 type
   Game = ref object
