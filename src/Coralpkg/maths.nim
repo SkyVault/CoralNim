@@ -457,10 +457,10 @@ proc lerpPercent* (a, b: Vec3, t:float): Vec3=
 
 proc `$`* (m: Mat4): string =
     result = "Mat4{\n"
-    result &= $m.a.m00 &  " " & $m.a.m10 & " " & $m.a.m20 & " " & $m.a.m30 & "\n"
-    result &= $m.a.m01 &  " " & $m.a.m11 & " " & $m.a.m21 & " " & $m.a.m31 & "\n"
-    result &= $m.a.m02 &  " " & $m.a.m12 & " " & $m.a.m22 & " " & $m.a.m32 & "\n"
-    result &= $m.a.m03 &  " " & $m.a.m13 & " " & $m.a.m23 & " " & $m.a.m33 & "\n}"
+    result &= $m.a.m00 & " " & $m.a.m10 & " " & $m.a.m20 & " " & $m.a.m30 & "\n"
+    result &= $m.a.m01 & " " & $m.a.m11 & " " & $m.a.m21 & " " & $m.a.m31 & "\n"
+    result &= $m.a.m02 & " " & $m.a.m12 & " " & $m.a.m22 & " " & $m.a.m32 & "\n"
+    result &= $m.a.m03 & " " & $m.a.m13 & " " & $m.a.m23 & " " & $m.a.m33 & "\n}"
 
 proc `$`* (v: Vec3): string =
     result = "Vec3{ " & $v.x & " " & $v.y & " " & $v.z & " }\n"

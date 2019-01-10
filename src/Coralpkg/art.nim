@@ -10,6 +10,7 @@ import
 
 type
   Vertex* = ref object
+    ## Represents a 2d vertice for the shapes we draw,
     position*: (float, float)
 
   Renderer* = ref object
@@ -18,8 +19,7 @@ type
   Drawable = object
     region: Region
     body: (float, float, float, float) # x y w h
-    transform: (float, float) # rot depth
-
+    transform: (float, float) # rot depth 
 
 include private/shaders
 
@@ -216,6 +216,9 @@ proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.
 
 proc setDrawColor* (r, g, b=1.0, a=1.0)=
   color = (r, g, b, a)
+
+proc setDrawColor* (c: (float, float, float, float))=
+  color = c
 
 proc setDrawColor* (c: Color)=
   color = (c.r, c.g, c.b, c.a)
