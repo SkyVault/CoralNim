@@ -43,12 +43,9 @@ proc draw(game: var Game)=
   for y in 0..<height:
     for x in 0..<width:
       let color = case level[y][x]:
-      of '1':
-        (0.8, 0.4, 0.2, 1.0)
-      of 'G':
-        (1.0, 0.9, 0.2, 1.0)
-      else:
-        (0.0, 0.0, 0.0, 0.0)
+      of '1': (0.8, 0.4, 0.2, 1.0)
+      of 'G': (1.0, 0.9, 0.2, 1.0)
+      else: (0.0, 0.0, 0.0, 0.0)
       setDrawColor color
 
       drawRect(x * TileSize, y * TileSize, TileSize, TileSize)
