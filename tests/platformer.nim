@@ -1,6 +1,9 @@
 import
   ../src/Coral,
-  ../src/Coralpkg/[cgl, platform, art, maths],
+  ../src/Coralpkg/[cgl, platform, art, maths, ecs],
+  typetraits,
+  typeinfo,
+  options,
   math
 
 const WorldMap = [
@@ -32,6 +35,27 @@ type
   Game = ref object
     currentLevel: int 
 
+  BodyC = ref object of Component
+    x, y, w, h: float
+
+initGame(
+  1280,
+  720,
+  "Coral: Platformer example",
+  ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
+
+initArt()
+initEntityWorld()
+
+var game = Game(
+  currentLevel: 0,
+  )
+
+let player = World.createEntity()
+player.add(BodyC(x: 0, y: 0, w: EntitySize, h: EntitySize))
+
+echo player.get(BodyC).w
+
 proc update(game: var Game)=
   discard
 
@@ -52,17 +76,6 @@ proc draw(game: var Game)=
       setDrawColor color
 
       drawRect(x * TileSize, y * TileSize, TileSize, TileSize)
-
-initGame(
-  1280,
-  720,
-  "Coral: Platformer example",
-  ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
-initArt()
-
-var game = Game(
-  currentLevel: 0,
-  )
 
 while updateGame():
   update(game)
