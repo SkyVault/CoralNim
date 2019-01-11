@@ -1,5 +1,5 @@
 import
-  ../src/Coralpkg/maths
+  ../../src/Coralpkg/maths
 
 var
   a: Vec2 = newVec2(1.0, 2.0)

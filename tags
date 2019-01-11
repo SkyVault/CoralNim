@@ -9,5 +9,4 @@ Coral	README.md	/^# Coral$/;"	c
 Coral is a simple, easy to use 2d game framework for the [Nim](https://nim-lang.org) programming language. Warning: Coral is under heavy development.	README.md	/^## Coral is a simple, easy to use 2d game framework for the [Nim](https:\/\/nim-lang.org) progra/;"	s
 Getting started	README.md	/^## Getting started$/;"	s
 Help support this project	README.md	/^### Help support this project$/;"	S
-build	Makefile	/^build:$/;"	t
 run	Makefile	/^run:$/;"	t

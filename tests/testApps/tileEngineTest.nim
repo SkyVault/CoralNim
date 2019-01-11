@@ -1,7 +1,7 @@
 import os, ospaths
 import
-  ../src/Coral,
-  ../src/Coralpkg/[platform, audio, art, input]
+  ../../src/Coral,
+  ../../src/Coralpkg/[platform, audio, art, input]
 
 import
   nim_tiled

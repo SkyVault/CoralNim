@@ -1,7 +1,7 @@
 import
-  ../src/Coral,
-  ../src/Coralpkg/platform,
-  ../src/Coralpkg/input
+  ../../src/Coral,
+  ../../src/Coralpkg/platform,
+  ../../src/Coralpkg/input
 
 initGame(1280, 720, ":)")
 

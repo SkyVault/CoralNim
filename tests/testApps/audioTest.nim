@@ -1,7 +1,7 @@
 import os
 import
-  ../src/Coral,
-  ../src/Coralpkg/[platform, audio, art, input]
+  ../../src/Coral,
+  ../../src/Coralpkg/[platform, audio, art, input]
 
 initGame(1280, 720, "audio")
 initArt()

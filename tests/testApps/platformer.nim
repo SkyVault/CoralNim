@@ -1,6 +1,7 @@
 import
-  ../src/Coral,
-  ../src/Coralpkg/[cgl, platform, art, maths, ecs],
+  ../../src/Coral,
+  ../../src/Coralpkg/[cgl, platform, art, maths, ecs],
+  sets,
   typetraits,
   typeinfo,
   options,
@@ -38,6 +39,9 @@ type
   BodyC = ref object of Component
     x, y, w, h: float
 
+  SpriteC = ref object of Component
+    test: string
+
 initGame(
   1280,
   720,
@@ -53,8 +57,18 @@ var game = Game(
 
 let player = World.createEntity()
 player.add(BodyC(x: 0, y: 0, w: EntitySize, h: EntitySize))
+player.add(SpriteC(test: "Hello"))
 
 echo player.get(BodyC).w
+
+var testSystem = System(
+  entityIds: newSeq[EntityID](100),
+  matchList: initSet[string](8))
+
+testSystem.matchList.incl("BodyC")
+testSystem.matchList.incl("Banana")
+
+echo testSystem.matches player
 
 proc update(game: var Game)=
   discard
@@ -87,15 +101,15 @@ initGame(
   ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
 initArt()
 
-var game = Game(
+var theGame = Game(
   currentLevel: 0,
   )
 
 while updateGame():
-  update(game)
+  update(theGame)
 
   clearColorAndDepthBuffers (0.0, 0.0, 0.0, 1.0)
 
   beginArt()
-  draw(game)
+  draw(theGame)
   flushArt()

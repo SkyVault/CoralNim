@@ -1,7 +1,8 @@
-import options
+import options, sets
 import typetraits, tables
+import macros
 
-type EntityID = distinct int
+type EntityID* = distinct int
 
 const EntityBlockSize = 256
 
@@ -18,6 +19,14 @@ type
     draw*: proc(self: Entity)
 
   System* = ref object
+    ## TODO(Dustin): @Private
+    entityIds*: seq[EntityID]
+    matchList*: HashSet[string]
+
+    load*: proc(sys: System, self: Entity)
+    update*: proc(sys: System, self: Entity)
+    draw*: proc(sys: System, self: Entity)
+    destroy*: proc(sys: System, self: Entity)
 
   EntityWorld* = ref object
     entities: seq[Option[Entity]]
@@ -32,18 +41,90 @@ proc add* [T](entity: Entity, component: T)=
   entity.components.add T.name, component
 
 proc get* (entity: Entity, T: typedesc): T=
+
   if entity.components.hasKey(T.name):
     return cast[T](entity.components[T.name])
-  echo "Entity does not have the component: ", T.name
-  return nil 
 
-proc entityDefaultUpdate* (entity: Entity) =discard
-proc entityDefaultDraw* (entity: Entity) =discard
+  echo "Entity does not have the component: ", T.name
+  return nil
+
+proc entityDefaultUpdate* (entity: Entity)= discard
+proc entityDefaultDraw* (entity: Entity)= discard
 
 ## System Functions
 
+proc systemDefaultLoad* (sys: System,self: Entity)= discard
+proc systemDefaultUpdate* (sys: System, self: Entity)= discard
+proc systemDefaultDraw* (sys: System, self: Entity)= discard
+proc systemDefaultDestroy* (sys: System, self: Entity)= discard
 
-## EntityWorld Functions 
+proc newSystem* (): System=
+  result = System(
+      entityIds: newSeq[EntityID](100),
+      matchList: initSet[string](8))
+
+static:
+  echo treeRepr parseStmt(
+    """
+    system MySystem:
+      match = [BodyC, Sprite]
+
+      proc init(self: Entity)=
+        discard
+    """
+  )
+
+macro system* (head, body: untyped):untyped =
+  result = newStmtList()
+  discard """
+    StmtList
+      Command
+        Ident "system"
+        Ident "MySystem"
+        StmtList
+          Call
+            Ident "match"
+            StmtList
+              Bracket
+                Ident "BodyC"
+                Ident "Sprite"
+          ProcDef
+            Ident "init"
+            Empty
+            Empty
+            FormalParams
+              Empty
+              IdentDefs
+                Ident "self"
+                Ident "Entity"
+                Empty
+            Empty
+            Empty
+            StmtList
+              DiscardStmt
+                Empty
+  """
+
+  let identName = head.strVal
+
+  result.add(newVarStmt(ident(identName),
+    newCall("newSystem")))
+
+  for child in head.children:
+    echo("head -->", child.kind)
+
+  for child in body.children:
+    echo("body -->", child.kind)
+
+
+proc matches* (sys: System, ent: Entity):bool =
+  result = true
+  if sys.matchList.len == 0: return false
+  for comp in sys.matchList:
+    if not ent.components.hasKey comp:
+      return false
+
+## EntityWorld Functions
 var world: EntityWorld = nil
 var uuid = 0
 
@@ -97,4 +178,3 @@ proc getEntity* (world: EntityWorld, id: EntityID): Option[Entity] =
     return none(Entity)
 
   return world.entities[(id.int)]
-  
