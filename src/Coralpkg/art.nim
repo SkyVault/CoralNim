@@ -172,11 +172,14 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY
     pushVertex x + width, y + height
   else:
     let r = rotation
+    let (vx0, vy0) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, y.float)
     let (vx1, vy1) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, (y + height).float)
     let (vx2, vy2) = rotatePoint(x.float + offsetX, y.float + offsetY, r, (x + width).float, y.float)
     let (vx3, vy3) = rotatePoint(x.float + offsetX, y.float + offsetY, r, (x + width).float, (y + height).float)
 
-    pushVertex x, y
+#    pushVertex x, y
+    pushVertex vx0, vy0
+
     pushVertex vx1, vy1
     pushVertex vx2, vy2
     pushVertex vx2, vy2

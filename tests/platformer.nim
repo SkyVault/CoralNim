@@ -50,6 +50,9 @@ proc draw(game: var Game)=
 
       drawRect(x * TileSize, y * TileSize, TileSize, TileSize)
 
+  setDrawColor Green
+  drawRect(100, 100, 200, 100, Time.timer, 100, 50)
+
 initGame(
   1280,
   720,
