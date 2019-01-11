@@ -1,6 +1,7 @@
 import options, sets
 import typetraits, tables
 import macros
+import strformat
 
 type EntityID* = distinct int
 
@@ -87,19 +88,22 @@ macro system* (head, body: untyped):untyped =
   result.add(newVarStmt(ident(identName),
     newCall("newSystem")))
 
-  # TODO(Dustin): Replace assert with proc error(msg: string) {..}
+  # TODO(Dustin): Replace assert with proc 
+  
+  proc errorIf(expr: bool, msg: string)=
+    if expr: error(msg)
 
   for child in body.children:
     case child.kind:
     of nnkAsgn:
       let ident = child[0]
       let list = child[1]
-      assert(list.kind == nnkBracket)
+      errorIf(list.kind != nnkBracket, &"{ident} expects a bracketed list of component types for system {identName}")
 
       case ident.strVal:
       of "match":
         for val in list.children:
-          assert(val.kind == nnkIdent)
+          errorIf(val.kind != nnkIdent, &"{ident} expects a bracketed list of component types, but got {val.kind}")
           let name = val.strVal
           result.add(newCall(
             "incl",
@@ -108,7 +112,7 @@ macro system* (head, body: untyped):untyped =
           ))
 
       else:
-        assert(false)
+        errorIf(true, &"Unknown list type {ident.strVal} for system {identName}")
 
     of nnkProcDef:
       let ident = child[0]
@@ -129,10 +133,9 @@ macro system* (head, body: untyped):untyped =
               procType=nnkLambda,
               params=arr,
               body=child[6]
-            )
-          ))
+            )))
       else:
-        assert(false)
+        errorIf(true, &"Unknown method {ident.strVal} for system {identName}")
 
     else:
       echo child.kind
