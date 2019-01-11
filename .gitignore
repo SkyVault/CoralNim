@@ -5,6 +5,10 @@ Coral/nimcache/
 *.dll
 Tests/*.dll
 Tests/*.exe
+tests/platformer
+tests/audioTest
+tests/mathsTest
+tests/openglTest
 Coral/*.exe
 .vscode
 htmldocs/

@@ -67,15 +67,29 @@ proc draw(game: var Game)=
   for y in 0..<height:
     for x in 0..<width:
       let color = case level[y][x]:
-      of '1':
-        (0.8, 0.4, 0.2, 1.0)
-      of 'G':
-        (1.0, 0.9, 0.2, 1.0)
-      else:
-        (0.0, 0.0, 0.0, 0.0)
+      of '1': (0.8, 0.4, 0.2, 1.0)
+      of 'G': (1.0, 0.9, 0.2, 1.0)
+      else: (0.0, 0.0, 0.0, 0.0)
       setDrawColor color
 
       drawRect(x * TileSize, y * TileSize, TileSize, TileSize)
+
+  setDrawColor Green
+  drawLineRect(100, 100, 200, 100, Time.timer, 100, 50)
+
+  setDrawColor Blue
+  drawCircle(100, 100, 32)
+
+initGame(
+  1280,
+  720,
+  "Coral: Platformer example",
+  ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
+initArt()
+
+var game = Game(
+  currentLevel: 0,
+  )
 
 while updateGame():
   update(game)

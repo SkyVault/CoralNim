@@ -4,6 +4,8 @@ import
 
 {.pragma: glfw_lib, cdecl.}
 proc glfwSetWindowSize*(window: GLFWWindow, width: int32, height: int32) {.glfw_lib, importc: "glfwSetWindowSize".}
+proc glfwSetWindowPos*(window: GLFWWindow, width: int32, height: int32) {.glfw_lib, importc: "glfwSetWindowPos".}
+proc glfwGetWindowPos*(window: GLFWWindow, width: ptr int32, height: ptr int32) {.glfw_lib, importc: "glfwGetWindowPos".}
 
 var
   window: GLFWWindow
@@ -54,13 +56,21 @@ proc size* (window: GLFWWindow): (int, int)=
   glfw.getWindowSize(window, addr w, addr h)
   result = (w.int, h.int)
 
+proc `position=`* (window: GLFWWindow, size: (int, int))=
+  glfwSetWindowPos(window, size[0].cint, size[1].cint)
+
+proc position* (window: GLFWWindow): (int, int)=
+  var w, h: cint = 0
+  glfwGetWindowPos(window, addr w, addr h)
+  result = (w.int, h.int)
+
 proc `title=`*(window: GLFWWindow, title: string)=
   winTitle = title
   glfw.setWindowTitle(window, title)
 
 proc title*(window: GLFWWindow): string=
   result = winTitle
-#
+
 ### Returns the time in seconds
 proc getTime* (): float=
   return glfw.glfwGetTime()

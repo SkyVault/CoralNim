@@ -23,10 +23,12 @@ type
 
 include private/shaders
 
-proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)
+const ART_DEFAULT_LINE_THICKNESS = 2.0
+
+proc drawLine* (x1, y1, x2, y2: int | float, thickness=ART_DEFAULT_LINE_THICKNESS)
 proc drawCircle* (x, y, radius: int | float, resolution=360)
 proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)
-proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)
+proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0, thickness=ART_DEFAULT_LINE_THICKNESS)
 
 proc drawImage* (image: Image, x, y = 0)
 proc drawImage* (image: Image, x, y = 0.0)
@@ -149,7 +151,7 @@ proc pushVertexRotated* (x, y: int | float | float32, rotation=0.0)=
   (PRIM_VERTICES.add 0.0)
 
 # Primitives 
-proc drawLine* (x1, y1, x2, y2: int | float, thickness=4.0)=
+proc drawLine* (x1, y1, x2, y2: int | float, thickness=ART_DEFAULT_LINE_THICKNESS)=
   let l = sqrt(((x2 - x1).float ^ 2) + ((y2 - y1).float ^ 2))
   let rot = arctan2(y2.float - y1.float, x2.float - x1.float)
   drawRect(x1.float, y1.float, l, thickness, rot)
@@ -172,16 +174,33 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY
     pushVertex x + width, y + height
   else:
     let r = rotation
+    let (vx0, vy0) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, y.float)
     let (vx1, vy1) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, (y + height).float)
     let (vx2, vy2) = rotatePoint(x.float + offsetX, y.float + offsetY, r, (x + width).float, y.float)
     let (vx3, vy3) = rotatePoint(x.float + offsetX, y.float + offsetY, r, (x + width).float, (y + height).float)
 
-    pushVertex x, y
+#    pushVertex x, y
+    pushVertex vx0, vy0
+
     pushVertex vx1, vy1
     pushVertex vx2, vy2
     pushVertex vx2, vy2
     pushVertex vx1, vy1
     pushVertex vx3, vy3
+
+proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0, thickness=ART_DEFAULT_LINE_THICKNESS)=
+  let 
+    fx = x.float
+    fy = y.float
+    fw = width.float
+    fh = height.float
+
+  drawRect(fx, fy, fw, thickness, rotation, x.float, y.float)
+  drawRect(fx, fy, thickness, fh, rotation, x.float, y.float)
+
+  drawRect(fx, fy+fh-thickness, fw, thickness, rotation, x.float, y.float - fh)
+  drawRect(fx+fw-thickness, fy, thickness, fh, rotation, x.float - fw, y.float)
+
 
 proc drawImageRegion* (image: Image, region: Region, x, y, width, height: int | float, rot=0.0, depth=0.0)=
   if not DRAWABLES_TABLE.hasKey image.id:
@@ -201,18 +220,6 @@ proc drawImage* (image: Image, x, y = 0.0)=
 
 proc drawImage* (image: Image, x, y = 0)=
   drawImage(image, x, y, image.width, image.height)
-
-proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, thickness=4.0)=
-  let 
-    fx = x.float
-    fy = y.float
-    fw = width.float
-    fh = height.float
-
-  drawRect(fx, fy, fw, thickness)
-  drawRect(fx, fy, thickness, fh)
-  drawRect(fx, fy+fh-thickness, fw, thickness)
-  drawRect(fx+fw-thickness, fy, thickness, fh)
 
 proc setDrawColor* (r, g, b=1.0, a=1.0)=
   color = (r, g, b, a)
