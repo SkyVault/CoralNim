@@ -28,15 +28,17 @@ assert(sys.matches(player) == true)
 sys.matchList.incl "Banana"
 assert(sys.matches(player) == false)
 
-dumpTree:
-  let sys = System(
-      entityIds: newSeq[EntityID](100),
-      matchList: initSet[string](8)
-    )
+#dumpTree:
+#  MySystem.load = proc(sys: System, self: Entity)=
+#    discard
 
 expandMacros:
   system MySystem:
     match = [BodyC, Sprite]
 
-    proc init(self: Entity)=
+    proc load(self: Entity)=
+      let body = self.get(BodyC)
+      echo body.x
+
+    proc update(self: Entity)=
       discard

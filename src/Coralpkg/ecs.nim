@@ -69,53 +69,73 @@ static:
     system MySystem:
       match = [BodyC, Sprite]
 
-      proc init(self: Entity)=
+      proc load(self: Entity)=
+        discard
+
+      proc update(self: Entity)=
         discard
     """
   )
 
+# TODO make it so that the user does not require the sys parameter
+
 macro system* (head, body: untyped):untyped =
   result = newStmtList()
-  discard """
-    StmtList
-      Command
-        Ident "system"
-        Ident "MySystem"
-        StmtList
-          Call
-            Ident "match"
-            StmtList
-              Bracket
-                Ident "BodyC"
-                Ident "Sprite"
-          ProcDef
-            Ident "init"
-            Empty
-            Empty
-            FormalParams
-              Empty
-              IdentDefs
-                Ident "self"
-                Ident "Entity"
-                Empty
-            Empty
-            Empty
-            StmtList
-              DiscardStmt
-                Empty
-  """
 
   let identName = head.strVal
 
   result.add(newVarStmt(ident(identName),
     newCall("newSystem")))
 
-  for child in head.children:
-    echo("head -->", child.kind)
+  # TODO(Dustin): Replace assert with proc error(msg: string) {..}
 
   for child in body.children:
-    echo("body -->", child.kind)
+    case child.kind:
+    of nnkAsgn:
+      let ident = child[0]
+      let list = child[1]
+      assert(list.kind == nnkBracket)
 
+      case ident.strVal:
+      of "match":
+        for val in list.children:
+          assert(val.kind == nnkIdent)
+          let name = val.strVal
+          result.add(newCall(
+            "incl",
+            newDotExpr(ident(identName), ident("matchList")),
+            newStrLitNode(name)
+          ))
+
+      else:
+        assert(false)
+
+    of nnkProcDef:
+      let ident = child[0]
+    
+      case ident.strVal:
+      of "load", "update", "draw":
+
+        child.params.insert(1, newIdentDefs(ident("sys"), ident("System")))
+
+        var arr = newSeq[NimNode]()
+        for param in child.params:
+          arr.add(param)
+
+        result.add(
+          newAssignment(
+            newDotExpr(ident(identName), ident),
+            newProc(
+              procType=nnkLambda,
+              params=arr,
+              body=child[6]
+            )
+          ))
+      else:
+        assert(false)
+
+    else:
+      echo child.kind
 
 proc matches* (sys: System, ent: Entity):bool =
   result = true
