@@ -53,6 +53,9 @@ proc draw(game: var Game)=
   setDrawColor Green
   drawLineRect(100, 100, 200, 100, Time.timer, 100, 50)
 
+  setDrawColor Blue
+  drawCircle(100, 100, 32)
+
 initGame(
   1280,
   720,
