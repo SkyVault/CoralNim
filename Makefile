@@ -1,2 +1,2 @@
 run:
-	nimble test
+	nimble c -r ./tests/testApps/platformer.nim

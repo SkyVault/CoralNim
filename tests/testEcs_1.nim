@@ -32,13 +32,13 @@ assert(sys.matches(player) == false)
 #  MySystem.load = proc(sys: System, self: Entity)=
 #    discard
 
-expandMacros:
-  system MySystem:
-    match = [BodyC, Sprite]
-
-    proc load(self: Entity)=
-      let body = self.get(BodyC)
-      echo body.x
-
-    proc update(self: Entity)=
-      discard
+#expandMacros:
+#  system MySystem:
+#    match = [BodyC, Sprite]
+#
+#    proc load(self: Entity)=
+#      let body = self.get(BodyC)
+#      echo body.x
+#
+#    proc update(self: Entity)=
+#      discard

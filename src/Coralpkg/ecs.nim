@@ -7,6 +7,8 @@ type EntityID* = distinct int
 
 const EntityBlockSize = 256
 
+var initialized = false
+
 type
   Component* = ref object of RootObj
 
@@ -31,6 +33,7 @@ type
 
   EntityWorld* = ref object
     entities: seq[Option[Entity]]
+    systems: seq[System]
 
 ## Entity Functions
 proc add* [T](entity: Entity, component: T)=
@@ -61,24 +64,8 @@ proc systemDefaultDestroy* (sys: System, self: Entity)= discard
 
 proc newSystem* (): System=
   result = System(
-      entityIds: newSeq[EntityID](100),
+      entityIds: newSeq[EntityID](),
       matchList: initSet[string](8))
-
-static:
-  echo treeRepr parseStmt(
-    """
-    system MySystem:
-      match = [BodyC, Sprite]
-
-      proc load(self: Entity)=
-        discard
-
-      proc update(self: Entity)=
-        discard
-    """
-  )
-
-# TODO make it so that the user does not require the sys parameter
 
 macro system* (head, body: untyped):untyped =
   result = newStmtList()
@@ -140,6 +127,12 @@ macro system* (head, body: untyped):untyped =
     else:
       echo child.kind
 
+  result.add(newCall(
+    "register",
+    ident("World"),
+    ident(identName)
+  ))
+
 proc matches* (sys: System, ent: Entity):bool =
   result = true
   if sys.matchList.len == 0: return false
@@ -147,16 +140,33 @@ proc matches* (sys: System, ent: Entity):bool =
     if not ent.components.hasKey comp:
       return false
 
+proc register* (world: EntityWorld, sys: System)=
+  for eOp in world.entities:
+    if eOp != none(Entity):
+      let e = eOp.get()
+
+      if sys.matches(e):
+        sys.entityIds.add(e.id)
+
+  world.systems.add sys
+
 ## EntityWorld Functions
 var world: EntityWorld = nil
 var uuid = 0
 
 template World* (): auto= ecs.world
 
+proc isEntityWorldInitialized* (): auto= initialized
+
 proc initEntityWorld* () =
+  initialized = true
   world = EntityWorld(
-    entities: newSeq[Option[Entity]](EntityBlockSize)
+    entities: newSeq[Option[Entity]](EntityBlockSize),
+    systems: newSeq[System](),
   )
+
+  for i in 0..<world.entities.len:
+    world.entities[i] = none(Entity)
 
 proc findSpace(world: EntityWorld): EntityID=
   for i in 0..<world.entities.len:
@@ -188,6 +198,10 @@ proc createEntity* (world: EntityWorld, components: varargs[Component]): Entity 
 
   world.entities[space] = some(entity)
 
+  for sys in world.systems:
+    if sys.matches(entity):
+      sys.entityIds.add space.EntityID
+
   return entity
 
 proc getEntity* (world: EntityWorld, id: EntityID): Option[Entity] =
@@ -201,3 +215,23 @@ proc getEntity* (world: EntityWorld, id: EntityID): Option[Entity] =
     return none(Entity)
 
   return world.entities[(id.int)]
+
+proc update* (world: EntityWorld)=
+  for system in world.systems:
+    for entId in system.entityIds:
+      let entOp = world.entities[entId.int]
+      if entOp != none(Entity):
+        var ent = entOp.get()
+
+        if system.update != nil:
+          system.update(system, ent)
+
+proc draw* (world: EntityWorld)=
+  for system in world.systems:
+    for entId in system.entityIds:
+      let entOp = world.entities[entId.int]
+      if entOp != none(Entity):
+        var ent = entOp.get()
+
+        if system.draw != nil:
+          system.draw(system, ent)

@@ -1,5 +1,5 @@
 # Hello Nim!
-import Coralpkg/[platform, input]
+import Coralpkg/[platform, input, ecs, art]
 
 include Coralpkg/private/clock
 
@@ -33,6 +33,14 @@ proc updateGame* (): bool=
 
   input.update()
   update(clock, platform.getTime())
+
+  if isEntityWorldInitialized():
+    update(World)
+
+    if isArtInitialized():
+      beginArt()
+      draw(World)
+      flushArt()
 
   defer: platform.update()
   return Window.shouldClose == false

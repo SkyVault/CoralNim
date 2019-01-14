@@ -1,6 +1,6 @@
 import
   ../../src/Coral,
-  ../../src/Coralpkg/[cgl, platform, art, maths, ecs],
+  ../../src/Coralpkg/[cgl, platform, art, maths, ecs, input],
   sets,
   typetraits,
   typeinfo,
@@ -12,8 +12,8 @@ const WorldMap = [
     "........................",
     ".......................G",
     ".................11...11",
-    "...........111...11...11",
-    ".S........1111...11...11",
+    "1..1.......111...11...11",
+    "1S.1......1111...11...11",
     "111111...11111...11...11",
     "111111...11111...11...11",
   ],
@@ -31,6 +31,7 @@ const WorldMap = [
 
 const TileSize = 32
 const EntitySize = 28
+const Gravity = 300.0
 
 type
   Game = ref object
@@ -42,6 +43,15 @@ type
   SpriteC = ref object of Component
     test: string
 
+  PhysicsC = ref object of Component
+    vx, vy: float
+
+  PlayerC = ref object of Component
+
+var theGame = Game(
+  currentLevel: 0,
+  )
+
 initGame(
   1280,
   720,
@@ -51,24 +61,91 @@ initGame(
 initArt()
 initEntityWorld()
 
-var game = Game(
-  currentLevel: 0,
-  )
-
 let player = World.createEntity()
 player.add(BodyC(x: 0, y: 0, w: EntitySize, h: EntitySize))
 player.add(SpriteC(test: "Hello"))
+player.add(PhysicsC(vx: 0, vy: 0))
+player.add(PlayerC())
 
-echo player.get(BodyC).w
+system RenderSystem:
+  match = [BodyC, SpriteC]
 
-var testSystem = System(
-  entityIds: newSeq[EntityID](100),
-  matchList: initSet[string](8))
+  proc draw(self: Entity)=
+    let body = self.get(BodyC)
+    let sprite = self.get(SpriteC)
+    setDrawColor P8_Peach
+    drawRect(body.x, body.y, body.w, body.h)
 
-testSystem.matchList.incl("BodyC")
-testSystem.matchList.incl("Banana")
+system PlayerSystem:
+  match = [PlayerC, BodyC, PhysicsC]
 
-echo testSystem.matches player
+  proc update(self: Entity)=
+    let phys = self.get(PhysicsC)
+
+    if Input.isKeyDown(Key.Left):
+      phys.vx -= 100.0 * Time.deltaTime
+
+    if Input.isKeyDown(Key.Right):
+      phys.vx += 100.0 * Time.deltaTime
+
+system PhysicsSystem:
+  match = [BodyC, PhysicsC]
+
+  proc update(self: Entity)=
+    let phys = self.get(PhysicsC)
+    let body = self.get(BodyC)
+
+    phys.vy += Gravity * Time.deltaTime
+
+    var nx = body.x + phys.vx * Time.deltaTime
+    var ny = body.y + phys.vy * Time.deltaTime
+
+    let left = math.floor(nx / TileSize).int
+    let top = math.floor(ny / TileSize).int
+    let bottom = math.floor((ny + body.h) / TileSize).int
+    let right = math.floor((nx + body.w) / TileSize).int
+
+    let currLevel = WorldMap[theGame.currentLevel]
+    
+    if left >= 0 and right <= WorldMap[theGame.currentLevel][0].len - 1 and
+      top >= 0 and bottom <= WorldMap[theGame.currentLevel].len - 1:
+
+      let X = math.floor(body.x / TileSize).int
+      let Y = math.floor(body.y / TileSize).int
+      
+      # Handle Y
+      
+      # Down 
+      
+      if currLevel[bottom][X] != '.':
+        ny = body.y
+        phys.vy = 0.0
+
+      # Handle X
+      if currLevel[Y][right] != '.':
+        nx = body.x
+
+      if currLevel[Y][left] != '.':
+        nx = body.x
+
+      discard
+
+    body.x = nx
+    body.y = ny
+
+    phys.vx *= math.pow(0.002, Time.deltaTime)
+    phys.vy *= math.pow(0.002, Time.deltaTime)
+
+  proc draw(self: Entity)=
+    let phys = self.get(PhysicsC)
+    let body = self.get(BodyC)
+    
+    setDrawColor(Red)
+    drawLine(
+      body.x + body.w / 2,
+      body.y + body.h / 2,
+      body.x + body.w / 2 + phys.vx,
+      body.y + body.h / 2)
 
 proc update(game: var Game)=
   discard
@@ -88,22 +165,12 @@ proc draw(game: var Game)=
 
       drawRect(x * TileSize, y * TileSize, TileSize, TileSize)
 
-  setDrawColor Green
-  drawLineRect(100, 100, 200, 100, Time.timer, 100, 50)
-
-  setDrawColor Blue
-  drawCircle(100, 100, 32)
-
 initGame(
   1280,
   720,
   "Coral: Platformer example",
   ContextSettings(majorVersion: 3, minorVersion: 3, core: true))
 initArt()
-
-var theGame = Game(
-  currentLevel: 0,
-  )
 
 while updateGame():
   update(theGame)

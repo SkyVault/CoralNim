@@ -61,8 +61,12 @@ var DRAWABLES_TABLE = newTable[GLuint, (Image, seq[Drawable])]()
 
 var lastPrimVerticesLen = 0
 var lastPrimColorsLen = 4
+var initialized = false
+
+proc isArtInitialized* (): auto = initialized
 
 proc initArt* ()=
+  initialized = true
   program = newShaderProgram(
     vertex=loadShaderFromString(GL_VERTEX_SHADER, VERTEX_SHADER),
     fragment=loadShaderFromString(GL_FRAGMENT_SHADER, FRAGMENT_SHADER))
