@@ -1,2 +1,2 @@
 run:
-	nimble c -r ./tests/testApps/platformer.nim
+	nimble c -r ./tests/testApps/artTest.nim
