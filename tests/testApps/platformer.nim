@@ -31,7 +31,7 @@ const WorldMap = [
 
 const TileSize = 32
 const EntitySize = 28
-const Gravity = 300.0
+const Gravity = 1200.0
 
 type
   Game = ref object
@@ -44,7 +44,8 @@ type
     test: string
 
   PhysicsC = ref object of Component
-    vx, vy: float
+    vx, vy, gravScale: float
+    onGround: bool
 
   PlayerC = ref object of Component
 
@@ -64,7 +65,7 @@ initEntityWorld()
 let player = World.createEntity()
 player.add(BodyC(x: 0, y: 0, w: EntitySize, h: EntitySize))
 player.add(SpriteC(test: "Hello"))
-player.add(PhysicsC(vx: 0, vy: 0))
+player.add(PhysicsC(vx: 0, vy: 0, gravScale: 1.0, onGround: false))
 player.add(PlayerC())
 
 system RenderSystem:
@@ -81,12 +82,17 @@ system PlayerSystem:
 
   proc update(self: Entity)=
     let phys = self.get(PhysicsC)
+    const Speed = 300
 
     if Input.isKeyDown(Key.Left):
-      phys.vx -= 100.0 * Time.deltaTime
+      phys.vx -= Speed * Time.deltaTime
 
     if Input.isKeyDown(Key.Right):
-      phys.vx += 100.0 * Time.deltaTime
+      phys.vx += Speed * Time.deltaTime
+
+    if Input.isKeyDown(Key.Space) and phys.onGround:
+      phys.vy = -Gravity * 0.5
+      phys.gravScale = 1.5 
 
 system PhysicsSystem:
   match = [BodyC, PhysicsC]
@@ -95,7 +101,7 @@ system PhysicsSystem:
     let phys = self.get(PhysicsC)
     let body = self.get(BodyC)
 
-    phys.vy += Gravity * Time.deltaTime
+    phys.vy += (Gravity * (1-phys.gravScale)) * Time.deltaTime
 
     var nx = body.x + phys.vx * Time.deltaTime
     var ny = body.y + phys.vy * Time.deltaTime
@@ -106,29 +112,30 @@ system PhysicsSystem:
     let right = math.floor((nx + body.w) / TileSize).int
 
     let currLevel = WorldMap[theGame.currentLevel]
+
+    proc getTile(x, y: int):char=
+        if x < 0 or y < 0 or x > currLevel[0].len or y > currLevel.len:
+            return '.'
+        else:
+            return currLevel[y][x]
     
-    if left >= 0 and right <= WorldMap[theGame.currentLevel][0].len - 1 and
-      top >= 0 and bottom <= WorldMap[theGame.currentLevel].len - 1:
+    let tile_bottom = getTile(left, bottom)
+    let tile_right = getTile(right, top)
+    let tile_left = getTile(left, top)
 
-      let X = math.floor(body.x / TileSize).int
-      let Y = math.floor(body.y / TileSize).int
-      
-      # Handle Y
-      
-      # Down 
-      
-      if currLevel[bottom][X] != '.':
-        ny = body.y
-        phys.vy = 0.0
+    phys.onGround = false
+    phys.gravScale *= math.pow(0.2, Time.deltaTime)
+    echo phys.gravScale
 
-      # Handle X
-      if currLevel[Y][right] != '.':
-        nx = body.x
+    if tile_bottom != '.' and tile_bottom != 'S':
+      ny = (TileSize * bottom.float) - body.h
+      phys.onGround = true
 
-      if currLevel[Y][left] != '.':
-        nx = body.x
+    if tile_right != '.' and tile_right != 'S':
+      nx = body.x
 
-      discard
+    if tile_left != '.' and tile_left != 'S':
+      nx = body.x
 
     body.x = nx
     body.y = ny
