@@ -11,6 +11,7 @@ tests/testApps/mathsTest
 tests/testApps/openglTest
 tests/testApps/tileEngineTest
 tests/testApps/windowTest
+tests/testApps/artTest
 tests/testEcs_1
 Coral/*.exe
 .vscode
