@@ -186,4 +186,4 @@ while updateGame():
 
   beginArt()
   draw(theGame)
-  flushArt()
+  endArt()

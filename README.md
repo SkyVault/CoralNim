@@ -24,5 +24,5 @@ while updateGame():
   setDrawColor (colorFromHex "FF00FF")
   drawRect 100, 100, 300, 300
   
-  flushArt()
+  endArt()
 ```

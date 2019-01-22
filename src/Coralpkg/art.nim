@@ -245,7 +245,7 @@ proc beginArt* ()=
   ortho_projection = ortho(0.0, ww.float32, wh.float32, 0.0, -10.0, 10.0)
   glViewport(0, 0, ww.GLsizei, wh.GLsizei)
 
-proc flushArt* ()=
+proc endArt* ()=
   # Drawing drawables
   useShaderProgram program:
     setUniform getUniformLoc(program, "projection"), ortho_projection

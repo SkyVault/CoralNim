@@ -11,4 +11,4 @@ while updateGame():
   setDrawColor(1, 0, 0)
   drawRect(0, 0, 100, 100)
 
-  flushArt()
+  endArt()

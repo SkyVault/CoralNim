@@ -38,4 +38,4 @@ while updateGame():
     #for x in 0..200:
       #drawImage lolwut, x*10, y*10, 10, 10
 
-  flushArt()
+  endArt()

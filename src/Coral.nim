@@ -40,7 +40,7 @@ proc updateGame* (): bool=
     if isArtInitialized():
       beginArt()
       draw(World)
-      flushArt()
+      endArt()
 
   defer: platform.update()
   return Window.shouldClose == false
