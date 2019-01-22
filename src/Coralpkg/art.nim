@@ -161,12 +161,16 @@ proc drawLine* (x1, y1, x2, y2: int | float, thickness=ART_DEFAULT_LINE_THICKNES
   drawRect(x1.float, y1.float, l, thickness, rot)
 
 proc drawCircle* (x, y, radius: int | float, resolution=360)=
-  for i in countup(0, 360, 10):
-    let fi = i.float
+  let res = (if resolution < 3: 3 else: resolution)
+  let step = (360 / res).float
+  for i in countup(0, res, 1):
+    let fi = i.float * step
     let irad = degToRad(fi)
     pushVertex(x.float, y.float);
     pushVertex(x.float + sin(irad)*radius.float, y.float + cos(irad)*radius.float)
-    pushVertex(x.float + sin(degToRad(fi + 10.0))*radius.float, y.float + cos(degToRad(fi + 10.0))*radius.float);
+    pushVertex(
+      x.float + sin(degToRad(fi + step))*radius.float,
+      y.float + cos(degToRad(fi + step))*radius.float);
 
 proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)=
   if rotation == 0.0:
