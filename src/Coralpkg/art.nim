@@ -27,6 +27,7 @@ const ART_DEFAULT_LINE_THICKNESS = 2.0
 
 proc drawLine* (x1, y1, x2, y2: int | float, thickness=ART_DEFAULT_LINE_THICKNESS)
 proc drawCircle* (x, y, radius: int | float, resolution=360)
+proc drawTriangle* (vx1, vy1, vx2, vy2, vx3, vy3: int | float)
 proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)
 proc drawLineRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0, thickness=ART_DEFAULT_LINE_THICKNESS)
 
@@ -171,6 +172,11 @@ proc drawCircle* (x, y, radius: int | float, resolution=360)=
     pushVertex(
       x.float + sin(degToRad(fi + step))*radius.float,
       y.float + cos(degToRad(fi + step))*radius.float);
+
+proc drawTriangle* (vx1, vy1, vx2, vy2, vx3, vy3: int | float)=
+  pushVertex(vx1, vy1)
+  pushVertex(vx2, vy2)
+  pushVertex(vx3, vy3)
 
 proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY=0.0)=
   if rotation == 0.0:
