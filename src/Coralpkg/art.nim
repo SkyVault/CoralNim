@@ -187,6 +187,7 @@ proc drawRect* (x, y, width, height: int | float, rotation=0.0, offsetX, offsetY
     pushVertex x, y + height
     pushVertex x + width, y + height
   else:
+    # TODO(Dustin): Make faster!
     let r = rotation
     let (vx0, vy0) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, y.float)
     let (vx1, vy1) = rotatePoint(x.float + offsetX, y.float + offsetY, r, x.float, (y + height).float)
