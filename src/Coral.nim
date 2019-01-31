@@ -13,8 +13,8 @@ var clock: Clock
 template Time* (): auto = clock
 
 proc initGame* (width, height: int, title: string, contextSettings = ContextSettings(
-  majorVersion: 4,
-  minorVersion: 5,
+  majorVersion: 3,
+  minorVersion: 3,
   core: true
 ))=
 
