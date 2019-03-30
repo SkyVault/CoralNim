@@ -1,2 +1,2 @@
 run:
-	nimble c -r ./tests/testApps/artTest.nim
+	nimble c -o:./des ./tests/testApps/artTest.nim

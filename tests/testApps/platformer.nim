@@ -31,11 +31,11 @@ const WorldMap = [
 
 const TileSize = 32
 const EntitySize = 28
-const Gravity = 1200.0
+const Gravity = 2200.0
 
 type
   Game = ref object
-    currentLevel: int 
+    currentLevel: int
 
   BodyC = ref object of Component
     x, y, w, h: float
@@ -82,7 +82,7 @@ system PlayerSystem:
 
   proc update(self: Entity)=
     let phys = self.get(PhysicsC)
-    const Speed = 300
+    const Speed = 500
 
     if Input.isKeyDown(Key.Left):
       phys.vx -= Speed * Time.deltaTime
@@ -92,7 +92,7 @@ system PlayerSystem:
 
     if Input.isKeyDown(Key.Space) and phys.onGround:
       phys.vy = -Gravity * 0.5
-      phys.gravScale = 1.5 
+      phys.gravScale = 1.5
 
 system PhysicsSystem:
   match = [BodyC, PhysicsC]
@@ -118,14 +118,13 @@ system PhysicsSystem:
             return '.'
         else:
             return currLevel[y][x]
-    
+
     let tile_bottom = getTile(left, bottom)
     let tile_right = getTile(right, top)
     let tile_left = getTile(left, top)
 
     phys.onGround = false
     phys.gravScale *= math.pow(0.2, Time.deltaTime)
-    echo phys.gravScale
 
     if tile_bottom != '.' and tile_bottom != 'S':
       ny = (TileSize * bottom.float) - body.h
@@ -146,7 +145,7 @@ system PhysicsSystem:
   proc draw(self: Entity)=
     let phys = self.get(PhysicsC)
     let body = self.get(BodyC)
-    
+
     setDrawColor(Red)
     drawLine(
       body.x + body.w / 2,

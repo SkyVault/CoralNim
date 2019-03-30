@@ -5,7 +5,12 @@ import
 initGame(1280, 720, ":)")
 initArt()
 
+let test = loadImage "tests/testApps/lolwut.png"
+
 while updateGame():
+  if Time.ticks mod 20 == 0:
+    echo $Time.framesPerSecond
+
   beginArt()
   clearColorAndDepthBuffers()
 
@@ -28,5 +33,8 @@ while updateGame():
     50, 0,
     0, 100,
     100, 100)
+
+  for i in 0..2000:
+    drawImage test, 100+i/2, 100, 100, 100
 
   endArt()

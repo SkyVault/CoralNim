@@ -259,17 +259,21 @@ proc beginArt* ()=
 proc endArt* ()=
   # Drawing drawables
   useShaderProgram program:
+    let region_id = getUniformLoc(program, "region")
+    let transform_id = getUniformLoc(program, "transform")
+    let body_id = getUniformLoc(program, "body")
+
     setUniform getUniformLoc(program, "projection"), ortho_projection
     useVertexArray rect_vao:
 
       for key in DRAWABLES_TABLE.keys:
-        var (image, _) = DRAWABLES_TABLE[key]
+        let (image, _) = DRAWABLES_TABLE[key]
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, key)
 
         for drawable in DRAWABLES_TABLE[key][1]:
           setUniform(
-            getUniformLoc(program, "body"),
+            body_id,
             drawable.body[0],
             drawable.body[1],
             drawable.body[2],
@@ -280,8 +284,8 @@ proc endArt* ()=
           let width = drawable.region.width.float / image.width.float
           let height = drawable.region.height.float / image.height.float
 
-          setUniform getUniformLoc(program, "region"), x, y, width, height
-          setUniform getUniformLoc(program, "transform"), drawable.transform[0], drawable.transform[1]
+          setUniform region_id, x, y, width, height
+          setUniform transform_id, drawable.transform[0], drawable.transform[1]
 
           glDrawArrays(GL_TRIANGLES, 0, 6)
         DRAWABLES_TABLE[key][1].setLen 0

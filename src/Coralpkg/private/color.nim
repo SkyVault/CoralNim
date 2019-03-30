@@ -52,8 +52,8 @@ template Gray*                 ():untyped =newColor(0.5, 0.5, 0.5)
 template Transperent*          ():untyped =newColor(1, 1, 1, 0)
 template TransperentBlack*     ():untyped =newColor(0, 0, 0, 0)
 
-proc randomColor* ():Color=
-  newColor(random.random(1.0), random.random(1.0), random.random(1.0), 1.0)
+#proc randomColor* ():Color=
+#  newColor(random.random(1.0), random.random(1.0), random.random(1.0), 1.0)
 
 template P8_Black*      ():untyped = newColor(0, 0, 0, 1)
 template P8_DarkBlue*   ():untyped = newColor(29.0 / 255.0, 43.0 / 255.0, 83.0 / 255.0)
