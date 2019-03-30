@@ -49,4 +49,4 @@ while updateGame():
 
   endArt()
 ```
-[Example]("./screenshot.png")
+![Example](./screenshot.png)
