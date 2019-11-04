@@ -131,7 +131,6 @@ proc loadImage* (path: string, filter=Nearest): Image=
       GL_RGBA.ord,
       GL_UNSIGNED_BYTE,
       data)
-  else: discard
 
   glBindTexture(GL_TEXTURE_2D, 0)
 
